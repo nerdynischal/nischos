@@ -1,0 +1,288 @@
+/* Desktop shell */
+.desktop {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  color: var(--ink);
+  background: var(--desktop-bg);
+  isolation: isolate;
+}
+
+.wallpaper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 149, 119, 0.13), transparent 34rem),
+    radial-gradient(circle at 78% 18%, rgba(115, 166, 232, 0.12), transparent 35rem),
+    radial-gradient(circle at 48% 86%, rgba(139, 196, 163, 0.1), transparent 34rem),
+    linear-gradient(135deg, #fbf7ef 0%, #f2f7f3 50%, #fbf6eb 100%);
+  z-index: -3;
+}
+
+.wallpaper-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(54, 47, 37, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(54, 47, 37, 0.11) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 92%, transparent);
+}
+
+.menu-bar {
+  position: relative;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(36, 32, 28, 0.17);
+  background: rgba(255, 252, 243, 0.76);
+  backdrop-filter: blur(18px) saturate(1.15);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset;
+}
+
+.menu-left,
+.brand-button,
+.menu-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: var(--type-chrome-size);
+  line-height: var(--type-chrome-line);
+}
+
+.menu-left {
+  min-width: 0;
+}
+
+.brand-button {
+  flex: 0 0 auto;
+  border: 0;
+  padding: 0.25rem 0.35rem;
+  border-radius: 5px;
+  background: transparent;
+  font-weight: var(--type-chrome-weight);
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-out), transform 140ms var(--ease-out);
+}
+
+.brand-button:hover {
+  background: rgba(39, 35, 30, 0.08);
+}
+
+.brand-button:active {
+  transform: scale(0.97);
+}
+
+.brand-logo {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.menu-status {
+  flex: 0 0 auto;
+  gap: 1rem;
+  color: rgba(41, 35, 28, 0.66);
+}
+
+.active-app-label {
+  max-width: 28vw;
+  overflow: hidden;
+  color: rgba(41, 35, 28, 0.58);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu-status time {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+.menu-date {
+  word-spacing: -0.12em;
+}
+
+.menu-clock {
+  min-width: 4.9rem;
+}
+
+.desktop-icons {
+  position: absolute;
+  inset: 40px 0 0;
+  z-index: 5;
+}
+
+/* Desktop app icons */
+.desktop-icon {
+  position: absolute;
+  left: var(--icon-x);
+  top: var(--icon-y);
+  --icon-shadow: rgba(46, 39, 31, 0.12);
+  display: grid;
+  justify-items: center;
+  width: 98px;
+  gap: 0.45rem;
+  border: 0;
+  padding: 0.4rem 0.3rem;
+  border-radius: 8px;
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.desktop-icon:hover,
+.desktop-icon:focus-visible {
+  transform: translate(-50%, -50%);
+}
+
+.desktop-icon:active {
+  transform: translate(-50%, -50%);
+}
+
+.icon-glyph {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  border: 1px solid rgba(39, 33, 27, 0.22);
+  border-radius: 16px;
+  color: rgba(31, 28, 24, 0.72);
+  box-shadow:
+    0 12px 22px rgba(56, 44, 32, 0.12),
+    0 1px 0 rgba(255, 255, 255, 0.7) inset;
+}
+
+.placeholder-svg {
+  width: 39px;
+  height: 39px;
+  opacity: 0.76;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.38));
+}
+
+.project-thumbnail {
+  display: block;
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.thumbnail-blog {
+  transform: scale(1.15);
+}
+
+.project-thumbnail[data-artwork-id='maneki-neko-catalog'] {
+  transform: scale(1.12);
+}
+
+.icon-label {
+  max-width: 90px;
+  color: rgba(30, 27, 22, 0.88);
+  font-family: var(--mono);
+  font-size: var(--type-meta-size);
+  font-weight: var(--type-meta-weight);
+  line-height: var(--type-meta-line);
+  overflow-wrap: anywhere;
+  text-align: center;
+  text-wrap: balance;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.tone-coral .icon-glyph,
+.project-icon.tone-coral {
+  background: linear-gradient(145deg, #ffd2bd, #ff8c67);
+}
+
+.tone-coral {
+  --icon-shadow: rgba(255, 140, 103, 0.22);
+}
+
+.tone-mint .icon-glyph,
+.project-icon.tone-mint {
+  background: linear-gradient(145deg, #d8f4d8, #72c59a);
+}
+
+.tone-mint {
+  --icon-shadow: rgba(114, 197, 154, 0.22);
+}
+
+.tone-blue .icon-glyph,
+.project-icon.tone-blue {
+  background: linear-gradient(145deg, #dceaff, #76a6ff);
+}
+
+.tone-blue {
+  --icon-shadow: rgba(118, 166, 255, 0.22);
+}
+
+.tone-amber .icon-glyph,
+.project-icon.tone-amber {
+  background: linear-gradient(145deg, #ffefb4, #e2ae42);
+}
+
+.tone-amber,
+.tone-folder {
+  --icon-shadow: rgba(226, 174, 66, 0.22);
+}
+
+.tone-rose .icon-glyph,
+.project-icon.tone-rose {
+  background: linear-gradient(145deg, #ffd7de, #e87990);
+}
+
+.tone-rose {
+  --icon-shadow: rgba(232, 121, 144, 0.22);
+}
+
+.tone-violet .icon-glyph,
+.project-icon.tone-violet {
+  background: linear-gradient(145deg, #eee1ff, #a586d8);
+}
+
+.tone-violet {
+  --icon-shadow: rgba(165, 134, 216, 0.22);
+}
+
+.tone-graphite .icon-glyph,
+.project-icon.tone-graphite {
+  color: #f5f1e8;
+  background: linear-gradient(145deg, #4c4a43, #1f1f1c);
+}
+
+.tone-graphite {
+  --icon-shadow: rgba(31, 31, 28, 0.18);
+}
+
+.tone-settings {
+  --icon-shadow: rgba(169, 184, 177, 0.22);
+}
+
+.tone-folder .icon-glyph {
+  background:
+    linear-gradient(180deg, #ffdd7a 0 28%, transparent 28%),
+    linear-gradient(145deg, #fff1a8, #e8bb42);
+}
+
+.tone-settings .icon-glyph {
+  overflow: hidden;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 24%, transparent 25%),
+    conic-gradient(from 20deg, #d7ddd7, #a9b8b1, #e8e4d7, #b5c2b7, #d7ddd7);
+}
+
+.tone-settings .project-thumbnail {
+  width: 66px;
+  height: 66px;
+  transform: translateX(-2.3%) scale(1.35);
+}

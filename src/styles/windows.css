@@ -1,0 +1,205 @@
+/* Window layout and bounds */
+.window-layer {
+  position: absolute;
+  inset: 40px 0 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.window {
+  --window-min-width: 390px;
+  --window-min-height: 320px;
+  --window-max-width: 920px;
+  --window-max-height: calc(100svh - 72px);
+  --type-title-size: 1.25rem;
+  --type-heading-size: 0.96rem;
+  --type-body-size: 0.88rem;
+  --type-ui-size: 0.8rem;
+  --type-meta-size: 0.7rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  width: clamp(
+    min(var(--window-min-width), calc(100vw - 20px)),
+    var(--window-width),
+    min(var(--window-max-width), calc(100vw - 20px))
+  );
+  height: clamp(
+    min(var(--window-min-height), calc(100svh - 96px)),
+    var(--window-height),
+    var(--window-max-height)
+  );
+  min-width: min(var(--window-min-width), calc(100vw - 20px));
+  min-height: min(var(--window-min-height), calc(100svh - 96px));
+  max-width: min(var(--window-max-width), calc(100vw - 20px));
+  max-height: var(--window-max-height);
+  overflow: hidden;
+  border: 1px solid rgba(36, 31, 25, 0.42);
+  border-radius: 10px;
+  background: rgba(255, 252, 244, 0.88);
+  backdrop-filter: blur(20px) saturate(1.08);
+  container-type: inline-size;
+  container-name: app-window;
+  box-shadow:
+    0 28px 70px rgba(54, 43, 31, 0.2),
+    0 2px 0 rgba(255, 255, 255, 0.62) inset;
+  pointer-events: auto;
+  resize: both;
+  transform: translate3d(var(--window-x), var(--window-y), 0);
+  transition:
+    box-shadow 180ms var(--ease-out),
+    filter 180ms var(--ease-out),
+    opacity 180ms var(--ease-out);
+}
+
+.window-project {
+  --window-min-width: 500px;
+  --window-min-height: 430px;
+  --window-max-width: 900px;
+}
+
+.window-blog {
+  --window-min-width: 540px;
+  --window-min-height: 360px;
+  --window-max-width: 980px;
+}
+
+.window-settings {
+  --window-min-width: 560px;
+  --window-min-height: 390px;
+  --window-max-width: 900px;
+}
+
+/* Window-scoped typography */
+@container app-window (min-width: 620px) {
+  .window-titlebar,
+  .window-body {
+    --type-title-size: 1.38rem;
+    --type-heading-size: 1rem;
+    --type-body-size: 0.92rem;
+    --type-ui-size: 0.82rem;
+    --type-meta-size: 0.72rem;
+  }
+}
+
+@container app-window (min-width: 780px) {
+  .window-titlebar,
+  .window-body {
+    --type-title-size: 1.58rem;
+    --type-heading-size: 1.04rem;
+    --type-body-size: 0.96rem;
+    --type-ui-size: 0.84rem;
+    --type-meta-size: 0.73rem;
+  }
+}
+
+@container app-window (min-width: 900px) {
+  .window-blog .window-body {
+    --type-title-size: 1.72rem;
+    --type-body-size: 1rem;
+  }
+}
+
+@container app-window (max-width: 520px) {
+  .window-titlebar,
+  .window-body {
+    --type-title-size: 1.12rem;
+    --type-heading-size: 0.92rem;
+    --type-body-size: 0.84rem;
+    --type-ui-size: 0.78rem;
+    --type-meta-size: 0.68rem;
+  }
+}
+
+/* Window chrome */
+.window.is-inactive {
+  filter: saturate(0.88);
+  box-shadow:
+    0 18px 44px rgba(54, 43, 31, 0.12),
+    0 2px 0 rgba(255, 255, 255, 0.52) inset;
+}
+
+.window-titlebar {
+  display: grid;
+  grid-template-columns: 96px 1fr 96px;
+  align-items: center;
+  min-height: 34px;
+  border-bottom: 1px solid rgba(36, 31, 25, 0.18);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.62), rgba(242, 234, 216, 0.62)),
+    rgba(255, 251, 241, 0.76);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.window-titlebar:active {
+  cursor: grabbing;
+}
+
+.window-titlebar h2 {
+  margin: 0;
+  color: rgba(34, 30, 26, 0.82);
+  font-family: var(--mono);
+  font-size: var(--type-chrome-size);
+  font-weight: var(--type-chrome-weight);
+  line-height: var(--type-chrome-line);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.traffic-lights {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  padding-left: 0.8rem;
+}
+
+.traffic {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(31, 27, 22, 0.22);
+  border-radius: 50%;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+}
+
+button.traffic {
+  padding: 0;
+  cursor: pointer;
+  transition: transform 140ms var(--ease-out), filter 140ms var(--ease-out);
+}
+
+button.traffic:hover {
+  filter: brightness(0.95) saturate(1.1);
+}
+
+button.traffic:active {
+  transform: scale(0.9);
+}
+
+.traffic-close {
+  background: #ff6f5c;
+}
+
+.traffic-minimize {
+  background: #4b4c4e;
+}
+
+.traffic-zoom {
+  background: #4b4c4e;
+}
+
+.window-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overflow-x: hidden;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
+    rgba(255, 252, 244, 0.72);
+}

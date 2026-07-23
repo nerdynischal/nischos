@@ -1,0 +1,151 @@
+/* Default theme: project windows */
+.project-window {
+  gap: 1.45rem;
+}
+
+.project-hero h3,
+.settings-detail h3,
+.empty-state h3 {
+  color: rgba(250, 250, 250, 0.96);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.project-hero p,
+.settings-detail p,
+.empty-state p {
+  color: var(--muted);
+}
+
+.eyebrow {
+  color: var(--text-tertiary);
+  font-size: var(--type-meta-size);
+  font-weight: var(--type-meta-weight);
+  letter-spacing: var(--tracking-meta);
+}
+
+.story-panel,
+.project-meta div,
+.settings-detail li {
+  border-color: var(--line-frame);
+}
+
+.project-meta {
+  border-top-color: var(--line-frame);
+  border-bottom-color: var(--line-frame);
+}
+
+.project-meta div {
+  border-right-color: var(--line-hairline);
+  background: transparent;
+}
+
+.story-panel p {
+  color: var(--text-secondary);
+}
+
+.story-panel h4 {
+  color: var(--text-primary);
+}
+
+.screenshot-card {
+  border-color: var(--line-frame);
+  color: var(--text-muted);
+  background:
+    radial-gradient(circle at 74% 8%, rgba(var(--icon-accent, 255, 255, 255), 0.1), transparent 46%),
+    var(--surface-panel-strong);
+}
+
+.carousel-controls > button {
+  border-color: var(--line-frame);
+  color: var(--text-muted);
+  background: var(--scrollbar-track);
+}
+
+.carousel-controls > button:hover {
+  color: var(--text-primary);
+  background: var(--surface-soft);
+}
+
+.carousel-dots button {
+  background: var(--control-inset);
+}
+
+.carousel-dots button.is-active {
+  background: var(--text-muted);
+}
+
+.screenshot-card::before,
+.screenshot-card::after {
+  border-color: var(--inset-highlight-subtle);
+  background: var(--scrollbar-track);
+}
+
+.shot-1,
+.shot-2,
+.shot-3 {
+  background-color: #101010;
+}
+
+.project-meta span {
+  color: var(--text-tertiary);
+  font-weight: var(--type-meta-weight);
+  letter-spacing: var(--tracking-meta);
+}
+
+.project-meta strong {
+  color: var(--text-secondary);
+  font-weight: var(--type-chrome-weight);
+}
+
+.project-actions a,
+.project-actions span,
+.project-actions button,
+.finder-sidebar button,
+.dock button {
+  border-color: var(--line-control);
+  color: var(--text-secondary);
+  background: var(--surface-panel-raised);
+  font-weight: var(--type-chrome-weight);
+}
+
+.project-actions .primary-action {
+  border-color: transparent;
+  color: var(--text-primary);
+  background: var(--glass-radial);
+  backdrop-filter: var(--glass-blur);
+  box-shadow:
+    var(--shadow-glass-compact),
+    0 1px 0 var(--inset-highlight-subtle) inset;
+}
+
+.project-actions a:hover,
+.project-actions button:hover,
+.finder-sidebar button:hover,
+.dock button:hover {
+  border-color: var(--line-control-hover);
+  background: var(--surface-hover-strong);
+}
+
+.project-actions .primary-action:hover {
+  border-color: transparent;
+  background: var(--glass-radial-hover);
+  box-shadow:
+    var(--shadow-glass-compact-hover),
+    0 1px 0 var(--line-subtle) inset;
+}
+
+.finder-sidebar button:hover {
+  border-color: transparent;
+}
+
+.project-actions .disabled-action {
+  color: var(--text-disabled);
+  background: var(--inset-line);
+}
+
+.finder-sidebar,
+.settings-sidebar {
+  border-right-color: var(--line-hairline);
+  background: var(--sidebar-bg);
+}

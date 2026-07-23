@@ -1,0 +1,205 @@
+/* Dock shell */
+.dock {
+  position: absolute;
+  left: 50%;
+  bottom: max(3.1rem, calc(env(safe-area-inset-bottom) + 2.3rem));
+  z-index: 90;
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  min-height: 64px;
+  padding: 0.55rem;
+  border: 1px solid rgba(36, 31, 25, 0.11);
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.16)),
+    rgba(255, 252, 244, 0.28);
+  backdrop-filter: blur(22px) saturate(1.2);
+  box-shadow:
+    0 22px 62px rgba(56, 44, 32, 0.14),
+    0 1px 0 rgba(255, 255, 255, 0.66) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.24) inset;
+  transform: translateX(-50%);
+}
+
+.dock button {
+  --dock-bg: rgba(255, 255, 255, 0.18);
+  --dock-bg-hover: rgba(255, 255, 255, 0.28);
+  --dock-shadow: rgba(56, 44, 32, 0.08);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  min-height: 50px;
+  border-color: rgba(36, 31, 25, 0.11);
+  border-radius: 15px;
+  padding: 0;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.34), transparent),
+    var(--dock-bg);
+  backdrop-filter: blur(10px) saturate(1.08);
+  box-shadow:
+    0 8px 22px var(--dock-shadow),
+    0 1px 0 rgba(255, 255, 255, 0.58) inset;
+  transition:
+    background-color 160ms var(--ease-out),
+    border-color 160ms var(--ease-out),
+    box-shadow 160ms var(--ease-out),
+    transform 160ms var(--ease-out);
+}
+
+.dock button:hover {
+  border-color: rgba(36, 31, 25, 0.14);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.42), transparent),
+    var(--dock-bg-hover);
+  box-shadow:
+    0 12px 30px var(--dock-shadow),
+    0 1px 0 rgba(255, 255, 255, 0.64) inset;
+  transform: translateY(-2px) scale(1.06);
+}
+
+.dock button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.dock-separator {
+  align-self: center;
+  width: 1px;
+  height: 30px;
+  margin-inline: -0.08rem;
+  background: var(--line-dock);
+  pointer-events: none;
+}
+
+.dock button:hover,
+.dock button:focus-visible {
+  z-index: 2;
+}
+
+.dock-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.7rem);
+  width: max-content;
+  max-width: min(220px, calc(100vw - 1rem));
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  padding: 0.38rem 0.55rem;
+  color: var(--text-primary);
+  background: var(--surface-panel-raised);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.34),
+    0 1px 0 var(--inset-highlight-subtle) inset;
+  font-family: var(--mono);
+  font-size: var(--type-meta-size);
+  font-weight: var(--type-meta-weight);
+  line-height: var(--type-meta-line);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transform: translate(-50%, 4px) scale(0.97);
+  transform-origin: 50% 100%;
+  transition:
+    opacity 125ms var(--ease-out),
+    transform 125ms var(--ease-out);
+}
+
+.dock-tooltip::after {
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 7px;
+  height: 7px;
+  border-right: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--surface-panel-raised);
+  content: '';
+  transform: translateX(-50%) rotate(45deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dock button:hover .dock-tooltip {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+    transition-delay: 90ms;
+  }
+}
+
+.dock button:focus-visible .dock-tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+  transition-delay: 0ms;
+  transition-duration: 1ms;
+}
+
+/* Dock item tones */
+.dock-tone-coral {
+  --dock-bg: rgba(255, 140, 103, 0.2);
+  --dock-bg-hover: rgba(255, 140, 103, 0.28);
+  --dock-shadow: rgba(255, 140, 103, 0.18);
+}
+
+.dock-tone-mint {
+  --dock-bg: rgba(114, 197, 154, 0.2);
+  --dock-bg-hover: rgba(114, 197, 154, 0.28);
+  --dock-shadow: rgba(114, 197, 154, 0.18);
+}
+
+.dock-tone-blue {
+  --dock-bg: rgba(118, 166, 255, 0.2);
+  --dock-bg-hover: rgba(118, 166, 255, 0.28);
+  --dock-shadow: rgba(118, 166, 255, 0.18);
+}
+
+.dock-tone-folder,
+.dock-tone-amber {
+  --dock-bg: rgba(226, 174, 66, 0.22);
+  --dock-bg-hover: rgba(226, 174, 66, 0.3);
+  --dock-shadow: rgba(226, 174, 66, 0.18);
+}
+
+.dock-tone-settings {
+  --dock-bg: rgba(169, 184, 177, 0.22);
+  --dock-bg-hover: rgba(169, 184, 177, 0.3);
+  --dock-shadow: rgba(169, 184, 177, 0.18);
+}
+
+.dock-tone-note,
+.dock-tone-violet {
+  --dock-bg: rgba(165, 134, 216, 0.2);
+  --dock-bg-hover: rgba(165, 134, 216, 0.28);
+  --dock-shadow: rgba(165, 134, 216, 0.18);
+}
+
+.dock-tone-graphite {
+  --dock-bg: rgba(31, 31, 28, 0.16);
+  --dock-bg-hover: rgba(31, 31, 28, 0.22);
+  --dock-shadow: rgba(31, 31, 28, 0.12);
+}
+
+.dock .placeholder-svg {
+  width: 28px;
+  height: 28px;
+  opacity: 0.72;
+}
+
+.dock .project-thumbnail {
+  width: 32px;
+  height: 32px;
+}
+
+.dock .dock-tone-settings .project-thumbnail {
+  width: 50px;
+  height: 50px;
+  transform: translateX(-2.3%) scale(1.35);
+}
+
+.empty-state {
+  display: grid;
+  place-items: center;
+  gap: 0.6rem;
+  min-height: 100%;
+  padding: 2rem;
+  text-align: center;
+}

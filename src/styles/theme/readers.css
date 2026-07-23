@@ -1,0 +1,224 @@
+/* Default theme: sidebars and readers */
+.finder-sidebar,
+.settings-sidebar {
+  gap: 0.16rem;
+  min-height: 0;
+  overflow: auto;
+  padding: 0.78rem 0.62rem;
+}
+
+.sidebar-title,
+.settings-sidebar-title {
+  color: var(--text-tertiary);
+  font-weight: var(--type-meta-weight);
+  letter-spacing: var(--tracking-meta);
+}
+
+.settings-sidebar button {
+  border-radius: 6px;
+  color: var(--text-muted);
+  background: transparent;
+  font-weight: var(--type-ui-weight);
+}
+
+.finder-sidebar button {
+  border-radius: 6px;
+  border-color: transparent;
+  min-height: 34px;
+  padding: 0 0.5rem;
+  color: var(--text-muted);
+  background: transparent;
+  font: var(--type-ui-weight) var(--type-ui-size)/var(--type-ui-line) var(--sans);
+  text-align: left;
+}
+
+.blog-post-nav {
+  gap: 0.08rem;
+}
+
+.blog-post-nav button {
+  min-height: 31px;
+}
+
+.blog-post-nav button span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.blog-reader {
+  min-height: 0;
+  overflow: auto;
+  background: var(--surface-panel-strong);
+}
+
+.blog-reader-post {
+  display: grid;
+  gap: 1.6rem;
+  max-width: 72ch;
+  padding: 3.2rem 3.4rem 8.5rem;
+}
+
+.blog-reader-post header {
+  display: grid;
+  gap: 0.58rem;
+}
+
+.blog-reader-post header p {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-family: var(--mono);
+  font-size: var(--type-meta-size);
+  font-weight: var(--type-meta-weight);
+  line-height: var(--type-meta-line);
+}
+
+.blog-reader-post h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  line-height: var(--type-title-line);
+}
+
+.blog-markdown {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.blog-markdown :is(p, ul, ol, blockquote, pre, table, h1, h2, h4, h5, h6) {
+  margin: 0;
+}
+
+.blog-markdown :is(p, li) {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-line);
+}
+
+.blog-markdown :is(h1, h2) {
+  color: var(--text-primary);
+  font-size: 1.32rem;
+  font-weight: 720;
+  line-height: 1.18;
+}
+
+.blog-markdown :is(h4, h5, h6) {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 720;
+  line-height: 1.3;
+}
+
+.blog-markdown :is(ul, ol) {
+  display: grid;
+  gap: 0.54rem;
+  padding-left: 1.25rem;
+}
+
+.blog-markdown a {
+  color: var(--accent-blue);
+  text-underline-offset: 0.18em;
+}
+
+.blog-markdown blockquote {
+  border-left: 3px solid rgba(255, 255, 255, 0.2);
+  padding-left: 1rem;
+  color: var(--text-muted);
+}
+
+.blog-markdown code {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 5px;
+  padding: 0.1rem 0.28rem;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--mono);
+  font-size: 0.9em;
+}
+
+.blog-markdown pre {
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.blog-markdown pre code {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.blog-markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+}
+
+.blog-markdown th,
+.blog-markdown td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+  padding: 0.62rem 0.78rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.blog-markdown th {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.07);
+  font-weight: 720;
+}
+
+.blog-markdown tr:last-child td {
+  border-bottom: 0;
+}
+
+.finder-sidebar button:hover,
+.settings-sidebar button:hover {
+  border-color: transparent;
+  background: var(--surface-hover);
+}
+
+.finder-sidebar button.is-selected,
+.settings-sidebar button.is-selected {
+  color: var(--text-primary);
+  border-color: transparent;
+  background: var(--surface-selected);
+  box-shadow: none;
+}
+
+.avatar-orbit {
+  align-self: center;
+  width: 86px;
+  height: 86px;
+  border-radius: 24px;
+  border: 0;
+  color: var(--text-secondary);
+  background: var(--glass-radial);
+  backdrop-filter: var(--glass-blur);
+  box-shadow:
+    var(--shadow-glass),
+    0 1px 0 var(--inset-highlight-subtle) inset;
+}
+
+.avatar-orbit img {
+  width: 46px;
+  height: 46px;
+  border-radius: 11px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.settings-detail li {
+  color: var(--text-secondary);
+}

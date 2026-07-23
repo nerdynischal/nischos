@@ -1,0 +1,70 @@
+/* Dark responsive behavior */
+@media (hover: hover) and (pointer: fine) {
+  .desktop-icon:hover .icon-glyph {
+    box-shadow:
+      0 34px 86px var(--icon-shadow),
+      0 14px 34px rgba(0, 0, 0, 0.32),
+      0 0 0 1px rgba(var(--icon-accent, 255, 255, 255), 0.18),
+      0 1px 0 rgba(255, 255, 255, 0.14) inset;
+  }
+
+  .desktop-icon:focus-visible .icon-glyph {
+    box-shadow:
+      0 34px 86px var(--icon-shadow),
+      0 14px 34px rgba(0, 0, 0, 0.32),
+      0 0 0 2px var(--focus),
+      0 1px 0 rgba(255, 255, 255, 0.14) inset;
+  }
+}
+
+@media (max-width: 760px) {
+  .finder-sidebar,
+  .settings-sidebar {
+    border-bottom-color: var(--line);
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1024px) {
+  .window {
+    --window-min-width: 440px;
+    --window-min-height: 340px;
+    --window-max-width: calc(100vw - 24px);
+    --window-max-height: calc(100svh - 72px);
+  }
+
+  .window-blog,
+  .window-settings {
+    --window-min-width: 500px;
+  }
+}
+
+@media (max-width: 1024px), (hover: none), (pointer: coarse) {
+  .desktop-icon {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .desktop-icon:hover .icon-glyph,
+  .desktop-icon:focus-visible .icon-glyph,
+  .desktop-icon:active .icon-glyph {
+    transform: none;
+    box-shadow:
+      0 16px 38px rgba(0, 0, 0, 0.38),
+      0 1px 0 rgba(255, 255, 255, 0.12) inset;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1024px) {
+  .desktop-icon:hover,
+  .desktop-icon:focus-visible,
+  .desktop-icon:active {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media (max-width: 760px) {
+  .desktop-icon:hover,
+  .desktop-icon:focus-visible,
+  .desktop-icon:active {
+    transform: none;
+  }
+}

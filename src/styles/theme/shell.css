@@ -1,0 +1,214 @@
+/* Default theme: desktop shell */
+.desktop {
+  color: var(--ink);
+  background: var(--desktop-bg);
+}
+
+.wallpaper {
+  background: var(--surface-base);
+}
+
+.wallpaper::after {
+  content: none;
+}
+
+.wallpaper-grid {
+  opacity: 0.32;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: none;
+}
+
+.menu-bar {
+  border-bottom-color: var(--line-chrome);
+  background: var(--chrome-bg);
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.menu-left,
+.brand-button,
+.menu-status {
+  color: var(--text-primary);
+  font-size: var(--type-chrome-size);
+}
+
+.brand-button {
+  font-weight: var(--type-chrome-weight);
+}
+
+.brand-button:hover {
+  background: var(--surface-soft);
+}
+
+.brand-logo {
+  background: var(--brand-logo-bg);
+  box-shadow:
+    0 0 0 1px var(--brand-logo-ring),
+    0 8px 22px rgba(0, 0, 0, 0.26);
+}
+
+.menu-status {
+  color: var(--text-muted);
+}
+
+.active-app-label {
+  color: var(--text-tertiary);
+}
+
+/* Default theme: desktop icons */
+.desktop-icon {
+  color: var(--ink);
+}
+
+.icon-glyph,
+.project-icon {
+  border-color: var(--icon-tile-border);
+  color: var(--icon-text);
+  background:
+    linear-gradient(145deg, var(--icon-tile-shine), var(--icon-tile-shine-soft)),
+    var(--icon-tile-bg);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.38),
+    0 1px 0 var(--icon-tile-shine) inset;
+}
+
+.placeholder-svg {
+  opacity: 0.78;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.32));
+}
+
+.icon-label {
+  color: var(--text-secondary);
+  font-weight: var(--type-meta-weight);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+.tone-coral {
+  --icon-accent: 255, 140, 103;
+  --icon-shadow: rgba(255, 140, 103, 0.2);
+}
+
+.tone-mint {
+  --icon-accent: 114, 197, 154;
+  --icon-shadow: rgba(114, 197, 154, 0.18);
+}
+
+.tone-blue {
+  --icon-accent: 118, 166, 255;
+  --icon-shadow: rgba(118, 166, 255, 0.2);
+}
+
+.tone-amber,
+.tone-folder {
+  --icon-accent: 226, 174, 66;
+  --icon-shadow: rgba(226, 174, 66, 0.19);
+}
+
+.tone-violet {
+  --icon-accent: 165, 134, 216;
+  --icon-shadow: rgba(165, 134, 216, 0.2);
+}
+
+.tone-graphite {
+  --icon-accent: 210, 210, 210;
+  --icon-shadow: var(--surface-soft);
+}
+
+.tone-settings {
+  --icon-accent: 188, 196, 192;
+  --icon-shadow: rgba(188, 196, 192, 0.16);
+}
+
+.tone-coral .icon-glyph,
+.tone-mint .icon-glyph,
+.tone-blue .icon-glyph,
+.tone-amber .icon-glyph,
+.tone-violet .icon-glyph,
+.tone-graphite .icon-glyph,
+.tone-folder .icon-glyph,
+.tone-settings .icon-glyph,
+.project-icon.tone-coral,
+.project-icon.tone-mint,
+.project-icon.tone-blue,
+.project-icon.tone-amber,
+.project-icon.tone-violet,
+.project-icon.tone-graphite {
+  color: var(--icon-text-strong);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(var(--icon-accent, 255, 255, 255), 0.24), transparent 56%),
+    linear-gradient(145deg, var(--line-dock), var(--icon-tile-shine-soft)),
+    var(--icon-tile-bg-strong);
+}
+
+.window {
+  border-color: var(--line-emphasis);
+  border-radius: 16px;
+  background: var(--window-bg);
+  backdrop-filter: none;
+  box-shadow:
+    var(--shadow-window),
+    0 0 0 1px var(--inset-line) inset;
+}
+
+.window.is-inactive {
+  filter: saturate(0.88) brightness(0.88);
+  box-shadow:
+    var(--shadow-window-inactive),
+    0 0 0 1px var(--inset-line-inactive) inset;
+}
+
+.window-titlebar {
+  min-height: 44px;
+  border-bottom-color: var(--line-hairline);
+  background: var(--surface-panel-strong);
+}
+
+.window-titlebar h2 {
+  color: var(--text-secondary);
+  font-size: var(--type-chrome-size);
+  font-weight: var(--type-chrome-weight);
+}
+
+.traffic {
+  border-color: var(--control-border);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.34),
+    0 1px 0 var(--control-inset) inset;
+}
+
+.traffic-close {
+  background: var(--control-close);
+}
+
+.traffic-minimize {
+  background: var(--control-neutral);
+}
+
+.traffic-zoom {
+  background: var(--control-neutral);
+}
+
+.window.is-inactive .traffic-close {
+  background: var(--control-neutral);
+}
+
+.window-body {
+  background: var(--window-bg);
+}
+
+.window-blog .window-body {
+  overflow: hidden;
+}
+
+.window-settings .window-body {
+  position: relative;
+  overflow: hidden;
+}
+
+.window-settings .settings-window {
+  position: absolute;
+  inset: 0;
+}
