@@ -14,7 +14,7 @@
 .project-hero p,
 .settings-detail p,
 .empty-state p {
-  color: var(--muted);
+  color: var(--text-muted);
 }
 
 .eyebrow {
@@ -84,7 +84,7 @@
 .shot-1,
 .shot-2,
 .shot-3 {
-  background-color: #101010;
+  background-color: var(--surface-screenshot);
 }
 
 .project-meta span {
@@ -110,13 +110,11 @@
 }
 
 .project-actions .primary-action {
-  border-color: transparent;
-  color: var(--text-primary);
-  background: var(--glass-radial);
-  backdrop-filter: var(--glass-blur);
-  box-shadow:
-    var(--shadow-glass-compact),
-    0 1px 0 var(--inset-highlight-subtle) inset;
+  border-color: var(--action-primary-border);
+  color: var(--action-primary-text);
+  background: var(--action-primary-bg);
+  background-clip: padding-box;
+  text-shadow: var(--action-primary-text-shadow);
 }
 
 .project-actions a:hover,
@@ -127,12 +125,10 @@
   background: var(--surface-hover-strong);
 }
 
-.project-actions .primary-action:hover {
-  border-color: transparent;
-  background: var(--glass-radial-hover);
-  box-shadow:
-    var(--shadow-glass-compact-hover),
-    0 1px 0 var(--line-subtle) inset;
+.project-actions .primary-action:hover,
+.project-actions .primary-action:focus-visible {
+  border-color: var(--action-primary-border-hover);
+  background: var(--action-primary-bg-hover);
 }
 
 .finder-sidebar button:hover {
@@ -140,8 +136,12 @@
 }
 
 .project-actions .disabled-action {
+  border-color: var(--line-control);
   color: var(--text-disabled);
   background: var(--inset-line);
+  background-clip: border-box;
+  text-shadow: none;
+  box-shadow: none;
 }
 
 .finder-sidebar,

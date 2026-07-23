@@ -15,17 +15,17 @@
 }
 
 .settings-sidebar button {
-  border-radius: 6px;
+  border-radius: var(--sidebar-control-radius);
   color: var(--text-muted);
   background: transparent;
   font-weight: var(--type-ui-weight);
 }
 
 .finder-sidebar button {
-  border-radius: 6px;
+  border-radius: var(--sidebar-control-radius);
   border-color: transparent;
-  min-height: 34px;
-  padding: 0 0.5rem;
+  min-height: var(--control-height-md);
+  padding: 0 var(--space-2);
   color: var(--text-muted);
   background: transparent;
   font: var(--type-ui-weight) var(--type-ui-size)/var(--type-ui-line) var(--sans);
@@ -37,7 +37,7 @@
 }
 
 .blog-post-nav button {
-  min-height: 31px;
+  min-height: var(--control-height-compact);
 }
 
 .blog-post-nav button span {
@@ -116,36 +116,36 @@
 .blog-markdown :is(ul, ol) {
   display: grid;
   gap: 0.54rem;
-  padding-left: 1.25rem;
+  padding-left: var(--space-5);
 }
 
 .blog-markdown a {
-  color: var(--accent-blue);
+  color: var(--text-link);
   text-underline-offset: 0.18em;
 }
 
 .blog-markdown blockquote {
-  border-left: 3px solid rgba(255, 255, 255, 0.2);
-  padding-left: 1rem;
+  border-left: 3px solid var(--line-content-strong);
+  padding-left: var(--space-4);
   color: var(--text-muted);
 }
 
 .blog-markdown code {
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 5px;
+  border: 1px solid var(--line-code-inline);
+  border-radius: var(--brand-control-radius);
   padding: 0.1rem 0.28rem;
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--surface-code-inline);
   font-family: var(--mono);
   font-size: 0.9em;
 }
 
 .blog-markdown pre {
   overflow: auto;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 8px;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid var(--line-content);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  background: var(--surface-code-block);
 }
 
 .blog-markdown pre code {
@@ -158,8 +158,8 @@
   width: 100%;
   border-collapse: collapse;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 8px;
+  border: 1px solid var(--line-content);
+  border-radius: var(--radius-md);
   color: var(--text-secondary);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
@@ -167,7 +167,7 @@
 
 .blog-markdown th,
 .blog-markdown td {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+  border-bottom: 1px solid var(--line-row);
   padding: 0.62rem 0.78rem;
   text-align: left;
   vertical-align: top;
@@ -175,7 +175,7 @@
 
 .blog-markdown th {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--surface-table-header);
   font-weight: 720;
 }
 
@@ -201,7 +201,7 @@
   align-self: center;
   width: 86px;
   height: 86px;
-  border-radius: 24px;
+  border-radius: var(--avatar-radius);
   border: 0;
   color: var(--text-secondary);
   background: var(--glass-radial);
@@ -214,7 +214,7 @@
 .avatar-orbit img {
   width: 46px;
   height: 46px;
-  border-radius: 11px;
+  border-radius: var(--avatar-image-radius);
   background: transparent;
   box-shadow: none;
 }

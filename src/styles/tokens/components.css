@@ -1,0 +1,209 @@
+/* Shared component dimensions and visual treatments. */
+:root {
+  --control-height-compact: 31px;
+  --control-height-sm: 32px;
+  --control-height-md: 34px;
+  --control-height-lg: 38px;
+  --control-radius: 7px;
+  --sidebar-control-radius: var(--radius-sm);
+  --brand-control-radius: 5px;
+  --brand-logo-radius: var(--radius-xs);
+  --desktop-icon-radius: var(--radius-md);
+  --icon-tile-radius: var(--radius-xl);
+  --window-radius: var(--radius-xl);
+  --window-titlebar-height: 44px;
+  --project-icon-radius: 26px;
+  --screenshot-radius: var(--radius-lg);
+  --dock-radius: 22px;
+  --dock-item-radius: 15px;
+  --dock-tooltip-radius: var(--control-radius);
+  --avatar-radius: var(--radius-2xl);
+  --avatar-image-radius: 11px;
+  --menu-bar-height: 40px;
+  --dock-height: 64px;
+  --dock-item-size: 50px;
+  --desktop-icon-width: 98px;
+  --icon-tile-size: 66px;
+
+  --control-close: #ff5f57;
+  --control-neutral: #4a4b4d;
+  --control-border: rgba(var(--color-white-rgb), 0.1);
+  --control-inset: rgba(var(--color-white-rgb), 0.18);
+
+  --action-primary-border: #7c2d12;
+  --action-primary-border-hover: #9a3412;
+  --action-primary-bg:
+    radial-gradient(
+      ellipse 74% 135% at 50% 50%,
+      rgba(74, 24, 6, 0.42) 0%,
+      rgba(74, 24, 6, 0.32) 54%,
+      rgba(74, 24, 6, 0.12) 78%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 76% 150% at 102% 120%,
+      #ffb000 0%,
+      #f97316 30%,
+      rgba(194, 65, 12, 0.2) 66%,
+      transparent 84%
+    ),
+    radial-gradient(
+      ellipse 92% 145% at -8% -18%,
+      #ff7a1a 0%,
+      #ea580c 38%,
+      rgba(154, 52, 18, 0.28) 70%,
+      transparent 88%
+    ),
+    linear-gradient(135deg, #c2410c 0%, #b7460e 54%, #6b250c 100%);
+  --action-primary-bg-hover:
+    radial-gradient(
+      ellipse 74% 135% at 50% 50%,
+      rgba(74, 24, 6, 0.48) 0%,
+      rgba(74, 24, 6, 0.38) 54%,
+      rgba(74, 24, 6, 0.15) 78%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 76% 150% at 102% 120%,
+      #ffc12e 0%,
+      #fb8a2b 30%,
+      rgba(220, 82, 18, 0.22) 66%,
+      transparent 84%
+    ),
+    radial-gradient(
+      ellipse 92% 145% at -8% -18%,
+      #ff8a2d 0%,
+      #f56616 38%,
+      rgba(174, 62, 20, 0.3) 70%,
+      transparent 88%
+    ),
+    linear-gradient(135deg, #d34b0f 0%, #c25017 54%, #7c2d12 100%);
+  --action-primary-text: #fff7ed;
+  --action-primary-text-shadow: 0 1px 1px rgba(24, 22, 31, 0.38);
+
+  --brand-logo-bg: rgba(var(--color-white-rgb), 0.92);
+  --brand-logo-ring: rgba(var(--color-white-rgb), 0.18);
+  --icon-tile-bg: rgba(12, 12, 12, 0.82);
+  --icon-tile-bg-strong: rgba(12, 12, 12, 0.88);
+  --icon-tile-border: rgba(var(--color-white-rgb), 0.14);
+  --icon-tile-shine: rgba(var(--color-white-rgb), 0.12);
+  --icon-tile-shine-soft: rgba(var(--color-white-rgb), 0.035);
+  --icon-text: rgba(var(--color-white-rgb), 0.78);
+  --icon-text-strong: rgba(var(--color-white-rgb), 0.82);
+
+  --glass-radial:
+    radial-gradient(circle at 38% 24%, rgba(var(--color-white-rgb), 0.13), transparent 32%),
+    radial-gradient(circle at 76% 78%, rgba(var(--color-white-rgb), 0.055), transparent 42%),
+    rgba(16, 17, 18, 0.72);
+  --glass-blur: blur(12px) saturate(1.08);
+
+  --shadow-window: 0 36px 110px rgba(var(--color-black-rgb), 0.62);
+  --shadow-window-inactive: 0 22px 68px rgba(var(--color-black-rgb), 0.42);
+  --shadow-glass: 0 22px 48px rgba(var(--color-black-rgb), 0.36);
+  --shadow-brand-logo: 0 8px 22px rgba(var(--color-black-rgb), 0.26);
+  --shadow-icon-rest: 0 16px 38px rgba(var(--color-black-rgb), 0.38);
+  --shadow-tooltip: 0 12px 28px rgba(var(--color-black-rgb), 0.34);
+  --shadow-dock: 0 28px 78px rgba(var(--color-black-rgb), 0.46);
+
+  --dock-surface:
+    linear-gradient(
+      180deg,
+      rgba(var(--color-white-rgb), 0.095),
+      rgba(var(--color-white-rgb), 0.035)
+    ),
+    rgba(8, 8, 8, 0.62);
+  --dock-button-bg: rgba(var(--color-white-rgb), 0.045);
+  --dock-button-bg-hover: rgba(var(--color-white-rgb), 0.08);
+  --dock-button-shadow: rgba(var(--color-black-rgb), 0.28);
+}
+
+.tone-coral,
+.dock-tone-coral {
+  --tone-rgb: var(--tone-coral-rgb);
+  --tone-icon-shadow: rgba(var(--tone-rgb), 0.2);
+  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
+  --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
+  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.2);
+  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.28);
+  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
+}
+
+.tone-mint,
+.dock-tone-mint {
+  --tone-rgb: var(--tone-mint-rgb);
+  --tone-icon-shadow: rgba(var(--tone-rgb), 0.18);
+  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
+  --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
+  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.2);
+  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.28);
+  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
+}
+
+.tone-blue,
+.dock-tone-blue {
+  --tone-rgb: var(--tone-blue-rgb);
+  --tone-icon-shadow: rgba(var(--tone-rgb), 0.2);
+  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
+  --tone-dock-shadow: rgba(var(--tone-rgb), 0.13);
+  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.2);
+  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.28);
+  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
+}
+
+.tone-amber,
+.tone-folder,
+.dock-tone-amber,
+.dock-tone-folder {
+  --tone-rgb: var(--tone-amber-rgb);
+  --tone-icon-shadow: rgba(var(--tone-rgb), 0.19);
+  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
+  --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
+  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.22);
+  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.3);
+  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
+}
+
+.tone-rose,
+.dock-tone-rose {
+  --tone-rgb: var(--tone-rose-rgb);
+  --tone-icon-shadow: rgba(var(--tone-rgb), 0.2);
+  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
+  --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
+  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.2);
+  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.28);
+  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
+}
+
+.tone-violet,
+.dock-tone-violet,
+.dock-tone-note {
+  --tone-rgb: var(--tone-violet-rgb);
+  --tone-icon-shadow: rgba(var(--tone-rgb), 0.2);
+  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
+  --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
+  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.2);
+  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.28);
+  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
+}
+
+.tone-graphite,
+.dock-tone-graphite {
+  --tone-rgb: var(--tone-graphite-rgb);
+  --tone-icon-shadow: var(--surface-soft);
+  --tone-icon-shadow-light: rgba(31, 31, 28, 0.18);
+  --tone-dock-shadow: var(--surface-soft);
+  --tone-dock-bg-light: rgba(31, 31, 28, 0.16);
+  --tone-dock-bg-light-hover: rgba(31, 31, 28, 0.22);
+  --tone-dock-shadow-light: rgba(31, 31, 28, 0.12);
+}
+
+.tone-settings,
+.dock-tone-settings {
+  --tone-rgb: var(--tone-settings-rgb);
+  --tone-icon-shadow: rgba(var(--tone-rgb), 0.16);
+  --tone-icon-shadow-light: rgba(169, 184, 177, 0.22);
+  --tone-dock-shadow: rgba(var(--tone-rgb), 0.11);
+  --tone-dock-bg-light: rgba(169, 184, 177, 0.22);
+  --tone-dock-bg-light-hover: rgba(169, 184, 177, 0.3);
+  --tone-dock-shadow-light: rgba(169, 184, 177, 0.18);
+}

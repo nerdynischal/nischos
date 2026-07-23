@@ -1,7 +1,7 @@
 /* Window layout and bounds */
 .window-layer {
   position: absolute;
-  inset: 40px 0 0;
+  inset: var(--menu-bar-height) 0 0;
   z-index: 20;
   pointer-events: none;
 }
@@ -37,7 +37,7 @@
   max-height: var(--window-max-height);
   overflow: hidden;
   border: 1px solid rgba(36, 31, 25, 0.42);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: rgba(255, 252, 244, 0.88);
   backdrop-filter: blur(20px) saturate(1.08);
   container-type: inline-size;
@@ -49,9 +49,9 @@
   resize: both;
   transform: translate3d(var(--window-x), var(--window-y), 0);
   transition:
-    box-shadow 180ms var(--ease-out),
-    filter 180ms var(--ease-out),
-    opacity 180ms var(--ease-out);
+    box-shadow var(--duration-window) var(--ease-out),
+    filter var(--duration-window) var(--ease-out),
+    opacity var(--duration-window) var(--ease-out);
 }
 
 .window-project {
@@ -164,14 +164,16 @@
   width: 12px;
   height: 12px;
   border: 1px solid rgba(31, 27, 22, 0.22);
-  border-radius: 50%;
+  border-radius: var(--radius-round);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
 }
 
 button.traffic {
   padding: 0;
   cursor: pointer;
-  transition: transform 140ms var(--ease-out), filter 140ms var(--ease-out);
+  transition:
+    transform var(--duration-press) var(--ease-out),
+    filter var(--duration-press) var(--ease-out);
 }
 
 button.traffic:hover {

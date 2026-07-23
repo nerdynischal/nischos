@@ -22,8 +22,8 @@
 
   .icon-glyph {
     transition:
-      box-shadow 180ms var(--ease-out),
-      transform 180ms var(--ease-out);
+      box-shadow var(--duration-window) var(--ease-out),
+      transform var(--duration-window) var(--ease-out);
   }
 }
 
@@ -52,7 +52,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.7rem;
-    padding: 1rem 0.75rem 6rem;
+    padding: var(--space-4) var(--space-3) 6rem;
   }
 
   .desktop-icon {
@@ -67,13 +67,13 @@
 
   .window-layer {
     position: fixed;
-    inset: 40px 0 0;
+    inset: var(--menu-bar-height) 0 0;
   }
 
   .window {
-    left: 0.5rem;
-    right: 0.5rem;
-    top: 0.75rem;
+    left: var(--space-2);
+    right: var(--space-2);
+    top: var(--space-3);
     width: auto;
     height: min(78svh, 620px);
     min-width: 0;
@@ -108,7 +108,7 @@
 
   .project-meta {
     border: 0;
-    gap: 0.5rem;
+    gap: var(--space-2);
     padding: 0;
   }
 
@@ -147,8 +147,8 @@
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    transition-duration: 1ms !important;
-    animation-duration: 1ms !important;
+    transition-duration: var(--duration-reduced) !important;
+    animation-duration: var(--duration-reduced) !important;
     animation-iteration-count: 1 !important;
   }
 }

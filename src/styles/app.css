@@ -1,4 +1,6 @@
-@import './tokens.css';
+@import './tokens/primitives.css';
+@import './tokens/semantic.css';
+@import './tokens/components.css';
 @import './desktop.css';
 @import './windows.css';
 @import './projects.css';

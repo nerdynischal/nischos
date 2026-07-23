@@ -3,13 +3,13 @@
   display: grid;
   align-content: start;
   gap: 1.45rem;
-  padding: 1.9rem 2rem 2.2rem;
+  padding: 1.9rem var(--space-8) 2.2rem;
 }
 
 .project-hero {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 1.25rem;
+  gap: var(--space-5);
   align-items: center;
 }
 
@@ -19,7 +19,7 @@
   width: 104px;
   height: 104px;
   border: 1px solid rgba(36, 31, 25, 0.2);
-  border-radius: 26px;
+  border-radius: var(--project-icon-radius);
   color: rgba(29, 26, 22, 0.74);
   box-shadow:
     0 18px 30px rgba(59, 47, 34, 0.14),
@@ -46,7 +46,7 @@
 .settings-detail h3,
 .empty-state h3 {
   margin: 0;
-  color: var(--ink);
+  color: var(--text-primary);
   font-family: var(--sans);
   font-size: var(--type-title-size);
   font-weight: var(--type-title-weight);
@@ -79,7 +79,7 @@
 
 .story-panel h4 {
   margin: 0;
-  color: var(--ink);
+  color: var(--text-primary);
   font-size: var(--type-heading-size);
   font-weight: var(--type-heading-weight);
   line-height: var(--type-heading-line);
@@ -107,8 +107,8 @@
   min-height: 240px;
   overflow: hidden;
   border: 1px solid rgba(41, 35, 28, 0.16);
-  border-radius: 12px;
-  padding: 1rem;
+  border-radius: var(--screenshot-radius);
+  padding: var(--space-4);
   color: rgba(34, 30, 26, 0.68);
   font-family: var(--mono);
   font-size: var(--type-meta-size);
@@ -134,7 +134,7 @@
   width: 34px;
   height: 28px;
   border: 1px solid rgba(41, 35, 28, 0.14);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   color: rgba(34, 30, 26, 0.72);
   background: rgba(255, 255, 255, 0.36);
   font-family: var(--sans);
@@ -153,7 +153,7 @@
   width: 6px;
   height: 6px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 0;
   background: rgba(41, 35, 28, 0.24);
 }
@@ -168,7 +168,7 @@
   position: absolute;
   content: '';
   border: 1px solid rgba(35, 31, 26, 0.12);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .screenshot-card::before {
@@ -276,18 +276,18 @@
 .project-actions button,
 .finder-sidebar button,
 .dock button {
-  min-height: 38px;
+  min-height: var(--control-height-lg);
   border: 1px solid rgba(36, 31, 25, 0.16);
-  border-radius: 7px;
+  border-radius: var(--control-radius);
   color: rgba(31, 28, 24, 0.86);
   background: rgba(255, 255, 255, 0.38);
   font: var(--type-chrome-weight) var(--type-chrome-size)/var(--type-chrome-line) var(--mono);
   text-decoration: none;
   cursor: pointer;
   transition:
-    transform 140ms var(--ease-out),
-    background-color 160ms var(--ease-out),
-    border-color 160ms var(--ease-out);
+    transform var(--duration-press) var(--ease-out),
+    background-color var(--duration-control) var(--ease-out),
+    border-color var(--duration-control) var(--ease-out);
 }
 
 .project-actions a,
@@ -296,7 +296,7 @@
   display: inline-grid;
   place-items: center;
   min-width: 0;
-  min-height: 32px;
+  min-height: var(--control-height-sm);
   padding: 0 0.9rem;
   text-align: center;
 }

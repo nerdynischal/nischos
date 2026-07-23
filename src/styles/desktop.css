@@ -3,7 +3,7 @@
   position: relative;
   min-height: 100svh;
   overflow: hidden;
-  color: var(--ink);
+  color: var(--text-primary);
   background: var(--desktop-bg);
   isolation: isolate;
 }
@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
+  height: var(--menu-bar-height);
   padding: 0 16px;
   border-bottom: 1px solid rgba(36, 32, 28, 0.17);
   background: rgba(255, 252, 243, 0.76);
@@ -51,7 +51,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  color: var(--ink);
+  color: var(--text-primary);
   font-family: var(--mono);
   font-size: var(--type-chrome-size);
   line-height: var(--type-chrome-line);
@@ -64,12 +64,14 @@
 .brand-button {
   flex: 0 0 auto;
   border: 0;
-  padding: 0.25rem 0.35rem;
-  border-radius: 5px;
+  padding: var(--space-1) 0.35rem;
+  border-radius: var(--brand-control-radius);
   background: transparent;
   font-weight: var(--type-chrome-weight);
   cursor: pointer;
-  transition: background-color 160ms var(--ease-out), transform 140ms var(--ease-out);
+  transition:
+    background-color var(--duration-control) var(--ease-out),
+    transform var(--duration-press) var(--ease-out);
 }
 
 .brand-button:hover {
@@ -83,7 +85,7 @@
 .brand-logo {
   width: 18px;
   height: 18px;
-  border-radius: 4px;
+  border-radius: var(--brand-logo-radius);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
@@ -119,7 +121,7 @@
 
 .desktop-icons {
   position: absolute;
-  inset: 40px 0 0;
+  inset: var(--menu-bar-height) 0 0;
   z-index: 5;
 }
 
@@ -131,12 +133,12 @@
   --icon-shadow: rgba(46, 39, 31, 0.12);
   display: grid;
   justify-items: center;
-  width: 98px;
+  width: var(--desktop-icon-width);
   gap: 0.45rem;
   border: 0;
   padding: 0.4rem 0.3rem;
-  border-radius: 8px;
-  color: var(--ink);
+  border-radius: var(--desktop-icon-radius);
+  color: var(--text-primary);
   background: transparent;
   cursor: pointer;
   transform: translate(-50%, -50%);
@@ -154,10 +156,10 @@
 .icon-glyph {
   display: grid;
   place-items: center;
-  width: 66px;
-  height: 66px;
+  width: var(--icon-tile-size);
+  height: var(--icon-tile-size);
   border: 1px solid rgba(39, 33, 27, 0.22);
-  border-radius: 16px;
+  border-radius: var(--icon-tile-radius);
   color: rgba(31, 28, 24, 0.72);
   box-shadow:
     0 12px 22px rgba(56, 44, 32, 0.12),
@@ -205,7 +207,7 @@
 }
 
 .tone-coral {
-  --icon-shadow: rgba(255, 140, 103, 0.22);
+  --icon-shadow: var(--tone-icon-shadow-light);
 }
 
 .tone-mint .icon-glyph,
@@ -214,7 +216,7 @@
 }
 
 .tone-mint {
-  --icon-shadow: rgba(114, 197, 154, 0.22);
+  --icon-shadow: var(--tone-icon-shadow-light);
 }
 
 .tone-blue .icon-glyph,
@@ -223,7 +225,7 @@
 }
 
 .tone-blue {
-  --icon-shadow: rgba(118, 166, 255, 0.22);
+  --icon-shadow: var(--tone-icon-shadow-light);
 }
 
 .tone-amber .icon-glyph,
@@ -233,7 +235,7 @@
 
 .tone-amber,
 .tone-folder {
-  --icon-shadow: rgba(226, 174, 66, 0.22);
+  --icon-shadow: var(--tone-icon-shadow-light);
 }
 
 .tone-rose .icon-glyph,
@@ -242,7 +244,7 @@
 }
 
 .tone-rose {
-  --icon-shadow: rgba(232, 121, 144, 0.22);
+  --icon-shadow: var(--tone-icon-shadow-light);
 }
 
 .tone-violet .icon-glyph,
@@ -251,7 +253,7 @@
 }
 
 .tone-violet {
-  --icon-shadow: rgba(165, 134, 216, 0.22);
+  --icon-shadow: var(--tone-icon-shadow-light);
 }
 
 .tone-graphite .icon-glyph,
@@ -261,11 +263,11 @@
 }
 
 .tone-graphite {
-  --icon-shadow: rgba(31, 31, 28, 0.18);
+  --icon-shadow: var(--tone-icon-shadow-light);
 }
 
 .tone-settings {
-  --icon-shadow: rgba(169, 184, 177, 0.22);
+  --icon-shadow: var(--tone-icon-shadow-light);
 }
 
 .tone-folder .icon-glyph {

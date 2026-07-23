@@ -7,10 +7,10 @@
   display: flex;
   gap: 0.55rem;
   align-items: center;
-  min-height: 64px;
+  min-height: var(--dock-height);
   padding: 0.55rem;
   border: 1px solid rgba(36, 31, 25, 0.11);
-  border-radius: 22px;
+  border-radius: var(--dock-radius);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.16)),
     rgba(255, 252, 244, 0.28);
@@ -29,10 +29,10 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: 50px;
-  min-height: 50px;
+  width: var(--dock-item-size);
+  min-height: var(--dock-item-size);
   border-color: rgba(36, 31, 25, 0.11);
-  border-radius: 15px;
+  border-radius: var(--dock-item-radius);
   padding: 0;
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.34), transparent),
@@ -42,10 +42,10 @@
     0 8px 22px var(--dock-shadow),
     0 1px 0 rgba(255, 255, 255, 0.58) inset;
   transition:
-    background-color 160ms var(--ease-out),
-    border-color 160ms var(--ease-out),
-    box-shadow 160ms var(--ease-out),
-    transform 160ms var(--ease-out);
+    background-color var(--duration-control) var(--ease-out),
+    border-color var(--duration-control) var(--ease-out),
+    box-shadow var(--duration-control) var(--ease-out),
+    transform var(--duration-control) var(--ease-out);
 }
 
 .dock button:hover {
@@ -84,12 +84,12 @@
   width: max-content;
   max-width: min(220px, calc(100vw - 1rem));
   border: 1px solid var(--line-strong);
-  border-radius: 7px;
+  border-radius: var(--dock-tooltip-radius);
   padding: 0.38rem 0.55rem;
   color: var(--text-primary);
   background: var(--surface-panel-raised);
   box-shadow:
-    0 12px 28px rgba(0, 0, 0, 0.34),
+    var(--shadow-tooltip),
     0 1px 0 var(--inset-highlight-subtle) inset;
   font-family: var(--mono);
   font-size: var(--type-meta-size);
@@ -101,8 +101,8 @@
   transform: translate(-50%, 4px) scale(0.97);
   transform-origin: 50% 100%;
   transition:
-    opacity 125ms var(--ease-out),
-    transform 125ms var(--ease-out);
+    opacity var(--duration-tooltip) var(--ease-out),
+    transform var(--duration-tooltip) var(--ease-out);
 }
 
 .dock-tooltip::after {
@@ -126,56 +126,26 @@
   }
 }
 
-.dock button:focus-visible .dock-tooltip {
+  .dock button:focus-visible .dock-tooltip {
   opacity: 1;
   transform: translate(-50%, 0) scale(1);
   transition-delay: 0ms;
-  transition-duration: 1ms;
+  transition-duration: var(--duration-reduced);
 }
 
 /* Dock item tones */
-.dock-tone-coral {
-  --dock-bg: rgba(255, 140, 103, 0.2);
-  --dock-bg-hover: rgba(255, 140, 103, 0.28);
-  --dock-shadow: rgba(255, 140, 103, 0.18);
-}
-
-.dock-tone-mint {
-  --dock-bg: rgba(114, 197, 154, 0.2);
-  --dock-bg-hover: rgba(114, 197, 154, 0.28);
-  --dock-shadow: rgba(114, 197, 154, 0.18);
-}
-
-.dock-tone-blue {
-  --dock-bg: rgba(118, 166, 255, 0.2);
-  --dock-bg-hover: rgba(118, 166, 255, 0.28);
-  --dock-shadow: rgba(118, 166, 255, 0.18);
-}
-
+.dock-tone-coral,
+.dock-tone-mint,
+.dock-tone-blue,
 .dock-tone-folder,
-.dock-tone-amber {
-  --dock-bg: rgba(226, 174, 66, 0.22);
-  --dock-bg-hover: rgba(226, 174, 66, 0.3);
-  --dock-shadow: rgba(226, 174, 66, 0.18);
-}
-
-.dock-tone-settings {
-  --dock-bg: rgba(169, 184, 177, 0.22);
-  --dock-bg-hover: rgba(169, 184, 177, 0.3);
-  --dock-shadow: rgba(169, 184, 177, 0.18);
-}
-
+.dock-tone-amber,
+.dock-tone-settings,
 .dock-tone-note,
-.dock-tone-violet {
-  --dock-bg: rgba(165, 134, 216, 0.2);
-  --dock-bg-hover: rgba(165, 134, 216, 0.28);
-  --dock-shadow: rgba(165, 134, 216, 0.18);
-}
-
+.dock-tone-violet,
 .dock-tone-graphite {
-  --dock-bg: rgba(31, 31, 28, 0.16);
-  --dock-bg-hover: rgba(31, 31, 28, 0.22);
-  --dock-shadow: rgba(31, 31, 28, 0.12);
+  --dock-bg: var(--tone-dock-bg-light);
+  --dock-bg-hover: var(--tone-dock-bg-light-hover);
+  --dock-shadow: var(--tone-dock-shadow-light);
 }
 
 .dock .placeholder-svg {
@@ -200,6 +170,6 @@
   place-items: center;
   gap: 0.6rem;
   min-height: 100%;
-  padding: 2rem;
+  padding: var(--space-8);
   text-align: center;
 }

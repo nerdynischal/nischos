@@ -4,7 +4,7 @@
   background: var(--dock-surface);
   backdrop-filter: blur(24px) saturate(1.04);
   box-shadow:
-    0 28px 78px rgba(0, 0, 0, 0.46),
+    var(--shadow-dock),
     0 1px 0 var(--inset-highlight) inset,
     0 0 0 1px var(--scrollbar-track) inset;
 }
@@ -36,41 +36,17 @@
     0 1px 0 var(--icon-tile-border) inset;
 }
 
-.dock-tone-coral {
-  --dock-accent: 255, 140, 103;
-  --dock-shadow: rgba(255, 140, 103, 0.12);
-}
-
-.dock-tone-mint {
-  --dock-accent: 114, 197, 154;
-  --dock-shadow: rgba(114, 197, 154, 0.12);
-}
-
-.dock-tone-blue {
-  --dock-accent: 118, 166, 255;
-  --dock-shadow: rgba(118, 166, 255, 0.13);
-}
-
+.dock-tone-coral,
+.dock-tone-mint,
+.dock-tone-blue,
 .dock-tone-folder,
-.dock-tone-amber {
-  --dock-accent: 226, 174, 66;
-  --dock-shadow: rgba(226, 174, 66, 0.12);
-}
-
-.dock-tone-settings {
-  --dock-accent: 188, 196, 192;
-  --dock-shadow: rgba(188, 196, 192, 0.11);
-}
-
+.dock-tone-amber,
+.dock-tone-settings,
 .dock-tone-note,
-.dock-tone-violet {
-  --dock-accent: 165, 134, 216;
-  --dock-shadow: rgba(165, 134, 216, 0.12);
-}
-
+.dock-tone-violet,
 .dock-tone-graphite {
-  --dock-accent: 225, 225, 225;
-  --dock-shadow: var(--surface-soft);
+  --dock-accent: var(--tone-rgb);
+  --dock-shadow: var(--tone-dock-shadow);
 }
 
 .dock .placeholder-svg {

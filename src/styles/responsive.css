@@ -12,7 +12,7 @@
     box-shadow:
       0 34px 86px var(--icon-shadow),
       0 14px 34px rgba(0, 0, 0, 0.32),
-      0 0 0 2px var(--focus),
+      0 0 0 2px var(--focus-ring),
       0 1px 0 rgba(255, 255, 255, 0.14) inset;
   }
 }
@@ -20,7 +20,7 @@
 @media (max-width: 760px) {
   .finder-sidebar,
   .settings-sidebar {
-    border-bottom-color: var(--line);
+    border-bottom-color: var(--line-subtle);
   }
 }
 
@@ -48,7 +48,7 @@
   .desktop-icon:active .icon-glyph {
     transform: none;
     box-shadow:
-      0 16px 38px rgba(0, 0, 0, 0.38),
+      var(--shadow-icon-rest),
       0 1px 0 rgba(255, 255, 255, 0.12) inset;
   }
 }
