@@ -9,6 +9,7 @@
     "check": "npm run lint && npm run test && npm run build",
     "lint": "oxlint",
     "test": "vitest run",
+    "supabase:check": "node scripts/check-supabase.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

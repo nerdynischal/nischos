@@ -39,15 +39,40 @@ export type SettingsSection = {
 
 export const projects: Project[] = [
   {
+    id: 'keyform',
+    title: 'Keyform',
+    subtitle: 'An interactive ANSI QWERTY keyboard that responds to every physical key press.',
+    iconTone: 'graphite',
+    thumbnail:
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-key.svg',
+    type: 'interactive experiment',
+    stack: ['Vite', 'JavaScript', 'CSS', 'Web Audio'],
+    story:
+      'Keyform turns the keyboard into the interface. It mirrors physical input across a full ANSI QWERTY layout, supports Mac and Windows legends, and pairs responsive key states with optional sound so every press feels immediate.',
+    screenshots: [
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-typing.jpg',
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-mac.jpg',
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-windows.jpg',
+    ],
+    demoUrl: 'https://nerdynischal.github.io/keyform/',
+    sourceUrl: 'https://github.com/nerdynischal/keyform',
+  },
+  {
     id: 'my-toolkit',
     title: "Nisch's Toolkit",
     subtitle: 'A living catalogue of the tools in my design and development workflow.',
     iconTone: 'blue',
+    thumbnail:
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/brand-logo.svg',
     type: 'reference tool',
     stack: ['React', 'TypeScript', 'CSS', 'Vite'],
     story:
       'I wanted one place to document the tools that shape my design and development workflow. The result is an interactive catalogue that separates everyday tools from things I am exploring, watching, or have moved on from.',
-    screenshots: ['Toolkit overview', 'Codex detail', 'Tool categories'],
+    screenshots: [
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/toolkit-overview.jpg',
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/codex-detail.jpg',
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/tool-categories.jpg',
+    ],
     demoUrl: 'https://nerdynischal.github.io/my-toolkit/',
     sourceUrl: 'https://github.com/nerdynischal/my-toolkit',
   },
@@ -56,11 +81,17 @@ export const projects: Project[] = [
     title: 'Maneki Neko Catalog',
     subtitle: 'A personal checklist for tracking lucky cat figures.',
     iconTone: 'amber',
+    thumbnail:
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/app-logo-medallion.svg',
     type: 'hobby app',
     stack: ['React', 'TypeScript', 'Vite'],
     story:
       'A lightweight catalog for Donkey Products Maneki Neko figures, with a visual product grid, local ownership tracking, and owned cats sorted to the front so the collection stays easy to scan.',
-    screenshots: ['Cat detail', 'Catalog overview', 'Color collection'],
+    screenshots: [
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/cat-detail.jpg',
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/catalog-overview.jpg',
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/color-collection.jpg',
+    ],
     demoUrl: 'https://nerdynischal.github.io/my-maneki-neko-collection/',
     sourceUrl: 'https://github.com/nerdynischal/my-maneki-neko-collection',
   },

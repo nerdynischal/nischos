@@ -19,10 +19,24 @@ Copy `.env.example` to `.env.local` and add your Supabase project values:
 
 ```bash
 VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
+VITE_SUPABASE_PUBLISHABLE_KEY=
 ```
 
-Run `supabase-schema.sql` in the Supabase SQL editor to create the public read tables.
+Older projects can keep using `VITE_SUPABASE_ANON_KEY`; the app prefers the
+current publishable key when both are present. Never put a secret key or
+service-role key in a `VITE_` variable because Vite exposes those values to the
+browser.
+
+Run `supabase-schema.sql` in the Supabase SQL editor to create the public-read
+tables, least-privilege RLS policies, and the public `project-screenshots` Storage
+bucket. The same schema is tracked as a versioned migration under
+`supabase/migrations`.
+
+Verify the configured project and public-read policies:
+
+```bash
+npm run supabase:check
+```
 
 The app currently loads these tables:
 
@@ -33,6 +47,19 @@ The app currently loads these tables:
 The checked-in schema contains only this current read model. Running it does not remove legacy columns or tables that may already exist in an older Supabase project.
 
 Each content type is loaded independently. If Supabase is not configured, a request fails, or a table is empty, the app keeps the corresponding local fallback content from `src/content.ts`.
+
+The typed browser client lives in `src/lib/supabase.ts`, with its database shape
+in `src/lib/database.types.ts`. Regenerate that type after future schema changes
+if you adopt the Supabase CLI.
+
+### Project media
+
+Project artwork lives in the public `project-screenshots` bucket, grouped by
+project ID. Store the copied public URL in `thumbnail` or `screenshots`; the app
+renders those URLs directly.
+
+For a fresh local Supabase project, `supabase/seed.sql` supplies the current
+portfolio content, including Keyform.
 
 ### Blog posts
 

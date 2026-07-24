@@ -4,6 +4,7 @@ import { posts, projects, settingsSections } from './content'
 describe('local fallback content', () => {
   it('contains only the current portfolio projects', () => {
     expect(projects.map((project) => project.id)).toEqual([
+      'keyform',
       'my-toolkit',
       'maneki-neko-catalog',
     ])

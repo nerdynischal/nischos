@@ -1,54 +1,69 @@
 import { createClient } from '@supabase/supabase-js'
 import type { BlogPost, Project, SettingsSection } from '../content'
+import type { Database } from './database.types'
 
-export type ProjectRow = {
-  id: string
-  title: string
-  subtitle: string | null
-  icon_tone: string | null
-  thumbnail: string | null
-  type: string | null
-  stack: string[] | null
-  story: string | null
-  screenshots: string[] | null
-  demo_url: string | null
-  source_url: string | null
-  post_id: string | null
-}
+type ProjectTableRow = Database['public']['Tables']['projects']['Row']
 
-export type BlogPostRow = {
-  id: string
-  title: string
-  filename: string | null
-  date: string
-  folder: BlogPost['folder'] | null
-  cover_tone: string | null
-  content_markdown: string | null
-  content: string[] | null
-}
+export type ProjectRow = Omit<ProjectTableRow, 'created_at'>
+
+type BlogPostTableRow = Database['public']['Tables']['blog_posts']['Row']
+
+export type BlogPostRow = Omit<BlogPostTableRow, 'created_at'>
 
 export type SettingsDetailRow = {
   label?: unknown
   value?: unknown
 }
 
-export type SettingsSectionRow = {
-  id: string
-  label: string
-  display_title: string | null
-  display_subtitle: string | null
-  body: string | null
+type SettingsSectionTableRow = Database['public']['Tables']['settings_sections']['Row']
+
+export type SettingsSectionRow = Omit<
+  SettingsSectionTableRow,
+  'created_at' | 'details' | 'sort_order'
+> & {
   details: SettingsDetailRow[] | null
-  items: string[] | null
 }
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
+type SupabasePublicEnv = {
+  VITE_SUPABASE_URL?: string
+  VITE_SUPABASE_PUBLISHABLE_KEY?: string
+  VITE_SUPABASE_ANON_KEY?: string
+}
 
-export const hasSupabaseConfig = Boolean(supabaseUrl && supabaseAnonKey)
+export function readSupabaseConfig(env: SupabasePublicEnv) {
+  const url = env.VITE_SUPABASE_URL?.trim()
+  const key = (
+    env.VITE_SUPABASE_PUBLISHABLE_KEY ?? env.VITE_SUPABASE_ANON_KEY
+  )?.trim()
 
-export const supabase = hasSupabaseConfig
-  ? createClient(supabaseUrl as string, supabaseAnonKey as string)
+  if (!url || !key) return null
+
+  try {
+    const parsedUrl = new URL(url)
+    if (parsedUrl.protocol !== 'https:' && parsedUrl.protocol !== 'http:') return null
+  } catch {
+    return null
+  }
+
+  return { url, key }
+}
+
+const supabaseConfig = readSupabaseConfig({
+  VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
+  VITE_SUPABASE_PUBLISHABLE_KEY: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+  VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY,
+})
+
+export const hasSupabaseConfig = Boolean(supabaseConfig)
+
+export const supabase = supabaseConfig
+  ? createClient<Database>(supabaseConfig.url, supabaseConfig.key, {
+      auth: {
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+        persistSession: false,
+      },
+    })
   : null
 
 export async function fetchProjects(): Promise<Project[]> {
@@ -56,14 +71,16 @@ export async function fetchProjects(): Promise<Project[]> {
 
   const { data, error } = await supabase
     .from('projects')
-    .select('*')
+    .select(
+      'id,title,subtitle,icon_tone,thumbnail,type,stack,story,screenshots,demo_url,source_url,post_id',
+    )
     .order('created_at', { ascending: false })
 
   if (error) {
     throw new Error(error.message)
   }
 
-  return ((data ?? []) as ProjectRow[]).map(mapProject)
+  return (data ?? []).map(mapProject)
 }
 
 export async function fetchPosts(): Promise<BlogPost[]> {
@@ -71,14 +88,14 @@ export async function fetchPosts(): Promise<BlogPost[]> {
 
   const { data, error } = await supabase
     .from('blog_posts')
-    .select('*')
+    .select('id,title,filename,date,folder,cover_tone,content_markdown,content')
     .order('date', { ascending: false })
 
   if (error) {
     throw new Error(error.message)
   }
 
-  return ((data ?? []) as BlogPostRow[]).map(mapPost)
+  return (data ?? []).map(mapPost)
 }
 
 export async function fetchSettingsSections(): Promise<SettingsSection[]> {
@@ -86,7 +103,7 @@ export async function fetchSettingsSections(): Promise<SettingsSection[]> {
 
   const { data, error } = await supabase
     .from('settings_sections')
-    .select('*')
+    .select('id,label,display_title,display_subtitle,body,details,items')
     .order('sort_order', { ascending: true })
 
   if (error) {

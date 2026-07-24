@@ -1,9 +1,9 @@
 import type { Project } from '../content'
 
 export const PINNED_PROJECT_IDS = [
+  'keyform',
   'my-toolkit',
   'maneki-neko-catalog',
-  'supabase-test-app',
 ]
 
 export function selectPinnedProjects(

@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { mapPost, mapProject, mapSettingsDetails } from './supabase'
+import {
+  mapPost,
+  mapProject,
+  mapSettingsDetails,
+  readSupabaseConfig,
+} from './supabase'
 
 describe('Supabase content mapping', () => {
   it('normalizes nullable project fields', () => {
@@ -60,5 +65,38 @@ describe('Supabase content mapping', () => {
         { label: 42, value: 'Nope' },
       ]),
     ).toEqual([{ label: 'Role', value: 'Design Engineer' }])
+  })
+
+  it('prefers a publishable key and supports legacy anon keys', () => {
+    expect(
+      readSupabaseConfig({
+        VITE_SUPABASE_URL: ' https://project.supabase.co ',
+        VITE_SUPABASE_PUBLISHABLE_KEY: ' publishable-key ',
+        VITE_SUPABASE_ANON_KEY: 'legacy-key',
+      }),
+    ).toEqual({
+      url: 'https://project.supabase.co',
+      key: 'publishable-key',
+    })
+
+    expect(
+      readSupabaseConfig({
+        VITE_SUPABASE_URL: 'http://127.0.0.1:54321',
+        VITE_SUPABASE_ANON_KEY: 'legacy-key',
+      }),
+    ).toEqual({
+      url: 'http://127.0.0.1:54321',
+      key: 'legacy-key',
+    })
+  })
+
+  it('rejects partial or invalid Supabase configuration', () => {
+    expect(readSupabaseConfig({ VITE_SUPABASE_URL: 'https://project.supabase.co' })).toBeNull()
+    expect(
+      readSupabaseConfig({
+        VITE_SUPABASE_URL: 'not-a-url',
+        VITE_SUPABASE_PUBLISHABLE_KEY: 'publishable-key',
+      }),
+    ).toBeNull()
   })
 })

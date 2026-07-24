@@ -1,5 +1,5 @@
--- Dashboard-friendly copy of the canonical migration in supabase/migrations.
--- Safe to rerun: it creates missing objects and preserves existing content.
+-- Keep this migration in sync with the dashboard-friendly supabase-schema.sql
+-- at the repository root.
 
 create table if not exists public.projects (
   id text primary key,
@@ -97,8 +97,6 @@ create policy "Settings sections are publicly readable"
   to anon, authenticated
   using (true);
 
--- Public project images. Uploads remain dashboard/service-role only because
--- there is deliberately no public INSERT, UPDATE, or DELETE policy.
 insert into storage.buckets (
   id,
   name,
