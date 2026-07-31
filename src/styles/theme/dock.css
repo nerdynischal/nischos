@@ -1,5 +1,5 @@
 /* Default theme: dock */
-.dock {
+.dock-background {
   border-color: var(--line-emphasis);
   background: var(--dock-surface);
   backdrop-filter: blur(24px) saturate(1.04);

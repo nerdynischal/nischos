@@ -3,6 +3,7 @@ import type { Project } from '../content'
 import type { DesktopWindow } from '../types'
 import { IconArtwork } from './IconArtwork'
 import { selectPinnedProjects } from './selectPinnedProjects'
+import { useDockMagnification } from './useDockMagnification'
 
 export function Dock({
   windows,
@@ -19,6 +20,15 @@ export function Dock({
   onOpenSettings: () => void
   onFocusWindow: (id: string) => void
 }) {
+  const {
+    dockRef,
+    tooltipRef,
+    tooltip,
+    handlePointerMove,
+    handlePointerLeave,
+    handleItemFocus,
+    handleItemBlur,
+  } = useDockMagnification()
   const pinnedItems = [
     ...selectPinnedProjects(projects).map((project) => ({
       id: project.id,
@@ -61,7 +71,14 @@ export function Dock({
   }
 
   return (
-    <nav className="dock" aria-label="Dock">
+    <nav
+      ref={dockRef}
+      className="dock"
+      aria-label="Dock"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+    >
+      <span className="dock-background" aria-hidden="true" />
       {pinnedItems.map((item) => {
         const openWindow = windows.find((windowItem) => windowItem.id === item.windowId)
 
@@ -71,7 +88,11 @@ export function Dock({
             <button
               type="button"
               className={`dock-item dock-tone-${item.tone} ${openWindow ? 'is-open' : ''}`}
+              data-dock-id={item.id}
+              data-dock-label={item.label}
               onClick={() => handlePinnedClick(item)}
+              onFocus={handleItemFocus}
+              onBlur={handleItemBlur}
               aria-label={`${openWindow ? 'Focus' : 'Open'} ${item.label}`}
             >
               <IconArtwork
@@ -79,9 +100,6 @@ export function Dock({
                 thumbnail={item.kind === 'project' ? item.thumbnail : undefined}
                 variant={item.kind}
               />
-              <span className="dock-tooltip" aria-hidden="true">
-                {item.label}
-              </span>
             </button>
           </Fragment>
         )
@@ -98,16 +116,26 @@ export function Dock({
             key={item.id}
             type="button"
             className="dock-item dock-tone-note is-open"
+            data-dock-id={item.id}
+            data-dock-label={item.title}
             onClick={() => onFocusWindow(item.id)}
+            onFocus={handleItemFocus}
+            onBlur={handleItemBlur}
             aria-label={`Focus ${item.title}`}
           >
             <IconArtwork artworkId={project?.id} thumbnail={project?.thumbnail} variant={variant} />
-            <span className="dock-tooltip" aria-hidden="true">
-              {item.title}
-            </span>
           </button>
         )
       })}
+      <span
+        ref={tooltipRef}
+        className="dock-tooltip"
+        data-visible={tooltip !== null}
+        data-source={tooltip?.source}
+        aria-hidden="true"
+      >
+        {tooltip?.label ?? ''}
+      </span>
     </nav>
   )
 }
