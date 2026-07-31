@@ -84,6 +84,29 @@
   --dock-press-scale: 0.97;
 }
 
+.dock-item::after {
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--indicator-dock-open);
+  box-shadow: 0 0 3px rgba(var(--color-white-rgb), 0.1);
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scale(0.8);
+  transition:
+    opacity var(--duration-press) var(--ease-out),
+    transform var(--duration-press) var(--ease-out);
+}
+
+.dock-item.is-open::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
 .dock-separator {
   align-self: center;
   width: 1px;

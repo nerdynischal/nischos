@@ -34,6 +34,7 @@
   --line-control-hover: rgba(var(--color-white-rgb), 0.12);
   --line-dock: rgba(var(--color-white-rgb), 0.11);
   --line-dock-hover: rgba(var(--color-white-rgb), 0.18);
+  --indicator-dock-open: rgba(var(--color-white-rgb), 0.48);
   --line-content: rgba(var(--color-white-rgb), 0.14);
   --line-content-strong: rgba(var(--color-white-rgb), 0.2);
   --line-code-inline: rgba(var(--color-white-rgb), 0.16);
