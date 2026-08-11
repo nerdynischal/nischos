@@ -4,8 +4,8 @@ export type Project = {
   subtitle: string
   iconTone: string
   thumbnail?: string
-  type: string
-  stack: string[]
+  category: string
+  model: string
   story: string
   screenshots: string[]
   demoUrl?: string
@@ -45,8 +45,8 @@ export const projects: Project[] = [
     iconTone: 'graphite',
     thumbnail:
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-key.svg',
-    type: 'interactive experiment',
-    stack: ['Vite', 'JavaScript', 'CSS', 'Web Audio'],
+    category: 'interactive experiment',
+    model: 'GPT-5.6 Sol',
     story:
       'Keyform turns the keyboard into the interface. It mirrors physical input across a full ANSI QWERTY layout, supports Mac and Windows legends, and pairs responsive key states with optional sound so every press feels immediate.',
     screenshots: [
@@ -64,8 +64,8 @@ export const projects: Project[] = [
     iconTone: 'blue',
     thumbnail:
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/brand-logo.svg',
-    type: 'reference tool',
-    stack: ['React', 'TypeScript', 'CSS', 'Vite'],
+    category: 'reference tool',
+    model: 'GPT-5.5',
     story:
       'I wanted one place to document the tools that shape my design and development workflow. The result is an interactive catalogue that separates everyday tools from things I am exploring, watching, or have moved on from.',
     screenshots: [
@@ -83,8 +83,8 @@ export const projects: Project[] = [
     iconTone: 'amber',
     thumbnail:
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/app-logo-medallion.svg',
-    type: 'hobby app',
-    stack: ['React', 'TypeScript', 'Vite'],
+    category: 'hobby app',
+    model: 'GPT-5.5',
     story:
       'A lightweight catalog for Donkey Products Maneki Neko figures, with a visual product grid, local ownership tracking, and owned cats sorted to the front so the collection stays easy to scan.',
     screenshots: [
@@ -131,3 +131,5 @@ export const settingsSections: SettingsSection[] = [
     items: [],
   },
 ]
+
+export const DEFAULT_SETTINGS_SECTION_ID = settingsSections[0].id

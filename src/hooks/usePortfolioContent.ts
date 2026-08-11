@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
+  DEFAULT_SETTINGS_SECTION_ID,
   posts as fallbackPosts,
   projects as fallbackProjects,
   settingsSections as fallbackSettingsSections,
@@ -13,7 +14,7 @@ import {
 
 export function usePortfolioContent() {
   const [settingsSections, setSettingsSections] = useState(fallbackSettingsSections)
-  const [activeSection, setActiveSection] = useState(fallbackSettingsSections[0].id)
+  const [activeSection, setActiveSection] = useState(DEFAULT_SETTINGS_SECTION_ID)
   const [projects, setProjects] = useState(fallbackProjects)
   const [posts, setPosts] = useState(fallbackPosts)
 
@@ -30,26 +31,19 @@ export function usePortfolioContent() {
       ])
       if (ignore) return
 
-      const [remoteProjects, remotePosts, remoteSettingsSections] = results
+      const remoteProjects = getLoadedContent('projects', results[0])
+      const remotePosts = getLoadedContent('blog posts', results[1])
+      const remoteSettingsSections = getLoadedContent('settings sections', results[2])
 
-      reportLoadFailure('projects', remoteProjects)
-      reportLoadFailure('blog posts', remotePosts)
-      reportLoadFailure('settings sections', remoteSettingsSections)
+      if (remoteProjects) setProjects(remoteProjects)
+      if (remotePosts) setPosts(remotePosts)
 
-      if (remoteProjects.status === 'fulfilled' && remoteProjects.value.length) {
-        setProjects(remoteProjects.value)
-      }
-
-      if (remotePosts.status === 'fulfilled' && remotePosts.value.length) {
-        setPosts(remotePosts.value)
-      }
-
-      if (remoteSettingsSections.status === 'fulfilled' && remoteSettingsSections.value.length) {
-        setSettingsSections(remoteSettingsSections.value)
+      if (remoteSettingsSections) {
+        setSettingsSections(remoteSettingsSections)
         setActiveSection((currentSection) =>
-          remoteSettingsSections.value.some((section) => section.id === currentSection)
+          remoteSettingsSections.some((section) => section.id === currentSection)
             ? currentSection
-            : remoteSettingsSections.value[0].id,
+            : remoteSettingsSections[0].id,
         )
       }
     }
@@ -70,8 +64,12 @@ export function usePortfolioContent() {
   }
 }
 
-function reportLoadFailure(label: string, result: PromiseSettledResult<unknown>) {
-  if (import.meta.env.DEV && result.status === 'rejected') {
+function getLoadedContent<T>(label: string, result: PromiseSettledResult<T[]>) {
+  if (result.status === 'fulfilled') return result.value.length > 0 ? result.value : null
+
+  if (import.meta.env.DEV) {
     console.warn(`Unable to load ${label} from Supabase; using local fallback content.`, result.reason)
   }
+
+  return null
 }

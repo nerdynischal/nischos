@@ -1,4 +1,5 @@
 import type { SettingsSection } from '../../content'
+import { EmptyState } from '../../components/EmptyState'
 
 export function SettingsWindow({
   activeSection,
@@ -10,6 +11,10 @@ export function SettingsWindow({
   settingsSections: SettingsSection[]
 }) {
   const section = settingsSections.find((item) => item.id === activeSection) ?? settingsSections[0]
+
+  if (!section) {
+    return <EmptyState title="About unavailable" body="Profile information could not be loaded." />
+  }
 
   return (
     <div className="settings-window">

@@ -2,7 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { FocusEvent, PointerEvent } from 'react'
 import {
   calculateDockMagnification,
+  calculateDockSeparatorTranslation,
   calculateDockSurfaceTransform,
+  findNearestDockItemIndex,
 } from './dockMagnification'
 
 type DockTooltip = {
@@ -78,11 +80,7 @@ export function useDockMagnification() {
       item.style.setProperty('--dock-shift', `${transforms[index].translation.toFixed(2)}px`)
     })
 
-    const nearestIndex = geometries.reduce((nearest, geometry, index) => {
-      const nearestDistance = Math.abs(pointerXRef.current - geometries[nearest].center)
-      const distance = Math.abs(pointerXRef.current - geometry.center)
-      return distance < nearestDistance ? index : nearest
-    }, 0)
+    const nearestIndex = findNearestDockItemIndex(geometries, pointerXRef.current)
     const surfaceTransform = calculateDockSurfaceTransform(
       geometries,
       transforms,
@@ -97,20 +95,11 @@ export function useDockMagnification() {
 
     dock.querySelectorAll<HTMLElement>('.dock-separator').forEach((separator) => {
       const separatorCenter = separator.offsetLeft + separator.offsetWidth / 2
-      let leftIndex = -1
-      let rightIndex = -1
-
-      geometries.forEach(({ center }, index) => {
-        if (center < separatorCenter) leftIndex = index
-        if (rightIndex === -1 && center > separatorCenter) rightIndex = index
-      })
-
-      const nearbyShifts = [leftIndex, rightIndex]
-        .filter((index) => index >= 0)
-        .map((index) => transforms[index].translation)
-      const shift = nearbyShifts.length > 0
-        ? nearbyShifts.reduce((sum, value) => sum + value, 0) / nearbyShifts.length
-        : 0
+      const shift = calculateDockSeparatorTranslation(
+        geometries,
+        transforms,
+        separatorCenter,
+      )
       separator.style.setProperty('--dock-separator-shift', `${shift.toFixed(2)}px`)
     })
 

@@ -27,9 +27,10 @@ export function ProjectWindow({
   const [activeShot, setActiveShot] = useState(0)
   const projectScreenshots = project.screenshots
   const screenshotCount = projectScreenshots.length
-  const selectedScreenshot = projectScreenshots[activeShot] ?? projectScreenshots[0]
+  const selectedShotIndex = screenshotCount > 0 ? activeShot % screenshotCount : 0
+  const selectedScreenshot = projectScreenshots[selectedShotIndex]
   const selectedScreenshotLabel = selectedScreenshot
-    ? getScreenshotLabel(selectedScreenshot, activeShot)
+    ? getScreenshotLabel(selectedScreenshot, selectedShotIndex)
     : 'Screenshot unavailable'
   const selectedScreenshotIsImage = selectedScreenshot
     ? isImageScreenshot(selectedScreenshot)
@@ -51,18 +52,18 @@ export function ProjectWindow({
         </div>
         <div className="project-heading">
           <h3>{project.title}</h3>
-          <p>{project.type}</p>
+          <p>{project.category}</p>
           <div className="project-actions">
             {project.demoUrl ? (
               <a className="primary-action" href={project.demoUrl} target="_blank" rel="noreferrer">
-                Live Demo
+                Visit Website
               </a>
             ) : (
-              <span className="primary-action disabled-action">Live Demo</span>
+              <span className="primary-action disabled-action">Visit Website</span>
             )}
             {project.sourceUrl ? (
               <a href={project.sourceUrl} target="_blank" rel="noreferrer">
-                Source
+                Source Code
               </a>
             ) : null}
             {hasLinkedPost ? (
@@ -75,8 +76,8 @@ export function ProjectWindow({
       </section>
 
       <section className="project-meta" aria-label="Project metadata">
-        <MetaRow label="kind" value={project.type} />
-        <MetaRow label="stack" value={project.stack.join(', ')} />
+        <MetaRow label="category" value={project.category} />
+        <MetaRow label="model" value={project.model} />
       </section>
 
       <section className="story-panel">
@@ -86,7 +87,7 @@ export function ProjectWindow({
 
       <section className="screenshot-carousel" aria-label={`${project.title} screenshots`}>
         <div
-          className={`screenshot-card shot-${activeShot + 1} ${
+          className={`screenshot-card shot-${selectedShotIndex + 1} ${
             selectedScreenshotIsImage ? 'has-image' : ''
           }`}
         >
@@ -108,10 +109,10 @@ export function ProjectWindow({
                   <button
                     key={`${screenshot}-${index}`}
                     type="button"
-                    className={index === activeShot ? 'is-active' : ''}
+                    className={index === selectedShotIndex ? 'is-active' : ''}
                     onClick={() => setActiveShot(index)}
                     aria-label={`Show ${label}`}
-                    aria-current={index === activeShot ? 'true' : undefined}
+                    aria-current={index === selectedShotIndex ? 'true' : undefined}
                   />
                 )
               })}

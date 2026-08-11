@@ -8,7 +8,7 @@ import {
   repositionWindowForViewport,
 } from '../windows/windowGeometry'
 
-type WindowInput = Pick<DesktopWindow, 'id' | 'kind' | 'title'> & Partial<DesktopWindow>
+type WindowInput = Pick<DesktopWindow, 'id' | 'category' | 'title'> & Partial<DesktopWindow>
 
 export function useDesktopWindows() {
   const [windows, setWindows] = useState<DesktopWindow[]>([])
@@ -58,7 +58,7 @@ export function useDesktopWindows() {
   }
 
   function upsertWindow(input: WindowInput) {
-    const layout = initialWindowLayout[input.kind]
+    const layout = initialWindowLayout[input.category]
     const z = getNextZ()
     setWindows((items) => {
       const existing = items.find((item) => item.id === input.id)

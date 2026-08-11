@@ -1,4 +1,4 @@
--- Dashboard-friendly copy of the canonical migration in supabase/migrations.
+-- Dashboard-friendly cumulative schema matching the versioned migrations.
 -- Safe to rerun: it creates missing objects and preserves existing content.
 
 create table if not exists public.projects (
@@ -7,8 +7,8 @@ create table if not exists public.projects (
   subtitle text,
   icon_tone text,
   thumbnail text,
-  type text,
-  stack text[] default '{}',
+  category text,
+  model text,
   story text,
   screenshots text[] default '{}',
   demo_url text,
@@ -20,14 +20,28 @@ create table if not exists public.projects (
 alter table public.projects add column if not exists subtitle text;
 alter table public.projects add column if not exists icon_tone text;
 alter table public.projects add column if not exists thumbnail text;
-alter table public.projects add column if not exists type text;
-alter table public.projects add column if not exists stack text[] default '{}';
+alter table public.projects add column if not exists category text;
+alter table public.projects add column if not exists model text;
 alter table public.projects add column if not exists story text;
 alter table public.projects add column if not exists screenshots text[] default '{}';
 alter table public.projects add column if not exists demo_url text;
 alter table public.projects add column if not exists source_url text;
 alter table public.projects add column if not exists post_id text;
 alter table public.projects add column if not exists created_at timestamptz not null default now();
+
+do $$
+begin
+  if exists (
+    select 1
+    from information_schema.columns
+    where table_schema = 'public'
+      and table_name = 'projects'
+      and column_name = 'type'
+  ) then
+    execute 'update public.projects set category = type where category is null and type is not null';
+  end if;
+end;
+$$;
 
 create table if not exists public.blog_posts (
   id text primary key,

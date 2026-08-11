@@ -30,56 +30,12 @@
   --control-border: rgba(var(--color-white-rgb), 0.1);
   --control-inset: rgba(var(--color-white-rgb), 0.18);
 
-  --action-primary-border: #7c2d12;
-  --action-primary-border-hover: #9a3412;
-  --action-primary-bg:
-    radial-gradient(
-      ellipse 74% 135% at 50% 50%,
-      rgba(74, 24, 6, 0.42) 0%,
-      rgba(74, 24, 6, 0.32) 54%,
-      rgba(74, 24, 6, 0.12) 78%,
-      transparent 100%
-    ),
-    radial-gradient(
-      ellipse 76% 150% at 102% 120%,
-      #ffb000 0%,
-      #f97316 30%,
-      rgba(194, 65, 12, 0.2) 66%,
-      transparent 84%
-    ),
-    radial-gradient(
-      ellipse 92% 145% at -8% -18%,
-      #ff7a1a 0%,
-      #ea580c 38%,
-      rgba(154, 52, 18, 0.28) 70%,
-      transparent 88%
-    ),
-    linear-gradient(135deg, #c2410c 0%, #b7460e 54%, #6b250c 100%);
-  --action-primary-bg-hover:
-    radial-gradient(
-      ellipse 74% 135% at 50% 50%,
-      rgba(74, 24, 6, 0.48) 0%,
-      rgba(74, 24, 6, 0.38) 54%,
-      rgba(74, 24, 6, 0.15) 78%,
-      transparent 100%
-    ),
-    radial-gradient(
-      ellipse 76% 150% at 102% 120%,
-      #ffc12e 0%,
-      #fb8a2b 30%,
-      rgba(220, 82, 18, 0.22) 66%,
-      transparent 84%
-    ),
-    radial-gradient(
-      ellipse 92% 145% at -8% -18%,
-      #ff8a2d 0%,
-      #f56616 38%,
-      rgba(174, 62, 20, 0.3) 70%,
-      transparent 88%
-    ),
-    linear-gradient(135deg, #d34b0f 0%, #c25017 54%, #7c2d12 100%);
-  --action-primary-text: #fff7ed;
-  --action-primary-text-shadow: 0 1px 1px rgba(24, 22, 31, 0.38);
+  --action-primary-bg: rgb(var(--color-neutral-50-rgb));
+  --action-primary-bg-hover: rgb(var(--color-white-rgb));
+  --action-primary-border: var(--action-primary-bg);
+  --action-primary-border-hover: var(--action-primary-bg-hover);
+  --action-primary-text: var(--color-neutral-850);
+  --action-primary-text-shadow: none;
 
   --brand-logo-bg: rgba(var(--color-white-rgb), 0.92);
   --brand-logo-ring: rgba(var(--color-white-rgb), 0.18);
@@ -117,37 +73,50 @@
   --dock-button-shadow: rgba(var(--color-black-rgb), 0.28);
 }
 
-.tone-coral,
-.dock-tone-coral {
-  --tone-rgb: var(--tone-coral-rgb);
+:is(
+  .tone-coral,
+  .tone-mint,
+  .tone-blue,
+  .tone-amber,
+  .tone-folder,
+  .tone-rose,
+  .tone-violet,
+  .tone-graphite,
+  .tone-settings,
+  .dock-tone-coral,
+  .dock-tone-mint,
+  .dock-tone-blue,
+  .dock-tone-amber,
+  .dock-tone-folder,
+  .dock-tone-rose,
+  .dock-tone-violet,
+  .dock-tone-note,
+  .dock-tone-graphite,
+  .dock-tone-settings
+) {
   --tone-icon-shadow: rgba(var(--tone-rgb), 0.2);
   --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
   --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
   --tone-dock-bg-light: rgba(var(--tone-rgb), 0.2);
   --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.28);
   --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
+}
+
+.tone-coral,
+.dock-tone-coral {
+  --tone-rgb: var(--tone-coral-rgb);
 }
 
 .tone-mint,
 .dock-tone-mint {
   --tone-rgb: var(--tone-mint-rgb);
   --tone-icon-shadow: rgba(var(--tone-rgb), 0.18);
-  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
-  --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
-  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.2);
-  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.28);
-  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
 }
 
 .tone-blue,
 .dock-tone-blue {
   --tone-rgb: var(--tone-blue-rgb);
-  --tone-icon-shadow: rgba(var(--tone-rgb), 0.2);
-  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
   --tone-dock-shadow: rgba(var(--tone-rgb), 0.13);
-  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.2);
-  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.28);
-  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
 }
 
 .tone-amber,
@@ -156,34 +125,19 @@
 .dock-tone-folder {
   --tone-rgb: var(--tone-amber-rgb);
   --tone-icon-shadow: rgba(var(--tone-rgb), 0.19);
-  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
-  --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
   --tone-dock-bg-light: rgba(var(--tone-rgb), 0.22);
   --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.3);
-  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
 }
 
 .tone-rose,
 .dock-tone-rose {
   --tone-rgb: var(--tone-rose-rgb);
-  --tone-icon-shadow: rgba(var(--tone-rgb), 0.2);
-  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
-  --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
-  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.2);
-  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.28);
-  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
 }
 
 .tone-violet,
 .dock-tone-violet,
 .dock-tone-note {
   --tone-rgb: var(--tone-violet-rgb);
-  --tone-icon-shadow: rgba(var(--tone-rgb), 0.2);
-  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
-  --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
-  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.2);
-  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.28);
-  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
 }
 
 .tone-graphite,

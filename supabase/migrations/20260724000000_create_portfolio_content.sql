@@ -1,5 +1,5 @@
--- Keep this migration in sync with the dashboard-friendly supabase-schema.sql
--- at the repository root.
+-- Initial schema snapshot. Later migrations evolve this shape; the
+-- dashboard-friendly supabase-schema.sql is the cumulative current schema.
 
 create table if not exists public.projects (
   id text primary key,

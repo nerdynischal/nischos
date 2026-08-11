@@ -26,7 +26,7 @@ export function WindowContent({
   onChangeSection: (sectionId: string) => void
   settingsSections: SettingsSection[]
 }) {
-  if (desktopWindow.kind === 'project') {
+  if (desktopWindow.category === 'project') {
     const project = projects.find((item) => item.id === desktopWindow.refId)
     if (!project) return <EmptyState title="Project missing" body="This app moved somewhere else." />
     return (
@@ -38,7 +38,7 @@ export function WindowContent({
     )
   }
 
-  if (desktopWindow.kind === 'blog') {
+  if (desktopWindow.category === 'blog') {
     return (
       <Suspense fallback={<EmptyState title="Opening Blog Posts" body="Loading your notes…" />}>
         <BlogWindow

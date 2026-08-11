@@ -1,9 +1,10 @@
 import { useMemo } from 'react'
 import './styles/app.css'
-import { settingsSections as fallbackSettingsSections } from './content'
+import { DEFAULT_SETTINGS_SECTION_ID } from './content'
 import { DesktopIcons } from './desktop/DesktopIcons'
 import { Dock } from './desktop/Dock'
 import { MenuBar } from './desktop/MenuBar'
+import { getProjectWindowId } from './desktop/appRegistry'
 import { createDesktopIcons } from './desktop/createDesktopIcons'
 import { useClock } from './hooks/useClock'
 import { useDesktopWindows } from './hooks/useDesktopWindows'
@@ -38,8 +39,8 @@ function App() {
     const project = projects.find((item) => item.id === projectId)
     if (!project) return
     upsertWindow({
-      id: `project:${project.id}`,
-      kind: 'project',
+      id: getProjectWindowId(project.id),
+      category: 'project',
       refId: project.id,
       title: project.title,
     })
@@ -50,28 +51,36 @@ function App() {
 
     upsertWindow({
       id: 'blog',
-      kind: 'blog',
+      category: 'blog',
       refId: linkedPostId,
       title: 'Blog Posts',
     })
   }
 
-  function openSettings(sectionId = settingsSections[0]?.id ?? fallbackSettingsSections[0].id) {
+  function openSettings(sectionId = settingsSections[0]?.id ?? DEFAULT_SETTINGS_SECTION_ID) {
     const nextSection = settingsSections.some((section) => section.id === sectionId)
       ? sectionId
-      : settingsSections[0]?.id ?? fallbackSettingsSections[0].id
+      : settingsSections[0]?.id ?? DEFAULT_SETTINGS_SECTION_ID
     setActiveSection(nextSection)
     upsertWindow({
       id: 'settings',
-      kind: 'settings',
+      category: 'settings',
       title: 'Nischal',
     })
   }
 
   function openIcon(icon: DesktopIcon) {
-    if (icon.kind === 'blog') openBlog()
-    if (icon.kind === 'settings') openSettings()
-    if (icon.kind === 'project') openProject(icon.id)
+    switch (icon.category) {
+      case 'blog':
+        openBlog()
+        break
+      case 'settings':
+        openSettings()
+        break
+      case 'project':
+        openProject(icon.id)
+        break
+    }
   }
 
   return (

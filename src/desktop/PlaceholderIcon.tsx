@@ -1,6 +1,6 @@
 import type { DesktopIcon } from '../types'
 
-export function PlaceholderIcon({ variant }: { variant: DesktopIcon['kind'] }) {
+export function PlaceholderIcon({ variant }: { variant: DesktopIcon['category'] }) {
   return (
     <svg
       className={`placeholder-svg placeholder-${variant}`}

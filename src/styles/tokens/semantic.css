@@ -7,8 +7,8 @@
   --text-disabled: rgba(var(--color-neutral-50-rgb), 0.32);
   --text-link: var(--text-secondary);
 
-  --desktop-bg: var(--color-neutral-1000);
   --surface-base: var(--color-neutral-1000);
+  --desktop-bg: var(--surface-base);
   --surface-panel: var(--color-neutral-950);
   --surface-panel-strong: var(--color-neutral-850);
   --surface-panel-raised: var(--color-neutral-800);
@@ -25,20 +25,20 @@
   --window-bg: var(--surface-panel);
   --sidebar-bg: var(--color-neutral-900);
 
-  --grid-line: rgba(var(--color-white-rgb), 0.075);
   --line-subtle: rgba(var(--color-white-rgb), 0.075);
+  --grid-line: var(--line-subtle);
   --line-default: rgba(var(--color-white-rgb), 0.095);
   --line-strong: rgba(var(--color-white-rgb), 0.12);
   --line-chrome: rgba(var(--color-white-rgb), 0.045);
   --line-control: rgba(var(--color-white-rgb), 0.09);
-  --line-control-hover: rgba(var(--color-white-rgb), 0.12);
+  --line-control-hover: var(--line-strong);
   --line-dock: rgba(var(--color-white-rgb), 0.11);
   --line-dock-hover: rgba(var(--color-white-rgb), 0.18);
   --indicator-dock-open: rgba(var(--color-white-rgb), 0.48);
   --line-content: rgba(var(--color-white-rgb), 0.14);
   --line-content-strong: rgba(var(--color-white-rgb), 0.2);
   --line-code-inline: rgba(var(--color-white-rgb), 0.16);
-  --line-row: rgba(var(--color-white-rgb), 0.11);
+  --line-row: var(--line-dock);
   --line-hairline: var(--line-subtle);
   --line-frame: var(--line-default);
   --line-emphasis: var(--line-strong);

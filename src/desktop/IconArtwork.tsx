@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { DesktopIcon } from '../types'
 import { PlaceholderIcon } from './PlaceholderIcon'
 
-const defaultArtwork: Partial<Record<DesktopIcon['kind'], string>> = {
+const defaultArtwork: Partial<Record<DesktopIcon['category'], string>> = {
   blog: '/blog-icon.png',
   settings: '/about-icon.png',
 }
@@ -14,16 +14,12 @@ export function IconArtwork({
 }: {
   artworkId?: string
   thumbnail?: string
-  variant: DesktopIcon['kind']
+  variant: DesktopIcon['category']
 }) {
-  const [failed, setFailed] = useState(false)
+  const [failedArtwork, setFailedArtwork] = useState<string | null>(null)
   const artwork = thumbnail ?? defaultArtwork[variant]
 
-  useEffect(() => {
-    setFailed(false)
-  }, [artwork])
-
-  if (!artwork || failed) {
+  if (!artwork || artwork === failedArtwork) {
     return <PlaceholderIcon variant={variant} />
   }
 
@@ -34,7 +30,7 @@ export function IconArtwork({
       alt=""
       aria-hidden="true"
       data-artwork-id={artworkId}
-      onError={() => setFailed(true)}
+      onError={() => setFailedArtwork(artwork)}
     />
   )
 }

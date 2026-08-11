@@ -74,3 +74,37 @@ export function calculateDockSurfaceTransform(
     translation: (rightExtension - leftExtension) / 2,
   }
 }
+
+export function findNearestDockItemIndex(items: DockItemGeometry[], pointerX: number) {
+  if (items.length === 0) return -1
+
+  return items.reduce((nearest, item, index) => {
+    const nearestDistance = Math.abs(pointerX - items[nearest].center)
+    const distance = Math.abs(pointerX - item.center)
+    return distance < nearestDistance ? index : nearest
+  }, 0)
+}
+
+export function calculateDockSeparatorTranslation(
+  items: DockItemGeometry[],
+  transforms: DockItemTransform[],
+  separatorCenter: number,
+) {
+  if (items.length !== transforms.length) return 0
+
+  let leftIndex = -1
+  let rightIndex = -1
+
+  items.forEach(({ center }, index) => {
+    if (center < separatorCenter) leftIndex = index
+    if (rightIndex === -1 && center > separatorCenter) rightIndex = index
+  })
+
+  const nearbyTranslations = [leftIndex, rightIndex]
+    .filter((index) => index >= 0)
+    .map((index) => transforms[index].translation)
+
+  return nearbyTranslations.length > 0
+    ? nearbyTranslations.reduce((sum, value) => sum + value, 0) / nearbyTranslations.length
+    : 0
+}

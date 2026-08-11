@@ -52,7 +52,11 @@
   border-color: var(--line-frame);
   color: var(--text-muted);
   background:
-    radial-gradient(circle at 74% 8%, rgba(var(--icon-accent, 255, 255, 255), 0.1), transparent 46%),
+    radial-gradient(
+      circle at 74% 8%,
+      rgba(var(--icon-accent, var(--color-white-rgb)), 0.1),
+      transparent 46%
+    ),
     var(--surface-panel-strong);
 }
 

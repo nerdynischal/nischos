@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { posts, projects, settingsSections } from './content'
+import { DEFAULT_SETTINGS_SECTION_ID, posts, projects, settingsSections } from './content'
 
 describe('local fallback content', () => {
   it('contains only the current portfolio projects', () => {
@@ -8,6 +8,14 @@ describe('local fallback content', () => {
       'my-toolkit',
       'maneki-neko-catalog',
     ])
+  })
+
+  it('records the AI model used for each project', () => {
+    expect(Object.fromEntries(projects.map((project) => [project.id, project.model]))).toEqual({
+      keyform: 'GPT-5.6 Sol',
+      'my-toolkit': 'GPT-5.5',
+      'maneki-neko-catalog': 'GPT-5.5',
+    })
   })
 
   it('does not expose placeholder contact information or example links', () => {
@@ -19,6 +27,7 @@ describe('local fallback content', () => {
 
   it('keeps a truthful local About section', () => {
     expect(settingsSections).toHaveLength(1)
+    expect(DEFAULT_SETTINGS_SECTION_ID).toBe('about')
     expect(settingsSections[0]).toMatchObject({
       id: 'about',
       displayTitle: 'Nischal',

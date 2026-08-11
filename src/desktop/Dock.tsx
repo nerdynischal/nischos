@@ -1,9 +1,19 @@
 import { Fragment } from 'react'
 import type { Project } from '../content'
-import type { DesktopWindow } from '../types'
+import type { DesktopWindow, WindowCategory } from '../types'
+import { getProjectWindowId, SYSTEM_APPS } from './appRegistry'
 import { IconArtwork } from './IconArtwork'
 import { selectPinnedProjects } from './selectPinnedProjects'
 import { useDockMagnification } from './useDockMagnification'
+
+type PinnedDockItem = {
+  id: string
+  label: string
+  category: WindowCategory
+  tone: string
+  thumbnail?: string
+  windowId: string
+}
 
 export function Dock({
   windows,
@@ -29,45 +39,40 @@ export function Dock({
     handleItemFocus,
     handleItemBlur,
   } = useDockMagnification()
-  const pinnedItems = [
+  const pinnedItems: PinnedDockItem[] = [
     ...selectPinnedProjects(projects).map((project) => ({
       id: project.id,
       label: project.title,
-      kind: 'project' as const,
+      category: 'project' as const,
       tone: project.iconTone,
       thumbnail: project.thumbnail,
-      windowId: `project:${project.id}`,
+      windowId: getProjectWindowId(project.id),
     })),
-    {
-      id: 'blog',
-      label: 'Blog Posts',
-      kind: 'blog' as const,
-      tone: 'folder',
-      windowId: 'blog',
-    },
-    {
-      id: 'settings',
-      label: 'About',
-      kind: 'settings' as const,
-      tone: 'settings',
-      windowId: 'settings',
-    },
+    ...SYSTEM_APPS.map(({ label, category, tone }) => ({
+      id: category,
+      label,
+      category,
+      tone,
+      windowId: category,
+    })),
   ]
 
+  const windowsById = new Map(windows.map((item) => [item.id, item]))
+  const projectsById = new Map(projects.map((project) => [project.id, project]))
   const pinnedWindowIds = new Set(pinnedItems.map((item) => item.windowId))
   const extraWindows = windows.filter((item) => !pinnedWindowIds.has(item.id))
 
-  function handlePinnedClick(item: (typeof pinnedItems)[number]) {
-    const openWindow = windows.find((windowItem) => windowItem.id === item.windowId)
+  function handlePinnedClick(item: PinnedDockItem) {
+    const openWindow = windowsById.get(item.windowId)
 
     if (openWindow) {
       onFocusWindow(openWindow.id)
       return
     }
 
-    if (item.kind === 'project') onOpenProject(item.id)
-    if (item.kind === 'blog') onOpenBlog()
-    if (item.kind === 'settings') onOpenSettings()
+    if (item.category === 'project') onOpenProject(item.id)
+    if (item.category === 'blog') onOpenBlog()
+    if (item.category === 'settings') onOpenSettings()
   }
 
   return (
@@ -80,11 +85,11 @@ export function Dock({
     >
       <span className="dock-background" aria-hidden="true" />
       {pinnedItems.map((item) => {
-        const openWindow = windows.find((windowItem) => windowItem.id === item.windowId)
+        const openWindow = windowsById.get(item.windowId)
 
         return (
           <Fragment key={item.id}>
-            {item.kind === 'blog' ? <span className="dock-separator" aria-hidden="true" /> : null}
+            {item.category === 'blog' ? <span className="dock-separator" aria-hidden="true" /> : null}
             <button
               type="button"
               className={`dock-item dock-tone-${item.tone} ${openWindow ? 'is-open' : ''}`}
@@ -97,19 +102,17 @@ export function Dock({
             >
               <IconArtwork
                 artworkId={item.id}
-                thumbnail={item.kind === 'project' ? item.thumbnail : undefined}
-                variant={item.kind}
+                thumbnail={item.category === 'project' ? item.thumbnail : undefined}
+                variant={item.category}
               />
             </button>
           </Fragment>
         )
       })}
       {extraWindows.map((item) => {
-        const project = item.kind === 'project'
-          ? projects.find((projectItem) => projectItem.id === item.refId)
+        const project = item.category === 'project'
+          ? projectsById.get(item.refId ?? '')
           : undefined
-        const variant =
-          item.kind === 'blog' ? 'blog' : item.kind === 'settings' ? 'settings' : 'project'
 
         return (
           <button
@@ -123,7 +126,11 @@ export function Dock({
             onBlur={handleItemBlur}
             aria-label={`Focus ${item.title}`}
           >
-            <IconArtwork artworkId={project?.id} thumbnail={project?.thumbnail} variant={variant} />
+            <IconArtwork
+              artworkId={project?.id}
+              thumbnail={project?.thumbnail}
+              variant={item.category}
+            />
           </button>
         )
       })}

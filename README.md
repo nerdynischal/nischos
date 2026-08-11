@@ -44,7 +44,7 @@ The app currently loads these tables:
 - `blog_posts`
 - `settings_sections`
 
-The checked-in schema contains only this current read model. Running it does not remove legacy columns or tables that may already exist in an older Supabase project.
+The checked-in schema contains the current read model. Running it does not remove legacy columns or tables that may already exist in an older Supabase project. The project-category migration adds and backfills `category` from the former `type` column without dropping existing data.
 
 Each content type is loaded independently. If Supabase is not configured, a request fails, or a table is empty, the app keeps the corresponding local fallback content from `src/content.ts`.
 

@@ -22,7 +22,7 @@ export function WindowFrame({
 }) {
   return (
     <article
-      className={`window window-${desktopWindow.kind} ${isActive ? 'is-active' : 'is-inactive'}`}
+      className={`window window-${desktopWindow.category} ${isActive ? 'is-active' : 'is-inactive'}`}
       style={
         {
           '--window-x': `${desktopWindow.x}px`,
@@ -32,7 +32,7 @@ export function WindowFrame({
           zIndex: desktopWindow.z,
         } as CSSProperties
       }
-      onPointerDown={() => onFocus(desktopWindow.id)}
+      onPointerDown={isActive ? undefined : () => onFocus(desktopWindow.id)}
       aria-label={desktopWindow.title}
     >
       <header

@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
   calculateDockMagnification,
+  calculateDockSeparatorTranslation,
   calculateDockSurfaceTransform,
+  findNearestDockItemIndex,
 } from './dockMagnification'
 
 const items = [
@@ -84,5 +86,23 @@ describe('calculateDockMagnification', () => {
 
     expect(surface.scaleX).toBeGreaterThan(1)
     expect(surface.translation).toBeCloseTo(0)
+  })
+})
+
+describe('dock item helpers', () => {
+  it('finds the item nearest to the pointer', () => {
+    expect(findNearestDockItemIndex(items, 88)).toBe(1)
+    expect(findNearestDockItemIndex([], 88)).toBe(-1)
+  })
+
+  it('centres a separator between the translations on either side', () => {
+    const transforms = [
+      { scale: 1, translation: -12 },
+      { scale: 1.2, translation: -4 },
+      { scale: 1.2, translation: 8 },
+    ]
+
+    expect(calculateDockSeparatorTranslation(items, transforms, 112)).toBe(2)
+    expect(calculateDockSeparatorTranslation(items, transforms.slice(1), 112)).toBe(0)
   })
 })

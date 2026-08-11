@@ -1,10 +1,18 @@
 import { createClient } from '@supabase/supabase-js'
+import { projects as fallbackProjects } from '../content'
 import type { BlogPost, Project, SettingsSection } from '../content'
 import type { Database } from './database.types'
 
 type ProjectTableRow = Database['public']['Tables']['projects']['Row']
 
-export type ProjectRow = Omit<ProjectTableRow, 'created_at'>
+export type ProjectRow = Omit<ProjectTableRow, 'created_at' | 'model'> & {
+  model?: string | null
+  type?: string | null
+}
+
+const projectModelFallbacks = new Map(
+  fallbackProjects.map((project) => [project.id, project.model]),
+)
 
 type BlogPostTableRow = Database['public']['Tables']['blog_posts']['Row']
 
@@ -71,9 +79,7 @@ export async function fetchProjects(): Promise<Project[]> {
 
   const { data, error } = await supabase
     .from('projects')
-    .select(
-      'id,title,subtitle,icon_tone,thumbnail,type,stack,story,screenshots,demo_url,source_url,post_id',
-    )
+    .select('*')
     .order('created_at', { ascending: false })
 
   if (error) {
@@ -120,8 +126,8 @@ export function mapProject(row: ProjectRow): Project {
     subtitle: row.subtitle ?? 'An experiment from the desktop.',
     iconTone: row.icon_tone ?? 'graphite',
     thumbnail: row.thumbnail ?? undefined,
-    type: row.type ?? 'experiment',
-    stack: row.stack ?? [],
+    category: row.category ?? row.type ?? 'experiment',
+    model: row.model ?? projectModelFallbacks.get(row.id) ?? 'Not specified',
     story: row.story ?? '',
     screenshots: row.screenshots ?? [],
     demoUrl: row.demo_url ?? undefined,

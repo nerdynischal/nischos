@@ -16,8 +16,8 @@ export type Database = {
           subtitle: string | null
           icon_tone: string | null
           thumbnail: string | null
-          type: string | null
-          stack: string[] | null
+          category: string | null
+          model: string | null
           story: string | null
           screenshots: string[] | null
           demo_url: string | null
@@ -31,8 +31,8 @@ export type Database = {
           subtitle?: string | null
           icon_tone?: string | null
           thumbnail?: string | null
-          type?: string | null
-          stack?: string[] | null
+          category?: string | null
+          model?: string | null
           story?: string | null
           screenshots?: string[] | null
           demo_url?: string | null
@@ -46,8 +46,8 @@ export type Database = {
           subtitle?: string | null
           icon_tone?: string | null
           thumbnail?: string | null
-          type?: string | null
-          stack?: string[] | null
+          category?: string | null
+          model?: string | null
           story?: string | null
           screenshots?: string[] | null
           demo_url?: string | null

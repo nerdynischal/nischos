@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "check": "npm run lint && npm run test && npm run build",
+    "check": "npm run tokens:check && npm run lint && npm run test && npm run build",
     "lint": "oxlint",
     "test": "vitest run",
+    "tokens:check": "node scripts/check-css-tokens.mjs",
     "supabase:check": "node scripts/check-supabase.mjs",
     "preview": "vite preview"
   },

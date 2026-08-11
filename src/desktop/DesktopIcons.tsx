@@ -21,7 +21,7 @@ export function DesktopIcons({
           aria-label={`Open ${icon.label}`}
         >
           <span className="icon-glyph" aria-hidden="true">
-            <IconArtwork artworkId={icon.id} thumbnail={icon.thumbnail} variant={icon.kind} />
+            <IconArtwork artworkId={icon.id} thumbnail={icon.thumbnail} variant={icon.category} />
           </span>
           <span className="icon-label">{icon.label}</span>
         </button>

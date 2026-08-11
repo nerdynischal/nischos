@@ -1,8 +1,8 @@
-export type WindowKind = 'project' | 'blog' | 'settings'
+export type WindowCategory = 'project' | 'blog' | 'settings'
 
 export type DesktopWindow = {
   id: string
-  kind: WindowKind
+  category: WindowCategory
   refId?: string
   title: string
   x: number
@@ -23,7 +23,7 @@ export type DragState = {
 export type DesktopIcon = {
   id: string
   label: string
-  kind: 'project' | 'blog' | 'settings'
+  category: WindowCategory
   tone: string
   thumbnail?: string
   x: number

@@ -8,8 +8,8 @@ function project(id: string): Project {
     title: id,
     subtitle: '',
     iconTone: 'graphite',
-    type: 'test',
-    stack: [],
+    category: 'test',
+    model: 'Test model',
     story: '',
     screenshots: [],
   }

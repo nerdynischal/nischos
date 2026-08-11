@@ -77,13 +77,13 @@
 
 .placeholder-svg {
   opacity: 0.78;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.32));
+  filter: drop-shadow(0 10px 20px rgba(var(--color-black-rgb), 0.32));
 }
 
 .icon-label {
   color: var(--text-secondary);
   font-weight: var(--type-meta-weight);
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 10px rgba(var(--color-black-rgb), 0.5);
 }
 
 .tone-coral,
@@ -115,7 +115,11 @@
 .project-icon.tone-graphite {
   color: var(--icon-text-strong);
   background:
-    radial-gradient(circle at 50% 0%, rgba(var(--icon-accent, 255, 255, 255), 0.24), transparent 56%),
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(var(--icon-accent, var(--color-white-rgb)), 0.24),
+      transparent 56%
+    ),
     linear-gradient(145deg, var(--line-dock), var(--icon-tile-shine-soft)),
     var(--icon-tile-bg-strong);
 }
@@ -152,7 +156,7 @@
 .traffic {
   border-color: var(--control-border);
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(var(--color-black-rgb), 0.34),
     0 1px 0 var(--control-inset) inset;
 }
 
