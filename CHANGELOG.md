@@ -4,7 +4,7 @@
 
 ### Added
 
-- Added a macOS-inspired nischalOS lock screen with a live date and time, a keyboard-accessible entry control, a 1.2-second progress indicator, and same-tab session persistence.
+- Added a macOS-inspired nischalOS lock screen with a centered About illustration avatar, live date and time, a keyboard-accessible entry control, a 1.2-second progress indicator, and same-tab session persistence.
 - Added a coordinated unlock transition that separates the clock and profile before revealing the desktop, with a reduced-motion fallback.
 - Added a persisted light and dark appearance with a compact menu-bar toggle, system-preference support, cross-tab synchronization, and a pre-render bootstrap that prevents theme flashing.
 - Added AI model metadata for projects, with local fallbacks for Keyform (`GPT-5.6 Sol`), Toolkit (`GPT-5.5`), and Maneki (`GPT-5.5`).

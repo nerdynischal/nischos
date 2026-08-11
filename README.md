@@ -95,7 +95,7 @@ add column if not exists content_markdown text;
 ## Project structure
 
 - `src/hooks` contains portfolio data loading, the live clock, and desktop-window state.
-- `src/features` contains the Blog, Project, and About window content.
+- `src/features` contains the entry lock screen plus the Blog, Project, and About window content.
 - `src/desktop` contains desktop icons, dock behavior, artwork, and explicit dock pinning.
 - `src/windows` contains reusable window framing and viewport geometry.
 - `src/theme` contains the persisted system/light/dark preference model and document theme synchronization.

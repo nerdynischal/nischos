@@ -40,7 +40,7 @@ export function LockScreen({
           onClick={onEnter}
         >
           <span className="lock-screen-avatar" aria-hidden="true">
-            <img src="/logo.svg" alt="" />
+            <img src="/about-icon.png" alt="" />
           </span>
           <span className="lock-screen-name">nischalOS</span>
           <span className="lock-screen-hint">Click to Enter</span>

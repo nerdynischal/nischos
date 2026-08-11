@@ -25,7 +25,7 @@
   --desktop-icon-width: 98px;
   --icon-tile-size: 66px;
   --lock-screen-avatar-size: 88px;
-  --lock-screen-logo-size: 46px;
+  --lock-screen-artwork-size: 112px;
   --lock-screen-grid-size: 40px;
   --lock-screen-exit-distance: clamp(2.5rem, 6svh, 3.5rem);
   --lock-screen-progress-width: 240px;
