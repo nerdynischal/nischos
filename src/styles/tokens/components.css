@@ -30,6 +30,14 @@
   --control-border: rgba(var(--color-white-rgb), 0.1);
   --control-inset: rgba(var(--color-white-rgb), 0.18);
 
+  --carousel-control-border: var(--line-frame);
+  --carousel-control-bg: var(--scrollbar-track);
+  --carousel-control-bg-hover: var(--surface-soft);
+  --carousel-control-text: var(--text-muted);
+  --carousel-control-text-hover: var(--text-primary);
+  --carousel-dot-bg: var(--control-inset);
+  --carousel-dot-active: var(--text-muted);
+
   --action-primary-bg: rgb(var(--color-neutral-50-rgb));
   --action-primary-bg-hover: rgb(var(--color-white-rgb));
   --action-primary-border: var(--action-primary-bg);
@@ -71,6 +79,73 @@
   --dock-button-bg: rgba(var(--color-white-rgb), 0.045);
   --dock-button-bg-hover: rgba(var(--color-white-rgb), 0.08);
   --dock-button-shadow: rgba(var(--color-black-rgb), 0.28);
+
+  --wallpaper-grid-mask: none;
+  --artwork-filter: drop-shadow(0 10px 20px rgba(var(--color-black-rgb), 0.32));
+  --icon-label-shadow: 0 1px 10px rgba(var(--color-black-rgb), 0.5);
+  --indicator-dock-glow: rgba(var(--color-white-rgb), 0.1);
+  --profile-row-line: rgba(var(--color-white-rgb), 0.065);
+}
+
+:root[data-theme='light'] {
+  --control-neutral: #858585;
+  --control-border: rgba(var(--color-black-rgb), 0.18);
+  --control-inset: rgba(var(--color-white-rgb), 0.72);
+
+  --carousel-control-border: rgba(var(--color-black-rgb), 0.42);
+  --carousel-control-bg: var(--surface-panel-raised);
+  --carousel-control-bg-hover: var(--surface-hover-strong);
+  --carousel-control-text: var(--text-primary);
+  --carousel-control-text-hover: var(--text-primary);
+  --carousel-dot-bg: rgba(var(--color-black-rgb), 0.42);
+  --carousel-dot-active: var(--text-primary);
+
+  --action-primary-bg: #191919;
+  --action-primary-bg-hover: #050505;
+  --action-primary-border: var(--action-primary-bg);
+  --action-primary-border-hover: var(--action-primary-bg-hover);
+  --action-primary-text: rgb(var(--color-neutral-50-rgb));
+
+  --brand-logo-bg: rgba(var(--color-white-rgb), 0.98);
+  --brand-logo-ring: rgba(var(--color-black-rgb), 0.12);
+  --icon-tile-bg: rgba(var(--color-white-rgb), 0.56);
+  --icon-tile-bg-strong: rgba(var(--color-white-rgb), 0.72);
+  --icon-tile-border: rgba(var(--color-black-rgb), 0.14);
+  --icon-tile-shine: rgba(var(--color-white-rgb), 0.7);
+  --icon-tile-shine-soft: rgba(var(--color-white-rgb), 0.18);
+  --icon-text: rgba(24, 24, 24, 0.76);
+  --icon-text-strong: rgba(24, 24, 24, 0.88);
+
+  --glass-radial:
+    radial-gradient(circle at 38% 24%, rgba(var(--color-white-rgb), 0.88), transparent 40%),
+    radial-gradient(circle at 76% 78%, rgba(var(--color-black-rgb), 0.035), transparent 48%),
+    rgba(var(--color-white-rgb), 0.76);
+  --glass-blur: blur(14px) saturate(1.06);
+
+  --shadow-window: 0 30px 80px rgba(var(--color-black-rgb), 0.18);
+  --shadow-window-inactive: 0 18px 48px rgba(var(--color-black-rgb), 0.11);
+  --shadow-glass: 0 18px 42px rgba(var(--color-black-rgb), 0.12);
+  --shadow-brand-logo: 0 6px 18px rgba(var(--color-black-rgb), 0.1);
+  --shadow-icon-rest: 0 16px 38px rgba(var(--color-black-rgb), 0.13);
+  --shadow-tooltip: 0 12px 28px rgba(var(--color-black-rgb), 0.15);
+  --shadow-dock: 0 24px 64px rgba(var(--color-black-rgb), 0.15);
+
+  --dock-surface:
+    linear-gradient(
+      180deg,
+      rgba(var(--color-white-rgb), 0.68),
+      rgba(var(--color-white-rgb), 0.34)
+    ),
+    rgba(var(--color-white-rgb), 0.5);
+  --dock-button-bg: rgba(var(--color-white-rgb), 0.42);
+  --dock-button-bg-hover: rgba(var(--color-white-rgb), 0.68);
+  --dock-button-shadow: rgba(var(--color-black-rgb), 0.09);
+
+  --wallpaper-grid-mask: linear-gradient(to bottom, transparent, black 10%, black 92%, transparent);
+  --artwork-filter: drop-shadow(0 1px 0 rgba(var(--color-white-rgb), 0.48));
+  --icon-label-shadow: 0 1px 0 rgba(var(--color-white-rgb), 0.78);
+  --indicator-dock-glow: rgba(var(--color-black-rgb), 0.12);
+  --profile-row-line: rgba(var(--color-black-rgb), 0.075);
 }
 
 :is(
@@ -95,28 +170,61 @@
   .dock-tone-settings
 ) {
   --tone-icon-shadow: rgba(var(--tone-rgb), 0.2);
-  --tone-icon-shadow-light: rgba(var(--tone-rgb), 0.22);
   --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
-  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.2);
-  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.28);
-  --tone-dock-shadow-light: rgba(var(--tone-rgb), 0.18);
+  --tone-dock-bg: rgba(var(--tone-rgb), 0.08);
+  --tone-dock-bg-hover: rgba(var(--tone-rgb), 0.13);
+  --tone-icon-background:
+    radial-gradient(circle at 50% 0%, rgba(var(--tone-rgb), 0.24), transparent 56%),
+    linear-gradient(145deg, var(--line-dock), var(--icon-tile-shine-soft)),
+    var(--icon-tile-bg-strong);
+}
+
+:root[data-theme='light'] :is(
+  .tone-coral,
+  .tone-mint,
+  .tone-blue,
+  .tone-amber,
+  .tone-folder,
+  .tone-rose,
+  .tone-violet,
+  .tone-graphite,
+  .tone-settings,
+  .dock-tone-coral,
+  .dock-tone-mint,
+  .dock-tone-blue,
+  .dock-tone-amber,
+  .dock-tone-folder,
+  .dock-tone-rose,
+  .dock-tone-violet,
+  .dock-tone-note,
+  .dock-tone-graphite,
+  .dock-tone-settings
+) {
+  --tone-icon-shadow: rgba(var(--tone-rgb), 0.16);
+  --tone-dock-shadow: rgba(var(--tone-rgb), 0.12);
+  --tone-dock-bg: rgba(var(--tone-rgb), 0.08);
+  --tone-dock-bg-hover: rgba(var(--tone-rgb), 0.13);
+  --tone-icon-background: var(--tone-artwork-background);
 }
 
 .tone-coral,
 .dock-tone-coral {
   --tone-rgb: var(--tone-coral-rgb);
+  --tone-artwork-background: linear-gradient(145deg, #ffd2bd, #ff8c67);
 }
 
 .tone-mint,
 .dock-tone-mint {
   --tone-rgb: var(--tone-mint-rgb);
   --tone-icon-shadow: rgba(var(--tone-rgb), 0.18);
+  --tone-artwork-background: linear-gradient(145deg, #d8f4d8, #72c59a);
 }
 
 .tone-blue,
 .dock-tone-blue {
   --tone-rgb: var(--tone-blue-rgb);
   --tone-dock-shadow: rgba(var(--tone-rgb), 0.13);
+  --tone-artwork-background: linear-gradient(145deg, #dceaff, #76a6ff);
 }
 
 .tone-amber,
@@ -125,39 +233,59 @@
 .dock-tone-folder {
   --tone-rgb: var(--tone-amber-rgb);
   --tone-icon-shadow: rgba(var(--tone-rgb), 0.19);
-  --tone-dock-bg-light: rgba(var(--tone-rgb), 0.22);
-  --tone-dock-bg-light-hover: rgba(var(--tone-rgb), 0.3);
+  --tone-artwork-background: linear-gradient(145deg, #ffefb4, #e2ae42);
 }
 
 .tone-rose,
 .dock-tone-rose {
   --tone-rgb: var(--tone-rose-rgb);
+  --tone-artwork-background: linear-gradient(145deg, #ffd7de, #e87990);
 }
 
 .tone-violet,
 .dock-tone-violet,
 .dock-tone-note {
   --tone-rgb: var(--tone-violet-rgb);
+  --tone-artwork-background: linear-gradient(145deg, #eee1ff, #a586d8);
 }
 
 .tone-graphite,
 .dock-tone-graphite {
   --tone-rgb: var(--tone-graphite-rgb);
   --tone-icon-shadow: var(--surface-soft);
-  --tone-icon-shadow-light: rgba(31, 31, 28, 0.18);
   --tone-dock-shadow: var(--surface-soft);
-  --tone-dock-bg-light: rgba(31, 31, 28, 0.16);
-  --tone-dock-bg-light-hover: rgba(31, 31, 28, 0.22);
-  --tone-dock-shadow-light: rgba(31, 31, 28, 0.12);
+  --tone-artwork-color: #f5f1e8;
+  --tone-artwork-background: linear-gradient(145deg, #4c4a43, #1f1f1c);
 }
 
 .tone-settings,
 .dock-tone-settings {
   --tone-rgb: var(--tone-settings-rgb);
   --tone-icon-shadow: rgba(var(--tone-rgb), 0.16);
-  --tone-icon-shadow-light: rgba(169, 184, 177, 0.22);
   --tone-dock-shadow: rgba(var(--tone-rgb), 0.11);
-  --tone-dock-bg-light: rgba(169, 184, 177, 0.22);
-  --tone-dock-bg-light-hover: rgba(169, 184, 177, 0.3);
-  --tone-dock-shadow-light: rgba(169, 184, 177, 0.18);
+  --tone-artwork-background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 24%, transparent 25%),
+    conic-gradient(from 20deg, #d7ddd7, #a9b8b1, #e8e4d7, #b5c2b7, #d7ddd7);
+}
+
+:root[data-theme='light'] :is(.tone-folder, .dock-tone-folder) {
+  --tone-dock-bg: rgba(var(--tone-rgb), 0.1);
+  --tone-dock-bg-hover: rgba(var(--tone-rgb), 0.15);
+  --tone-artwork-background:
+    linear-gradient(180deg, #ffdd7a 0 28%, transparent 28%),
+    linear-gradient(145deg, #fff1a8, #e8bb42);
+}
+
+:root[data-theme='light'] :is(.tone-graphite, .dock-tone-graphite) {
+  --tone-icon-shadow: rgba(var(--color-black-rgb), 0.14);
+  --tone-dock-shadow: rgba(var(--color-black-rgb), 0.1);
+  --tone-dock-bg: rgba(var(--color-black-rgb), 0.075);
+  --tone-dock-bg-hover: rgba(var(--color-black-rgb), 0.12);
+}
+
+:root[data-theme='light'] :is(.tone-settings, .dock-tone-settings) {
+  --tone-icon-shadow: rgba(var(--tone-rgb), 0.14);
+  --tone-dock-shadow: rgba(var(--tone-rgb), 0.11);
+  --tone-dock-bg: rgba(var(--tone-rgb), 0.08);
+  --tone-dock-bg-hover: rgba(var(--tone-rgb), 0.13);
 }

@@ -9,6 +9,29 @@
       content="nischalOS is Nischal's desktop-inspired portfolio for projects, experiments, and notes."
     />
     <meta name="theme-color" content="#050505" />
+    <script>
+      ;(() => {
+        const storageKey = 'nischalos-theme'
+        let preference = 'system'
+
+        try {
+          const storedPreference = window.localStorage.getItem(storageKey)
+          if (storedPreference === 'light' || storedPreference === 'dark') {
+            preference = storedPreference
+          }
+        } catch {
+          // Use the system preference when browser storage is unavailable.
+        }
+
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        const theme = preference === 'system' ? (prefersDark ? 'dark' : 'light') : preference
+        const themeColor = theme === 'dark' ? '#050505' : '#f6f6f6'
+
+        document.documentElement.dataset.theme = theme
+        document.documentElement.style.colorScheme = theme
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor)
+      })()
+    </script>
     <title>nischalOS</title>
   </head>
   <body>

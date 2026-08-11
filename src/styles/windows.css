@@ -36,15 +36,15 @@
   max-width: min(var(--window-max-width), calc(100vw - 20px));
   max-height: var(--window-max-height);
   overflow: hidden;
-  border: 1px solid rgba(36, 31, 25, 0.42);
+  border: 1px solid var(--line-emphasis);
   border-radius: var(--radius-md);
-  background: rgba(255, 252, 244, 0.88);
+  background: var(--window-bg);
   backdrop-filter: blur(20px) saturate(1.08);
   container-type: inline-size;
   container-name: app-window;
   box-shadow:
-    0 28px 70px rgba(54, 43, 31, 0.2),
-    0 2px 0 rgba(255, 255, 255, 0.62) inset;
+    var(--shadow-window),
+    0 0 0 1px var(--inset-line) inset;
   pointer-events: auto;
   resize: both;
   transform: translate3d(var(--window-x), var(--window-y), 0);
@@ -117,8 +117,8 @@
 .window.is-inactive {
   filter: saturate(0.88);
   box-shadow:
-    0 18px 44px rgba(54, 43, 31, 0.12),
-    0 2px 0 rgba(255, 255, 255, 0.52) inset;
+    var(--shadow-window-inactive),
+    0 0 0 1px var(--inset-line-inactive) inset;
 }
 
 .window-titlebar {
@@ -126,10 +126,8 @@
   grid-template-columns: 96px 1fr 96px;
   align-items: center;
   min-height: 34px;
-  border-bottom: 1px solid rgba(36, 31, 25, 0.18);
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.62), rgba(242, 234, 216, 0.62)),
-    rgba(255, 251, 241, 0.76);
+  border-bottom: 1px solid var(--line-hairline);
+  background: var(--surface-panel-strong);
   cursor: grab;
   touch-action: none;
   user-select: none;
@@ -141,7 +139,7 @@
 
 .window-titlebar h2 {
   margin: 0;
-  color: rgba(34, 30, 26, 0.82);
+  color: var(--text-secondary);
   font-family: var(--mono);
   font-size: var(--type-chrome-size);
   font-weight: var(--type-chrome-weight);
@@ -163,9 +161,11 @@
   display: block;
   width: 12px;
   height: 12px;
-  border: 1px solid rgba(31, 27, 22, 0.22);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius-round);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  box-shadow:
+    0 0 0 1px rgba(var(--color-black-rgb), 0.34),
+    0 1px 0 var(--control-inset) inset;
 }
 
 button.traffic {
@@ -185,15 +185,15 @@ button.traffic:active {
 }
 
 .traffic-close {
-  background: #ff6f5c;
+  background: var(--control-close);
 }
 
 .traffic-minimize {
-  background: #4b4c4e;
+  background: var(--control-neutral);
 }
 
 .traffic-zoom {
-  background: #4b4c4e;
+  background: var(--control-neutral);
 }
 
 .window-body {
@@ -201,7 +201,5 @@ button.traffic:active {
   min-height: 0;
   overflow: auto;
   overflow-x: hidden;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
-    rgba(255, 252, 244, 0.72);
+  background: var(--window-bg);
 }

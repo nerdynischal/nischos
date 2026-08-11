@@ -5,7 +5,7 @@
 }
 
 .wallpaper {
-  background: var(--surface-base);
+  background: var(--wallpaper-background);
 }
 
 .wallpaper::after {
@@ -18,7 +18,7 @@
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 40px 40px;
-  mask-image: none;
+  mask-image: var(--wallpaper-grid-mask);
 }
 
 .menu-bar {
@@ -77,13 +77,13 @@
 
 .placeholder-svg {
   opacity: 0.78;
-  filter: drop-shadow(0 10px 20px rgba(var(--color-black-rgb), 0.32));
+  filter: var(--artwork-filter);
 }
 
 .icon-label {
   color: var(--text-secondary);
   font-weight: var(--type-meta-weight);
-  text-shadow: 0 1px 10px rgba(var(--color-black-rgb), 0.5);
+  text-shadow: var(--icon-label-shadow);
 }
 
 .tone-coral,
@@ -113,15 +113,23 @@
 .project-icon.tone-amber,
 .project-icon.tone-violet,
 .project-icon.tone-graphite {
+  color: var(--tone-artwork-color, var(--icon-text-strong));
+  background: var(--tone-icon-background);
+}
+
+:root[data-theme='light'] .desktop-icon .icon-glyph {
   color: var(--icon-text-strong);
   background:
     radial-gradient(
       circle at 50% 0%,
-      rgba(var(--icon-accent, var(--color-white-rgb)), 0.24),
-      transparent 56%
+      rgba(var(--icon-accent, var(--color-black-rgb)), 0.08),
+      transparent 64%
     ),
-    linear-gradient(145deg, var(--line-dock), var(--icon-tile-shine-soft)),
-    var(--icon-tile-bg-strong);
+    linear-gradient(145deg, var(--line-subtle), transparent),
+    var(--dock-button-bg);
+  box-shadow:
+    0 12px 28px var(--dock-button-shadow),
+    0 1px 0 var(--icon-tile-shine) inset;
 }
 
 .window {

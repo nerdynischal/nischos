@@ -4,10 +4,8 @@
   flex-direction: column;
   gap: 0.22rem;
   padding: 0.78rem 0.62rem;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  background:
-    linear-gradient(180deg, rgba(248, 248, 248, 0.72), rgba(232, 232, 232, 0.58)),
-    rgba(238, 238, 238, 0.54);
+  border-right: 1px solid var(--line-hairline);
+  background: var(--sidebar-bg);
 }
 
 .settings-sidebar-group {
@@ -16,7 +14,7 @@
 
 .settings-sidebar-title {
   margin: 0;
-  color: rgba(0, 0, 0, 0.42);
+  color: var(--text-tertiary);
   font-family: var(--mono);
   font-size: var(--type-meta-size);
   font-weight: var(--type-meta-weight);
@@ -26,7 +24,7 @@
 
 .sidebar-title {
   margin: 0 0 0.35rem;
-  color: rgba(41, 35, 28, 0.55);
+  color: var(--text-tertiary);
   font-family: var(--mono);
   font-size: var(--type-meta-size);
   font-weight: var(--type-meta-weight);
@@ -46,7 +44,7 @@
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   padding: 0 var(--space-2);
-  color: rgba(0, 0, 0, 0.62);
+  color: var(--text-muted);
   background: transparent;
   font: var(--type-ui-weight) var(--type-ui-size)/var(--type-ui-line) var(--sans);
   text-align: left;
@@ -59,8 +57,8 @@
 }
 
 .settings-sidebar button:hover {
-  background: rgba(255, 255, 255, 0.32);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: var(--surface-hover);
+  border-color: transparent;
 }
 
 .settings-sidebar button:active {
@@ -68,17 +66,15 @@
 }
 
 .finder-sidebar button.is-selected {
-  background: rgba(255, 255, 255, 0.74);
-  border-color: rgba(36, 31, 25, 0.2);
+  background: var(--surface-selected);
+  border-color: transparent;
 }
 
 .settings-sidebar button.is-selected {
-  color: rgba(0, 0, 0, 0.84);
-  background: rgba(255, 255, 255, 0.62);
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow:
-    0 6px 16px rgba(0, 0, 0, 0.05),
-    0 1px 0 rgba(255, 255, 255, 0.72) inset;
+  color: var(--text-primary);
+  background: var(--surface-selected);
+  border-color: transparent;
+  box-shadow: none;
 }
 
 /* Settings detail pane */
@@ -115,7 +111,7 @@
   margin-bottom: 0.45rem;
   border: 0;
   border-radius: var(--avatar-radius);
-  color: rgba(36, 31, 25, 0.72);
+  color: var(--text-secondary);
   background: var(--glass-radial);
   backdrop-filter: var(--glass-blur);
   box-shadow:
@@ -156,7 +152,7 @@
 .profile-subtitle {
   margin: 0;
   justify-self: center;
-  color: rgba(245, 245, 245, 0.42);
+  color: var(--text-tertiary);
   font-size: var(--type-ui-size);
   font-weight: var(--type-ui-weight);
   line-height: var(--type-ui-line);
@@ -179,7 +175,7 @@
   gap: 1rem;
   align-items: start;
   padding: 0.78rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+  border-bottom: 1px solid var(--profile-row-line);
 }
 
 .profile-row:last-child {
@@ -194,12 +190,12 @@
 }
 
 .profile-row dt {
-  color: rgba(245, 245, 245, 0.88);
+  color: var(--text-primary);
   font-weight: var(--type-heading-weight);
 }
 
 .profile-row dd {
-  color: rgba(245, 245, 245, 0.58);
+  color: var(--text-muted);
   font-weight: var(--type-ui-weight);
   text-align: right;
 }
@@ -215,8 +211,8 @@
 
 .settings-detail li {
   padding: 0.7rem 0.8rem;
-  border: 1px solid rgba(36, 31, 25, 0.12);
+  border: 1px solid var(--line-frame);
   border-radius: var(--radius-md);
-  color: rgba(34, 30, 26, 0.78);
-  background: rgba(255, 255, 255, 0.34);
+  color: var(--text-secondary);
+  background: var(--surface-soft);
 }

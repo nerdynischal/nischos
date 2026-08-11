@@ -38,6 +38,7 @@ const definitions = new Map()
 const references = new Map()
 const runtimeDefinitions = new Set()
 const rootDefinitions = new Map()
+const rawColorDeclarations = []
 
 for (const file of cssFiles) {
   const source = await readFile(file, 'utf8')
@@ -50,7 +51,13 @@ for (const file of cssFiles) {
     addOccurrence(references, match[1], file)
   }
 
-  if (!tokenFiles.has(file)) continue
+  if (!tokenFiles.has(file)) {
+    for (const match of source.matchAll(/#[\da-f]{3,8}\b|rgba?\(\s*\d/gi)) {
+      const line = source.slice(0, match.index).split('\n').length
+      rawColorDeclarations.push(`${path.relative(projectRoot, file)}:${line}`)
+    }
+    continue
+  }
 
   for (const rootBlock of source.matchAll(/:root\s*\{([^}]*)\}/gs)) {
     for (const definition of rootBlock[1].matchAll(/--([\w-]+)\s*:/g)) {
@@ -82,6 +89,7 @@ const problems = [
   ['Unresolved custom properties', unresolvedReferences],
   ['Unused root tokens', unusedRootTokens],
   ['Duplicate root tokens', duplicateRootTokens],
+  ['Raw colours outside token files', rawColorDeclarations],
 ].filter(([, names]) => names.length > 0)
 
 if (problems.length > 0) {

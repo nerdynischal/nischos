@@ -18,16 +18,14 @@
   position: absolute;
   inset: -1px;
   z-index: -1;
-  border: 1px solid rgba(36, 31, 25, 0.11);
+  border: 1px solid var(--line-emphasis);
   border-radius: var(--dock-radius);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.16)),
-    rgba(255, 252, 244, 0.28);
+  background: var(--dock-surface);
   backdrop-filter: blur(22px) saturate(1.2);
   box-shadow:
-    0 22px 62px rgba(56, 44, 32, 0.14),
-    0 1px 0 rgba(255, 255, 255, 0.66) inset,
-    0 0 0 1px rgba(255, 255, 255, 0.24) inset;
+    var(--shadow-dock),
+    0 1px 0 var(--inset-highlight) inset,
+    0 0 0 1px var(--scrollbar-track) inset;
   pointer-events: none;
   transform: translate3d(0, 0, 0) scaleX(1);
   transform-origin: 50% 50%;
@@ -39,24 +37,24 @@
   --dock-press-scale: 1;
   --dock-scale: 1;
   --dock-shift: 0px;
-  --dock-bg: rgba(255, 255, 255, 0.18);
-  --dock-bg-hover: rgba(255, 255, 255, 0.28);
-  --dock-shadow: rgba(56, 44, 32, 0.08);
+  --dock-bg: var(--dock-button-bg);
+  --dock-bg-hover: var(--dock-button-bg-hover);
+  --dock-shadow: var(--dock-button-shadow);
   position: relative;
   display: grid;
   place-items: center;
   width: var(--dock-item-size);
   min-height: var(--dock-item-size);
-  border-color: rgba(36, 31, 25, 0.11);
+  border-color: var(--line-dock);
   border-radius: var(--dock-item-radius);
   padding: 0;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.34), transparent),
+    linear-gradient(145deg, var(--line-subtle), transparent),
     var(--dock-bg);
   backdrop-filter: blur(10px) saturate(1.08);
   box-shadow:
     0 8px 22px var(--dock-shadow),
-    0 1px 0 rgba(255, 255, 255, 0.58) inset;
+    0 1px 0 var(--icon-tile-shine) inset;
   transition:
     background-color var(--duration-control) var(--ease-out),
     border-color var(--duration-control) var(--ease-out),
@@ -71,13 +69,13 @@
 }
 
 .dock button:hover {
-  border-color: rgba(36, 31, 25, 0.14);
+  border-color: var(--line-dock-hover);
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.42), transparent),
+    linear-gradient(145deg, var(--line-strong), transparent),
     var(--dock-bg-hover);
   box-shadow:
     0 12px 30px var(--dock-shadow),
-    0 1px 0 rgba(255, 255, 255, 0.64) inset;
+    0 1px 0 var(--icon-tile-border) inset;
 }
 
 .dock button:active {
@@ -92,7 +90,7 @@
   height: 3px;
   border-radius: 50%;
   background: var(--indicator-dock-open);
-  box-shadow: 0 0 3px rgba(var(--color-white-rgb), 0.1);
+  box-shadow: 0 0 3px var(--indicator-dock-glow);
   content: '';
   opacity: 0;
   pointer-events: none;
@@ -187,9 +185,9 @@
 .dock-tone-note,
 .dock-tone-violet,
 .dock-tone-graphite {
-  --dock-bg: var(--tone-dock-bg-light);
-  --dock-bg-hover: var(--tone-dock-bg-light-hover);
-  --dock-shadow: var(--tone-dock-shadow-light);
+  --dock-bg: var(--tone-dock-bg);
+  --dock-bg-hover: var(--tone-dock-bg-hover);
+  --dock-shadow: var(--tone-dock-shadow);
 }
 
 .dock .placeholder-svg {

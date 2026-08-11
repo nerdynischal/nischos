@@ -98,7 +98,8 @@ add column if not exists content_markdown text;
 - `src/features` contains the Blog, Project, and About window content.
 - `src/desktop` contains desktop icons, dock behavior, artwork, and explicit dock pinning.
 - `src/windows` contains reusable window framing and viewport geometry.
-- `src/styles/theme` contains the component-scoped dark theme layers.
+- `src/theme` contains the persisted system/light/dark preference model and document theme synchronization.
+- `src/styles/tokens` contains the semantic light and dark palettes; `src/styles/theme` contains component-scoped theme rendering.
 - `src/assets/fonts` contains the locally bundled Geist fonts and their license.
 - `public` contains the favicon and app artwork.
 

@@ -1,5 +1,7 @@
 /* Theme roles. Swap these values to introduce another colour theme. */
 :root {
+  color-scheme: dark;
+
   --text-primary: rgb(var(--color-neutral-50-rgb));
   --text-secondary: rgba(var(--color-neutral-50-rgb), 0.74);
   --text-muted: rgba(var(--color-neutral-50-rgb), 0.58);
@@ -21,6 +23,7 @@
   --surface-code-block: rgba(var(--color-white-rgb), 0.055);
   --surface-table-header: rgba(var(--color-white-rgb), 0.07);
   --surface-screenshot: #101010;
+  --wallpaper-background: var(--surface-base);
   --chrome-bg: var(--surface-base);
   --window-bg: var(--surface-panel);
   --sidebar-bg: var(--color-neutral-900);
@@ -76,4 +79,63 @@
   --type-chrome-weight: 600;
   --tracking-tight: 0;
   --tracking-meta: 0.02em;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --text-primary: #171717;
+  --text-secondary: rgba(23, 23, 23, 0.78);
+  --text-muted: rgba(23, 23, 23, 0.7);
+  --text-tertiary: rgba(23, 23, 23, 0.64);
+  --text-disabled: rgba(23, 23, 23, 0.46);
+  --text-link: #2b2b2b;
+
+  --surface-base: #f6f6f6;
+  --desktop-bg: var(--surface-base);
+  --surface-panel: #ffffff;
+  --surface-panel-strong: #fafafa;
+  --surface-panel-raised: #f2f2f2;
+  --surface-hover: #ebebeb;
+  --surface-hover-strong: #e5e5e5;
+  --surface-selected: #dedede;
+  --surface-profile: #f1f1f1;
+  --surface-soft: rgba(var(--color-black-rgb), 0.045);
+  --surface-code-inline: rgba(var(--color-black-rgb), 0.055);
+  --surface-code-block: rgba(var(--color-black-rgb), 0.035);
+  --surface-table-header: rgba(var(--color-black-rgb), 0.045);
+  --surface-screenshot: #ebebeb;
+  --wallpaper-background: linear-gradient(135deg, #fafafa 0%, #f3f3f3 50%, #f8f8f8 100%);
+  --chrome-bg: rgba(var(--color-white-rgb), 0.88);
+  --window-bg: rgba(var(--color-white-rgb), 0.96);
+  --sidebar-bg: #f3f3f3;
+
+  --line-subtle: rgba(var(--color-black-rgb), 0.075);
+  --grid-line: rgba(var(--color-black-rgb), 0.085);
+  --line-default: rgba(var(--color-black-rgb), 0.1);
+  --line-strong: rgba(var(--color-black-rgb), 0.15);
+  --line-chrome: rgba(var(--color-black-rgb), 0.12);
+  --line-control: rgba(var(--color-black-rgb), 0.13);
+  --line-control-hover: rgba(var(--color-black-rgb), 0.22);
+  --line-dock: rgba(var(--color-black-rgb), 0.12);
+  --line-dock-hover: rgba(var(--color-black-rgb), 0.2);
+  --indicator-dock-open: rgba(var(--color-black-rgb), 0.56);
+  --line-content: rgba(var(--color-black-rgb), 0.13);
+  --line-content-strong: rgba(var(--color-black-rgb), 0.22);
+  --line-code-inline: rgba(var(--color-black-rgb), 0.14);
+  --line-row: var(--line-dock);
+  --line-hairline: var(--line-subtle);
+  --line-frame: var(--line-default);
+  --line-emphasis: var(--line-strong);
+
+  --inset-line: rgba(var(--color-white-rgb), 0.7);
+  --inset-line-inactive: rgba(var(--color-white-rgb), 0.52);
+  --inset-highlight: rgba(var(--color-white-rgb), 0.82);
+  --inset-highlight-subtle: rgba(var(--color-white-rgb), 0.64);
+
+  --scrollbar-track: rgba(var(--color-black-rgb), 0.035);
+  --scrollbar-thumb: rgba(var(--color-black-rgb), 0.2);
+  --scrollbar-thumb-hover: rgba(var(--color-black-rgb), 0.3);
+  --scrollbar-color: rgba(var(--color-black-rgb), 0.24);
+  --focus-ring: rgba(45, 105, 185, 0.72);
 }
