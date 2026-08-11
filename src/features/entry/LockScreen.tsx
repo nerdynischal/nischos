@@ -1,4 +1,5 @@
 import type { ClockValue } from '../../hooks/useClock'
+import { LockScreenWaterRipple } from './LockScreenWaterRipple'
 
 type LockScreenProps = {
   dateTime: ClockValue
@@ -23,6 +24,8 @@ export function LockScreen({
       data-exiting={isExiting || undefined}
       inert={isExiting}
     >
+      <LockScreenWaterRipple isInteractive={!isLoading && !isExiting} />
+
       <header className="lock-screen-clock">
         <p>{dateTime.lockScreenDate}</p>
         <time dateTime={shortTime}>{shortTime}</time>
@@ -32,7 +35,7 @@ export function LockScreen({
         <button
           type="button"
           className="lock-screen-profile"
-          aria-label="Enter nischalOS"
+          aria-label="Unlock nischalOS"
           aria-busy={isLoading || undefined}
           data-loading={isLoading || undefined}
           autoFocus
@@ -43,7 +46,7 @@ export function LockScreen({
             <img src="/about-icon.png" alt="" />
           </span>
           <span className="lock-screen-name">nischalOS</span>
-          <span className="lock-screen-hint">Click to Enter</span>
+          <span className="lock-screen-hint">Click to Unlock</span>
         </button>
         <div
           className="lock-screen-progress"

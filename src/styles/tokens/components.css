@@ -27,6 +27,7 @@
   --lock-screen-avatar-size: 88px;
   --lock-screen-artwork-size: 112px;
   --lock-screen-grid-size: 40px;
+  --lock-screen-grid-opacity: 0.045;
   --lock-screen-exit-distance: clamp(2.5rem, 6svh, 3.5rem);
   --lock-screen-progress-width: 240px;
   --entry-load-duration: 1200ms;

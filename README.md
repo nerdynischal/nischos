@@ -4,6 +4,12 @@ A desktop-inspired personal portfolio built with React, TypeScript, Vite, Supaba
 
 Projects, blog posts, and profile information open as movable desktop windows. The interface includes desktop shortcuts, a dock, responsive window positioning, Markdown blog rendering, and local fallback content.
 
+## Entry experience
+
+New browser sessions begin on a macOS-inspired nischalOS lock screen. Unlocking is an experiential gateway rather than authentication: successful entry is stored in `sessionStorage`, so reloads in the same tab return directly to the desktop.
+
+On fine-pointer devices, a lightweight WebGL surface bends the lock-screen grid around the mouse and idles as soon as its ripples settle. Touch devices, reduced-motion preferences, and browsers without WebGL keep the static CSS grid. The effect is unmounted after unlocking; the desktop uses its own static wallpaper grid.
+
 ## Local setup
 
 ```bash
@@ -95,7 +101,8 @@ add column if not exists content_markdown text;
 ## Project structure
 
 - `src/hooks` contains portfolio data loading, the live clock, and desktop-window state.
-- `src/features` contains the entry lock screen plus the Blog, Project, and About window content.
+- `src/features/entry` contains the lock screen, session persistence, and its isolated water-ripple renderer.
+- The remaining `src/features` folders contain the Blog, Project, and About window content.
 - `src/desktop` contains desktop icons, dock behavior, artwork, and explicit dock pinning.
 - `src/windows` contains reusable window framing and viewport geometry.
 - `src/theme` contains the persisted system/light/dark preference model and document theme synchronization.
@@ -117,6 +124,7 @@ Or run each check individually:
 
 ```bash
 npm run lint
+npm run tokens:check
 npm run test
 npm run build
 ```
