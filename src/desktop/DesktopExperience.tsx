@@ -1,0 +1,153 @@
+import { useEffect, useMemo, useRef } from 'react'
+import { DEFAULT_SETTINGS_SECTION_ID } from '../content'
+import { useDesktopWindows } from '../hooks/useDesktopWindows'
+import type { ClockValue } from '../hooks/useClock'
+import { usePortfolioContent } from '../hooks/usePortfolioContent'
+import type { DesktopIcon } from '../types'
+import { WindowContent } from '../windows/WindowContent'
+import { WindowFrame } from '../windows/WindowFrame'
+import { DesktopIcons } from './DesktopIcons'
+import { Dock } from './Dock'
+import { MenuBar } from './MenuBar'
+import { getProjectWindowId } from './appRegistry'
+import { createDesktopIcons } from './createDesktopIcons'
+
+type DesktopExperienceProps = {
+  dateTime: ClockValue
+  isEntering: boolean
+}
+
+export function DesktopExperience({
+  dateTime,
+  isEntering,
+}: DesktopExperienceProps) {
+  const desktopRef = useRef<HTMLElement>(null)
+  const {
+    projects,
+    posts,
+    settingsSections,
+    activeSection,
+    setActiveSection,
+  } = usePortfolioContent()
+  const {
+    windows,
+    activeWindow,
+    focusWindow,
+    upsertWindow,
+    closeWindow,
+    startDrag,
+    moveDrag,
+    endDrag,
+  } = useDesktopWindows()
+
+  const icons = useMemo(() => createDesktopIcons(projects), [projects])
+
+  useEffect(() => {
+    if (isEntering) {
+      desktopRef.current?.focus()
+    }
+  }, [isEntering])
+
+  function openProject(projectId: string) {
+    const project = projects.find((item) => item.id === projectId)
+    if (!project) return
+    upsertWindow({
+      id: getProjectWindowId(project.id),
+      category: 'project',
+      refId: project.id,
+      title: project.title,
+    })
+  }
+
+  function openBlog(postId?: string) {
+    const linkedPostId = postId && posts.some((post) => post.id === postId) ? postId : undefined
+
+    upsertWindow({
+      id: 'blog',
+      category: 'blog',
+      refId: linkedPostId,
+      title: 'Blog Posts',
+    })
+  }
+
+  function openSettings(sectionId = settingsSections[0]?.id ?? DEFAULT_SETTINGS_SECTION_ID) {
+    const nextSection = settingsSections.some((section) => section.id === sectionId)
+      ? sectionId
+      : settingsSections[0]?.id ?? DEFAULT_SETTINGS_SECTION_ID
+    setActiveSection(nextSection)
+    upsertWindow({
+      id: 'settings',
+      category: 'settings',
+      title: 'Nischal',
+    })
+  }
+
+  function openIcon(icon: DesktopIcon) {
+    switch (icon.category) {
+      case 'blog':
+        openBlog()
+        break
+      case 'settings':
+        openSettings()
+        break
+      case 'project':
+        openProject(icon.id)
+        break
+    }
+  }
+
+  return (
+    <main
+      ref={desktopRef}
+      className="desktop"
+      data-entering={isEntering}
+      aria-label="nischalOS Desktop"
+      tabIndex={isEntering ? -1 : undefined}
+    >
+      <div className="wallpaper" aria-hidden="true">
+        <div className="wallpaper-grid" />
+      </div>
+
+      <MenuBar
+        activeTitle={activeWindow?.title}
+        dateTime={dateTime}
+        onOpenAbout={() => openSettings('about')}
+      />
+      <DesktopIcons icons={icons} onOpenIcon={openIcon} />
+
+      <section className="window-layer" aria-live="polite">
+        {windows.map((desktopWindow) => (
+          <WindowFrame
+            key={desktopWindow.id}
+            desktopWindow={desktopWindow}
+            isActive={activeWindow?.id === desktopWindow.id}
+            onFocus={focusWindow}
+            onClose={closeWindow}
+            onStartDrag={startDrag}
+            onMoveDrag={moveDrag}
+            onEndDrag={endDrag}
+          >
+            <WindowContent
+              desktopWindow={desktopWindow}
+              projects={projects}
+              posts={posts}
+              onOpenBlog={openBlog}
+              activeSection={activeSection}
+              onChangeSection={setActiveSection}
+              settingsSections={settingsSections}
+            />
+          </WindowFrame>
+        ))}
+      </section>
+
+      <Dock
+        windows={windows}
+        projects={projects}
+        onOpenProject={openProject}
+        onOpenBlog={openBlog}
+        onOpenSettings={openSettings}
+        onFocusWindow={focusWindow}
+      />
+    </main>
+  )
+}

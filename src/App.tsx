@@ -1,135 +1,67 @@
-import { useMemo } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './styles/app.css'
-import { DEFAULT_SETTINGS_SECTION_ID } from './content'
-import { DesktopIcons } from './desktop/DesktopIcons'
-import { Dock } from './desktop/Dock'
-import { MenuBar } from './desktop/MenuBar'
-import { getProjectWindowId } from './desktop/appRegistry'
-import { createDesktopIcons } from './desktop/createDesktopIcons'
+import { DesktopExperience } from './desktop/DesktopExperience'
+import { LockScreen } from './features/entry/LockScreen'
+import {
+  hasEntrySession,
+  markEntrySessionEntered,
+} from './features/entry/entrySession'
 import { useClock } from './hooks/useClock'
-import { useDesktopWindows } from './hooks/useDesktopWindows'
-import { usePortfolioContent } from './hooks/usePortfolioContent'
-import type { DesktopIcon } from './types'
-import { WindowContent } from './windows/WindowContent'
-import { WindowFrame } from './windows/WindowFrame'
+
+const ENTRY_EXIT_MS = 360
+const ENTRY_LOAD_MS = 1200
+
+type EntryState = 'locked' | 'loading' | 'unlocking' | 'entered'
+
+function getInitialEntryState(): EntryState {
+  return hasEntrySession() ? 'entered' : 'locked'
+}
 
 function App() {
-  const {
-    projects,
-    posts,
-    settingsSections,
-    activeSection,
-    setActiveSection,
-  } = usePortfolioContent()
-  const {
-    windows,
-    activeWindow,
-    focusWindow,
-    upsertWindow,
-    closeWindow,
-    startDrag,
-    moveDrag,
-    endDrag,
-  } = useDesktopWindows()
+  const [entryState, setEntryState] = useState<EntryState>(getInitialEntryState)
+  const entryTimerRef = useRef<number | null>(null)
   const dateTime = useClock()
 
-  const icons = useMemo(() => createDesktopIcons(projects), [projects])
-
-  function openProject(projectId: string) {
-    const project = projects.find((item) => item.id === projectId)
-    if (!project) return
-    upsertWindow({
-      id: getProjectWindowId(project.id),
-      category: 'project',
-      refId: project.id,
-      title: project.title,
-    })
-  }
-
-  function openBlog(postId?: string) {
-    const linkedPostId = postId && posts.some((post) => post.id === postId) ? postId : undefined
-
-    upsertWindow({
-      id: 'blog',
-      category: 'blog',
-      refId: linkedPostId,
-      title: 'Blog Posts',
-    })
-  }
-
-  function openSettings(sectionId = settingsSections[0]?.id ?? DEFAULT_SETTINGS_SECTION_ID) {
-    const nextSection = settingsSections.some((section) => section.id === sectionId)
-      ? sectionId
-      : settingsSections[0]?.id ?? DEFAULT_SETTINGS_SECTION_ID
-    setActiveSection(nextSection)
-    upsertWindow({
-      id: 'settings',
-      category: 'settings',
-      title: 'Nischal',
-    })
-  }
-
-  function openIcon(icon: DesktopIcon) {
-    switch (icon.category) {
-      case 'blog':
-        openBlog()
-        break
-      case 'settings':
-        openSettings()
-        break
-      case 'project':
-        openProject(icon.id)
-        break
+  useEffect(() => {
+    return () => {
+      if (entryTimerRef.current !== null) {
+        window.clearTimeout(entryTimerRef.current)
+      }
     }
+  }, [])
+
+  function enterDesktop() {
+    if (entryState !== 'locked') return
+
+    setEntryState('loading')
+    entryTimerRef.current = window.setTimeout(() => {
+      markEntrySessionEntered()
+      setEntryState('unlocking')
+      entryTimerRef.current = window.setTimeout(() => {
+        setEntryState('entered')
+        entryTimerRef.current = null
+      }, ENTRY_EXIT_MS)
+    }, ENTRY_LOAD_MS)
   }
+
+  const isUnlocking = entryState === 'unlocking'
+  const isDesktopMounted = isUnlocking || entryState === 'entered'
 
   return (
-    <main className="desktop" aria-label="nischalOS Desktop">
-      <div className="wallpaper" aria-hidden="true">
-        <div className="wallpaper-grid" />
-      </div>
+    <>
+      {isDesktopMounted ? (
+        <DesktopExperience dateTime={dateTime} isEntering={isUnlocking} />
+      ) : null}
 
-      <MenuBar
-        activeTitle={activeWindow?.title}
-        dateTime={dateTime}
-        onOpenAbout={() => openSettings('about')}
-      />
-      <DesktopIcons icons={icons} onOpenIcon={openIcon} />
-
-      <section className="window-layer" aria-live="polite">
-        {windows.map((desktopWindow) => (
-          <WindowFrame
-            key={desktopWindow.id}
-            desktopWindow={desktopWindow}
-            isActive={activeWindow?.id === desktopWindow.id}
-            onFocus={focusWindow}
-            onClose={closeWindow}
-            onStartDrag={startDrag}
-            onMoveDrag={moveDrag}
-            onEndDrag={endDrag}
-          >
-            <WindowContent
-              desktopWindow={desktopWindow}
-              projects={projects}
-              posts={posts}
-              onOpenBlog={openBlog}
-              activeSection={activeSection}
-              onChangeSection={setActiveSection}
-              settingsSections={settingsSections}
-            />
-          </WindowFrame>
-        ))}
-      </section>
-
-      <Dock
-        windows={windows}
-        projects={projects}
-        onOpenProject={openProject}
-        onOpenBlog={openBlog}
-        onOpenSettings={openSettings}
-        onFocusWindow={focusWindow}
-      />
-    </main>
+      {entryState !== 'entered' ? (
+        <LockScreen
+          dateTime={dateTime}
+          isLoading={entryState === 'loading'}
+          isExiting={isUnlocking}
+          onEnter={enterDesktop}
+        />
+      ) : null}
+    </>
   )
 }
 

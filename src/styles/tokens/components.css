@@ -24,6 +24,15 @@
   --dock-item-size: 50px;
   --desktop-icon-width: 98px;
   --icon-tile-size: 66px;
+  --lock-screen-avatar-size: 88px;
+  --lock-screen-logo-size: 46px;
+  --lock-screen-grid-size: 40px;
+  --lock-screen-exit-distance: clamp(2.5rem, 6svh, 3.5rem);
+  --lock-screen-progress-width: 240px;
+  --entry-load-duration: 1200ms;
+  --entry-exit-duration: 360ms;
+  --entry-reveal-duration: 280ms;
+  --entry-reveal-delay: 80ms;
 
   --control-close: #ff5f57;
   --control-neutral: #4a4b4d;

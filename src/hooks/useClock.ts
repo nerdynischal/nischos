@@ -3,7 +3,13 @@ import { useEffect, useState } from 'react'
 const weekdayFormatter = new Intl.DateTimeFormat('en-GB', { weekday: 'short' })
 const monthFormatter = new Intl.DateTimeFormat('en-GB', { month: 'short' })
 
-export function useClock() {
+export type ClockValue = {
+  date: string
+  lockScreenDate: string
+  time: string
+}
+
+export function useClock(): ClockValue {
   const [now, setNow] = useState(() => new Date())
 
   useEffect(() => {
@@ -23,6 +29,7 @@ export function useClock() {
 
   return {
     date: `${weekday} ${day} ${month}`,
+    lockScreenDate: `${weekday} ${month} ${now.getDate()}`,
     time: `${hours}:${minutes}:${seconds}`,
   }
 }
