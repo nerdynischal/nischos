@@ -19,6 +19,7 @@
   --dock-tooltip-radius: var(--control-radius);
   --avatar-radius: var(--radius-2xl);
   --avatar-image-radius: 11px;
+  --avatar-border: var(--icon-tile-border);
   --menu-bar-height: 40px;
   --dock-height: 64px;
   --dock-item-size: 50px;

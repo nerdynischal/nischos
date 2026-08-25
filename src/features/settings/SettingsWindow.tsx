@@ -1,6 +1,8 @@
 import type { SettingsSection } from '../../content'
 import { EmptyState } from '../../components/EmptyState'
 
+const GITHUB_PROFILE_URL = 'https://github.com/nerdynischal'
+
 export function SettingsWindow({
   activeSection,
   onChangeSection,
@@ -36,7 +38,7 @@ export function SettingsWindow({
       </aside>
       <section className="settings-detail">
         <div className="avatar-orbit" aria-hidden="true">
-          <img src="/logo.svg" alt="" />
+          <img className="about-portrait" src="/about-icon.png" alt="" />
         </div>
         <div className="profile-heading">
           <h3>{section.displayTitle ?? section.label}</h3>
@@ -63,7 +65,21 @@ export function SettingsWindow({
             ) : null}
           </>
         )}
+        {section.id === 'about' ? <AboutFooter /> : null}
       </section>
     </div>
+  )
+}
+
+function AboutFooter() {
+  return (
+    <footer className="about-footer" aria-label="About nischalOS">
+      <nav className="about-footer-links" aria-label="Project links">
+        <a href={GITHUB_PROFILE_URL} target="_blank" rel="noreferrer">
+          GitHub Profile
+        </a>
+      </nav>
+      <p className="about-copyright">© 2026 Nischal. All rights reserved.</p>
+    </footer>
   )
 }

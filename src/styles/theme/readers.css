@@ -202,7 +202,7 @@
   width: 86px;
   height: 86px;
   border-radius: var(--avatar-radius);
-  border: 0;
+  border: 1px solid var(--avatar-border);
   color: var(--text-secondary);
   background: var(--glass-radial);
   backdrop-filter: var(--glass-blur);

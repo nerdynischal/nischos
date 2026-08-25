@@ -109,7 +109,8 @@
   min-width: 86px;
   min-height: 86px;
   margin-bottom: 0.45rem;
-  border: 0;
+  overflow: hidden;
+  border: 1px solid var(--avatar-border);
   border-radius: var(--avatar-radius);
   color: var(--text-secondary);
   background: var(--glass-radial);
@@ -126,6 +127,15 @@
   min-width: 46px;
   min-height: 46px;
   object-fit: contain;
+}
+
+.avatar-orbit img.about-portrait {
+  width: 86px;
+  height: 86px;
+  min-width: 86px;
+  min-height: 86px;
+  border-radius: 0;
+  transform: translateX(-2.3%) scale(1.35);
 }
 
 .settings-detail p {
@@ -198,6 +208,49 @@
   color: var(--text-muted);
   font-weight: var(--type-ui-weight);
   text-align: right;
+}
+
+/* About footer */
+.about-footer {
+  display: grid;
+  flex: 0 0 auto;
+  gap: var(--space-1);
+  justify-items: center;
+  width: 100%;
+  margin-top: auto;
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-8);
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.about-footer-links {
+  font-size: var(--type-meta-size);
+  font-weight: var(--type-meta-weight);
+  line-height: 1.55;
+}
+
+.about-footer-links a {
+  color: var(--text-muted);
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+  transition: color var(--duration-control) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .about-footer-links a:hover {
+    color: var(--text-primary);
+  }
+}
+
+.settings-detail .about-copyright {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: var(--type-meta-size);
+  font-weight: var(--type-meta-weight);
+  line-height: var(--type-meta-line);
 }
 
 /* Settings lists */
