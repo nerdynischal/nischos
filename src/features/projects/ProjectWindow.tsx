@@ -15,6 +15,22 @@ function getScreenshotLabel(screenshot: string, index: number) {
   return label ? label.charAt(0).toUpperCase() + label.slice(1) : `Screenshot ${index + 1}`
 }
 
+function ExternalLinkIcon() {
+  return (
+    <svg
+      className="external-link-icon"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M9 3H13V7" />
+      <path d="M13 3L7.25 8.75" />
+      <path d="M11.5 9V11.5C11.5 12.33 10.83 13 10 13H4.5C3.67 13 3 12.33 3 11.5V6C3 5.17 3.67 4.5 4.5 4.5H7" />
+    </svg>
+  )
+}
+
 export function ProjectWindow({
   project,
   hasLinkedPost,
@@ -57,6 +73,7 @@ export function ProjectWindow({
             {project.demoUrl ? (
               <a className="primary-action" href={project.demoUrl} target="_blank" rel="noreferrer">
                 Visit Website
+                <ExternalLinkIcon />
               </a>
             ) : (
               <span className="primary-action disabled-action">Visit Website</span>
@@ -64,6 +81,7 @@ export function ProjectWindow({
             {project.sourceUrl ? (
               <a href={project.sourceUrl} target="_blank" rel="noreferrer">
                 Source Code
+                <ExternalLinkIcon />
               </a>
             ) : null}
             {hasLinkedPost ? (

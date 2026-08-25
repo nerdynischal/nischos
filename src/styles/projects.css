@@ -302,12 +302,24 @@
 .project-actions a,
 .project-actions span,
 .project-actions button {
-  display: inline-grid;
-  place-items: center;
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
   min-width: 0;
   min-height: var(--control-height-sm);
   padding: 0 0.9rem;
   text-align: center;
+}
+
+.external-link-icon {
+  flex: 0 0 auto;
+  width: var(--space-3);
+  height: var(--space-3);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .project-actions a:hover,
