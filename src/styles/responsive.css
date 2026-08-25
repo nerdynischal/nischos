@@ -28,7 +28,7 @@
   .dock {
     --dock-item-size: 2.5rem;
     gap: 0.35rem;
-    padding: 0.4rem;
+    padding: 0.4rem 0.4rem var(--space-3);
   }
 
   .dock .project-thumbnail {
