@@ -68,7 +68,7 @@ export function ProjectWindow({
         </div>
         <div className="project-heading">
           <h3>{project.title}</h3>
-          <p>{project.category}</p>
+          <p>{project.type}</p>
           <div className="project-actions">
             {project.demoUrl ? (
               <a className="primary-action" href={project.demoUrl} target="_blank" rel="noreferrer">
@@ -94,7 +94,7 @@ export function ProjectWindow({
       </section>
 
       <section className="project-meta" aria-label="Project metadata">
-        <MetaRow label="category" value={project.category} />
+        <MetaRow label="type" value={project.type} />
         <MetaRow label="model" value={project.model} />
       </section>
 

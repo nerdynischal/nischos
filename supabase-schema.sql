@@ -7,7 +7,7 @@ create table if not exists public.projects (
   subtitle text,
   icon_tone text,
   thumbnail text,
-  category text,
+  type text,
   model text,
   story text,
   screenshots text[] default '{}',
@@ -20,7 +20,7 @@ create table if not exists public.projects (
 alter table public.projects add column if not exists subtitle text;
 alter table public.projects add column if not exists icon_tone text;
 alter table public.projects add column if not exists thumbnail text;
-alter table public.projects add column if not exists category text;
+alter table public.projects add column if not exists type text;
 alter table public.projects add column if not exists model text;
 alter table public.projects add column if not exists story text;
 alter table public.projects add column if not exists screenshots text[] default '{}';
@@ -36,12 +36,14 @@ begin
     from information_schema.columns
     where table_schema = 'public'
       and table_name = 'projects'
-      and column_name = 'type'
+      and column_name = 'category'
   ) then
-    execute 'update public.projects set category = type where category is null and type is not null';
+    execute 'update public.projects set type = category where type is null and category is not null';
   end if;
 end;
 $$;
+
+alter table public.projects drop column if exists category;
 
 create table if not exists public.blog_posts (
   id text primary key,

@@ -8,7 +8,7 @@ const project: Project = {
   title: 'Project',
   subtitle: '',
   iconTone: 'graphite',
-  category: 'experiment',
+  type: 'experiment',
   model: 'GPT-5.6 Sol',
   story: '',
   screenshots: [],

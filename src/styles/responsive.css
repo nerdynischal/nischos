@@ -24,6 +24,19 @@
   }
 }
 
+@media (max-width: 480px) {
+  .dock {
+    --dock-item-size: 2.5rem;
+    gap: 0.35rem;
+    padding: 0.4rem;
+  }
+
+  .dock .project-thumbnail {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
 @media (min-width: 761px) and (max-width: 1024px) {
   .window {
     --window-min-width: 440px;

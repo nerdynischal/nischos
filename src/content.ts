@@ -4,7 +4,7 @@ export type Project = {
   subtitle: string
   iconTone: string
   thumbnail?: string
-  category: string
+  type: string
   model: string
   story: string
   screenshots: string[]
@@ -39,13 +39,25 @@ export type SettingsSection = {
 
 export const projects: Project[] = [
   {
+    id: 'still',
+    title: 'Still',
+    subtitle: 'A private, local-first visual library for websites worth remembering.',
+    iconTone: 'coral',
+    thumbnail: '/project-media/still/icon.png',
+    type: 'desktop app',
+    model: 'GPT-5.6 Sol',
+    story:
+      'Still captures full-page website screenshots, extracts useful metadata, and organises everything into a searchable personal collection stored entirely on the Mac.',
+    screenshots: ['/project-media/still/still-preview.png'],
+  },
+  {
     id: 'keyform',
     title: 'Keyform',
     subtitle: 'An interactive ANSI QWERTY keyboard that responds to every physical key press.',
     iconTone: 'graphite',
     thumbnail:
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-key.svg',
-    category: 'interactive experiment',
+    type: 'interactive experiment',
     model: 'GPT-5.6 Sol',
     story:
       'Keyform turns the keyboard into the interface. It mirrors physical input across a full ANSI QWERTY layout, supports Mac and Windows legends, and pairs responsive key states with optional sound so every press feels immediate.',
@@ -64,7 +76,7 @@ export const projects: Project[] = [
     iconTone: 'blue',
     thumbnail:
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/brand-logo.svg',
-    category: 'reference tool',
+    type: 'reference tool',
     model: 'GPT-5.5',
     story:
       'I wanted one place to document the tools that shape my design and development workflow. The result is an interactive catalogue that separates everyday tools from things I am exploring, watching, or have moved on from.',
@@ -83,7 +95,7 @@ export const projects: Project[] = [
     iconTone: 'amber',
     thumbnail:
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/app-logo-medallion.svg',
-    category: 'hobby app',
+    type: 'hobby app',
     model: 'GPT-5.5',
     story:
       'A lightweight catalog for Donkey Products Maneki Neko figures, with a visual product grid, local ownership tracking, and owned cats sorted to the front so the collection stays easy to scan.',

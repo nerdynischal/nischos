@@ -5,10 +5,7 @@ import type { Database } from './database.types'
 
 type ProjectTableRow = Database['public']['Tables']['projects']['Row']
 
-export type ProjectRow = Omit<ProjectTableRow, 'created_at' | 'model'> & {
-  model?: string | null
-  type?: string | null
-}
+export type ProjectRow = Omit<ProjectTableRow, 'created_at'>
 
 const projectModelFallbacks = new Map(
   fallbackProjects.map((project) => [project.id, project.model]),
@@ -126,7 +123,7 @@ export function mapProject(row: ProjectRow): Project {
     subtitle: row.subtitle ?? 'An experiment from the desktop.',
     iconTone: row.icon_tone ?? 'graphite',
     thumbnail: row.thumbnail ?? undefined,
-    category: row.category ?? row.type ?? 'experiment',
+    type: row.type ?? 'experiment',
     model: row.model ?? projectModelFallbacks.get(row.id) ?? 'Not specified',
     story: row.story ?? '',
     screenshots: row.screenshots ?? [],

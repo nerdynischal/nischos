@@ -8,7 +8,7 @@ function project(id: string): Project {
     title: id,
     subtitle: '',
     iconTone: 'graphite',
-    category: 'test',
+    type: 'test',
     model: 'Test model',
     story: '',
     screenshots: [],
@@ -30,5 +30,15 @@ describe('selectPinnedProjects', () => {
     expect(
       selectPinnedProjects(projects, ['missing', 'pinned']).map((item) => item.id),
     ).toEqual(['pinned', 'fallback-a', 'fallback-b'])
+  })
+
+  it('keeps all four configured portfolio projects in the dock', () => {
+    const projects = [project('fourth'), project('third'), project('second'), project('first')]
+
+    expect(
+      selectPinnedProjects(projects, ['first', 'second', 'third', 'fourth']).map(
+        (item) => item.id,
+      ),
+    ).toEqual(['first', 'second', 'third', 'fourth'])
   })
 })

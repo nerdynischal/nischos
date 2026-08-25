@@ -4,6 +4,7 @@ import { DEFAULT_SETTINGS_SECTION_ID, posts, projects, settingsSections } from '
 describe('local fallback content', () => {
   it('contains only the current portfolio projects', () => {
     expect(projects.map((project) => project.id)).toEqual([
+      'still',
       'keyform',
       'my-toolkit',
       'maneki-neko-catalog',
@@ -12,6 +13,7 @@ describe('local fallback content', () => {
 
   it('records the AI model used for each project', () => {
     expect(Object.fromEntries(projects.map((project) => [project.id, project.model]))).toEqual({
+      still: 'GPT-5.6 Sol',
       keyform: 'GPT-5.6 Sol',
       'my-toolkit': 'GPT-5.5',
       'maneki-neko-catalog': 'GPT-5.5',

@@ -15,7 +15,7 @@ describe('Supabase content mapping', () => {
         subtitle: null,
         icon_tone: null,
         thumbnail: null,
-        category: null,
+        type: null,
         model: null,
         story: null,
         screenshots: null,
@@ -27,21 +27,21 @@ describe('Supabase content mapping', () => {
       id: 'project',
       subtitle: 'An experiment from the desktop.',
       iconTone: 'graphite',
-      category: 'experiment',
+      type: 'experiment',
       model: 'Not specified',
       story: '',
       screenshots: [],
     })
   })
 
-  it('supports legacy category data while preferring the current column', () => {
+  it('maps the canonical project type and preserves model fallbacks', () => {
     const row = {
       id: 'keyform',
       title: 'Keyform',
       subtitle: null,
       icon_tone: null,
       thumbnail: null,
-      category: null,
+      type: 'interactive experiment',
       model: null,
       story: null,
       screenshots: null,
@@ -50,14 +50,9 @@ describe('Supabase content mapping', () => {
       post_id: null,
     }
 
-    expect(mapProject({ ...row, type: 'legacy experiment' })).toMatchObject({
-      category: 'legacy experiment',
+    expect(mapProject(row)).toMatchObject({
+      type: 'interactive experiment',
       model: 'GPT-5.6 Sol',
-    })
-    expect(
-      mapProject({ ...row, category: 'interactive experiment', type: 'legacy experiment' }),
-    ).toMatchObject({
-      category: 'interactive experiment',
     })
   })
 

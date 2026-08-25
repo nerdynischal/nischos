@@ -16,7 +16,7 @@ export type Database = {
           subtitle: string | null
           icon_tone: string | null
           thumbnail: string | null
-          category: string | null
+          type: string | null
           model: string | null
           story: string | null
           screenshots: string[] | null
@@ -31,7 +31,7 @@ export type Database = {
           subtitle?: string | null
           icon_tone?: string | null
           thumbnail?: string | null
-          category?: string | null
+          type?: string | null
           model?: string | null
           story?: string | null
           screenshots?: string[] | null
@@ -46,7 +46,7 @@ export type Database = {
           subtitle?: string | null
           icon_tone?: string | null
           thumbnail?: string | null
-          category?: string | null
+          type?: string | null
           model?: string | null
           story?: string | null
           screenshots?: string[] | null
