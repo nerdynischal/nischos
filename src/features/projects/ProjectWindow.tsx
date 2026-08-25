@@ -92,7 +92,7 @@ export function ProjectWindow({
             )}
             {hasLinkedPost ? (
               <button type="button" onClick={() => onOpenBlog(project.postId)}>
-                Blog Story
+                Related Note
               </button>
             ) : null}
           </div>

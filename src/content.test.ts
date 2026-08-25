@@ -27,6 +27,13 @@ describe('local fallback content', () => {
     expect(serializedContent).not.toContain('https://example.com')
   })
 
+  it('keeps the welcome note pinned first', () => {
+    expect(posts[0]).toMatchObject({
+      id: 'welcome-to-nischalos',
+      isPinned: true,
+    })
+  })
+
   it('keeps a truthful local About section', () => {
     expect(settingsSections).toHaveLength(1)
     expect(DEFAULT_SETTINGS_SECTION_ID).toBe('about')

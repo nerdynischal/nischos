@@ -18,8 +18,8 @@ export function BlogWindow({
 
   return (
     <div className="finder">
-      <aside className="finder-sidebar blog-post-nav" aria-label="Blog posts">
-        <p className="sidebar-title">Posts</p>
+      <aside className="finder-sidebar blog-post-nav" aria-label="Notes">
+        <p className="sidebar-title">Notes</p>
         {posts.map((post) => (
           <button
             key={post.id}
@@ -28,11 +28,12 @@ export function BlogWindow({
             onClick={() => onSelectPost(post.id)}
             aria-current={post.id === selectedPost?.id ? 'page' : undefined}
           >
-            <span>{post.title}</span>
+            <span className="post-title">{post.title}</span>
+            {post.isPinned ? <span className="post-pin">Pinned</span> : null}
           </button>
         ))}
       </aside>
-      <section className="blog-reader" aria-label="Selected blog post">
+      <section className="blog-reader" aria-label="Selected note">
         {selectedPost ? (
           <article className="blog-reader-post">
             <header>
@@ -44,7 +45,7 @@ export function BlogWindow({
             </div>
           </article>
         ) : (
-          <EmptyState title="No posts yet" body="This folder is waiting for a first note." />
+          <EmptyState title="No notes yet" body="This folder is waiting for its first note." />
         )}
       </section>
     </div>

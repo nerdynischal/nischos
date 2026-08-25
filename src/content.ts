@@ -20,6 +20,7 @@ export type BlogPost = {
   date: string
   folder: 'Notes' | 'Build Logs' | 'Drafts'
   coverTone: string
+  isPinned: boolean
   contentMarkdown?: string
   content: string[]
 }
@@ -114,14 +115,30 @@ export const posts: BlogPost[] = [
     id: 'welcome-to-nischalos',
     title: 'Welcome to nischalOS',
     filename: 'welcome-to-nischalos.md',
-    date: '2026-07-23',
-    folder: 'Build Logs',
+    date: '2026-08-25',
+    folder: 'Notes',
     coverTone: 'graphite',
-    content: [
-      'nischalOS is a desktop-inspired home for my projects, experiments, and notes.',
-      'Projects open as movable windows, the dock keeps frequently used apps close, and Supabase supplies the live portfolio content.',
-      'When the remote content is unavailable, this local note and a small selection of real projects keep the desktop useful.',
-    ],
+    isPinned: true,
+    contentMarkdown: `Welcome — this is my corner of the internet, designed less like a traditional portfolio and more like a small desktop.
+
+## A portfolio you can explore
+
+nischalOS brings together the projects I build, the ideas I write down, and a little about who I am. Everything opens in its own window, so you can move around the site in whatever order feels natural.
+
+## Finding your way around
+
+- **Projects** open from the icons on the desktop. Each one includes the story behind it, a closer look at the interface, and links to visit the finished work or view its source when available.
+- **Notes** is where I share build logs, decisions, experiments, and things I learn along the way.
+- **About** has the short version of who I am and what I am currently focused on.
+
+Select any desktop icon to open it, or use the dock at the bottom to jump between open windows. You can move and layer windows just like you would on a desktop.
+
+## Always in progress
+
+This website is also one of the projects. I will keep refining the system, adding new work, and writing about what I discover while making it.
+
+Thanks for stopping by.`,
+    content: [],
   },
 ]
 

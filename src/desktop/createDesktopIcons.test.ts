@@ -23,6 +23,13 @@ describe('desktop app registry', () => {
     )
   })
 
+  it('presents the Notes app with the graphite tone', () => {
+    expect(SYSTEM_APPS.find((app) => app.category === 'blog')).toMatchObject({
+      label: 'Notes',
+      tone: 'graphite',
+    })
+  })
+
   it('creates stable project window IDs', () => {
     expect(getProjectWindowId('keyform')).toBe('project:keyform')
   })

@@ -52,6 +52,7 @@ create table if not exists public.blog_posts (
   date text not null,
   folder text check (folder in ('Notes', 'Build Logs', 'Drafts')),
   cover_tone text,
+  is_pinned boolean not null default false,
   content_markdown text,
   content text[] default '{}',
   created_at timestamptz not null default now()
@@ -60,6 +61,7 @@ create table if not exists public.blog_posts (
 alter table public.blog_posts add column if not exists filename text;
 alter table public.blog_posts add column if not exists folder text;
 alter table public.blog_posts add column if not exists cover_tone text;
+alter table public.blog_posts add column if not exists is_pinned boolean not null default false;
 alter table public.blog_posts add column if not exists content_markdown text;
 alter table public.blog_posts add column if not exists content text[] default '{}';
 alter table public.blog_posts add column if not exists created_at timestamptz not null default now();

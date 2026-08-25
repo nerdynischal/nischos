@@ -10,11 +10,13 @@ type SystemAppDefinition = {
   y: number
 }
 
+export const NOTES_APP_LABEL = 'Notes'
+
 export const SYSTEM_APPS = [
   {
-    label: 'Blog Posts',
+    label: NOTES_APP_LABEL,
     category: 'blog',
-    tone: 'folder',
+    tone: 'graphite',
     x: 83,
     y: 14,
   },

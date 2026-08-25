@@ -65,6 +65,7 @@ export type Database = {
           date: string
           folder: 'Notes' | 'Build Logs' | 'Drafts' | null
           cover_tone: string | null
+          is_pinned: boolean
           content_markdown: string | null
           content: string[] | null
           created_at: string
@@ -76,6 +77,7 @@ export type Database = {
           date: string
           folder?: 'Notes' | 'Build Logs' | 'Drafts' | null
           cover_tone?: string | null
+          is_pinned?: boolean
           content_markdown?: string | null
           content?: string[] | null
           created_at?: string
@@ -87,6 +89,7 @@ export type Database = {
           date?: string
           folder?: 'Notes' | 'Build Logs' | 'Drafts' | null
           cover_tone?: string | null
+          is_pinned?: boolean
           content_markdown?: string | null
           content?: string[] | null
           created_at?: string

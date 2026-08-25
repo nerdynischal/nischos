@@ -40,7 +40,7 @@ export function WindowContent({
 
   if (desktopWindow.category === 'blog') {
     return (
-      <Suspense fallback={<EmptyState title="Opening Blog Posts" body="Loading your notes…" />}>
+      <Suspense fallback={<EmptyState title="Opening Notes" body="Loading your notes…" />}>
         <BlogWindow
           posts={posts}
           selectedPostId={desktopWindow.refId}

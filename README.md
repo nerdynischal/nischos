@@ -2,7 +2,7 @@
 
 A desktop-inspired personal portfolio built with React, TypeScript, Vite, Supabase, and CSS.
 
-Projects, blog posts, and profile information open as movable desktop windows. The interface includes desktop shortcuts, a dock, responsive window positioning, Markdown blog rendering, and local fallback content.
+Projects, notes, and profile information open as movable desktop windows. The interface includes desktop shortcuts, a dock, responsive window positioning, Markdown note rendering, and local fallback content.
 
 ## Entry experience
 
@@ -67,9 +67,9 @@ renders those URLs directly.
 For a fresh local Supabase project, `supabase/seed.sql` supplies the current
 portfolio content, including Keyform.
 
-### Blog posts
+### Notes
 
-Blog posts can be stored as full Markdown in the `content_markdown` column. Existing `content` paragraph arrays still work as a fallback, but new posts should prefer Markdown:
+Notes are stored in the existing `blog_posts` table and can use full Markdown in the `content_markdown` column. Existing `content` paragraph arrays still work as a fallback, but new notes should prefer Markdown:
 
 ```sql
 insert into public.blog_posts (
@@ -79,6 +79,7 @@ insert into public.blog_posts (
   date,
   folder,
   cover_tone,
+  is_pinned,
   content_markdown
 ) values (
   'building-nischalos',
@@ -87,22 +88,26 @@ insert into public.blog_posts (
   '2026-07-01',
   'Build Logs',
   'mint',
+  false,
   $$Paste the full Markdown body here.$$
 );
 ```
 
-For an existing Supabase table created before `content_markdown` existed, run:
+For an existing Supabase table created before Markdown and pinning support existed, run:
 
 ```sql
 alter table public.blog_posts
 add column if not exists content_markdown text;
+
+alter table public.blog_posts
+add column if not exists is_pinned boolean not null default false;
 ```
 
 ## Project structure
 
 - `src/hooks` contains portfolio data loading, the live clock, and desktop-window state.
 - `src/features/entry` contains the lock screen, session persistence, and its isolated water-ripple renderer.
-- The remaining `src/features` folders contain the Blog, Project, and About window content.
+- The remaining `src/features` folders contain the Notes, Project, and About window content.
 - `src/desktop` contains desktop icons, dock behavior, artwork, and explicit dock pinning.
 - `src/windows` contains reusable window framing and viewport geometry.
 - `src/theme` contains the persisted system/light/dark preference model and document theme synchronization.
@@ -110,7 +115,7 @@ add column if not exists content_markdown text;
 - `src/assets/fonts` contains the locally bundled Geist fonts and their license.
 - `public` contains the favicon and app artwork.
 
-The Markdown blog reader is lazy-loaded so its rendering dependencies are not part of the initial JavaScript bundle.
+The Markdown notes reader is lazy-loaded so its rendering dependencies are not part of the initial JavaScript bundle.
 
 ## Checks
 

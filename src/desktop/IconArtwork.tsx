@@ -3,7 +3,7 @@ import type { DesktopIcon } from '../types'
 import { PlaceholderIcon } from './PlaceholderIcon'
 
 const defaultArtwork: Partial<Record<DesktopIcon['category'], string>> = {
-  blog: '/blog-icon.png',
+  blog: '/notes-icon.png',
   settings: '/about-icon.png',
 }
 

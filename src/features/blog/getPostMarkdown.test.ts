@@ -10,6 +10,7 @@ function post(overrides: Partial<BlogPost> = {}): BlogPost {
     date: '2026-07-23',
     folder: 'Notes',
     coverTone: 'graphite',
+    isPinned: false,
     content: ['Fallback paragraph.'],
     ...overrides,
   }

@@ -32,7 +32,7 @@ export function usePortfolioContent() {
       if (ignore) return
 
       const remoteProjects = getLoadedContent('projects', results[0])
-      const remotePosts = getLoadedContent('blog posts', results[1])
+      const remotePosts = getLoadedContent('notes', results[1])
       const remoteSettingsSections = getLoadedContent('settings sections', results[2])
 
       if (remoteProjects) setProjects(remoteProjects)

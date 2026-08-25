@@ -91,14 +91,14 @@ export async function fetchPosts(): Promise<BlogPost[]> {
 
   const { data, error } = await supabase
     .from('blog_posts')
-    .select('id,title,filename,date,folder,cover_tone,content_markdown,content')
+    .select('id,title,filename,date,folder,cover_tone,is_pinned,content_markdown,content')
     .order('date', { ascending: false })
 
   if (error) {
     throw new Error(error.message)
   }
 
-  return (data ?? []).map(mapPost)
+  return sortPosts((data ?? []).map(mapPost))
 }
 
 export async function fetchSettingsSections(): Promise<SettingsSection[]> {
@@ -153,9 +153,17 @@ export function mapPost(row: BlogPostRow): BlogPost {
     date: row.date,
     folder: row.folder ?? 'Notes',
     coverTone: row.cover_tone ?? 'graphite',
+    isPinned: row.is_pinned,
     contentMarkdown: row.content_markdown ?? undefined,
     content: row.content ?? [],
   }
+}
+
+export function sortPosts(posts: BlogPost[]) {
+  return [...posts].sort((left, right) => {
+    if (left.isPinned !== right.isPinned) return left.isPinned ? -1 : 1
+    return right.date.localeCompare(left.date)
+  })
 }
 
 export function mapSettingsDetails(details: SettingsDetailRow[] | null) {

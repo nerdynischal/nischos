@@ -4,6 +4,7 @@ import {
   mapProject,
   mapSettingsDetails,
   readSupabaseConfig,
+  sortPosts,
 } from './supabase'
 
 describe('Supabase content mapping', () => {
@@ -65,6 +66,7 @@ describe('Supabase content mapping', () => {
         date: '2026-07-23',
         folder: null,
         cover_tone: null,
+        is_pinned: false,
         content_markdown: null,
         content: null,
       }),
@@ -75,9 +77,31 @@ describe('Supabase content mapping', () => {
       date: '2026-07-23',
       folder: 'Notes',
       coverTone: 'graphite',
+      isPinned: false,
       contentMarkdown: undefined,
       content: [],
     })
+  })
+
+  it('keeps pinned notes first, then sorts the rest by date', () => {
+    const note = (id: string, date: string, isPinned = false) => ({
+      id,
+      title: id,
+      filename: `${id}.md`,
+      date,
+      folder: 'Notes' as const,
+      coverTone: 'graphite',
+      isPinned,
+      content: [],
+    })
+
+    expect(
+      sortPosts([
+        note('older', '2026-01-01'),
+        note('pinned', '2025-01-01', true),
+        note('newer', '2026-08-25'),
+      ]).map((post) => post.id),
+    ).toEqual(['pinned', 'newer', 'older'])
   })
 
   it('drops malformed settings details', () => {

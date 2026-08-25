@@ -9,7 +9,7 @@ import { WindowFrame } from '../windows/WindowFrame'
 import { DesktopIcons } from './DesktopIcons'
 import { Dock } from './Dock'
 import { MenuBar } from './MenuBar'
-import { getProjectWindowId } from './appRegistry'
+import { getProjectWindowId, NOTES_APP_LABEL } from './appRegistry'
 import { createDesktopIcons } from './createDesktopIcons'
 
 type DesktopExperienceProps = {
@@ -66,7 +66,7 @@ export function DesktopExperience({
       id: 'blog',
       category: 'blog',
       refId: linkedPostId,
-      title: 'Blog Posts',
+      title: NOTES_APP_LABEL,
     })
   }
 
