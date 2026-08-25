@@ -340,4 +340,6 @@
 .project-actions .disabled-action {
   color: var(--text-disabled);
   background: var(--inset-line);
+  cursor: default;
+  transition: none;
 }

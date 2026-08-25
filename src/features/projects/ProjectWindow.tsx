@@ -76,14 +76,20 @@ export function ProjectWindow({
                 <ExternalLinkIcon />
               </a>
             ) : (
-              <span className="primary-action disabled-action">Visit Website</span>
+              <span className="primary-action disabled-action" aria-disabled="true">
+                Visit Website
+              </span>
             )}
             {project.sourceUrl ? (
               <a href={project.sourceUrl} target="_blank" rel="noreferrer">
                 Source Code
                 <ExternalLinkIcon />
               </a>
-            ) : null}
+            ) : (
+              <span className="disabled-action" aria-disabled="true">
+                Source Code
+              </span>
+            )}
             {hasLinkedPost ? (
               <button type="button" onClick={() => onOpenBlog(project.postId)}>
                 Blog Story

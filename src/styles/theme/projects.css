@@ -110,8 +110,8 @@
   background: var(--surface-hover-strong);
 }
 
-.project-actions .primary-action:hover,
-.project-actions .primary-action:focus-visible {
+.project-actions .primary-action:not(.disabled-action):hover,
+.project-actions .primary-action:not(.disabled-action):focus-visible {
   border-color: var(--action-primary-border-hover);
   background: var(--action-primary-bg-hover);
 }
