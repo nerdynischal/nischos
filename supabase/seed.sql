@@ -21,7 +21,7 @@ insert into public.projects (
     'GPT-5.6 Sol',
     'Still captures full-page website screenshots, extracts useful metadata, and organises everything into a searchable personal collection stored entirely on the Mac.',
     array[
-      '/project-media/still/still-preview.png'
+      '/project-media/still/still-preview.webp'
     ],
     null,
     null
@@ -70,9 +70,9 @@ insert into public.projects (
     'GPT-5.5',
     'A lightweight catalog for Donkey Products Maneki Neko figures, with a visual product grid, local ownership tracking, and owned cats sorted to the front so the collection stays easy to scan.',
     array[
-      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/cat-detail.jpg',
-      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/catalog-overview.jpg',
-      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/color-collection.jpg'
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-01-catalog.jpg',
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-02-collection-status.jpg',
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-03-product-details.jpg'
     ],
     'https://nerdynischal.github.io/my-maneki-neko-collection/',
     'https://github.com/nerdynischal/my-maneki-neko-collection'
@@ -92,20 +92,15 @@ on conflict (id) do update set
 insert into public.blog_posts (
   id,
   title,
-  filename,
   date,
   folder,
-  cover_tone,
   is_pinned,
-  content_markdown,
-  content
+  content_markdown
 ) values (
   'welcome-to-nischalos',
   'Welcome to nischalOS',
-  'welcome-to-nischalos.md',
   '2026-08-25',
   'Notes',
-  'graphite',
   true,
   $$Welcome — this is my corner of the internet, designed less like a traditional portfolio and more like a small desktop.
 
@@ -125,18 +120,14 @@ Select any desktop icon to open it, or use the dock at the bottom to jump betwee
 
 This website is also one of the projects. I will keep refining the system, adding new work, and writing about what I discover while making it.
 
-Thanks for stopping by.$$,
-  array[]::text[]
+Thanks for stopping by.$$
 )
 on conflict (id) do update set
   title = excluded.title,
-  filename = excluded.filename,
   date = excluded.date,
   folder = excluded.folder,
-  cover_tone = excluded.cover_tone,
   is_pinned = excluded.is_pinned,
-  content_markdown = excluded.content_markdown,
-  content = excluded.content;
+  content_markdown = excluded.content_markdown;
 
 insert into public.settings_sections (
   id,

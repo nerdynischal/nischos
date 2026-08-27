@@ -1,0 +1,38 @@
+{
+  "archived_at": "2026-08-27",
+  "source": "Live public Supabase tables before legacy-column removal",
+  "projects": [
+    {
+      "id": "keyform",
+      "description": null,
+      "icon_label": null,
+      "stack": ["Vite", "JavaScript", "CSS", "Web Audio"]
+    },
+    {
+      "id": "maneki-neko-catalog",
+      "description": null,
+      "icon_label": null,
+      "stack": ["React", "TypeScript", "Vite"]
+    },
+    {
+      "id": "my-toolkit",
+      "description": "A visual catalogue of the tools I use, explore, watch, and retire.",
+      "icon_label": "Toolkit",
+      "stack": ["React", "TypeScript", "CSS", "Vite"]
+    },
+    {
+      "id": "still",
+      "description": null,
+      "icon_label": null,
+      "stack": []
+    }
+  ],
+  "blog_posts": [
+    {
+      "id": "welcome-to-nischalos",
+      "cover_image": null,
+      "excerpt": null,
+      "size": null
+    }
+  ]
+}

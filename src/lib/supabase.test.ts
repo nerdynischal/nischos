@@ -62,24 +62,18 @@ describe('Supabase content mapping', () => {
       mapPost({
         id: 'post',
         title: 'Post',
-        filename: null,
         date: '2026-07-23',
         folder: null,
-        cover_tone: null,
         is_pinned: false,
-        content_markdown: null,
-        content: null,
+        content_markdown: 'Post body.',
       }),
     ).toEqual({
       id: 'post',
       title: 'Post',
-      filename: 'post.md',
       date: '2026-07-23',
       folder: 'Notes',
-      coverTone: 'graphite',
       isPinned: false,
-      contentMarkdown: undefined,
-      content: [],
+      contentMarkdown: 'Post body.',
     })
   })
 
@@ -87,12 +81,10 @@ describe('Supabase content mapping', () => {
     const note = (id: string, date: string, isPinned = false) => ({
       id,
       title: id,
-      filename: `${id}.md`,
       date,
       folder: 'Notes' as const,
-      coverTone: 'graphite',
       isPinned,
-      content: [],
+      contentMarkdown: `${id} body.`,
     })
 
     expect(

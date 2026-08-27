@@ -4,6 +4,15 @@ import type { BlogPost } from '../../content'
 import { EmptyState } from '../../components/EmptyState'
 import { getPostMarkdown } from './getPostMarkdown'
 
+const markdownHeadingComponents = {
+  h1: 'h4',
+  h2: 'h4',
+  h3: 'h5',
+  h4: 'h6',
+  h5: 'h6',
+  h6: 'h6',
+} as const
+
 export function BlogWindow({
   posts,
   selectedPostId,
@@ -37,11 +46,18 @@ export function BlogWindow({
         {selectedPost ? (
           <article className="blog-reader-post">
             <header>
-              <p>{selectedPost.folder} · {selectedPost.date}</p>
+              <p>
+                {selectedPost.folder} · <time dateTime={selectedPost.date}>{selectedPost.date}</time>
+              </p>
               <h3>{selectedPost.title}</h3>
             </header>
             <div className="blog-markdown">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{postMarkdown}</ReactMarkdown>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={markdownHeadingComponents}
+              >
+                {postMarkdown}
+              </ReactMarkdown>
             </div>
           </article>
         ) : (

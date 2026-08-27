@@ -1,7 +1,7 @@
 import type { BlogPost } from '../../content'
 
 export function getPostMarkdown(post: BlogPost) {
-  const markdown = post.contentMarkdown?.trim() || post.content.join('\n\n')
+  const markdown = post.contentMarkdown.trim()
   const [firstLine = '', ...remainingLines] = markdown.split(/\r?\n/)
   const heading = firstLine.match(/^#\s+(.+?)\s*#*\s*$/)?.[1]
 

@@ -19,7 +19,6 @@ export function LockScreenWaterRipple({
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const isInteractiveRef = useRef(isInteractive)
   const resetRef = useRef<(() => void) | null>(null)
-  isInteractiveRef.current = isInteractive
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -184,6 +183,7 @@ export function LockScreenWaterRipple({
   }, [])
 
   useEffect(() => {
+    isInteractiveRef.current = isInteractive
     if (!isInteractive) resetRef.current?.()
   }, [isInteractive])
 

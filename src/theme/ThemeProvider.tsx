@@ -44,7 +44,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       setSystemTheme(event.matches ? 'dark' : 'light')
     }
 
-    setSystemTheme(mediaQuery.matches ? 'dark' : 'light')
     mediaQuery.addEventListener('change', onChange)
     return () => mediaQuery.removeEventListener('change', onChange)
   }, [])

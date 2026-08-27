@@ -6,12 +6,10 @@ function post(overrides: Partial<BlogPost> = {}): BlogPost {
   return {
     id: 'post',
     title: 'A test post',
-    filename: 'post.md',
     date: '2026-07-23',
     folder: 'Notes',
-    coverTone: 'graphite',
     isPinned: false,
-    content: ['Fallback paragraph.'],
+    contentMarkdown: 'Body copy.',
     ...overrides,
   }
 }
@@ -27,11 +25,5 @@ describe('getPostMarkdown', () => {
     expect(
       getPostMarkdown(post({ contentMarkdown: '# A different heading\n\nBody copy.' })),
     ).toBe('# A different heading\n\nBody copy.')
-  })
-
-  it('uses paragraph content when Markdown is empty', () => {
-    expect(
-      getPostMarkdown(post({ contentMarkdown: '   ', content: ['First.', 'Second.'] })),
-    ).toBe('First.\n\nSecond.')
   })
 })

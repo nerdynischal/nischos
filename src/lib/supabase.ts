@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { projects as fallbackProjects } from '../content'
 import type { BlogPost, Project, SettingsSection } from '../content'
 import type { Database } from './database.types'
@@ -61,22 +61,33 @@ const supabaseConfig = readSupabaseConfig({
 
 export const hasSupabaseConfig = Boolean(supabaseConfig)
 
-export const supabase = supabaseConfig
-  ? createClient<Database>(supabaseConfig.url, supabaseConfig.key, {
+let supabaseClientPromise: Promise<SupabaseClient<Database>> | null = null
+
+async function getSupabaseClient() {
+  if (!supabaseConfig) return null
+
+  supabaseClientPromise ??= import('@supabase/supabase-js').then(({ createClient }) =>
+    createClient<Database>(supabaseConfig.url, supabaseConfig.key, {
       auth: {
         autoRefreshToken: false,
         detectSessionInUrl: false,
         persistSession: false,
       },
-    })
-  : null
+    }),
+  )
+
+  return supabaseClientPromise
+}
 
 export async function fetchProjects(): Promise<Project[]> {
+  const supabase = await getSupabaseClient()
   if (!supabase) return []
 
   const { data, error } = await supabase
     .from('projects')
-    .select('*')
+    .select(
+      'id,title,subtitle,icon_tone,thumbnail,type,model,story,screenshots,demo_url,source_url,post_id',
+    )
     .order('created_at', { ascending: false })
 
   if (error) {
@@ -87,11 +98,12 @@ export async function fetchProjects(): Promise<Project[]> {
 }
 
 export async function fetchPosts(): Promise<BlogPost[]> {
+  const supabase = await getSupabaseClient()
   if (!supabase) return []
 
   const { data, error } = await supabase
     .from('blog_posts')
-    .select('id,title,filename,date,folder,cover_tone,is_pinned,content_markdown,content')
+    .select('id,title,date,folder,is_pinned,content_markdown')
     .order('date', { ascending: false })
 
   if (error) {
@@ -102,6 +114,7 @@ export async function fetchPosts(): Promise<BlogPost[]> {
 }
 
 export async function fetchSettingsSections(): Promise<SettingsSection[]> {
+  const supabase = await getSupabaseClient()
   if (!supabase) return []
 
   const { data, error } = await supabase
@@ -149,13 +162,10 @@ export function mapPost(row: BlogPostRow): BlogPost {
   return {
     id: row.id,
     title: row.title,
-    filename: row.filename ?? `${row.id}.md`,
     date: row.date,
     folder: row.folder ?? 'Notes',
-    coverTone: row.cover_tone ?? 'graphite',
     isPinned: row.is_pinned,
-    contentMarkdown: row.content_markdown ?? undefined,
-    content: row.content ?? [],
+    contentMarkdown: row.content_markdown,
   }
 }
 

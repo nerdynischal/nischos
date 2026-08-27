@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { resolveAssetUrl } from '../lib/assetUrl'
 import type { DesktopIcon } from '../types'
 import { PlaceholderIcon } from './PlaceholderIcon'
 
@@ -18,19 +19,21 @@ export function IconArtwork({
 }) {
   const [failedArtwork, setFailedArtwork] = useState<string | null>(null)
   const artwork = thumbnail ?? defaultArtwork[variant]
+  const artworkUrl = artwork ? resolveAssetUrl(artwork) : undefined
 
-  if (!artwork || artwork === failedArtwork) {
+  if (!artworkUrl || artworkUrl === failedArtwork) {
     return <PlaceholderIcon variant={variant} />
   }
 
   return (
     <img
       className={`project-thumbnail thumbnail-${variant}`}
-      src={artwork}
+      src={artworkUrl}
       alt=""
       aria-hidden="true"
+      decoding="async"
       data-artwork-id={artworkId}
-      onError={() => setFailedArtwork(artwork)}
+      onError={() => setFailedArtwork(artworkUrl)}
     />
   )
 }

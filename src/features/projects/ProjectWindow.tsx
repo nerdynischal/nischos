@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Project } from '../../content'
 import { IconArtwork } from '../../desktop/IconArtwork'
+import { resolveAssetUrl } from '../../lib/assetUrl'
 import { MetaRow } from './MetaRow'
 
 function isImageScreenshot(screenshot: string) {
@@ -41,6 +42,7 @@ export function ProjectWindow({
   onOpenBlog: (postId?: string) => void
 }) {
   const [activeShot, setActiveShot] = useState(0)
+  const [failedScreenshot, setFailedScreenshot] = useState<string | null>(null)
   const projectScreenshots = project.screenshots
   const screenshotCount = projectScreenshots.length
   const selectedShotIndex = screenshotCount > 0 ? activeShot % screenshotCount : 0
@@ -48,9 +50,15 @@ export function ProjectWindow({
   const selectedScreenshotLabel = selectedScreenshot
     ? getScreenshotLabel(selectedScreenshot, selectedShotIndex)
     : 'Screenshot unavailable'
-  const selectedScreenshotIsImage = selectedScreenshot
-    ? isImageScreenshot(selectedScreenshot)
-    : false
+  const selectedScreenshotUrl = selectedScreenshot
+    ? resolveAssetUrl(selectedScreenshot)
+    : undefined
+  const selectedScreenshotIsImage = Boolean(
+    selectedScreenshot &&
+    selectedScreenshotUrl &&
+    isImageScreenshot(selectedScreenshot) &&
+    selectedScreenshotUrl !== failedScreenshot,
+  )
 
   function showPreviousShot() {
     setActiveShot((index) => (index - 1 + screenshotCount) % screenshotCount)
@@ -76,9 +84,9 @@ export function ProjectWindow({
                 <ExternalLinkIcon />
               </a>
             ) : (
-              <span className="primary-action disabled-action" aria-disabled="true">
+              <button type="button" className="primary-action disabled-action" disabled>
                 Visit Website
-              </span>
+              </button>
             )}
             {project.sourceUrl ? (
               <a href={project.sourceUrl} target="_blank" rel="noreferrer">
@@ -86,9 +94,9 @@ export function ProjectWindow({
                 <ExternalLinkIcon />
               </a>
             ) : (
-              <span className="disabled-action" aria-disabled="true">
+              <button type="button" className="disabled-action" disabled>
                 Source Code
-              </span>
+              </button>
             )}
             {hasLinkedPost ? (
               <button type="button" onClick={() => onOpenBlog(project.postId)}>
@@ -116,7 +124,13 @@ export function ProjectWindow({
           }`}
         >
           {selectedScreenshotIsImage ? (
-            <img src={selectedScreenshot} alt={`${project.title}: ${selectedScreenshotLabel}`} />
+            <img
+              src={selectedScreenshotUrl}
+              alt={`${project.title}: ${selectedScreenshotLabel}`}
+              loading="lazy"
+              decoding="async"
+              onError={() => setFailedScreenshot(selectedScreenshotUrl ?? null)}
+            />
           ) : (
             <span>{selectedScreenshotLabel}</span>
           )}

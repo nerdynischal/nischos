@@ -69,39 +69,27 @@ portfolio content, including Keyform.
 
 ### Notes
 
-Notes are stored in the existing `blog_posts` table and can use full Markdown in the `content_markdown` column. Existing `content` paragraph arrays still work as a fallback, but new notes should prefer Markdown:
+Notes are stored in the existing `blog_posts` table as full Markdown in the required `content_markdown` column:
 
 ```sql
 insert into public.blog_posts (
   id,
   title,
-  filename,
   date,
   folder,
-  cover_tone,
   is_pinned,
   content_markdown
 ) values (
   'building-nischalos',
   'Building nischalOS',
-  'building-nischalos.md',
   '2026-07-01',
   'Build Logs',
-  'mint',
   false,
   $$Paste the full Markdown body here.$$
 );
 ```
 
-For an existing Supabase table created before Markdown and pinning support existed, run:
-
-```sql
-alter table public.blog_posts
-add column if not exists content_markdown text;
-
-alter table public.blog_posts
-add column if not exists is_pinned boolean not null default false;
-```
+For an existing Supabase table created before Markdown and pinning support existed, run the versioned migrations in `supabase/migrations` rather than altering the table manually.
 
 ## Project structure
 
@@ -139,3 +127,15 @@ To preview the production build locally:
 ```bash
 npm run preview
 ```
+
+## GitHub Pages deployment
+
+The repository includes `.github/workflows/deploy-pages.yml`. A push to `master`, or a manual workflow run, installs dependencies, runs the full production check, builds with the correct repository subpath, and deploys `dist` to GitHub Pages.
+
+Before the first deployment:
+
+1. In the GitHub repository, open **Settings → Pages** and set **Source** to **GitHub Actions**.
+2. If the live site should use Supabase content, add `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` as repository variables under **Settings → Secrets and variables → Actions → Variables**. If they are omitted, the deployed site uses the checked-in fallback content.
+3. Push to `master` and follow the **Deploy to GitHub Pages** workflow in the Actions tab.
+
+The workflow derives the Vite base path from the repository name, so both `<username>.github.io` sites and project sites hosted at `<username>.github.io/<repository>/` resolve assets correctly.

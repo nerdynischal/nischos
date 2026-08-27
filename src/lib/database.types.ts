@@ -61,37 +61,28 @@ export type Database = {
         Row: {
           id: string
           title: string
-          filename: string | null
           date: string
           folder: 'Notes' | 'Build Logs' | 'Drafts' | null
-          cover_tone: string | null
           is_pinned: boolean
-          content_markdown: string | null
-          content: string[] | null
+          content_markdown: string
           created_at: string
         }
         Insert: {
           id: string
           title: string
-          filename?: string | null
           date: string
           folder?: 'Notes' | 'Build Logs' | 'Drafts' | null
-          cover_tone?: string | null
           is_pinned?: boolean
-          content_markdown?: string | null
-          content?: string[] | null
+          content_markdown?: string
           created_at?: string
         }
         Update: {
           id?: string
           title?: string
-          filename?: string | null
           date?: string
           folder?: 'Notes' | 'Build Logs' | 'Drafts' | null
-          cover_tone?: string | null
           is_pinned?: boolean
-          content_markdown?: string | null
-          content?: string[] | null
+          content_markdown?: string
           created_at?: string
         }
         Relationships: []

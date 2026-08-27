@@ -34,6 +34,10 @@ describe('local fallback content', () => {
     })
   })
 
+  it('stores every local note as Markdown', () => {
+    expect(posts.every((post) => post.contentMarkdown.trim().length > 0)).toBe(true)
+  })
+
   it('keeps a truthful local About section', () => {
     expect(settingsSections).toHaveLength(1)
     expect(DEFAULT_SETTINGS_SECTION_ID).toBe('about')

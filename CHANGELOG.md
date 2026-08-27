@@ -1,5 +1,41 @@
 # Changelog
 
+## 27 August 2026
+
+### Added
+
+- Added a GitHub Pages workflow that installs dependencies, runs the complete production check, derives the correct repository base path, and deploys the built site.
+- Added a top-level error boundary with an accessible recovery screen if the desktop cannot render.
+- Added deployment documentation, runtime version requirements, social metadata, and tests for base-path-aware asset URLs.
+- Added an archive of legacy Supabase content fields and an idempotent migration for removing their obsolete columns.
+- Added an archive and migration for removing unused Notes filename, cover-tone, and paragraph-array fields after consolidating note bodies on Markdown.
+
+### Changed
+
+- Moved the Supabase client into an on-demand chunk so it no longer increases the initial lock-screen bundle when remote content is not needed.
+- Limited project reads to the fields used by the application instead of transferring legacy database columns.
+- Simplified the Notes content model, database types, queries, tests, seed data, and documentation around `content_markdown` as the single body format.
+- Made local artwork and screenshots work from GitHub Pages project subpaths, corrected the Maneki Neko fallback media URLs, and added graceful screenshot fallbacks.
+- Replaced the oversized Still PNG preview with a resized WebP asset to reduce its transfer size without a visible loss of detail.
+- Improved Notes heading hierarchy, semantic dates, image decoding, and unavailable project-action semantics.
+
+## 25 August 2026
+
+### Added
+
+- Added Still to the projects collection with dedicated icon and preview artwork, responsive presentation, pinned-project support, and Supabase schema, migration, seed, and fallback content updates.
+- Added a pinned welcome note with local fallback content and Supabase support for pinning notes.
+- Added external-link icons to the “Visit Website” and “Source Code” project actions.
+- Added a GitHub profile link and copyright footer to the About window.
+
+### Changed
+
+- Renamed Blog to Notes across the desktop, window chrome, content model, documentation, styling, tests, and database-facing code, with new Notes app artwork.
+- Restored project `type` metadata across local content and Supabase while keeping project selection and display behaviour consistent.
+- Updated the About window to use the portrait artwork and refined its avatar framing, spacing, and footer styling.
+- Improved unavailable project actions by showing clearly disabled Website and Source Code controls with appropriate accessibility state and no hover treatment.
+- Increased the space beneath dock icons so open-app indicators sit more clearly on desktop and mobile layouts.
+
 ## 11 August 2026
 
 ### Added

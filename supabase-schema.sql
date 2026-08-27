@@ -48,23 +48,51 @@ alter table public.projects drop column if exists category;
 create table if not exists public.blog_posts (
   id text primary key,
   title text not null,
-  filename text,
   date text not null,
   folder text check (folder in ('Notes', 'Build Logs', 'Drafts')),
-  cover_tone text,
   is_pinned boolean not null default false,
-  content_markdown text,
-  content text[] default '{}',
+  content_markdown text not null default '',
   created_at timestamptz not null default now()
 );
 
-alter table public.blog_posts add column if not exists filename text;
 alter table public.blog_posts add column if not exists folder text;
-alter table public.blog_posts add column if not exists cover_tone text;
 alter table public.blog_posts add column if not exists is_pinned boolean not null default false;
 alter table public.blog_posts add column if not exists content_markdown text;
-alter table public.blog_posts add column if not exists content text[] default '{}';
 alter table public.blog_posts add column if not exists created_at timestamptz not null default now();
+
+do $$
+begin
+  if exists (
+    select 1
+    from information_schema.columns
+    where table_schema = 'public'
+      and table_name = 'blog_posts'
+      and column_name = 'content'
+  ) then
+    execute $migration$
+      update public.blog_posts
+      set content_markdown = coalesce(
+        nullif(btrim(content_markdown), ''),
+        array_to_string(content, E'\n\n'),
+        ''
+      )
+      where content_markdown is null
+         or btrim(content_markdown) = ''
+    $migration$;
+  end if;
+end;
+$$;
+
+update public.blog_posts
+set content_markdown = ''
+where content_markdown is null;
+
+alter table public.blog_posts
+  alter column content_markdown set default '',
+  alter column content_markdown set not null,
+  drop column if exists filename,
+  drop column if exists cover_tone,
+  drop column if exists content;
 
 create table if not exists public.settings_sections (
   id text primary key,

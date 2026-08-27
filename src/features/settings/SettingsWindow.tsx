@@ -1,5 +1,6 @@
 import type { SettingsSection } from '../../content'
 import { EmptyState } from '../../components/EmptyState'
+import { resolveAssetUrl } from '../../lib/assetUrl'
 
 const GITHUB_PROFILE_URL = 'https://github.com/nerdynischal'
 
@@ -38,7 +39,11 @@ export function SettingsWindow({
       </aside>
       <section className="settings-detail">
         <div className="avatar-orbit" aria-hidden="true">
-          <img className="about-portrait" src="/about-icon.png" alt="" />
+          <img
+            className="about-portrait"
+            src={resolveAssetUrl('/about-icon.png')}
+            alt=""
+          />
         </div>
         <div className="profile-heading">
           <h3>{section.displayTitle ?? section.label}</h3>

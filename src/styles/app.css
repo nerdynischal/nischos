@@ -14,3 +14,55 @@
 @import './theme/readers.css';
 @import './theme/dock.css';
 @import './responsive.css';
+
+.fatal-error {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: var(--space-5);
+  color: var(--text-primary);
+  background: var(--desktop-bg);
+}
+
+.fatal-error-panel {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-4);
+  width: min(100%, 32rem);
+  border: 1px solid var(--line-emphasis);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  background: var(--surface-panel);
+  box-shadow: var(--shadow-window);
+}
+
+.fatal-error-panel :is(h1, p) {
+  margin: 0;
+}
+
+.fatal-error-label {
+  color: var(--text-tertiary);
+  font-family: var(--mono);
+  font-size: var(--type-meta-size);
+  font-weight: var(--type-meta-weight);
+}
+
+.fatal-error-panel h1 {
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-line);
+}
+
+.fatal-error-panel > p:not(.fatal-error-label) {
+  color: var(--text-secondary);
+  line-height: var(--type-body-line);
+}
+
+.fatal-error-panel button {
+  min-height: var(--control-height-lg);
+  border: 1px solid var(--line-control);
+  border-radius: var(--control-radius);
+  padding: 0 var(--space-4);
+  color: var(--text-primary);
+  background: var(--surface-panel-raised);
+  cursor: pointer;
+}

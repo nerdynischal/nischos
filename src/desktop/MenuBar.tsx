@@ -1,3 +1,4 @@
+import { resolveAssetUrl } from '../lib/assetUrl'
 import { useTheme } from '../theme/theme-context'
 import { getNextTheme } from '../theme/theme'
 
@@ -23,7 +24,12 @@ export function MenuBar({
     <header className="menu-bar">
       <div className="menu-left">
         <button type="button" className="brand-button" onClick={onOpenAbout}>
-          <img className="brand-logo" src="/logo.svg" alt="" aria-hidden="true" />
+          <img
+            className="brand-logo"
+            src={resolveAssetUrl('/logo.svg')}
+            alt=""
+            aria-hidden="true"
+          />
           nischalOS
         </button>
         {activeTitle ? <span className="active-app-label">{activeTitle}</span> : null}
@@ -49,7 +55,7 @@ export function MenuBar({
           )}
         </button>
         <span>London, UK</span>
-        <time>
+        <time dateTime={dateTime.time}>
           <span className="menu-date">{dateTime.date}</span>
           <span className="menu-clock">{dateTime.time}</span>
         </time>

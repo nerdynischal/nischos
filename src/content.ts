@@ -16,13 +16,10 @@ export type Project = {
 export type BlogPost = {
   id: string
   title: string
-  filename: string
   date: string
   folder: 'Notes' | 'Build Logs' | 'Drafts'
-  coverTone: string
   isPinned: boolean
-  contentMarkdown?: string
-  content: string[]
+  contentMarkdown: string
 }
 
 export type SettingsSection = {
@@ -49,7 +46,7 @@ export const projects: Project[] = [
     model: 'GPT-5.6 Sol',
     story:
       'Still captures full-page website screenshots, extracts useful metadata, and organises everything into a searchable personal collection stored entirely on the Mac.',
-    screenshots: ['/project-media/still/still-preview.png'],
+    screenshots: ['/project-media/still/still-preview.webp'],
   },
   {
     id: 'keyform',
@@ -101,9 +98,9 @@ export const projects: Project[] = [
     story:
       'A lightweight catalog for Donkey Products Maneki Neko figures, with a visual product grid, local ownership tracking, and owned cats sorted to the front so the collection stays easy to scan.',
     screenshots: [
-      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/cat-detail.jpg',
-      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/catalog-overview.jpg',
-      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/color-collection.jpg',
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-01-catalog.jpg',
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-02-collection-status.jpg',
+      'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-03-product-details.jpg',
     ],
     demoUrl: 'https://nerdynischal.github.io/my-maneki-neko-collection/',
     sourceUrl: 'https://github.com/nerdynischal/my-maneki-neko-collection',
@@ -114,10 +111,8 @@ export const posts: BlogPost[] = [
   {
     id: 'welcome-to-nischalos',
     title: 'Welcome to nischalOS',
-    filename: 'welcome-to-nischalos.md',
     date: '2026-08-25',
     folder: 'Notes',
-    coverTone: 'graphite',
     isPinned: true,
     contentMarkdown: `Welcome — this is my corner of the internet, designed less like a traditional portfolio and more like a small desktop.
 
@@ -138,7 +133,6 @@ Select any desktop icon to open it, or use the dock at the bottom to jump betwee
 This website is also one of the projects. I will keep refining the system, adding new work, and writing about what I discover while making it.
 
 Thanks for stopping by.`,
-    content: [],
   },
 ]
 

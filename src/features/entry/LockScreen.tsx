@@ -1,4 +1,5 @@
 import type { ClockValue } from '../../hooks/useClock'
+import { resolveAssetUrl } from '../../lib/assetUrl'
 import { LockScreenWaterRipple } from './LockScreenWaterRipple'
 
 type LockScreenProps = {
@@ -43,7 +44,7 @@ export function LockScreen({
           onClick={onEnter}
         >
           <span className="lock-screen-avatar" aria-hidden="true">
-            <img src="/about-icon.png" alt="" />
+            <img src={resolveAssetUrl('/about-icon.png')} alt="" />
           </span>
           <span className="lock-screen-name">nischalOS</span>
           <span className="lock-screen-hint">Click to Unlock</span>
