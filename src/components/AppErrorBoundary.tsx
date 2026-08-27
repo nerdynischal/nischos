@@ -16,7 +16,7 @@ export class AppErrorBoundary extends Component<
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     if (import.meta.env.DEV) {
-      console.error('nischalOS failed to render.', error, errorInfo)
+      console.error('nischOS failed to render.', error, errorInfo)
     }
   }
 
@@ -26,11 +26,11 @@ export class AppErrorBoundary extends Component<
     return (
       <main className="fatal-error" role="alert">
         <section className="fatal-error-panel">
-          <p className="fatal-error-label">nischalOS</p>
+          <p className="fatal-error-label">nischOS</p>
           <h1>Something went wrong.</h1>
           <p>The desktop could not start. Reload the page to try again.</p>
           <button type="button" onClick={() => window.location.reload()}>
-            Reload nischalOS
+            Reload nischOS
           </button>
         </section>
       </main>

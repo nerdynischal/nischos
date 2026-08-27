@@ -78,7 +78,7 @@ export function SettingsWindow({
 
 function AboutFooter() {
   return (
-    <footer className="about-footer" aria-label="About nischalOS">
+    <footer className="about-footer" aria-label="About nischOS">
       <nav className="about-footer-links" aria-label="Project links">
         <a href={GITHUB_PROFILE_URL} target="_blank" rel="noreferrer">
           GitHub Profile

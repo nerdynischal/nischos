@@ -12,6 +12,7 @@
 
 ### Changed
 
+- Renamed the portfolio from nischalOS to nischOS across the interface, metadata, content, persistence keys, and deployment-facing project identity.
 - Moved the Supabase client into an on-demand chunk so it no longer increases the initial lock-screen bundle when remote content is not needed.
 - Limited project reads to the fields used by the application instead of transferring legacy database columns.
 - Simplified the Notes content model, database types, queries, tests, seed data, and documentation around `content_markdown` as the single body format.
@@ -40,7 +41,7 @@
 
 ### Added
 
-- Added a macOS-inspired nischalOS lock screen with a centered About illustration avatar, live date and time, a keyboard-accessible “Click to Unlock” control, a 1.2-second progress indicator, and same-tab session persistence.
+- Added a macOS-inspired nischOS lock screen with a centered About illustration avatar, live date and time, a keyboard-accessible “Click to Unlock” control, a 1.2-second progress indicator, and same-tab session persistence.
 - Added a lock-screen-only water-surface effect for fine pointers that bends the grid, idles once its ripples settle, pauses when the page is hidden, and falls back to static CSS for touch, reduced motion, or unavailable WebGL.
 - Added a coordinated unlock transition that separates the clock and profile before revealing the desktop, with a reduced-motion fallback.
 - Added a persisted light and dark appearance with a compact menu-bar toggle, system-preference support, cross-tab synchronization, and a pre-render bootstrap that prevents theme flashing.

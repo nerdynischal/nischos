@@ -109,8 +109,8 @@ export const projects: Project[] = [
 
 export const posts: BlogPost[] = [
   {
-    id: 'welcome-to-nischalos',
-    title: 'Welcome to nischalOS',
+    id: 'welcome-to-nischos',
+    title: 'Welcome to nischOS',
     date: '2026-08-25',
     folder: 'Notes',
     isPinned: true,
@@ -118,7 +118,7 @@ export const posts: BlogPost[] = [
 
 ## A portfolio you can explore
 
-nischalOS brings together the projects I build, the ideas I write down, and a little about who I am. Everything opens in its own window, so you can move around the site in whatever order feels natural.
+nischOS brings together the projects I build, the ideas I write down, and a little about who I am. Everything opens in its own window, so you can move around the site in whatever order feels natural.
 
 ## Finding your way around
 
@@ -149,7 +149,7 @@ export const settingsSections: SettingsSection[] = [
       { label: 'Location', value: 'London, UK' },
       { label: 'Role', value: 'Design Engineer' },
       { label: 'Focus', value: 'Creative tools, systems, and interaction design' },
-      { label: 'Status', value: 'Building nischalOS' },
+      { label: 'Status', value: 'Building nischOS' },
     ],
     items: [],
   },

@@ -101,7 +101,7 @@ export function DesktopExperience({
       ref={desktopRef}
       className="desktop"
       data-entering={isEntering}
-      aria-label="nischalOS Desktop"
+      aria-label="nischOS Desktop"
       tabIndex={isEntering ? -1 : undefined}
     >
       <div className="wallpaper" aria-hidden="true">

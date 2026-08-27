@@ -1,4 +1,4 @@
-export const ENTRY_SESSION_STORAGE_KEY = 'nischalos:entry-session'
+export const ENTRY_SESSION_STORAGE_KEY = 'nischos:entry-session'
 
 const ENTRY_SESSION_ENTERED_VALUE = 'entered'
 

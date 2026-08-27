@@ -20,7 +20,7 @@ export function LockScreen({
   return (
     <main
       className="lock-screen"
-      aria-label="nischalOS login"
+      aria-label="nischOS login"
       aria-hidden={isExiting || undefined}
       data-exiting={isExiting || undefined}
       inert={isExiting}
@@ -32,11 +32,11 @@ export function LockScreen({
         <time dateTime={shortTime}>{shortTime}</time>
       </header>
 
-      <section className="lock-screen-profile-region" aria-label="nischalOS profile">
+      <section className="lock-screen-profile-region" aria-label="nischOS profile">
         <button
           type="button"
           className="lock-screen-profile"
-          aria-label="Unlock nischalOS"
+          aria-label="Unlock nischOS"
           aria-busy={isLoading || undefined}
           data-loading={isLoading || undefined}
           autoFocus
@@ -46,7 +46,7 @@ export function LockScreen({
           <span className="lock-screen-avatar" aria-hidden="true">
             <img src={resolveAssetUrl('/about-icon.png')} alt="" />
           </span>
-          <span className="lock-screen-name">nischalOS</span>
+          <span className="lock-screen-name">nischOS</span>
           <span className="lock-screen-hint">Click to Unlock</span>
         </button>
         <div

@@ -29,7 +29,7 @@ describe('local fallback content', () => {
 
   it('keeps the welcome note pinned first', () => {
     expect(posts[0]).toMatchObject({
-      id: 'welcome-to-nischalos',
+      id: 'welcome-to-nischos',
       isPinned: true,
     })
   })

@@ -97,8 +97,8 @@ insert into public.blog_posts (
   is_pinned,
   content_markdown
 ) values (
-  'welcome-to-nischalos',
-  'Welcome to nischalOS',
+  'welcome-to-nischos',
+  'Welcome to nischOS',
   '2026-08-25',
   'Notes',
   true,
@@ -106,7 +106,7 @@ insert into public.blog_posts (
 
 ## A portfolio you can explore
 
-nischalOS brings together the projects I build, the ideas I write down, and a little about who I am. Everything opens in its own window, so you can move around the site in whatever order feels natural.
+nischOS brings together the projects I build, the ideas I write down, and a little about who I am. Everything opens in its own window, so you can move around the site in whatever order feels natural.
 
 ## Finding your way around
 
@@ -149,7 +149,7 @@ insert into public.settings_sections (
     {"label": "Location", "value": "London, UK"},
     {"label": "Role", "value": "Design Engineer"},
     {"label": "Focus", "value": "Creative tools, systems, and interaction design"},
-    {"label": "Status", "value": "Building nischalOS"}
+    {"label": "Status", "value": "Building nischOS"}
   ]'::jsonb,
   array[]::text[],
   0

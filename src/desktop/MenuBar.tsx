@@ -30,7 +30,7 @@ export function MenuBar({
             alt=""
             aria-hidden="true"
           />
-          nischalOS
+          nischOS
         </button>
         {activeTitle ? <span className="active-app-label">{activeTitle}</span> : null}
       </div>

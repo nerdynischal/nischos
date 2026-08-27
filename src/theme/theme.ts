@@ -1,4 +1,4 @@
-export const THEME_STORAGE_KEY = 'nischalos-theme'
+export const THEME_STORAGE_KEY = 'nischos-theme'
 
 export const THEME_PREFERENCES = ['system', 'light', 'dark'] as const
 

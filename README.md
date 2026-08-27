@@ -1,4 +1,4 @@
-# nischalOS
+# nischOS
 
 A desktop-inspired personal portfolio built with React, TypeScript, Vite, Supabase, and CSS.
 
@@ -6,7 +6,7 @@ Projects, notes, and profile information open as movable desktop windows. The in
 
 ## Entry experience
 
-New browser sessions begin on a macOS-inspired nischalOS lock screen. Unlocking is an experiential gateway rather than authentication: successful entry is stored in `sessionStorage`, so reloads in the same tab return directly to the desktop.
+New browser sessions begin on a macOS-inspired nischOS lock screen. Unlocking is an experiential gateway rather than authentication: successful entry is stored in `sessionStorage`, so reloads in the same tab return directly to the desktop.
 
 On fine-pointer devices, a lightweight WebGL surface bends the lock-screen grid around the mouse and idles as soon as its ripples settle. Touch devices, reduced-motion preferences, and browsers without WebGL keep the static CSS grid. The effect is unmounted after unlocking; the desktop uses its own static wallpaper grid.
 
@@ -80,8 +80,8 @@ insert into public.blog_posts (
   is_pinned,
   content_markdown
 ) values (
-  'building-nischalos',
-  'Building nischalOS',
+  'building-nischos',
+  'Building nischOS',
   '2026-07-01',
   'Build Logs',
   false,
