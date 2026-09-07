@@ -18,7 +18,7 @@
   ],
   "properties": {
     "$schema": {
-      "type": "string"
+      "const": "../project.schema.json"
     },
     "id": {
       "type": "string",

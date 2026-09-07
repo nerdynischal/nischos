@@ -12,6 +12,7 @@
     "check": "npm run projects:check && npm run tokens:check && npm run lint && npm run test && npm run build",
     "lint": "oxlint",
     "test": "vitest run",
+    "project:add": "node scripts/add-project.mjs",
     "projects:check": "node scripts/check-projects.mjs",
     "tokens:check": "node scripts/check-css-tokens.mjs",
     "supabase:check": "node scripts/check-supabase.mjs",

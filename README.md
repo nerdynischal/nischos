@@ -90,9 +90,24 @@ remote media and project links must use HTTPS. Validate manifests with:
 npm run projects:check
 ```
 
-Manifests provide the offline/deployment fallback. Until the Supabase ingestion
-step is added, make the corresponding Supabase record separately when the live
-database should serve the new project.
+Manifests provide the offline/deployment fallback; the generated migration puts
+the same metadata into the live Supabase database.
+
+Create a new manifest and its matching idempotent Supabase migration with:
+
+```bash
+npm run project:add
+```
+
+The guided command suggests the next desktop position, offers a dock position
+when capacity is available, validates all metadata and local media, and refuses
+to overwrite existing files. Apply the generated SQL file in the Supabase SQL
+editor after reviewing it. To automate or preview the same workflow:
+
+```bash
+npm run project:add -- --from ./project.json
+npm run project:add -- --from ./project.json --dry-run
+```
 
 ### Notes
 
