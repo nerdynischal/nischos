@@ -1,4 +1,4 @@
-import type { BlogPost } from '../../content'
+import type { BlogPost } from '../../content/types'
 
 export function getPostMarkdown(post: BlogPost) {
   const markdown = post.contentMarkdown.trim()

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { BlogPost } from '../../content'
+import type { BlogPost } from '../../content/types'
 import { getPostMarkdown } from './getPostMarkdown'
 
 function post(overrides: Partial<BlogPost> = {}): BlogPost {

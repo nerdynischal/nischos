@@ -1,20 +1,19 @@
-import type { ClockValue } from '../../hooks/useClock'
+import { useClock } from '../../hooks/useClock'
 import { resolveAssetUrl } from '../../lib/assetUrl'
 import { LockScreenWaterRipple } from './LockScreenWaterRipple'
 
 type LockScreenProps = {
-  dateTime: ClockValue
   isLoading: boolean
   isExiting: boolean
   onEnter: () => void
 }
 
 export function LockScreen({
-  dateTime,
   isLoading,
   isExiting,
   onEnter,
 }: LockScreenProps) {
+  const dateTime = useClock()
   const shortTime = dateTime.time.slice(0, 5).replace(/^0/, '')
 
   return (

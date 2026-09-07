@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
 import { useState } from 'react'
-import type { Project } from '../../content'
+import type { Project } from '../../content/types'
 import { IconArtwork } from '../../desktop/IconArtwork'
 import { resolveAssetUrl } from '../../lib/assetUrl'
 import { MetaRow } from './MetaRow'

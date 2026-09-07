@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { projects as fallbackProjects } from '../content'
-import type { BlogPost, Project, SettingsSection } from '../content'
+import type { BlogPost, Project, SettingsSection } from '../content/types'
 import type { Database } from './database.types'
 
 type ProjectTableRow = Database['public']['Tables']['projects']['Row']

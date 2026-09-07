@@ -94,6 +94,7 @@ For an existing Supabase table created before Markdown and pinning support exist
 ## Project structure
 
 - `src/hooks` contains portfolio data loading, the live clock, and desktop-window state.
+- `src/content/types.ts` defines the shared portfolio content model; `src/content.ts` contains checked-in fallback content only.
 - `src/features/entry` contains the lock screen, session persistence, and its isolated water-ripple renderer.
 - The remaining `src/features` folders contain the Notes, Project, and About window content.
 - `src/desktop` contains desktop icons, dock behavior, artwork, and explicit dock pinning.

@@ -1,4 +1,4 @@
-import type { Project } from '../content'
+import type { Project } from '../content/types'
 
 export const PINNED_PROJECT_IDS = [
   'workout-board',

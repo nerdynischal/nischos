@@ -1,4 +1,4 @@
-import type { SettingsSection } from '../../content'
+import type { SettingsSection } from '../../content/types'
 import { EmptyState } from '../../components/EmptyState'
 import { resolveAssetUrl } from '../../lib/assetUrl'
 
@@ -47,7 +47,9 @@ export function SettingsWindow({
         </div>
         <div className="profile-heading">
           <h3>{section.displayTitle ?? section.label}</h3>
-          {section.displaySubtitle ? <p className="profile-subtitle">{section.displaySubtitle}</p> : null}
+          {section.displaySubtitle ? (
+            <p className="profile-subtitle">{section.displaySubtitle}</p>
+          ) : null}
         </div>
         {section.details?.length ? (
           <dl className="profile-details">

@@ -1,13 +1,16 @@
-import { DatabaseCheck, DatabaseX, LoaderCircle, Moon, Sun, type LucideIcon } from 'lucide-react'
+import {
+  DatabaseCheck,
+  DatabaseX,
+  LoaderCircle,
+  Moon,
+  Sun,
+  type LucideIcon,
+} from 'lucide-react'
+import { useClock } from '../hooks/useClock'
 import { resolveAssetUrl } from '../lib/assetUrl'
 import type { SupabaseLoadStatus } from '../hooks/usePortfolioContent'
 import { useTheme } from '../theme/theme-context'
 import { getNextTheme } from '../theme/theme'
-
-type DateTime = {
-  date: string
-  time: string
-}
 
 const SUPABASE_STATUS_COPY: Record<SupabaseLoadStatus, string> = {
   loading: 'Loading Supabase data',
@@ -23,15 +26,14 @@ const SUPABASE_STATUS_ICONS = {
 
 export function MenuBar({
   activeTitle,
-  dateTime,
   supabaseStatus,
   onOpenAbout,
 }: {
   activeTitle?: string
-  dateTime: DateTime
   supabaseStatus: SupabaseLoadStatus
   onOpenAbout: () => void
 }) {
+  const dateTime = useClock()
   const { resolvedTheme, toggleTheme } = useTheme()
   const nextTheme = getNextTheme(resolvedTheme)
   const toggleLabel = `Switch to ${nextTheme} appearance`

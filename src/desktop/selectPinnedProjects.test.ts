@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { Project } from '../content'
+import type { Project } from '../content/types'
 import { selectPinnedProjects } from './selectPinnedProjects'
 
 function project(id: string): Project {

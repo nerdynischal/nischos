@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { Project } from '../content'
+import type { Project } from '../content/types'
 import { getProjectWindowId, SYSTEM_APPS } from './appRegistry'
 import { createDesktopIcons } from './createDesktopIcons'
 

@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import type { Project } from '../content'
+import type { Project } from '../content/types'
 import type { DesktopWindow, WindowCategory } from '../types'
 import { getProjectWindowId, SYSTEM_APPS } from './appRegistry'
 import { IconArtwork } from './IconArtwork'
@@ -110,15 +110,14 @@ export function Dock({
         )
       })}
       {extraWindows.map((item) => {
-        const project = item.category === 'project'
-          ? projectsById.get(item.refId ?? '')
-          : undefined
+        const project =
+          item.category === 'project' ? projectsById.get(item.refId ?? '') : undefined
 
         return (
           <button
             key={item.id}
             type="button"
-            className="dock-item dock-tone-note is-open"
+            className={`dock-item dock-tone-${project?.iconTone ?? 'note'} is-open`}
             data-dock-id={item.id}
             data-dock-label={item.title}
             onClick={() => onFocusWindow(item.id)}

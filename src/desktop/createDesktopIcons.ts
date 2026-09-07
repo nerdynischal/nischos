@@ -1,4 +1,4 @@
-import type { Project } from '../content'
+import type { Project } from '../content/types'
 import type { DesktopIcon } from '../types'
 import { SYSTEM_APPS } from './appRegistry'
 

@@ -87,7 +87,10 @@ function getLoadedContent<T>(label: string, result: PromiseSettledResult<T[]>) {
   if (result.status === 'fulfilled') return result.value.length > 0 ? result.value : null
 
   if (import.meta.env.DEV) {
-    console.warn(`Unable to load ${label} from Supabase; using local fallback content.`, result.reason)
+    console.warn(
+      `Unable to load ${label} from Supabase; using local fallback content.`,
+      result.reason,
+    )
   }
 
   return null

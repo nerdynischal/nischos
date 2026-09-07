@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import type { BlogPost, Project, SettingsSection } from '../content'
+import type { BlogPost, Project, SettingsSection } from '../content/types'
 import { EmptyState } from '../components/EmptyState'
 import { ProjectWindow } from '../features/projects/ProjectWindow'
 import { SettingsWindow } from '../features/settings/SettingsWindow'
@@ -28,7 +28,9 @@ export function WindowContent({
 }) {
   if (desktopWindow.category === 'project') {
     const project = projects.find((item) => item.id === desktopWindow.refId)
-    if (!project) return <EmptyState title="Project missing" body="This app moved somewhere else." />
+    if (!project) {
+      return <EmptyState title="Project missing" body="This app moved somewhere else." />
+    }
     return (
       <ProjectWindow
         project={project}

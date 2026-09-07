@@ -6,7 +6,6 @@ import {
   hasEntrySession,
   markEntrySessionEntered,
 } from './features/entry/entrySession'
-import { useClock } from './hooks/useClock'
 
 const ENTRY_EXIT_MS = 360
 const ENTRY_LOAD_MS = 1200
@@ -20,7 +19,6 @@ function getInitialEntryState(): EntryState {
 function App() {
   const [entryState, setEntryState] = useState<EntryState>(getInitialEntryState)
   const entryTimerRef = useRef<number | null>(null)
-  const dateTime = useClock()
 
   useEffect(() => {
     return () => {
@@ -50,12 +48,11 @@ function App() {
   return (
     <>
       {isDesktopMounted ? (
-        <DesktopExperience dateTime={dateTime} isEntering={isUnlocking} />
+        <DesktopExperience isEntering={isUnlocking} />
       ) : null}
 
       {entryState !== 'entered' ? (
         <LockScreen
-          dateTime={dateTime}
           isLoading={entryState === 'loading'}
           isExiting={isUnlocking}
           onEnter={enterDesktop}

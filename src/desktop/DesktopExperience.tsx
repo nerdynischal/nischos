@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { DEFAULT_SETTINGS_SECTION_ID } from '../content'
 import { useDesktopWindows } from '../hooks/useDesktopWindows'
-import type { ClockValue } from '../hooks/useClock'
 import { usePortfolioContent } from '../hooks/usePortfolioContent'
 import type { DesktopIcon } from '../types'
 import { WindowContent } from '../windows/WindowContent'
@@ -13,14 +12,10 @@ import { getProjectWindowId, NOTES_APP_LABEL } from './appRegistry'
 import { createDesktopIcons } from './createDesktopIcons'
 
 type DesktopExperienceProps = {
-  dateTime: ClockValue
   isEntering: boolean
 }
 
-export function DesktopExperience({
-  dateTime,
-  isEntering,
-}: DesktopExperienceProps) {
+export function DesktopExperience({ isEntering }: DesktopExperienceProps) {
   const desktopRef = useRef<HTMLElement>(null)
   const {
     projects,
@@ -111,7 +106,6 @@ export function DesktopExperience({
 
       <MenuBar
         activeTitle={activeWindow?.title}
-        dateTime={dateTime}
         supabaseStatus={supabaseStatus}
         onOpenAbout={() => openSettings('about')}
       />

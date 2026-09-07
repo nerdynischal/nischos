@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import type { BlogPost } from '../../content'
+import type { BlogPost } from '../../content/types'
 import { EmptyState } from '../../components/EmptyState'
 import { getPostMarkdown } from './getPostMarkdown'
 
@@ -47,7 +47,8 @@ export function BlogWindow({
           <article className="blog-reader-post">
             <header>
               <p>
-                {selectedPost.folder} · <time dateTime={selectedPost.date}>{selectedPost.date}</time>
+                {selectedPost.folder} ·{' '}
+                <time dateTime={selectedPost.date}>{selectedPost.date}</time>
               </p>
               <h3>{selectedPost.title}</h3>
             </header>
