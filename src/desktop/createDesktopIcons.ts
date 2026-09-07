@@ -1,3 +1,4 @@
+import { sortProjects } from '../content/projectOrdering'
 import type { Project } from '../content/types'
 import type { DesktopIcon } from '../types'
 import { SYSTEM_APPS } from './appRegistry'
@@ -15,7 +16,7 @@ const PROJECT_POSITIONS: ReadonlyArray<readonly [number, number]> = [
 
 export function createDesktopIcons(projects: Project[]): DesktopIcon[] {
   return [
-    ...projects.map((project, index) => {
+    ...sortProjects(projects).map((project, index) => {
       const position = PROJECT_POSITIONS[index] ?? [
         12 + (index % 4) * 18,
         70 + Math.floor(index / 4) * 14,

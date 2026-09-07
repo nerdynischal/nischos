@@ -1,9 +1,9 @@
 import { Fragment } from 'react'
+import { selectDockProjects } from '../content/projectOrdering'
 import type { Project } from '../content/types'
 import type { DesktopWindow, WindowCategory } from '../types'
 import { getProjectWindowId, SYSTEM_APPS } from './appRegistry'
 import { IconArtwork } from './IconArtwork'
-import { selectPinnedProjects } from './selectPinnedProjects'
 import { useDockMagnification } from './useDockMagnification'
 
 type PinnedDockItem = {
@@ -40,7 +40,7 @@ export function Dock({
     handleItemBlur,
   } = useDockMagnification()
   const pinnedItems: PinnedDockItem[] = [
-    ...selectPinnedProjects(projects).map((project) => ({
+    ...selectDockProjects(projects).map((project) => ({
       id: project.id,
       label: project.title,
       category: 'project' as const,

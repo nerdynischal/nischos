@@ -1,16 +1,12 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { projects as fallbackProjects } from '../content'
+import { sortProjects } from '../content/projectOrdering'
 import type { BlogPost, Project, SettingsSection } from '../content/types'
 import type { Database } from './database.types'
 
 type ProjectTableRow = Database['public']['Tables']['projects']['Row']
 
-// Ordering columns are activated in the next migration step. Keeping them out
-// of this read shape lets the current app run before or after the schema update.
-export type ProjectRow = Omit<
-  ProjectTableRow,
-  'created_at' | 'sort_order' | 'dock_order'
->
+export type ProjectRow = Omit<ProjectTableRow, 'created_at'>
 
 const projectModelFallbacks = new Map(
   fallbackProjects.map((project) => [project.id, project.model]),
@@ -91,9 +87,10 @@ export async function fetchProjects(): Promise<Project[]> {
   const { data, error } = await supabase
     .from('projects')
     .select(
-      'id,title,subtitle,icon_tone,thumbnail,type,model,story,screenshots,demo_url,source_url,post_id',
+      'id,title,subtitle,icon_tone,thumbnail,type,model,sort_order,dock_order,story,screenshots,demo_url,source_url,post_id',
     )
-    .order('created_at', { ascending: false })
+    .order('sort_order', { ascending: true })
+    .order('id', { ascending: true })
 
   if (error) {
     throw new Error(error.message)
@@ -143,6 +140,8 @@ export function mapProject(row: ProjectRow): Project {
     thumbnail: row.thumbnail ?? undefined,
     type: row.type ?? 'experiment',
     model: row.model ?? projectModelFallbacks.get(row.id) ?? 'Not specified',
+    sortOrder: row.sort_order,
+    dockOrder: row.dock_order ?? undefined,
     story: row.story ?? '',
     screenshots: row.screenshots ?? [],
     demoUrl: row.demo_url ?? undefined,
@@ -160,10 +159,10 @@ export function mergeProjects(
   )
   const localProjectIds = new Set(localProjects.map((project) => project.id))
 
-  return [
+  return sortProjects([
     ...localProjects.map((project) => remoteProjectsById.get(project.id) ?? project),
     ...remoteProjects.filter((project) => !localProjectIds.has(project.id)),
-  ]
+  ])
 }
 
 export function mapSettingsSection(row: SettingsSectionRow): SettingsSection {

@@ -9,6 +9,8 @@ export const projects: Project[] = [
     thumbnail: '/project-media/workout-board/icon.svg',
     type: 'Fitness',
     model: 'GPT-5.6 Sol',
+    sortOrder: 10,
+    dockOrder: 10,
     story:
       'Workout Board keeps exercises, individual sets, reps, and weights together in one focused session view. Progress saves automatically in the browser, while a built-in countdown timer and stopwatch keep rest periods close at hand without requiring an account.',
     screenshots: [
@@ -26,6 +28,8 @@ export const projects: Project[] = [
     thumbnail: '/project-media/still/icon.png',
     type: 'desktop app',
     model: 'GPT-5.6 Sol',
+    sortOrder: 20,
+    dockOrder: 20,
     story:
       'Still captures full-page website screenshots, extracts useful metadata, and organises everything into a searchable personal collection stored entirely on the Mac.',
     screenshots: ['/project-media/still/still-preview.webp'],
@@ -39,6 +43,8 @@ export const projects: Project[] = [
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-key.svg',
     type: 'interactive experiment',
     model: 'GPT-5.6 Sol',
+    sortOrder: 30,
+    dockOrder: 30,
     story:
       'Keyform turns the keyboard into the interface. It mirrors physical input across a full ANSI QWERTY layout, supports Mac and Windows legends, and pairs responsive key states with optional sound so every press feels immediate.',
     screenshots: [
@@ -58,6 +64,8 @@ export const projects: Project[] = [
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/brand-logo.svg',
     type: 'reference tool',
     model: 'GPT-5.5',
+    sortOrder: 40,
+    dockOrder: 40,
     story:
       'I wanted one place to document the tools that shape my design and development workflow. The result is an interactive catalogue that separates everyday tools from things I am exploring, watching, or have moved on from.',
     screenshots: [
@@ -77,6 +85,8 @@ export const projects: Project[] = [
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/app-logo-medallion.svg',
     type: 'hobby app',
     model: 'GPT-5.5',
+    sortOrder: 50,
+    dockOrder: 50,
     story:
       'A lightweight catalog for Donkey Products Maneki Neko figures, with a visual product grid, local ownership tracking, and owned cats sorted to the front so the collection stays easy to scan.',
     screenshots: [

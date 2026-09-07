@@ -6,6 +6,8 @@ export type Project = {
   thumbnail?: string
   type: string
   model: string
+  sortOrder: number
+  dockOrder?: number
   story: string
   screenshots: string[]
   demoUrl?: string

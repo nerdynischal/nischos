@@ -17,6 +17,7 @@ describe('Supabase content mapping', () => {
       iconTone: 'graphite',
       type: 'experiment',
       model: 'Not specified',
+      sortOrder: 1000,
       story: '',
       screenshots: [],
     })
@@ -43,6 +44,8 @@ describe('Supabase content mapping', () => {
         thumbnail: null,
         type: null,
         model: null,
+        sort_order: 1000,
+        dock_order: null,
         story: null,
         screenshots: null,
         demo_url: null,
@@ -55,6 +58,8 @@ describe('Supabase content mapping', () => {
       iconTone: 'graphite',
       type: 'experiment',
       model: 'Not specified',
+      sortOrder: 1000,
+      dockOrder: undefined,
       story: '',
       screenshots: [],
     })
@@ -69,6 +74,8 @@ describe('Supabase content mapping', () => {
       thumbnail: null,
       type: 'interactive experiment',
       model: null,
+      sort_order: 30,
+      dock_order: 10,
       story: null,
       screenshots: null,
       demo_url: null,
@@ -79,6 +86,8 @@ describe('Supabase content mapping', () => {
     expect(mapProject(row)).toMatchObject({
       type: 'interactive experiment',
       model: 'GPT-5.6 Sol',
+      sortOrder: 30,
+      dockOrder: 10,
     })
   })
 

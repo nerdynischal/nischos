@@ -10,11 +10,23 @@ const project: Project = {
   iconTone: 'graphite',
   type: 'experiment',
   model: 'GPT-5.6 Sol',
+  sortOrder: 10,
   story: '',
   screenshots: [],
 }
 
 describe('desktop app registry', () => {
+  it('uses project sort order for desktop placement', () => {
+    const laterProject = { ...project, id: 'later', sortOrder: 20 }
+    const earlierProject = { ...project, id: 'earlier', sortOrder: 10 }
+
+    expect(
+      createDesktopIcons([laterProject, earlierProject])
+        .filter((icon) => icon.category === 'project')
+        .map((icon) => icon.id),
+    ).toEqual(['earlier', 'later'])
+  })
+
   it('uses the shared system-app definitions for desktop icons', () => {
     const icons = createDesktopIcons([project])
 

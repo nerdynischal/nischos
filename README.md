@@ -50,8 +50,9 @@ The app currently loads these tables:
 - `blog_posts`
 - `settings_sections`
 
-Project records include `sort_order` for desktop placement and nullable
-`dock_order` for dock placement. Ordering values use gaps of ten so new
+Project records use `sort_order` for desktop placement and nullable
+`dock_order` for dock placement. A null `dock_order` keeps a project on the
+desktop without pinning it to the dock. Ordering values use gaps of ten so new
 projects can be inserted without renumbering the whole collection.
 
 The checked-in schema contains the current read model. Running it preserves legacy tables and content. Project metadata uses `type`; the current migration backfills it from the obsolete `category` column before removing that column.
@@ -101,7 +102,7 @@ For an existing Supabase table created before Markdown and pinning support exist
 - `src/content/types.ts` defines the shared portfolio content model; `src/content.ts` contains checked-in fallback content only.
 - `src/features/entry` contains the lock screen, session persistence, and its isolated water-ripple renderer.
 - The remaining `src/features` folders contain the Notes, Project, and About window content.
-- `src/desktop` contains desktop icons, dock behavior, artwork, and explicit dock pinning.
+- `src/desktop` contains desktop icons, dock behavior, and artwork.
 - `src/windows` contains reusable window framing and viewport geometry.
 - `src/theme` contains the persisted system/light/dark preference model and document theme synchronization.
 - `src/styles/tokens` contains the semantic light and dark palettes; `src/styles/theme` contains component-scoped theme rendering.
