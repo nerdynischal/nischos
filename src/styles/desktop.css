@@ -146,14 +146,6 @@
 .supabase-status-icon {
   width: 15px;
   height: 15px;
-  stroke: currentColor;
-  stroke-width: 1.45;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.supabase-status-mark {
-  stroke-width: 1.9;
 }
 
 .supabase-status[data-status='connected'] {
@@ -197,11 +189,6 @@
   width: 15px;
   height: 15px;
   overflow: visible;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 .active-app-label {

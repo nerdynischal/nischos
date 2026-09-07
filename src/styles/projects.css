@@ -151,6 +151,11 @@
   background: var(--carousel-control-bg-hover);
 }
 
+.carousel-controls > button svg {
+  width: 15px;
+  height: 15px;
+}
+
 .carousel-dots {
   display: flex;
   justify-content: center;
@@ -316,10 +321,6 @@
   flex: 0 0 auto;
   width: var(--space-3);
   height: var(--space-3);
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 .project-actions a:hover,

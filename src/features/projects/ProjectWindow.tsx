@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
 import { useState } from 'react'
 import type { Project } from '../../content'
 import { IconArtwork } from '../../desktop/IconArtwork'
@@ -14,22 +15,6 @@ function getScreenshotLabel(screenshot: string, index: number) {
   const filename = screenshot.split('/').pop()?.split('?')[0]
   const label = filename?.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ')
   return label ? label.charAt(0).toUpperCase() + label.slice(1) : `Screenshot ${index + 1}`
-}
-
-function ExternalLinkIcon() {
-  return (
-    <svg
-      className="external-link-icon"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M9 3H13V7" />
-      <path d="M13 3L7.25 8.75" />
-      <path d="M11.5 9V11.5C11.5 12.33 10.83 13 10 13H4.5C3.67 13 3 12.33 3 11.5V6C3 5.17 3.67 4.5 4.5 4.5H7" />
-    </svg>
-  )
 }
 
 export function ProjectWindow({
@@ -81,7 +66,12 @@ export function ProjectWindow({
             {project.demoUrl ? (
               <a className="primary-action" href={project.demoUrl} target="_blank" rel="noreferrer">
                 Visit Website
-                <ExternalLinkIcon />
+                <ExternalLink
+                  className="external-link-icon"
+                  strokeWidth={1.7}
+                  absoluteStrokeWidth
+                  aria-hidden="true"
+                />
               </a>
             ) : (
               <button type="button" className="primary-action disabled-action" disabled>
@@ -91,7 +81,12 @@ export function ProjectWindow({
             {project.sourceUrl ? (
               <a href={project.sourceUrl} target="_blank" rel="noreferrer">
                 Source Code
-                <ExternalLinkIcon />
+                <ExternalLink
+                  className="external-link-icon"
+                  strokeWidth={1.7}
+                  absoluteStrokeWidth
+                  aria-hidden="true"
+                />
               </a>
             ) : (
               <button type="button" className="disabled-action" disabled>
@@ -138,7 +133,7 @@ export function ProjectWindow({
         {screenshotCount > 1 ? (
           <div className="carousel-controls" aria-label="Screenshot carousel controls">
             <button type="button" onClick={showPreviousShot} aria-label="Show previous screenshot">
-              ‹
+              <ChevronLeft strokeWidth={1.8} absoluteStrokeWidth aria-hidden="true" />
             </button>
             <div className="carousel-dots" aria-label="Screenshot selector">
               {projectScreenshots.map((screenshot, index) => {
@@ -156,7 +151,7 @@ export function ProjectWindow({
               })}
             </div>
             <button type="button" onClick={showNextShot} aria-label="Show next screenshot">
-              ›
+              <ChevronRight strokeWidth={1.8} absoluteStrokeWidth aria-hidden="true" />
             </button>
           </div>
         ) : null}
