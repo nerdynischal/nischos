@@ -18,6 +18,8 @@ export type Database = {
           thumbnail: string | null
           type: string | null
           model: string | null
+          sort_order: number
+          dock_order: number | null
           story: string | null
           screenshots: string[] | null
           demo_url: string | null
@@ -33,6 +35,8 @@ export type Database = {
           thumbnail?: string | null
           type?: string | null
           model?: string | null
+          sort_order?: number
+          dock_order?: number | null
           story?: string | null
           screenshots?: string[] | null
           demo_url?: string | null
@@ -48,6 +52,8 @@ export type Database = {
           thumbnail?: string | null
           type?: string | null
           model?: string | null
+          sort_order?: number
+          dock_order?: number | null
           story?: string | null
           screenshots?: string[] | null
           demo_url?: string | null

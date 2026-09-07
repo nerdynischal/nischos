@@ -5,7 +5,12 @@ import type { Database } from './database.types'
 
 type ProjectTableRow = Database['public']['Tables']['projects']['Row']
 
-export type ProjectRow = Omit<ProjectTableRow, 'created_at'>
+// Ordering columns are activated in the next migration step. Keeping them out
+// of this read shape lets the current app run before or after the schema update.
+export type ProjectRow = Omit<
+  ProjectTableRow,
+  'created_at' | 'sort_order' | 'dock_order'
+>
 
 const projectModelFallbacks = new Map(
   fallbackProjects.map((project) => [project.id, project.model]),

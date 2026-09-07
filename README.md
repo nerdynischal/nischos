@@ -50,6 +50,10 @@ The app currently loads these tables:
 - `blog_posts`
 - `settings_sections`
 
+Project records include `sort_order` for desktop placement and nullable
+`dock_order` for dock placement. Ordering values use gaps of ten so new
+projects can be inserted without renumbering the whole collection.
+
 The checked-in schema contains the current read model. Running it preserves legacy tables and content. Project metadata uses `type`; the current migration backfills it from the obsolete `category` column before removing that column.
 
 Each content type is loaded independently. Checked-in projects form the baseline collection, with matching Supabase records overlaid and remote-only projects appended. If Supabase is not configured, a request fails, or another table is empty, the app keeps the corresponding local fallback content from `src/content.ts`.

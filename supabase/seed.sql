@@ -6,6 +6,8 @@ insert into public.projects (
   thumbnail,
   type,
   model,
+  sort_order,
+  dock_order,
   story,
   screenshots,
   demo_url,
@@ -19,6 +21,8 @@ insert into public.projects (
     '/project-media/workout-board/icon.svg',
     'Fitness',
     'GPT-5.6 Sol',
+    10,
+    10,
     'Workout Board keeps exercises, individual sets, reps, and weights together in one focused session view. Progress saves automatically in the browser, while a built-in countdown timer and stopwatch keep rest periods close at hand without requiring an account.',
     array[
       '/project-media/workout-board/workout-board-session.png',
@@ -35,6 +39,8 @@ insert into public.projects (
     '/project-media/still/icon.png',
     'desktop app',
     'GPT-5.6 Sol',
+    20,
+    20,
     'Still captures full-page website screenshots, extracts useful metadata, and organises everything into a searchable personal collection stored entirely on the Mac.',
     array[
       '/project-media/still/still-preview.webp'
@@ -50,6 +56,8 @@ insert into public.projects (
     'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-key.svg',
     'interactive experiment',
     'GPT-5.6 Sol',
+    30,
+    30,
     'Keyform turns the keyboard into the interface. It mirrors physical input across a full ANSI QWERTY layout, supports Mac and Windows legends, and pairs responsive key states with optional sound so every press feels immediate.',
     array[
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-typing.jpg',
@@ -67,6 +75,8 @@ insert into public.projects (
     'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/brand-logo.svg',
     'reference tool',
     'GPT-5.5',
+    40,
+    40,
     'I wanted one place to document the tools that shape my design and development workflow. The result is an interactive catalogue that separates everyday tools from things I am exploring, watching, or have moved on from.',
     array[
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/toolkit-overview.jpg',
@@ -84,6 +94,8 @@ insert into public.projects (
     'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/app-logo-medallion.svg',
     'hobby app',
     'GPT-5.5',
+    50,
+    50,
     'A lightweight catalog for Donkey Products Maneki Neko figures, with a visual product grid, local ownership tracking, and owned cats sorted to the front so the collection stays easy to scan.',
     array[
       'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-01-catalog.jpg',
@@ -100,6 +112,8 @@ on conflict (id) do update set
   thumbnail = excluded.thumbnail,
   type = excluded.type,
   model = excluded.model,
+  sort_order = excluded.sort_order,
+  dock_order = excluded.dock_order,
   story = excluded.story,
   screenshots = excluded.screenshots,
   demo_url = excluded.demo_url,
