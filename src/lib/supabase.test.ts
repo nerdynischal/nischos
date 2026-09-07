@@ -152,6 +152,17 @@ describe('Supabase content mapping', () => {
       url: 'http://127.0.0.1:54321',
       key: 'legacy-key',
     })
+
+    expect(
+      readSupabaseConfig({
+        VITE_SUPABASE_URL: 'https://project.supabase.co',
+        VITE_SUPABASE_PUBLISHABLE_KEY: '   ',
+        VITE_SUPABASE_ANON_KEY: 'legacy-key',
+      }),
+    ).toEqual({
+      url: 'https://project.supabase.co',
+      key: 'legacy-key',
+    })
   })
 
   it('rejects partial or invalid Supabase configuration', () => {

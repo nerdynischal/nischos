@@ -37,9 +37,9 @@ type SupabasePublicEnv = {
 
 export function readSupabaseConfig(env: SupabasePublicEnv) {
   const url = env.VITE_SUPABASE_URL?.trim()
-  const key = (
-    env.VITE_SUPABASE_PUBLISHABLE_KEY ?? env.VITE_SUPABASE_ANON_KEY
-  )?.trim()
+  const publishableKey = env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim()
+  const anonKey = env.VITE_SUPABASE_ANON_KEY?.trim()
+  const key = publishableKey || anonKey
 
   if (!url || !key) return null
 
