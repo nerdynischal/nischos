@@ -93,16 +93,23 @@ npm run projects:check
 Manifests provide the offline/deployment fallback; the generated migration puts
 the same metadata into the live Supabase database.
 
-Create a new manifest and its matching idempotent Supabase migration with:
+Point the command at a local project directory to create a new manifest and its
+matching idempotent Supabase migration:
 
 ```bash
-npm run project:add
+npm run project:add -- "/path/to/project"
 ```
 
-The guided command suggests the next desktop position, offers a dock position
-when capacity is available, validates all metadata and local media, and refuses
-to overwrite existing files. Apply the generated SQL file in the Supabase SQL
-editor after reviewing it. To automate or preview the same workflow:
+The command inspects `package.json`, the README, `index.html`, the Git remote,
+and common artwork locations. Detected values become editable prompt defaults.
+Selected local icons and screenshots are copied into the matching
+`public/project-media` folder. It also suggests the next desktop position,
+offers a dock position when capacity is available, validates everything, and
+refuses to overwrite existing files.
+
+Run `npm run project:add` without a directory for the original guided flow.
+Apply the generated SQL file in the Supabase SQL editor after reviewing it. To
+automate or preview the same workflow:
 
 ```bash
 npm run project:add -- --from ./project.json

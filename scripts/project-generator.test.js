@@ -1,10 +1,22 @@
-import { describe, expect, it } from 'vitest'
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import path from 'node:path'
+import { afterEach, describe, expect, it } from 'vitest'
 import {
   createProjectMigration,
+  inspectProjectDirectory,
   migrationTimestamp,
   nextOrder,
   slugify,
 } from './project-generator.mjs'
+
+const temporaryDirectories = []
+
+afterEach(async () => {
+  await Promise.all(
+    temporaryDirectories.splice(0).map((directory) => rm(directory, { force: true, recursive: true })),
+  )
+})
 
 const project = {
   id: 'nischals-project',
@@ -42,5 +54,37 @@ describe('project generator', () => {
     expect(migration).toContain('  dock_order,')
     expect(migration).toContain('  null,')
     expect(migration).toContain('  post_id = excluded.post_id;')
+  })
+
+  it('detects metadata and media from a project directory', async () => {
+    const directory = await mkdtemp(path.join(tmpdir(), 'nischos-project-'))
+    temporaryDirectories.push(directory)
+    await mkdir(path.join(directory, '.git'))
+    await mkdir(path.join(directory, 'public', 'screenshots'), { recursive: true })
+    await writeFile(
+      path.join(directory, 'package.json'),
+      JSON.stringify({ name: 'sample-tool', description: 'Package description.' }),
+    )
+    await writeFile(path.join(directory, 'README.md'), '# Sample Tool\n\nThe longer project story.\n')
+    await writeFile(path.join(directory, 'index.html'), '<title>Sample Tool</title>')
+    await writeFile(
+      path.join(directory, '.git', 'config'),
+      '[remote "origin"]\n  url = git@github.com:nerdynischal/sample-tool.git\n',
+    )
+    await writeFile(path.join(directory, 'public', 'favicon.svg'), '<svg />')
+    await writeFile(path.join(directory, 'public', 'screenshots', 'overview.png'), 'image')
+
+    const detected = await inspectProjectDirectory(directory)
+
+    expect(detected).toMatchObject({
+      id: 'sample-tool',
+      title: 'Sample Tool',
+      subtitle: 'Package description.',
+      story: 'The longer project story.',
+      sourceUrl: 'https://github.com/nerdynischal/sample-tool',
+      demoUrl: 'https://nerdynischal.github.io/sample-tool/',
+      thumbnailPath: path.join(directory, 'public', 'favicon.svg'),
+      screenshotPaths: [path.join(directory, 'public', 'screenshots', 'overview.png')],
+    })
   })
 })
