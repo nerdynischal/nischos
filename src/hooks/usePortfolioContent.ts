@@ -10,6 +10,7 @@ import {
   fetchProjects,
   fetchSettingsSections,
   hasSupabaseConfig,
+  mergeProjects,
 } from '../lib/supabase'
 
 export function usePortfolioContent() {
@@ -35,7 +36,7 @@ export function usePortfolioContent() {
       const remotePosts = getLoadedContent('notes', results[1])
       const remoteSettingsSections = getLoadedContent('settings sections', results[2])
 
-      if (remoteProjects) setProjects(remoteProjects)
+      if (remoteProjects) setProjects(mergeProjects(remoteProjects))
       if (remotePosts) setPosts(remotePosts)
 
       if (remoteSettingsSections) {

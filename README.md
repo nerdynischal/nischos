@@ -52,7 +52,7 @@ The app currently loads these tables:
 
 The checked-in schema contains the current read model. Running it preserves legacy tables and content. Project metadata uses `type`; the current migration backfills it from the obsolete `category` column before removing that column.
 
-Each content type is loaded independently. If Supabase is not configured, a request fails, or a table is empty, the app keeps the corresponding local fallback content from `src/content.ts`.
+Each content type is loaded independently. Checked-in projects form the baseline collection, with matching Supabase records overlaid and remote-only projects appended. If Supabase is not configured, a request fails, or another table is empty, the app keeps the corresponding local fallback content from `src/content.ts`.
 
 The typed browser client lives in `src/lib/supabase.ts`, with its database shape
 in `src/lib/database.types.ts`. Regenerate that type after future schema changes

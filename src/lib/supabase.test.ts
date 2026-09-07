@@ -3,11 +3,36 @@ import {
   mapPost,
   mapProject,
   mapSettingsDetails,
+  mergeProjects,
   readSupabaseConfig,
   sortPosts,
 } from './supabase'
 
 describe('Supabase content mapping', () => {
+  it('keeps checked-in projects that are not yet present in Supabase', () => {
+    const project = (id: string, title: string) => ({
+      id,
+      title,
+      subtitle: '',
+      iconTone: 'graphite',
+      type: 'experiment',
+      model: 'Not specified',
+      story: '',
+      screenshots: [],
+    })
+
+    expect(
+      mergeProjects(
+        [project('existing', 'Remote title'), project('remote-only', 'Remote only')],
+        [project('existing', 'Local title'), project('local-only', 'Local only')],
+      ).map(({ id, title }) => ({ id, title })),
+    ).toEqual([
+      { id: 'existing', title: 'Remote title' },
+      { id: 'local-only', title: 'Local only' },
+      { id: 'remote-only', title: 'Remote only' },
+    ])
+  })
+
   it('normalizes nullable project fields', () => {
     expect(
       mapProject({

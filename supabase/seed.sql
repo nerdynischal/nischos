@@ -12,6 +12,22 @@ insert into public.projects (
   source_url
 ) values
   (
+    'workout-board',
+    'Workout Board',
+    'A focused, local-first planner for a single training session.',
+    'mint',
+    '/project-media/workout-board/icon.svg',
+    'fitness tool',
+    'GPT-5.6 Sol',
+    'Workout Board keeps exercises, individual sets, reps, and weights together in one focused session view. Progress saves automatically in the browser, while a built-in countdown timer and stopwatch keep rest periods close at hand without requiring an account.',
+    array[
+      '/project-media/workout-board/workout-board-session.png',
+      '/project-media/workout-board/workout-board-overview.png'
+    ],
+    'https://nerdynischal.github.io/workout-board/',
+    'https://github.com/nerdynischal/workout-board'
+  ),
+  (
     'still',
     'Still',
     'A private, local-first visual library for websites worth remembering.',

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Generated from design-tokens.json by scripts/build-design-tokens.mjs. -->
+  <rect width="64" height="64" rx="14" fill="#171918" />
+  <g fill="none" stroke="#b7f82f" stroke-linecap="round" stroke-width="6">
+    <path d="M18 24v16M46 24v16M24 19v26M40 19v26M24 32h16" />
+  </g>
+</svg>

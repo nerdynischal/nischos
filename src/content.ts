@@ -37,6 +37,23 @@ export type SettingsSection = {
 
 export const projects: Project[] = [
   {
+    id: 'workout-board',
+    title: 'Workout Board',
+    subtitle: 'A focused, local-first planner for a single training session.',
+    iconTone: 'mint',
+    thumbnail: '/project-media/workout-board/icon.svg',
+    type: 'fitness tool',
+    model: 'GPT-5.6 Sol',
+    story:
+      'Workout Board keeps exercises, individual sets, reps, and weights together in one focused session view. Progress saves automatically in the browser, while a built-in countdown timer and stopwatch keep rest periods close at hand without requiring an account.',
+    screenshots: [
+      '/project-media/workout-board/workout-board-session.png',
+      '/project-media/workout-board/workout-board-overview.png',
+    ],
+    demoUrl: 'https://nerdynischal.github.io/workout-board/',
+    sourceUrl: 'https://github.com/nerdynischal/workout-board',
+  },
+  {
     id: 'still',
     title: 'Still',
     subtitle: 'A private, local-first visual library for websites worth remembering.',

@@ -146,6 +146,21 @@ export function mapProject(row: ProjectRow): Project {
   }
 }
 
+export function mergeProjects(
+  remoteProjects: Project[],
+  localProjects: Project[] = fallbackProjects,
+): Project[] {
+  const remoteProjectsById = new Map(
+    remoteProjects.map((project) => [project.id, project]),
+  )
+  const localProjectIds = new Set(localProjects.map((project) => project.id))
+
+  return [
+    ...localProjects.map((project) => remoteProjectsById.get(project.id) ?? project),
+    ...remoteProjects.filter((project) => !localProjectIds.has(project.id)),
+  ]
+}
+
 export function mapSettingsSection(row: SettingsSectionRow): SettingsSection {
   return {
     id: row.id,
