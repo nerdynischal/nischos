@@ -1,10 +1,34 @@
 # Changelog
 
+## 7 September 2026
+
+### Added
+
+- Added Workout Board to the desktop and dock with local icon and screenshot assets, project links, fallback metadata, and a Supabase migration.
+- Added a menu-bar connection indicator that distinguishes successfully loaded Supabase content from local fallback data, using Lucide's `DatabaseCheck` and `DatabaseX` icons with accessible status text.
+- Added explicit `sort_order` and nullable `dock_order` project fields so Supabase controls desktop and dock placement without relying on array positions.
+- Added one automatically discovered JSON manifest per fallback project, a JSON Schema, and a deployment-blocking validator for metadata, ordering, URLs, local media, and dock capacity.
+- Added `npm run project:add`, which can inspect a local project folder, suggest metadata and ordering, copy selected artwork, and generate both a fallback manifest and an idempotent Supabase migration.
+- Added tests for project ordering, manifest-backed content, Supabase mapping and loading status, system icon rendering, and project generation.
+
+### Changed
+
+- Standardized interface icons on Lucide across the menu bar, project actions, Notes, window controls, theme controls, and fallback states.
+- Made Supabase project values authoritative when a matching remote record is available, while retaining checked-in manifests as reliable offline and deployment fallbacks.
+- Refactored project rendering and dock construction around shared, data-driven ordering helpers and a single project content model.
+- Expanded the standard project check to validate manifests before linting, tests, type-checking, and the production build.
+
+### Fixed
+
+- Corrected production Supabase configuration to accept the existing `ANON_KEY` deployment variable.
+- Fixed stale fallback metadata overriding Supabase project type and description values on the live site.
+
 ## 27 August 2026
 
 ### Added
 
 - Added a GitHub Pages workflow that installs dependencies, runs the complete production check, derives the correct repository base path, and deploys the built site.
+- Published nischOS from the new `nerdynischal/nischos` repository with GitHub Pages and production Supabase configuration.
 - Added a top-level error boundary with an accessible recovery screen if the desktop cannot render.
 - Added deployment documentation, runtime version requirements, social metadata, and tests for base-path-aware asset URLs.
 - Added an archive of legacy Supabase content fields and an idempotent migration for removing their obsolete columns.
@@ -19,6 +43,11 @@
 - Made local artwork and screenshots work from GitHub Pages project subpaths, corrected the Maneki Neko fallback media URLs, and added graceful screenshot fallbacks.
 - Replaced the oversized Still PNG preview with a resized WebP asset to reduce its transfer size without a visible loss of detail.
 - Improved Notes heading hierarchy, semantic dates, image decoding, and unavailable project-action semantics.
+
+### Removed
+
+- Removed the unused `description`, `icon_label`, and `stack` columns from `projects` after archiving their previous values.
+- Removed the unused `cover_image`, `excerpt`, `size`, `filename`, `cover_tone`, and paragraph-array `content` columns from `blog_posts`, leaving Markdown as the single note-body format.
 
 ## 25 August 2026
 

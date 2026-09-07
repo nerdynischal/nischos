@@ -50,6 +50,11 @@ The app currently loads these tables:
 - `blog_posts`
 - `settings_sections`
 
+An icon in the menu bar reports whether every content collection loaded from
+Supabase. If configuration is missing, a request fails, or a table is empty,
+the icon indicates fallback mode and the affected collection stays available
+from checked-in content.
+
 Project records use `sort_order` for desktop placement and nullable
 `dock_order` for dock placement. A null `dock_order` keeps a project on the
 desktop without pinning it to the dock. Ordering values use gaps of ten so new
@@ -65,9 +70,10 @@ if you adopt the Supabase CLI.
 
 ### Project media
 
-Project artwork lives in the public `project-screenshots` bucket, grouped by
-project ID. Store the copied public URL in `thumbnail` or `screenshots`; the app
-renders those URLs directly.
+Project artwork can be stored locally under `public/project-media/<project-id>`
+or remotely in the public `project-screenshots` Supabase Storage bucket. Store
+the resulting local path or public HTTPS URL in `thumbnail` or `screenshots`;
+the app renders both forms directly.
 
 For a fresh local Supabase project, `supabase/seed.sql` supplies the current
 portfolio content, including Keyform.
@@ -99,6 +105,9 @@ matching idempotent Supabase migration:
 ```bash
 npm run project:add -- "/path/to/project"
 ```
+
+See [Adding a project](docs/adding-projects.md) for the complete checklist and
+the metadata and artwork conventions used by the command.
 
 The command inspects `package.json`, the README, `index.html`, the Git remote,
 and common artwork locations. Detected values become editable prompt defaults.
@@ -163,6 +172,10 @@ Run the complete pre-commit check:
 ```bash
 npm run check
 ```
+
+This validates project manifests and design tokens, lints the repository, runs
+the automated tests, type-checks the application, and creates a production
+build. It does not apply generated Supabase migrations.
 
 Or run each check individually:
 
