@@ -26,6 +26,7 @@ export function DesktopExperience({
     projects,
     posts,
     settingsSections,
+    supabaseStatus,
     activeSection,
     setActiveSection,
   } = usePortfolioContent()
@@ -111,6 +112,7 @@ export function DesktopExperience({
       <MenuBar
         activeTitle={activeWindow?.title}
         dateTime={dateTime}
+        supabaseStatus={supabaseStatus}
         onOpenAbout={() => openSettings('about')}
       />
       <DesktopIcons icons={icons} onOpenIcon={openIcon} />

@@ -56,6 +56,9 @@
   --scrollbar-thumb-hover: rgba(var(--color-white-rgb), 0.32);
   --scrollbar-color: rgba(var(--color-white-rgb), 0.26);
   --focus-ring: rgba(116, 166, 255, 0.72);
+  --status-connected: rgb(var(--tone-mint-rgb));
+  --status-loading: var(--text-tertiary);
+  --status-fallback: rgb(var(--tone-amber-rgb));
 
   --sans: var(--font-sans);
   --mono: var(--font-mono);
@@ -138,4 +141,7 @@
   --scrollbar-thumb-hover: rgba(var(--color-black-rgb), 0.3);
   --scrollbar-color: rgba(var(--color-black-rgb), 0.24);
   --focus-ring: rgba(45, 105, 185, 0.72);
+  --status-connected: rgb(54, 135, 91);
+  --status-loading: var(--text-tertiary);
+  --status-fallback: rgb(166, 105, 14);
 }

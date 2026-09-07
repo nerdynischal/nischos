@@ -42,6 +42,10 @@
     display: none;
   }
 
+  .menu-status .supabase-status-dot {
+    display: block;
+  }
+
   .active-app-label {
     max-width: 34vw;
   }

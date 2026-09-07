@@ -13,11 +13,16 @@ import {
   mergeProjects,
 } from '../lib/supabase'
 
+export type SupabaseLoadStatus = 'loading' | 'connected' | 'fallback'
+
 export function usePortfolioContent() {
   const [settingsSections, setSettingsSections] = useState(fallbackSettingsSections)
   const [activeSection, setActiveSection] = useState(DEFAULT_SETTINGS_SECTION_ID)
   const [projects, setProjects] = useState(fallbackProjects)
   const [posts, setPosts] = useState(fallbackPosts)
+  const [supabaseStatus, setSupabaseStatus] = useState<SupabaseLoadStatus>(
+    hasSupabaseConfig ? 'loading' : 'fallback',
+  )
 
   useEffect(() => {
     let ignore = false
@@ -35,6 +40,8 @@ export function usePortfolioContent() {
       const remoteProjects = getLoadedContent('projects', results[0])
       const remotePosts = getLoadedContent('notes', results[1])
       const remoteSettingsSections = getLoadedContent('settings sections', results[2])
+
+      setSupabaseStatus(getSupabaseLoadStatus(results))
 
       if (remoteProjects) setProjects(mergeProjects(remoteProjects))
       if (remotePosts) setPosts(remotePosts)
@@ -60,9 +67,20 @@ export function usePortfolioContent() {
     projects,
     posts,
     settingsSections,
+    supabaseStatus,
     activeSection,
     setActiveSection,
   }
+}
+
+export function getSupabaseLoadStatus(
+  results: PromiseSettledResult<unknown[]>[],
+): SupabaseLoadStatus {
+  return results.every(
+    (result) => result.status === 'fulfilled' && result.value.length > 0,
+  )
+    ? 'connected'
+    : 'fallback'
 }
 
 function getLoadedContent<T>(label: string, result: PromiseSettledResult<T[]>) {

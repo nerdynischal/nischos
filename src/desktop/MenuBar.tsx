@@ -1,4 +1,5 @@
 import { resolveAssetUrl } from '../lib/assetUrl'
+import type { SupabaseLoadStatus } from '../hooks/usePortfolioContent'
 import { useTheme } from '../theme/theme-context'
 import { getNextTheme } from '../theme/theme'
 
@@ -7,13 +8,21 @@ type DateTime = {
   time: string
 }
 
+const SUPABASE_STATUS_COPY: Record<SupabaseLoadStatus, string> = {
+  loading: 'Loading Supabase data',
+  connected: 'Supabase data loaded',
+  fallback: 'Supabase data unavailable; using local fallbacks',
+}
+
 export function MenuBar({
   activeTitle,
   dateTime,
+  supabaseStatus,
   onOpenAbout,
 }: {
   activeTitle?: string
   dateTime: DateTime
+  supabaseStatus: SupabaseLoadStatus
   onOpenAbout: () => void
 }) {
   const { resolvedTheme, toggleTheme } = useTheme()
@@ -35,6 +44,17 @@ export function MenuBar({
         {activeTitle ? <span className="active-app-label">{activeTitle}</span> : null}
       </div>
       <div className="menu-status" aria-label="Desktop status">
+        <div
+          className="supabase-status"
+          data-status={supabaseStatus}
+          role="status"
+          aria-atomic="true"
+          aria-label={SUPABASE_STATUS_COPY[supabaseStatus]}
+          title={SUPABASE_STATUS_COPY[supabaseStatus]}
+        >
+          <span className="supabase-status-dot" aria-hidden="true" />
+          <span className="supabase-status-label">Supabase</span>
+        </div>
         <button
           type="button"
           className="theme-toggle"
