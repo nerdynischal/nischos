@@ -134,34 +134,34 @@
 }
 
 .supabase-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--text-tertiary);
-  white-space: nowrap;
-}
-
-.supabase-status-dot {
-  display: block;
-  width: 6px;
-  height: 6px;
+  display: grid;
   flex: 0 0 auto;
-  border-radius: var(--radius-round);
-  background: var(--status-loading);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--status-loading) 14%, transparent);
-  transition:
-    background-color var(--duration-control) var(--ease-out),
-    box-shadow var(--duration-control) var(--ease-out);
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  color: var(--status-loading);
+  transition: color var(--duration-control) var(--ease-out);
 }
 
-.supabase-status[data-status='connected'] .supabase-status-dot {
-  background: var(--status-connected);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--status-connected) 16%, transparent);
+.supabase-status-icon {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.supabase-status[data-status='fallback'] .supabase-status-dot {
-  background: var(--status-fallback);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--status-fallback) 16%, transparent);
+.supabase-status-mark {
+  stroke-width: 1.9;
+}
+
+.supabase-status[data-status='connected'] {
+  color: var(--status-connected);
+}
+
+.supabase-status[data-status='fallback'] {
+  color: var(--status-fallback);
 }
 
 .theme-toggle {

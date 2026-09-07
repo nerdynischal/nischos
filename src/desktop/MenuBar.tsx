@@ -52,8 +52,22 @@ export function MenuBar({
           aria-label={SUPABASE_STATUS_COPY[supabaseStatus]}
           title={SUPABASE_STATUS_COPY[supabaseStatus]}
         >
-          <span className="supabase-status-dot" aria-hidden="true" />
-          <span className="supabase-status-label">Supabase</span>
+          <svg
+            className="supabase-status-icon"
+            viewBox="0 0 20 20"
+            fill="none"
+            aria-hidden="true"
+          >
+            <ellipse cx="10" cy="5" rx="6" ry="2.5" />
+            <path d="M4 5V10C4 11.38 6.69 12.5 10 12.5C13.31 12.5 16 11.38 16 10V5" />
+            <path d="M4 10V15C4 16.38 6.69 17.5 10 17.5C13.31 17.5 16 16.38 16 15V10" />
+            {supabaseStatus === 'connected' ? (
+              <path className="supabase-status-mark" d="M12.75 15.25L14.25 16.75L17.25 13.75" />
+            ) : null}
+            {supabaseStatus === 'fallback' ? (
+              <path className="supabase-status-mark" d="M13.25 13.75L16.75 17.25M16.75 13.75L13.25 17.25" />
+            ) : null}
+          </svg>
         </div>
         <button
           type="button"
