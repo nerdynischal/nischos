@@ -1,4 +1,4 @@
-import { Database, DatabaseX, LoaderCircle, Moon, Sun } from 'lucide-react'
+import { DatabaseCheck, DatabaseX, LoaderCircle, Moon, Sun, type LucideIcon } from 'lucide-react'
 import { resolveAssetUrl } from '../lib/assetUrl'
 import type { SupabaseLoadStatus } from '../hooks/usePortfolioContent'
 import { useTheme } from '../theme/theme-context'
@@ -17,9 +17,9 @@ const SUPABASE_STATUS_COPY: Record<SupabaseLoadStatus, string> = {
 
 const SUPABASE_STATUS_ICONS = {
   loading: LoaderCircle,
-  connected: Database,
+  connected: DatabaseCheck,
   fallback: DatabaseX,
-} satisfies Record<SupabaseLoadStatus, typeof Database>
+} satisfies Record<SupabaseLoadStatus, LucideIcon>
 
 export function MenuBar({
   activeTitle,
