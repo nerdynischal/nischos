@@ -42,7 +42,7 @@ export const projects: Project[] = [
     subtitle: 'A focused, local-first planner for a single training session.',
     iconTone: 'mint',
     thumbnail: '/project-media/workout-board/icon.svg',
-    type: 'fitness tool',
+    type: 'Fitness',
     model: 'GPT-5.6 Sol',
     story:
       'Workout Board keeps exercises, individual sets, reps, and weights together in one focused session view. Progress saves automatically in the browser, while a built-in countdown timer and stopwatch keep rest periods close at hand without requiring an account.',

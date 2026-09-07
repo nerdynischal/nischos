@@ -17,7 +17,7 @@ insert into public.projects (
     'A focused, local-first planner for a single training session.',
     'mint',
     '/project-media/workout-board/icon.svg',
-    'fitness tool',
+    'Fitness',
     'GPT-5.6 Sol',
     'Workout Board keeps exercises, individual sets, reps, and weights together in one focused session view. Progress saves automatically in the browser, while a built-in countdown timer and stopwatch keep rest periods close at hand without requiring an account.',
     array[

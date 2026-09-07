@@ -22,6 +22,12 @@ describe('local fallback content', () => {
     })
   })
 
+  it('keeps Workout Board metadata aligned with Supabase', () => {
+    expect(projects.find((project) => project.id === 'workout-board')).toMatchObject({
+      type: 'Fitness',
+    })
+  })
+
   it('does not expose placeholder contact information or example links', () => {
     const serializedContent = JSON.stringify({ posts, projects, settingsSections })
 
