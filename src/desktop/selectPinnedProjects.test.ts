@@ -32,13 +32,19 @@ describe('selectPinnedProjects', () => {
     ).toEqual(['pinned', 'fallback-a', 'fallback-b'])
   })
 
-  it('keeps all four configured portfolio projects in the dock', () => {
-    const projects = [project('fourth'), project('third'), project('second'), project('first')]
+  it('keeps all five configured portfolio projects in the dock', () => {
+    const projects = [
+      project('fifth'),
+      project('fourth'),
+      project('third'),
+      project('second'),
+      project('first'),
+    ]
 
     expect(
-      selectPinnedProjects(projects, ['first', 'second', 'third', 'fourth']).map(
+      selectPinnedProjects(projects, ['first', 'second', 'third', 'fourth', 'fifth']).map(
         (item) => item.id,
       ),
-    ).toEqual(['first', 'second', 'third', 'fourth'])
+    ).toEqual(['first', 'second', 'third', 'fourth', 'fifth'])
   })
 })

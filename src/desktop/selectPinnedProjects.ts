@@ -1,6 +1,7 @@
 import type { Project } from '../content'
 
 export const PINNED_PROJECT_IDS = [
+  'workout-board',
   'still',
   'keyform',
   'my-toolkit',
@@ -10,7 +11,7 @@ export const PINNED_PROJECT_IDS = [
 export function selectPinnedProjects(
   projects: Project[],
   pinnedIds = PINNED_PROJECT_IDS,
-  limit = 4,
+  limit = 5,
 ) {
   const projectsById = new Map(projects.map((project) => [project.id, project]))
   const selected = pinnedIds.flatMap((id) => {
