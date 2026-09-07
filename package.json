@@ -9,9 +9,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "check": "npm run tokens:check && npm run lint && npm run test && npm run build",
+    "check": "npm run projects:check && npm run tokens:check && npm run lint && npm run test && npm run build",
     "lint": "oxlint",
     "test": "vitest run",
+    "projects:check": "node scripts/check-projects.mjs",
     "tokens:check": "node scripts/check-css-tokens.mjs",
     "supabase:check": "node scripts/check-supabase.mjs",
     "preview": "vite preview"
@@ -29,6 +30,8 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "oxlint": "^1.69.0",
     "typescript": "~6.0.2",
     "vite": "^8.1.0",

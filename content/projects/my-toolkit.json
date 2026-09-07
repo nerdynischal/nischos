@@ -1,0 +1,20 @@
+{
+  "$schema": "../project.schema.json",
+  "id": "my-toolkit",
+  "title": "Nisch's Toolkit",
+  "subtitle": "A living catalogue of the tools in my design and development workflow.",
+  "iconTone": "blue",
+  "thumbnail": "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/brand-logo.svg",
+  "type": "reference tool",
+  "model": "GPT-5.5",
+  "sortOrder": 40,
+  "dockOrder": 40,
+  "story": "I wanted one place to document the tools that shape my design and development workflow. The result is an interactive catalogue that separates everyday tools from things I am exploring, watching, or have moved on from.",
+  "screenshots": [
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/toolkit-overview.jpg",
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/codex-detail.jpg",
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/tool-categories.jpg"
+  ],
+  "demoUrl": "https://nerdynischal.github.io/my-toolkit/",
+  "sourceUrl": "https://github.com/nerdynischal/my-toolkit"
+}

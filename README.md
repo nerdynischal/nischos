@@ -57,7 +57,7 @@ projects can be inserted without renumbering the whole collection.
 
 The checked-in schema contains the current read model. Running it preserves legacy tables and content. Project metadata uses `type`; the current migration backfills it from the obsolete `category` column before removing that column.
 
-Each content type is loaded independently. Checked-in projects form the baseline collection, with matching Supabase records overlaid and remote-only projects appended. If Supabase is not configured, a request fails, or another table is empty, the app keeps the corresponding local fallback content from `src/content.ts`.
+Each content type is loaded independently. Checked-in projects form the baseline collection, with matching Supabase records overlaid and remote-only projects appended. If Supabase is not configured, a request fails, or another table is empty, the app keeps the corresponding local fallback content.
 
 The typed browser client lives in `src/lib/supabase.ts`, with its database shape
 in `src/lib/database.types.ts`. Regenerate that type after future schema changes
@@ -71,6 +71,28 @@ renders those URLs directly.
 
 For a fresh local Supabase project, `supabase/seed.sql` supplies the current
 portfolio content, including Keyform.
+
+### Project manifests
+
+Checked-in fallback projects live as individual JSON files in
+`content/projects`. Vite discovers them automatically, so adding a fallback
+project does not require editing an import list or `src/content.ts`.
+
+Each manifest must follow `content/project.schema.json`, and its filename must
+match its `id` (for example, `workout-board.json`). `sortOrder` controls desktop
+ordering. Set `dockOrder` to a number to pin the project to the dock, or omit it
+to keep the project on the desktop only. The dock supports up to five projects.
+
+Local artwork must use a `/project-media/...` path that exists under `public`;
+remote media and project links must use HTTPS. Validate manifests with:
+
+```bash
+npm run projects:check
+```
+
+Manifests provide the offline/deployment fallback. Until the Supabase ingestion
+step is added, make the corresponding Supabase record separately when the live
+database should serve the new project.
 
 ### Notes
 
@@ -99,7 +121,8 @@ For an existing Supabase table created before Markdown and pinning support exist
 ## Project structure
 
 - `src/hooks` contains portfolio data loading, the live clock, and desktop-window state.
-- `src/content/types.ts` defines the shared portfolio content model; `src/content.ts` contains checked-in fallback content only.
+- `content/projects` contains validated fallback project manifests.
+- `src/content/types.ts` defines the shared portfolio content model; `src/content.ts` assembles project manifests with the checked-in notes and profile fallback.
 - `src/features/entry` contains the lock screen, session persistence, and its isolated water-ripple renderer.
 - The remaining `src/features` folders contain the Notes, Project, and About window content.
 - `src/desktop` contains desktop icons, dock behavior, and artwork.
@@ -123,6 +146,7 @@ Or run each check individually:
 
 ```bash
 npm run lint
+npm run projects:check
 npm run tokens:check
 npm run test
 npm run build

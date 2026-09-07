@@ -1,0 +1,20 @@
+{
+  "$schema": "../project.schema.json",
+  "id": "keyform",
+  "title": "Keyform",
+  "subtitle": "An interactive ANSI QWERTY keyboard that responds to every physical key press.",
+  "iconTone": "graphite",
+  "thumbnail": "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-key.svg",
+  "type": "interactive experiment",
+  "model": "GPT-5.6 Sol",
+  "sortOrder": 30,
+  "dockOrder": 30,
+  "story": "Keyform turns the keyboard into the interface. It mirrors physical input across a full ANSI QWERTY layout, supports Mac and Windows legends, and pairs responsive key states with optional sound so every press feels immediate.",
+  "screenshots": [
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-typing.jpg",
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-mac.jpg",
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-windows.jpg"
+  ],
+  "demoUrl": "https://nerdynischal.github.io/keyform/",
+  "sourceUrl": "https://github.com/nerdynischal/keyform"
+}

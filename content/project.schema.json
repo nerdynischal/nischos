@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nerdynischal.github.io/nischos/project.schema.json",
+  "title": "nischOS project manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "id",
+    "title",
+    "subtitle",
+    "iconTone",
+    "type",
+    "model",
+    "sortOrder",
+    "story",
+    "screenshots"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subtitle": {
+      "type": "string",
+      "minLength": 1
+    },
+    "iconTone": {
+      "enum": ["amber", "blue", "coral", "graphite", "mint", "rose", "violet"]
+    },
+    "thumbnail": {
+      "$ref": "#/$defs/mediaReference"
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sortOrder": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "dockOrder": {
+      "type": ["integer", "null"],
+      "minimum": 0
+    },
+    "story": {
+      "type": "string",
+      "minLength": 1
+    },
+    "screenshots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/mediaReference"
+      },
+      "uniqueItems": true
+    },
+    "demoUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "postId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    }
+  },
+  "$defs": {
+    "mediaReference": {
+      "type": "string",
+      "anyOf": [
+        {
+          "pattern": "^/project-media/[a-zA-Z0-9._/-]+$"
+        },
+        {
+          "format": "uri",
+          "pattern": "^https://"
+        }
+      ]
+    }
+  }
+}

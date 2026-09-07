@@ -1,0 +1,20 @@
+{
+  "$schema": "../project.schema.json",
+  "id": "maneki-neko-catalog",
+  "title": "Maneki Neko Catalog",
+  "subtitle": "A personal checklist for tracking lucky cat figures.",
+  "iconTone": "amber",
+  "thumbnail": "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/app-logo-medallion.svg",
+  "type": "hobby app",
+  "model": "GPT-5.5",
+  "sortOrder": 50,
+  "dockOrder": 50,
+  "story": "A lightweight catalog for Donkey Products Maneki Neko figures, with a visual product grid, local ownership tracking, and owned cats sorted to the front so the collection stays easy to scan.",
+  "screenshots": [
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-01-catalog.jpg",
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-02-collection-status.jpg",
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-03-product-details.jpg"
+  ],
+  "demoUrl": "https://nerdynischal.github.io/my-maneki-neko-collection/",
+  "sourceUrl": "https://github.com/nerdynischal/my-maneki-neko-collection"
+}
