@@ -135,7 +135,7 @@ The repository includes `.github/workflows/deploy-pages.yml`. A push to `master`
 Before the first deployment:
 
 1. In the GitHub repository, open **Settings → Pages** and set **Source** to **GitHub Actions**.
-2. If the live site should use Supabase content, add `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` as repository variables under **Settings → Secrets and variables → Actions → Variables**. If they are omitted, the deployed site uses the checked-in fallback content.
+2. If the live site should use Supabase content, add `VITE_SUPABASE_URL` and either `VITE_SUPABASE_PUBLISHABLE_KEY` or the legacy `VITE_SUPABASE_ANON_KEY` as repository variables under **Settings → Secrets and variables → Actions → Variables**. The workflow also accepts an existing `ANON_KEY` variable. If they are omitted, the deployed site uses the checked-in fallback content.
 3. Push to `master` and follow the **Deploy to GitHub Pages** workflow in the Actions tab.
 
 The workflow derives the Vite base path from the repository name, so both `<username>.github.io` sites and project sites hosted at `<username>.github.io/<repository>/` resolve assets correctly.
