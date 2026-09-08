@@ -226,6 +226,7 @@
 
 .contact-row {
   width: 100%;
+  align-items: center;
   border: 0;
   border-bottom: 1px solid var(--profile-row-line);
   border-radius: 0;
@@ -283,10 +284,6 @@
   white-space: nowrap;
 }
 
-.contact-row {
-  align-items: center;
-}
-
 .contact-icon-tile {
   display: grid;
   flex: 0 0 32px;
@@ -328,7 +325,7 @@
   text-align: right;
 }
 
-.contact-action {
+.contact-action-indicator {
   position: relative;
   display: grid;
   flex: 0 0 auto;
@@ -368,13 +365,13 @@
   transform: translateY(-50%) translateX(0) scale(1);
 }
 
-.contact-action svg {
+.contact-action-indicator svg {
   width: 16px;
   height: 16px;
   stroke-width: 1.75;
 }
 
-.contact-row:hover .contact-action {
+.contact-row:hover .contact-action-indicator {
   color: var(--text-primary);
 }
 

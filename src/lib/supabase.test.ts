@@ -136,6 +136,7 @@ describe('Supabase content mapping', () => {
     expect(
       mapSettingsDetails([
         { label: 'Role', value: 'Design Engineer', href: 'https://example.com' },
+        { label: 'Unsafe', value: 'Blocked', href: 'javascript:alert(1)' },
         { label: 'Broken' },
         { label: 42, value: 'Nope' },
       ]),
@@ -143,6 +144,10 @@ describe('Supabase content mapping', () => {
       label: 'Role',
       value: 'Design Engineer',
       href: 'https://example.com',
+    }, {
+      label: 'Unsafe',
+      value: 'Blocked',
+      href: undefined,
     }])
   })
 
@@ -159,6 +164,12 @@ describe('Supabase content mapping', () => {
               icon: '/tool-icons/notion.svg',
               url: 'https://www.notion.com/',
             },
+            {
+              title: 'Unsafe',
+              description: 'Untrusted external link.',
+              icon: '/tool-icons/unsafe.svg',
+              url: 'javascript:alert(1)',
+            },
             { title: 'Broken' },
           ],
         },
@@ -174,6 +185,12 @@ describe('Supabase content mapping', () => {
             description: 'Documentation and project logs.',
             icon: '/tool-icons/notion.svg',
             url: 'https://www.notion.com/',
+          },
+          {
+            title: 'Unsafe',
+            description: 'Untrusted external link.',
+            icon: '/tool-icons/unsafe.svg',
+            url: undefined,
           },
         ],
       },

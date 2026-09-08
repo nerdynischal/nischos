@@ -24,12 +24,6 @@ type BlogPostTableRow = Database['public']['Tables']['blog_posts']['Row']
 
 export type BlogPostRow = Omit<BlogPostTableRow, 'created_at'>
 
-export type SettingsDetailRow = {
-  label?: unknown
-  value?: unknown
-  href?: unknown
-}
-
 type SettingsSectionTableRow = Database['public']['Tables']['settings_sections']['Row']
 
 export type SettingsSectionRow = Omit<
@@ -263,11 +257,13 @@ export function mapSettingsDetails(details: unknown) {
   return details.flatMap((item) => {
     if (!isRecord(item)) return []
     if (typeof item.label !== 'string' || typeof item.value !== 'string') return []
-    return [{
-      label: item.label,
-      value: item.value,
-      href: typeof item.href === 'string' ? item.href : undefined,
-    }]
+    return [
+      {
+        label: item.label,
+        value: item.value,
+        href: mapExternalUrl(item.href),
+      },
+    ]
   })
 }
 
@@ -299,7 +295,7 @@ export function mapSettingsToolGroups(details: unknown): SettingsToolGroup[] {
           title: tool.title,
           description: tool.description,
           icon: tool.icon,
-          url: typeof tool.url === 'string' ? tool.url : undefined,
+          url: mapExternalUrl(tool.url),
         },
       ]
     })
@@ -310,4 +306,17 @@ export function mapSettingsToolGroups(details: unknown): SettingsToolGroup[] {
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null
+}
+
+function mapExternalUrl(value: unknown) {
+  if (typeof value !== 'string') return undefined
+
+  try {
+    const url = new URL(value)
+    return url.protocol === 'https:' || url.protocol === 'http:'
+      ? value
+      : undefined
+  } catch {
+    return undefined
+  }
 }
