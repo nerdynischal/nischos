@@ -28,7 +28,6 @@ export function LegacyWorkWindow({
             <FolderOpen strokeWidth={1.7} absoluteStrokeWidth aria-hidden="true" />
             Selected Work
           </button>
-          <span>Freelance archive</span>
         </aside>
 
         <section className="legacy-file-grid" aria-label="Selected work files">

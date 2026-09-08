@@ -14,7 +14,6 @@ export function LegacyProjectWindow({ project }: { project: Project }) {
       ) : null}
 
       <header className="legacy-project-header">
-        <p className="eyebrow">Freelance archive</p>
         <h3>{project.title}</h3>
         <p>{project.subtitle}</p>
         <ul className="legacy-project-tags" aria-label="Project disciplines">

@@ -1,4 +1,4 @@
-/* Local freelance archive folder */
+/* Local selected-work folder */
 .window-folder {
   --window-min-width: 560px;
   --window-min-height: 410px;
@@ -68,8 +68,7 @@
   background: var(--sidebar-bg);
 }
 
-.legacy-folder-sidebar p,
-.legacy-folder-sidebar span {
+.legacy-folder-sidebar p {
   margin: 0;
   padding: 0 var(--space-2);
   color: var(--text-tertiary);

@@ -10,7 +10,7 @@ export const legacyProjects: Project[] = [
     iconTone: 'violet',
     thumbnail: `${mediaRoot}/auto-gmail/cover.jpg`,
     type: 'Branding',
-    model: 'Freelance archive',
+    model: 'Case study',
     sortOrder: 10,
     story:
       'Designed the product icon and promotional assets for Auto Gmail, a Chrome extension that uses inbox context and ChatGPT to draft replies.',
@@ -55,7 +55,7 @@ export const legacyProjects: Project[] = [
     iconTone: 'rose',
     thumbnail: `${mediaRoot}/ravageous/cover.jpg`,
     type: 'UI · UX · Web',
-    model: 'Freelance archive',
+    model: 'Case study',
     sortOrder: 20,
     story:
       'Redesigned the landing page for an unreleased game, simplifying a fragmented download experience while giving it a clearer game-led identity.',
@@ -113,7 +113,7 @@ export const legacyProjects: Project[] = [
     iconTone: 'mint',
     thumbnail: `${mediaRoot}/freeguides/cover.jpg`,
     type: 'UI · UX · Web',
-    model: 'Freelance archive',
+    model: 'Case study',
     sortOrder: 30,
     story:
       'Designed a pair of focused landing pages that explain the FreeGuides platform differently to hotel and hostel operators.',
@@ -166,7 +166,7 @@ export const legacyProjects: Project[] = [
     iconTone: 'amber',
     thumbnail: `${mediaRoot}/form-gpt/cover.jpg`,
     type: 'UI · UX',
-    model: 'Freelance archive',
+    model: 'Case study',
     sortOrder: 40,
     story:
       'Created a practical interface concept for a Chrome extension that analyses the current page with AI.',
@@ -219,7 +219,7 @@ export const legacyProjects: Project[] = [
     iconTone: 'blue',
     thumbnail: `${mediaRoot}/donor-hub/cover.jpg`,
     type: 'UI · IA · Web',
-    model: 'Freelance archive',
+    model: 'Case study',
     sortOrder: 50,
     story:
       'Designed a responsive dApp donor hub for a tech-aware audience, including the transaction journey in dark and light modes.',
@@ -278,7 +278,7 @@ export const legacyProjects: Project[] = [
     iconTone: 'graphite',
     thumbnail: `${mediaRoot}/alice-puzzle/cover.jpg`,
     type: 'UI · UX · IA',
-    model: 'Freelance archive',
+    model: 'Case study',
     sortOrder: 60,
     story:
       'Helped an indie developer define the information architecture and interface language for a logic game played by programming a malfunctioning AI.',
@@ -326,7 +326,7 @@ export const legacyProjects: Project[] = [
     iconTone: 'coral',
     thumbnail: `${mediaRoot}/vocal-email/cover.jpg`,
     type: 'UI · UX · Web',
-    model: 'Freelance archive',
+    model: 'Case study',
     sortOrder: 70,
     story:
       'Redesigned the Vocal Email paywall and payment journey around one Pro plan across mobile and desktop.',
@@ -388,7 +388,7 @@ export const legacyProjects: Project[] = [
     iconTone: 'mint',
     thumbnail: `${mediaRoot}/seogaeilge/cover.jpg`,
     type: 'UI · UX · IA · Web',
-    model: 'Freelance archive',
+    model: 'Case study',
     sortOrder: 80,
     story:
       'Reworked the navigation, content patterns, and interface of a community resource site for learning Irish.',
