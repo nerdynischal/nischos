@@ -4,7 +4,12 @@ import {
   settingsSections as fallbackSettingsSections,
 } from '../content'
 import { sortProjects } from '../content/projectOrdering'
-import type { BlogPost, Project, SettingsSection } from '../content/types'
+import type {
+  BlogPost,
+  Project,
+  SettingsSection,
+  SettingsToolGroup,
+} from '../content/types'
 import type { Database } from './database.types'
 
 type ProjectTableRow = Database['public']['Tables']['projects']['Row']
@@ -30,7 +35,7 @@ export type SettingsSectionRow = Omit<
   SettingsSectionTableRow,
   'created_at' | 'details' | 'sort_order'
 > & {
-  details: SettingsDetailRow[] | null
+  details: unknown
 }
 
 type SupabasePublicEnv = {
@@ -187,6 +192,9 @@ export function mergeSettingsSections(
         ...remoteSection,
         displayTitle: remoteSection.displayTitle ?? section.displayTitle,
         displaySubtitle: remoteSection.displaySubtitle ?? section.displaySubtitle,
+        toolGroups: remoteSection.toolGroups?.length
+          ? remoteSection.toolGroups
+          : section.toolGroups,
       }
     }),
     ...remoteSections.filter((section) => !localSectionIds.has(section.id)),
@@ -201,6 +209,7 @@ export function mapSettingsSection(row: SettingsSectionRow): SettingsSection {
     displaySubtitle: row.display_subtitle ?? undefined,
     body: row.body ?? '',
     details: mapSettingsDetails(row.details),
+    toolGroups: mapSettingsToolGroups(row.details),
     items: row.items ?? [],
   }
 }
@@ -223,11 +232,53 @@ export function sortPosts(posts: BlogPost[]) {
   })
 }
 
-export function mapSettingsDetails(details: SettingsDetailRow[] | null) {
+export function mapSettingsDetails(details: unknown) {
   if (!Array.isArray(details)) return []
 
   return details.flatMap((item) => {
+    if (!isRecord(item)) return []
     if (typeof item.label !== 'string' || typeof item.value !== 'string') return []
     return [{ label: item.label, value: item.value }]
   })
+}
+
+export function mapSettingsToolGroups(details: unknown): SettingsToolGroup[] {
+  if (!Array.isArray(details)) return []
+
+  return details.flatMap((group) => {
+    if (
+      !isRecord(group) ||
+      typeof group.id !== 'string' ||
+      typeof group.label !== 'string' ||
+      !Array.isArray(group.tools)
+    ) {
+      return []
+    }
+
+    const tools = group.tools.flatMap((tool) => {
+      if (
+        !isRecord(tool) ||
+        typeof tool.title !== 'string' ||
+        typeof tool.description !== 'string' ||
+        typeof tool.icon !== 'string'
+      ) {
+        return []
+      }
+
+      return [
+        {
+          title: tool.title,
+          description: tool.description,
+          icon: tool.icon,
+          url: typeof tool.url === 'string' ? tool.url : undefined,
+        },
+      ]
+    })
+
+    return tools.length ? [{ id: group.id, label: group.label, tools }] : []
+  })
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null
 }

@@ -47,12 +47,29 @@ describe('local fallback content', () => {
   })
 
   it('keeps a truthful local About section', () => {
-    expect(settingsSections).toHaveLength(1)
+    expect(settingsSections.map((section) => section.id)).toEqual([
+      'about',
+      'values',
+      'hobbies',
+      'tools',
+    ])
     expect(DEFAULT_SETTINGS_SECTION_ID).toBe('about')
     expect(settingsSections[0]).toMatchObject({
       id: 'about',
       displayTitle: 'Nischal',
       displaySubtitle: 'Design Engineer',
     })
+  })
+
+  it('keeps the complete toolkit grouped by status', () => {
+    const toolkit = settingsSections.find((section) => section.id === 'tools')
+
+    expect(toolkit?.toolGroups?.map((group) => group.id)).toEqual([
+      'main',
+      'exploring',
+      'watchlist',
+      'obsolete',
+    ])
+    expect(toolkit?.toolGroups?.flatMap((group) => group.tools)).toHaveLength(17)
   })
 })

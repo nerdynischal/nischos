@@ -1,6 +1,7 @@
 import type { SettingsSection } from '../../content/types'
 import { EmptyState } from '../../components/EmptyState'
 import { resolveAssetUrl } from '../../lib/assetUrl'
+import { ToolkitSection } from './ToolkitSection'
 
 const GITHUB_PROFILE_URL = 'https://github.com/nerdynischal'
 
@@ -51,7 +52,9 @@ export function SettingsWindow({
             <p className="profile-subtitle">{section.displaySubtitle}</p>
           ) : null}
         </div>
-        {section.details?.length ? (
+        {section.toolGroups?.length ? (
+          <ToolkitSection groups={section.toolGroups} />
+        ) : section.details?.length ? (
           <dl className="profile-details">
             {section.details.map((item) => (
               <div key={item.label} className="profile-row">

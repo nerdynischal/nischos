@@ -29,6 +29,19 @@ export type SettingsDetail = {
   value: string
 }
 
+export type SettingsTool = {
+  title: string
+  description: string
+  icon: string
+  url?: string
+}
+
+export type SettingsToolGroup = {
+  id: string
+  label: string
+  tools: SettingsTool[]
+}
+
 export type SettingsSection = {
   id: string
   label: string
@@ -36,5 +49,6 @@ export type SettingsSection = {
   displaySubtitle?: string
   body: string
   details?: SettingsDetail[]
+  toolGroups?: SettingsToolGroup[]
   items: string[]
 }

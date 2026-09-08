@@ -3,6 +3,7 @@ import {
   mapPost,
   mapProject,
   mapSettingsDetails,
+  mapSettingsToolGroups,
   mergeProjects,
   mergeSettingsSections,
   readSupabaseConfig,
@@ -139,6 +140,40 @@ describe('Supabase content mapping', () => {
         { label: 42, value: 'Nope' },
       ]),
     ).toEqual([{ label: 'Role', value: 'Design Engineer' }])
+  })
+
+  it('maps toolkit groups while dropping malformed tools', () => {
+    expect(
+      mapSettingsToolGroups([
+        {
+          id: 'main',
+          label: 'Main',
+          tools: [
+            {
+              title: 'Notion',
+              description: 'Documentation and project logs.',
+              icon: '/tool-icons/notion.svg',
+              url: 'https://www.notion.com/',
+            },
+            { title: 'Broken' },
+          ],
+        },
+        { id: 'broken' },
+      ]),
+    ).toEqual([
+      {
+        id: 'main',
+        label: 'Main',
+        tools: [
+          {
+            title: 'Notion',
+            description: 'Documentation and project logs.',
+            icon: '/tool-icons/notion.svg',
+            url: 'https://www.notion.com/',
+          },
+        ],
+      },
+    ])
   })
 
   it('keeps checked-in settings sections that are not yet present in Supabase', () => {

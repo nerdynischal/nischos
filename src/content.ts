@@ -1,5 +1,6 @@
 import { loadProjectManifests } from './content/projectManifest'
 import { sortProjects } from './content/projectOrdering'
+import { toolkitGroups } from './content/toolkit'
 import type { BlogPost, SettingsSection } from './content/types'
 
 export const projects = sortProjects(loadProjectManifests())
@@ -76,6 +77,15 @@ export const settingsSections: SettingsSection[] = [
       { label: 'Listening', value: 'Dive Club, How to be a Better Human' },
       { label: 'Playing', value: 'Dunk City Dynasty, PES' },
     ],
+    items: [],
+  },
+  {
+    id: 'tools',
+    label: 'Tools',
+    displayTitle: 'Tools',
+    displaySubtitle: 'my toolkit',
+    body: '',
+    toolGroups: toolkitGroups,
     items: [],
   },
 ]
