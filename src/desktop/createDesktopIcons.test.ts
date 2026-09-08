@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Project } from '../content/types'
-import { getProjectWindowId, SYSTEM_APPS } from './appRegistry'
+import { getProjectWindowId, LEGACY_WORK_APP, SYSTEM_APPS } from './appRegistry'
 import { createDesktopIcons } from './createDesktopIcons'
 
 const project: Project = {
@@ -30,9 +30,10 @@ describe('desktop app registry', () => {
   it('uses the shared system-app definitions for desktop icons', () => {
     const icons = createDesktopIcons([project])
 
-    expect(icons.slice(1)).toEqual(
-      SYSTEM_APPS.map((app) => ({ id: app.category, ...app })),
-    )
+    expect(icons.slice(1)).toEqual([
+      LEGACY_WORK_APP,
+      ...SYSTEM_APPS.map((app) => ({ id: app.category, ...app })),
+    ])
   })
 
   it('presents the Notes app with the graphite tone', () => {

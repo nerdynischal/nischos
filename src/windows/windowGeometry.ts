@@ -5,6 +5,7 @@ type WindowSize = Pick<DesktopWindow, 'width' | 'height'>
 
 export const initialWindowLayout: Record<WindowCategory, WindowGeometry> = {
   project: { x: 9, y: 13, width: 680, height: 630 },
+  folder: { x: 21, y: 14, width: 790, height: 580 },
   blog: { x: 13, y: 17, width: 860, height: 640 },
   settings: { x: 17, y: 22, width: 700, height: 570 },
 }

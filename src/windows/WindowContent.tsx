@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react'
 import type { BlogPost, Project, SettingsSection } from '../content/types'
 import { EmptyState } from '../components/EmptyState'
+import { legacyProjects } from '../content/legacyProjects'
+import { LegacyWorkWindow } from '../features/projects/LegacyWorkWindow'
 import { ProjectWindow } from '../features/projects/ProjectWindow'
 import { SettingsWindow } from '../features/settings/SettingsWindow'
 import type { DesktopWindow } from '../types'
@@ -14,6 +16,7 @@ export function WindowContent({
   projects,
   posts,
   onOpenBlog,
+  onOpenProject,
   activeSection,
   onChangeSection,
   settingsSections,
@@ -22,10 +25,15 @@ export function WindowContent({
   projects: Project[]
   posts: BlogPost[]
   onOpenBlog: (postId?: string) => void
+  onOpenProject: (projectId: string) => void
   activeSection: string
   onChangeSection: (sectionId: string) => void
   settingsSections: SettingsSection[]
 }) {
+  if (desktopWindow.category === 'folder') {
+    return <LegacyWorkWindow projects={legacyProjects} onOpenProject={onOpenProject} />
+  }
+
   if (desktopWindow.category === 'project') {
     const project = projects.find((item) => item.id === desktopWindow.refId)
     if (!project) {

@@ -4,6 +4,7 @@ import type { Project } from '../../content/types'
 import { IconArtwork } from '../../desktop/IconArtwork'
 import { resolveAssetUrl } from '../../lib/assetUrl'
 import { MetaRow } from './MetaRow'
+import { LegacyProjectWindow } from './LegacyProjectWindow'
 
 function isImageScreenshot(screenshot: string) {
   return /^(?:https?:\/\/|\/)/.test(screenshot)
@@ -44,6 +45,10 @@ export function ProjectWindow({
     isImageScreenshot(selectedScreenshot) &&
     selectedScreenshotUrl !== failedScreenshot,
   )
+
+  if (project.caseStudy) {
+    return <LegacyProjectWindow project={project} />
+  }
 
   function showPreviousShot() {
     setActiveShot((index) => (index - 1 + screenshotCount) % screenshotCount)

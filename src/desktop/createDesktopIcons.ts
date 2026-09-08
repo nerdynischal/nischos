@@ -1,7 +1,7 @@
 import { sortProjects } from '../content/projectOrdering'
 import type { Project } from '../content/types'
 import type { DesktopIcon } from '../types'
-import { SYSTEM_APPS } from './appRegistry'
+import { LEGACY_WORK_APP, SYSTEM_APPS } from './appRegistry'
 
 const PROJECT_POSITIONS: ReadonlyArray<readonly [number, number]> = [
   [11, 17],
@@ -31,6 +31,7 @@ export function createDesktopIcons(projects: Project[]): DesktopIcon[] {
         y: position[1],
       }
     }),
+    LEGACY_WORK_APP,
     ...SYSTEM_APPS.map((app) => ({ id: app.category, ...app })),
   ]
 }

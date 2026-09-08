@@ -13,6 +13,25 @@ export type Project = {
   demoUrl?: string
   sourceUrl?: string
   postId?: string
+  caseStudy?: ProjectCaseStudy
+}
+
+export type ProjectCaseStudyImage = {
+  src: string
+  alt: string
+  caption?: string
+}
+
+export type ProjectCaseStudySection = {
+  title: string
+  body?: string[]
+  bullets?: string[]
+  images?: ProjectCaseStudyImage[]
+}
+
+export type ProjectCaseStudy = {
+  tags: string[]
+  sections: ProjectCaseStudySection[]
 }
 
 export type BlogPost = {

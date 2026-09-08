@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { clampWindowToViewport, repositionWindowForViewport } from './windowGeometry'
+import {
+  clampWindowToViewport,
+  initialWindowLayout,
+  repositionWindowForViewport,
+} from './windowGeometry'
 
 const windowGeometry = {
   x: 900,
@@ -40,5 +44,11 @@ describe('repositionWindowForViewport', () => {
     expect((result.y - 8) / (1000 - 40 - 400 - 16)).toBeCloseTo(
       (176 - 8) / (800 - 40 - 400 - 16),
     )
+  })
+})
+
+describe('initialWindowLayout', () => {
+  it('gives the Selected Work folder a dedicated Finder-sized window', () => {
+    expect(initialWindowLayout.folder).toMatchObject({ width: 790, height: 580 })
   })
 })

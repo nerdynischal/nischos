@@ -1,4 +1,4 @@
-export type WindowCategory = 'project' | 'blog' | 'settings'
+export type WindowCategory = 'project' | 'folder' | 'blog' | 'settings'
 
 export type DesktopWindow = {
   id: string

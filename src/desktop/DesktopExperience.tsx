@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { DEFAULT_SETTINGS_SECTION_ID } from '../content'
+import { legacyProjects } from '../content/legacyProjects'
 import { useDesktopWindows } from '../hooks/useDesktopWindows'
 import { usePortfolioContent } from '../hooks/usePortfolioContent'
 import type { DesktopIcon } from '../types'
@@ -37,6 +38,7 @@ export function DesktopExperience({ isEntering }: DesktopExperienceProps) {
   } = useDesktopWindows()
 
   const icons = useMemo(() => createDesktopIcons(projects), [projects])
+  const allProjects = useMemo(() => [...projects, ...legacyProjects], [projects])
 
   useEffect(() => {
     if (isEntering) {
@@ -45,13 +47,21 @@ export function DesktopExperience({ isEntering }: DesktopExperienceProps) {
   }, [isEntering])
 
   function openProject(projectId: string) {
-    const project = projects.find((item) => item.id === projectId)
+    const project = allProjects.find((item) => item.id === projectId)
     if (!project) return
     upsertWindow({
       id: getProjectWindowId(project.id),
       category: 'project',
       refId: project.id,
       title: project.title,
+    })
+  }
+
+  function openLegacyWork() {
+    upsertWindow({
+      id: 'selected-work',
+      category: 'folder',
+      title: 'Selected Work',
     })
   }
 
@@ -85,6 +95,9 @@ export function DesktopExperience({ isEntering }: DesktopExperienceProps) {
         break
       case 'settings':
         openSettings()
+        break
+      case 'folder':
+        openLegacyWork()
         break
       case 'project':
         openProject(icon.id)
@@ -125,9 +138,10 @@ export function DesktopExperience({ isEntering }: DesktopExperienceProps) {
           >
             <WindowContent
               desktopWindow={desktopWindow}
-              projects={projects}
+              projects={allProjects}
               posts={posts}
               onOpenBlog={openBlog}
+              onOpenProject={openProject}
               activeSection={activeSection}
               onChangeSection={setActiveSection}
               settingsSections={settingsSections}
@@ -138,7 +152,7 @@ export function DesktopExperience({ isEntering }: DesktopExperienceProps) {
 
       <Dock
         windows={windows}
-        projects={projects}
+        projects={allProjects}
         onOpenProject={openProject}
         onOpenBlog={openBlog}
         onOpenSettings={openSettings}
