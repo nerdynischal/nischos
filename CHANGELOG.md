@@ -1,5 +1,21 @@
 # Changelog
 
+## 8 September 2026
+
+### Added
+
+- Expanded the About window with Values, Hobbies, Tools, and Contact sections, each with matching navigation icons and consistent section headings and subtitles.
+- Added a categorized toolkit covering main tools, tools being explored, a watchlist, and obsolete tools, with product artwork and dark-theme contrast treatments.
+- Added full-row Contact actions for copying an email address and opening LinkedIn or GitHub in a new tab, including an inline copy-confirmation toast.
+- Added local fallback content, Supabase seed data, and versioned migrations for every new About section.
+- Added tests for settings-section merging, toolkit mapping, Contact links, and unsafe external URL handling.
+
+### Changed
+
+- Aligned the new About sections with the existing window layout, typography, spacing, responsive behaviour, and light and dark themes.
+- Refactored the About window into focused sidebar, toolkit, and contact components while consolidating duplicate styles and shared mapping logic.
+- Restricted data-driven external links to safe HTTP and HTTPS destinations before rendering them as interactive actions.
+
 ## 7 September 2026
 
 ### Added
