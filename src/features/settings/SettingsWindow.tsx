@@ -1,5 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
-import { Check, Copy, ExternalLink, Mail } from 'lucide-react'
+import {
+  AtSign,
+  Check,
+  CircleUserRound,
+  Copy,
+  ExternalLink,
+  Gem,
+  Mail,
+  Shapes,
+  Wrench,
+  type LucideIcon,
+} from 'lucide-react'
 import type { SettingsDetail, SettingsSection } from '../../content/types'
 import { EmptyState } from '../../components/EmptyState'
 import { resolveAssetUrl } from '../../lib/assetUrl'
@@ -9,6 +20,13 @@ const GITHUB_PROFILE_URL = 'https://github.com/nerdynischal'
 const CONTACT_ICON_ASSETS: Record<string, string> = {
   LinkedIn: '/contact-icons/linkedin.svg',
   GitHub: '/contact-icons/github.svg',
+}
+const SETTINGS_SECTION_ICONS: Record<string, LucideIcon> = {
+  about: CircleUserRound,
+  values: Gem,
+  hobbies: Shapes,
+  tools: Wrench,
+  contact: AtSign,
 }
 
 export function SettingsWindow({
@@ -32,17 +50,24 @@ export function SettingsWindow({
         <div className="settings-sidebar-group">
           <p className="settings-sidebar-title">Nischal</p>
         </div>
-        {settingsSections.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            className={item.id === section.id ? 'is-selected' : ''}
-            onClick={() => onChangeSection(item.id)}
-            aria-current={item.id === section.id ? 'page' : undefined}
-          >
-            <span>{item.label}</span>
-          </button>
-        ))}
+        {settingsSections.map((item) => {
+          const SectionIcon = SETTINGS_SECTION_ICONS[item.id]
+
+          return (
+            <button
+              key={item.id}
+              type="button"
+              className={item.id === section.id ? 'is-selected' : ''}
+              onClick={() => onChangeSection(item.id)}
+              aria-current={item.id === section.id ? 'page' : undefined}
+            >
+              {SectionIcon ? (
+                <SectionIcon className="settings-sidebar-icon" aria-hidden="true" />
+              ) : null}
+              <span>{item.label}</span>
+            </button>
+          )
+        })}
       </aside>
       <section className="settings-detail">
         <div className="avatar-orbit" aria-hidden="true">

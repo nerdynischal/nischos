@@ -40,6 +40,9 @@
 }
 
 .settings-sidebar button {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
   min-height: var(--control-height-md);
   border: 1px solid transparent;
   border-radius: var(--radius-md);
@@ -54,6 +57,19 @@
     border-color var(--duration-control) var(--ease-out),
     box-shadow var(--duration-control) var(--ease-out),
     transform var(--duration-press) var(--ease-out);
+}
+
+.settings-sidebar-icon {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+  opacity: 0.82;
+  stroke-width: 1.75;
+}
+
+.settings-sidebar button.is-selected .settings-sidebar-icon {
+  opacity: 1;
 }
 
 .settings-sidebar button:hover {
