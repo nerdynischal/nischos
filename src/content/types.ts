@@ -27,6 +27,7 @@ export type ProjectCaseStudySection = {
   body?: string[]
   bullets?: string[]
   images?: ProjectCaseStudyImage[]
+  imageLayout?: 'grid'
 }
 
 export type ProjectCaseStudy = {

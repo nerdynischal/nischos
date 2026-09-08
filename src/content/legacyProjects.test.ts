@@ -33,4 +33,25 @@ describe('local legacy project archive', () => {
   it('does not pin archive files as standalone dock apps', () => {
     expect(legacyProjects.every((project) => project.dockOrder === undefined)).toBe(true)
   })
+
+  it('preserves the complete source image set for every case study', () => {
+    const imageCounts = Object.fromEntries(
+      legacyProjects.map((project) => [
+        project.id,
+        project.caseStudy?.sections.flatMap((section) => section.images ?? []).length,
+      ]),
+    )
+
+    expect(imageCounts).toEqual({
+      'auto-gmail': 8,
+      ravageous: 6,
+      freeguides: 6,
+      'form-gpt': 8,
+      'donor-hub': 20,
+      'alice-puzzle': 9,
+      'vocal-email': 16,
+      seogaeilge: 4,
+    })
+  })
+
 })

@@ -39,17 +39,21 @@ export function LegacyProjectWindow({ project }: { project: Project }) {
                   {section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
                 </ul>
               ) : null}
-              {section.images?.map((image) => (
-                <figure key={image.src}>
-                  <img
-                    src={resolveAssetUrl(image.src)}
-                    alt={image.alt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  {image.caption ? <figcaption>{image.caption}</figcaption> : null}
-                </figure>
-              ))}
+              {section.images ? (
+                <div className="legacy-section-gallery" data-layout={section.imageLayout}>
+                  {section.images.map((image) => (
+                    <figure key={image.src}>
+                      <img
+                        src={resolveAssetUrl(image.src)}
+                        alt={image.alt}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      {image.caption ? <figcaption>{image.caption}</figcaption> : null}
+                    </figure>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </section>
         ))}
