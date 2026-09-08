@@ -44,7 +44,6 @@ export function LegacyWorkWindow({
                 ) : (
                   <FileText strokeWidth={1.5} absoluteStrokeWidth />
                 )}
-                <span className="legacy-file-fold" />
               </span>
               <strong>{project.title}</strong>
               <span>{project.type}</span>

@@ -142,18 +142,6 @@
   object-fit: cover;
 }
 
-.legacy-file-fold {
-  position: absolute;
-  right: -1px;
-  top: -1px;
-  width: 22px;
-  height: 22px;
-  border-left: 1px solid var(--line-frame);
-  border-bottom: 1px solid var(--line-frame);
-  background: var(--surface-panel);
-  clip-path: polygon(100% 0, 100% 100%, 0 0);
-}
-
 .legacy-file > strong {
   max-width: 100%;
   color: var(--text-secondary);
