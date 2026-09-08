@@ -192,3 +192,70 @@ on conflict (id) do update set
   details = excluded.details,
   items = excluded.items,
   sort_order = excluded.sort_order;
+
+insert into public.settings_sections (
+  id,
+  label,
+  display_title,
+  display_subtitle,
+  body,
+  details,
+  items,
+  sort_order
+) values (
+  'hobbies',
+  'Hobbies',
+  'Hobbies',
+  'Current interests',
+  '',
+  '[
+    {"label": "Exploring", "value": "AI tools & Front End Development"},
+    {"label": "Reading", "value": "Building a Second Brain by Tiago Forte"},
+    {"label": "Listening", "value": "Dive Club, How to be a Better Human"},
+    {"label": "Playing", "value": "Dunk City Dynasty, PES"}
+  ]'::jsonb,
+  array[]::text[],
+  20
+)
+on conflict (id) do update set
+  label = excluded.label,
+  display_title = excluded.display_title,
+  display_subtitle = excluded.display_subtitle,
+  body = excluded.body,
+  details = excluded.details,
+  items = excluded.items,
+  sort_order = excluded.sort_order;
+
+insert into public.settings_sections (
+  id,
+  label,
+  display_title,
+  display_subtitle,
+  body,
+  details,
+  items,
+  sort_order
+) values (
+  'values',
+  'Values',
+  'Values',
+  'Design Principles',
+  '',
+  '[]'::jsonb,
+  array[
+    'Design with intention',
+    'Design with integrity',
+    'Design with curiosity',
+    'Design with simplicity',
+    'Design with empathy'
+  ],
+  10
+)
+on conflict (id) do update set
+  label = excluded.label,
+  display_title = excluded.display_title,
+  display_subtitle = excluded.display_subtitle,
+  body = excluded.body,
+  details = excluded.details,
+  items = excluded.items,
+  sort_order = excluded.sort_order;

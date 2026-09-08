@@ -4,6 +4,7 @@ import {
   mapProject,
   mapSettingsDetails,
   mergeProjects,
+  mergeSettingsSections,
   readSupabaseConfig,
   sortPosts,
 } from './supabase'
@@ -138,6 +139,37 @@ describe('Supabase content mapping', () => {
         { label: 42, value: 'Nope' },
       ]),
     ).toEqual([{ label: 'Role', value: 'Design Engineer' }])
+  })
+
+  it('keeps checked-in settings sections that are not yet present in Supabase', () => {
+    const section = (id: string, label: string) => ({
+      id,
+      label,
+      displayTitle: label,
+      displaySubtitle: undefined as string | undefined,
+      body: '',
+      items: [],
+    })
+
+    const localValues = {
+      ...section('values', 'Values'),
+      displaySubtitle: 'Design Principles',
+    }
+
+    expect(
+      mergeSettingsSections(
+        [
+          section('about', 'Remote About'),
+          section('values', 'Values'),
+          section('remote-only', 'Remote only'),
+        ],
+        [section('about', 'Local About'), localValues],
+      ).map(({ id, label, displaySubtitle }) => ({ id, label, displaySubtitle })),
+    ).toEqual([
+      { id: 'about', label: 'Remote About', displaySubtitle: undefined },
+      { id: 'values', label: 'Values', displaySubtitle: 'Design Principles' },
+      { id: 'remote-only', label: 'Remote only', displaySubtitle: undefined },
+    ])
   })
 
   it('prefers a publishable key and supports legacy anon keys', () => {

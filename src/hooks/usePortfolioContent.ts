@@ -11,6 +11,7 @@ import {
   fetchSettingsSections,
   hasSupabaseConfig,
   mergeProjects,
+  mergeSettingsSections,
 } from '../lib/supabase'
 
 export type SupabaseLoadStatus = 'loading' | 'connected' | 'fallback'
@@ -47,11 +48,12 @@ export function usePortfolioContent() {
       if (remotePosts) setPosts(remotePosts)
 
       if (remoteSettingsSections) {
-        setSettingsSections(remoteSettingsSections)
+        const mergedSettingsSections = mergeSettingsSections(remoteSettingsSections)
+        setSettingsSections(mergedSettingsSections)
         setActiveSection((currentSection) =>
-          remoteSettingsSections.some((section) => section.id === currentSection)
+          mergedSettingsSections.some((section) => section.id === currentSection)
             ? currentSection
-            : remoteSettingsSections[0].id,
+            : mergedSettingsSections[0].id,
         )
       }
     }

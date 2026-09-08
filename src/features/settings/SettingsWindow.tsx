@@ -62,11 +62,13 @@ export function SettingsWindow({
           </dl>
         ) : (
           <>
-            <p>{section.body}</p>
+            {section.body ? <p>{section.body}</p> : null}
             {section.items.length ? (
-              <ul>
+              <ul className="settings-items">
                 {section.items.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} className="settings-item">
+                    {item}
+                  </li>
                 ))}
               </ul>
             ) : null}

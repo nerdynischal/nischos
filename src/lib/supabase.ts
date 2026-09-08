@@ -1,5 +1,8 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { projects as fallbackProjects } from '../content'
+import {
+  projects as fallbackProjects,
+  settingsSections as fallbackSettingsSections,
+} from '../content'
 import { sortProjects } from '../content/projectOrdering'
 import type { BlogPost, Project, SettingsSection } from '../content/types'
 import type { Database } from './database.types'
@@ -163,6 +166,31 @@ export function mergeProjects(
     ...localProjects.map((project) => remoteProjectsById.get(project.id) ?? project),
     ...remoteProjects.filter((project) => !localProjectIds.has(project.id)),
   ])
+}
+
+export function mergeSettingsSections(
+  remoteSections: SettingsSection[],
+  localSections: SettingsSection[] = fallbackSettingsSections,
+): SettingsSection[] {
+  const remoteSectionsById = new Map(
+    remoteSections.map((section) => [section.id, section]),
+  )
+  const localSectionIds = new Set(localSections.map((section) => section.id))
+
+  return [
+    ...localSections.map((section) => {
+      const remoteSection = remoteSectionsById.get(section.id)
+      if (!remoteSection) return section
+
+      return {
+        ...section,
+        ...remoteSection,
+        displayTitle: remoteSection.displayTitle ?? section.displayTitle,
+        displaySubtitle: remoteSection.displaySubtitle ?? section.displaySubtitle,
+      }
+    }),
+    ...remoteSections.filter((section) => !localSectionIds.has(section.id)),
+  ]
 }
 
 export function mapSettingsSection(row: SettingsSectionRow): SettingsSection {

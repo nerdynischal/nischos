@@ -96,6 +96,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   padding: 1.7rem 1.8rem;
 }
 
@@ -268,4 +269,29 @@
   border-radius: var(--radius-md);
   color: var(--text-secondary);
   background: var(--surface-soft);
+}
+
+.settings-detail .settings-items {
+  gap: 0;
+  width: 100%;
+  margin: 0.05rem 0 0;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--surface-profile);
+}
+
+.settings-detail .settings-item {
+  padding: 0.78rem 1rem;
+  border: 0;
+  border-bottom: 1px solid var(--profile-row-line);
+  border-radius: 0;
+  color: var(--text-primary);
+  background: transparent;
+  font-size: var(--type-ui-size);
+  font-weight: var(--type-heading-weight);
+  line-height: var(--type-ui-line);
+}
+
+.settings-detail .settings-item:last-child {
+  border-bottom: 0;
 }

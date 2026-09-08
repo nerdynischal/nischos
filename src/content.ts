@@ -50,6 +50,34 @@ export const settingsSections: SettingsSection[] = [
     ],
     items: [],
   },
+  {
+    id: 'values',
+    label: 'Values',
+    displayTitle: 'Values',
+    displaySubtitle: 'Design Principles',
+    body: '',
+    items: [
+      'Design with intention',
+      'Design with integrity',
+      'Design with curiosity',
+      'Design with simplicity',
+      'Design with empathy',
+    ],
+  },
+  {
+    id: 'hobbies',
+    label: 'Hobbies',
+    displayTitle: 'Hobbies',
+    displaySubtitle: 'Current interests',
+    body: '',
+    details: [
+      { label: 'Exploring', value: 'AI tools & Front End Development' },
+      { label: 'Reading', value: 'Building a Second Brain by Tiago Forte' },
+      { label: 'Listening', value: 'Dive Club, How to be a Better Human' },
+      { label: 'Playing', value: 'Dunk City Dynasty, PES' },
+    ],
+    items: [],
+  },
 ]
 
 export const DEFAULT_SETTINGS_SECTION_ID = settingsSections[0].id
