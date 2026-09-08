@@ -23,7 +23,6 @@ export function LegacyWorkWindow({
 
       <div className="legacy-folder-layout">
         <aside className="legacy-folder-sidebar" aria-label="Folder locations">
-          <p>Favourites</p>
           <button type="button" className="is-selected" aria-current="page">
             <FolderOpen strokeWidth={1.7} absoluteStrokeWidth aria-hidden="true" />
             Selected Work

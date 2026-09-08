@@ -68,19 +68,6 @@
   background: var(--sidebar-bg);
 }
 
-.legacy-folder-sidebar p {
-  margin: 0;
-  padding: 0 var(--space-2);
-  color: var(--text-tertiary);
-  font: var(--type-meta-weight) var(--type-meta-size)/var(--type-meta-line) var(--mono);
-}
-
-.legacy-folder-sidebar p {
-  margin-bottom: var(--space-1);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-meta);
-}
-
 .legacy-folder-sidebar button {
   display: flex;
   min-height: var(--control-height-compact);
