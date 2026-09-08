@@ -88,6 +88,23 @@ export const settingsSections: SettingsSection[] = [
     toolGroups: toolkitGroups,
     items: [],
   },
+  {
+    id: 'contact',
+    label: 'Contact',
+    displayTitle: 'Contact',
+    displaySubtitle: 'Get in touch',
+    body: '',
+    details: [
+      { label: 'Email', value: 'test@example.test' },
+      {
+        label: 'LinkedIn',
+        value: 'linkedin.com',
+        href: 'https://www.linkedin.com/',
+      },
+      { label: 'GitHub', value: 'github.com', href: 'https://github.com/' },
+    ],
+    items: [],
+  },
 ]
 
 export const DEFAULT_SETTINGS_SECTION_ID = settingsSections[0].id

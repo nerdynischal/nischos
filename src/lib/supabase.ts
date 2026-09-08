@@ -27,6 +27,7 @@ export type BlogPostRow = Omit<BlogPostTableRow, 'created_at'>
 export type SettingsDetailRow = {
   label?: unknown
   value?: unknown
+  href?: unknown
 }
 
 type SettingsSectionTableRow = Database['public']['Tables']['settings_sections']['Row']
@@ -192,6 +193,7 @@ export function mergeSettingsSections(
         ...remoteSection,
         displayTitle: remoteSection.displayTitle ?? section.displayTitle,
         displaySubtitle: remoteSection.displaySubtitle ?? section.displaySubtitle,
+        details: mergeSettingsDetails(remoteSection.details, section.details),
         toolGroups: remoteSection.toolGroups?.length
           ? remoteSection.toolGroups
           : section.toolGroups,
@@ -199,6 +201,29 @@ export function mergeSettingsSections(
     }),
     ...remoteSections.filter((section) => !localSectionIds.has(section.id)),
   ]
+}
+
+function mergeSettingsDetails(
+  remoteDetails: SettingsSection['details'],
+  localDetails: SettingsSection['details'],
+) {
+  if (!remoteDetails?.length) return localDetails
+
+  const localDetailsByLabel = new Map(
+    localDetails?.map((detail) => [detail.label, detail]),
+  )
+
+  return remoteDetails.map((detail) => {
+    const localDetail = localDetailsByLabel.get(detail.label)
+    if (!localDetail) return detail
+    if (detail.value.trim().toLowerCase() === 'placeholder') return localDetail
+
+    return {
+      ...localDetail,
+      ...detail,
+      href: detail.href ?? localDetail.href,
+    }
+  })
 }
 
 export function mapSettingsSection(row: SettingsSectionRow): SettingsSection {
@@ -238,7 +263,11 @@ export function mapSettingsDetails(details: unknown) {
   return details.flatMap((item) => {
     if (!isRecord(item)) return []
     if (typeof item.label !== 'string' || typeof item.value !== 'string') return []
-    return [{ label: item.label, value: item.value }]
+    return [{
+      label: item.label,
+      value: item.value,
+      href: typeof item.href === 'string' ? item.href : undefined,
+    }]
   })
 }
 

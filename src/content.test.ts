@@ -52,6 +52,7 @@ describe('local fallback content', () => {
       'values',
       'hobbies',
       'tools',
+      'contact',
     ])
     expect(DEFAULT_SETTINGS_SECTION_ID).toBe('about')
     expect(settingsSections[0]).toMatchObject({
@@ -71,5 +72,22 @@ describe('local fallback content', () => {
       'obsolete',
     ])
     expect(toolkit?.toolGroups?.flatMap((group) => group.tools)).toHaveLength(17)
+  })
+
+  it('provides safe dummy contact destinations for interaction testing', () => {
+    const contact = settingsSections.find((section) => section.id === 'contact')
+
+    expect(contact).toMatchObject({
+      displaySubtitle: 'Get in touch',
+      details: [
+        { label: 'Email', value: 'test@example.test' },
+        {
+          label: 'LinkedIn',
+          value: 'linkedin.com',
+          href: 'https://www.linkedin.com/',
+        },
+        { label: 'GitHub', value: 'github.com', href: 'https://github.com/' },
+      ],
+    })
   })
 })

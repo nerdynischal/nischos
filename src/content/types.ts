@@ -27,6 +27,7 @@ export type BlogPost = {
 export type SettingsDetail = {
   label: string
   value: string
+  href?: string
 }
 
 export type SettingsTool = {

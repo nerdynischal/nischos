@@ -135,11 +135,15 @@ describe('Supabase content mapping', () => {
   it('drops malformed settings details', () => {
     expect(
       mapSettingsDetails([
-        { label: 'Role', value: 'Design Engineer' },
+        { label: 'Role', value: 'Design Engineer', href: 'https://example.com' },
         { label: 'Broken' },
         { label: 42, value: 'Nope' },
       ]),
-    ).toEqual([{ label: 'Role', value: 'Design Engineer' }])
+    ).toEqual([{
+      label: 'Role',
+      value: 'Design Engineer',
+      href: 'https://example.com',
+    }])
   })
 
   it('maps toolkit groups while dropping malformed tools', () => {
@@ -205,6 +209,36 @@ describe('Supabase content mapping', () => {
       { id: 'values', label: 'Values', displaySubtitle: 'Design Principles' },
       { id: 'remote-only', label: 'Remote only', displaySubtitle: undefined },
     ])
+  })
+
+  it('uses checked-in contact details while remote values are placeholders', () => {
+    const baseSection = {
+      id: 'contact',
+      label: 'Contact',
+      body: '',
+      items: [],
+    }
+
+    const [contact] = mergeSettingsSections(
+      [{
+        ...baseSection,
+        details: [{ label: 'GitHub', value: 'Placeholder' }],
+      }],
+      [{
+        ...baseSection,
+        details: [{
+          label: 'GitHub',
+          value: 'github.com',
+          href: 'https://github.com/',
+        }],
+      }],
+    )
+
+    expect(contact.details).toEqual([{
+      label: 'GitHub',
+      value: 'github.com',
+      href: 'https://github.com/',
+    }])
   })
 
   it('prefers a publishable key and supports legacy anon keys', () => {
