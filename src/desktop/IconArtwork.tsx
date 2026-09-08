@@ -4,6 +4,7 @@ import type { DesktopIcon } from '../types'
 import { PlaceholderIcon } from './PlaceholderIcon'
 
 const defaultArtwork: Partial<Record<DesktopIcon['category'], string>> = {
+  folder: '/folder-icon-v2.png',
   blog: '/notes-icon.png',
   settings: '/about-icon.png',
 }

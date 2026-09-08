@@ -280,6 +280,10 @@
   transform: scale(1.15);
 }
 
+.thumbnail-folder {
+  transform: scale(1.15);
+}
+
 .project-thumbnail[data-artwork-id='maneki-neko-catalog'] {
   transform: scale(1.12);
 }
