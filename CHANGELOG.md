@@ -1,5 +1,25 @@
 # Changelog
 
+## 9 September 2026
+
+### Added
+
+- Added a local Selected Work folder containing eight complete freelance case studies, dedicated folder artwork, and checked-in media for reliable offline and production rendering.
+- Added a window-contained image viewer for case-study covers and gallery images, with keyboard access, focus restoration, scroll locking, backdrop dismissal, captions, and responsive touch controls.
+- Restored the missing Auto Gmail initial product-icon explorations and added regression coverage for archive completeness, editorial image grouping, gallery configuration, and image zoom controls.
+
+### Changed
+
+- Increased individual project windows to a 960 × 820 default size with a wider responsive maximum while retaining viewport clamping.
+- Replaced synchronized multi-column image grids with two-column masonry galleries, using consistent 24px horizontal and vertical spacing and a single-column mobile layout.
+- Refined the Selected Work folder navigation and file previews, removed redundant freelance-archive labels, and kept archive projects out of the primary dock.
+- Reorganized Form GPT and Alice Puzzle images into their intended final-design sections, simplified captions, and displayed the low-resolution Auto Gmail product icon at its native size.
+- Refactored legacy case-study rendering into focused image-viewer and project-window components with dedicated styles and clearer masonry content metadata.
+
+### Fixed
+
+- Fixed inconsistent image-to-caption spacing caused by stretched gallery rows with mixed image aspect ratios.
+
 ## 8 September 2026
 
 ### Added
