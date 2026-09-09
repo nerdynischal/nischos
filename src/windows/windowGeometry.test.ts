@@ -48,6 +48,10 @@ describe('repositionWindowForViewport', () => {
 })
 
 describe('initialWindowLayout', () => {
+  it('opens individual projects in a spacious case-study window', () => {
+    expect(initialWindowLayout.project).toMatchObject({ width: 960, height: 820 })
+  })
+
   it('gives the Selected Work folder a dedicated Finder-sized window', () => {
     expect(initialWindowLayout.folder).toMatchObject({ width: 790, height: 580 })
   })

@@ -57,7 +57,7 @@
 .window-project {
   --window-min-width: 500px;
   --window-min-height: 430px;
-  --window-max-width: 900px;
+  --window-max-width: 1120px;
 }
 
 .window-blog {
