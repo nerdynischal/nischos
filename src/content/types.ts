@@ -20,6 +20,7 @@ export type ProjectCaseStudyImage = {
   src: string
   alt: string
   caption?: string
+  displaySize?: 'compact'
 }
 
 export type ProjectCaseStudySection = {
@@ -27,7 +28,7 @@ export type ProjectCaseStudySection = {
   body?: string[]
   bullets?: string[]
   images?: ProjectCaseStudyImage[]
-  imageLayout?: 'grid'
+  imageLayout?: 'masonry'
 }
 
 export type ProjectCaseStudy = {

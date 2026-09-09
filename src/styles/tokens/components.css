@@ -49,6 +49,12 @@
   --carousel-dot-bg: var(--control-inset);
   --carousel-dot-active: var(--text-muted);
 
+  --image-lightbox-backdrop: rgba(var(--color-black-rgb), 0.9);
+  --image-lightbox-control-bg: rgba(var(--color-white-rgb), 0.1);
+  --image-lightbox-control-bg-hover: rgba(var(--color-white-rgb), 0.18);
+  --image-lightbox-control-text: rgb(var(--color-white-rgb));
+  --image-lightbox-caption: rgba(var(--color-white-rgb), 0.72);
+
   --action-primary-bg: rgb(var(--color-neutral-50-rgb));
   --action-primary-bg-hover: rgb(var(--color-white-rgb));
   --action-primary-border: var(--action-primary-bg);

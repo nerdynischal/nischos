@@ -43,7 +43,7 @@ describe('local legacy project archive', () => {
     )
 
     expect(imageCounts).toEqual({
-      'auto-gmail': 8,
+      'auto-gmail': 9,
       ravageous: 6,
       freeguides: 6,
       'form-gpt': 8,
@@ -54,4 +54,38 @@ describe('local legacy project archive', () => {
     })
   })
 
+  it('keeps revised images in their intended editorial sections', () => {
+    const getCaptions = (projectId: string, sectionTitle: string) =>
+      legacyProjects
+        .find((project) => project.id === projectId)
+        ?.caseStudy?.sections.find((section) => section.title === sectionTitle)
+        ?.images?.map((image) => image.caption)
+
+    expect(getCaptions('auto-gmail', 'Initial drafts')).toEqual([
+      'Initial product icon explorations',
+    ])
+    expect(getCaptions('form-gpt', 'Initial drafts')).toEqual(['Draft 1', 'Draft 2', 'Draft 3'])
+    expect(getCaptions('form-gpt', 'Final designs')).toEqual([
+      'Extension in context',
+      'Final compact extension UI',
+    ])
+    expect(getCaptions('alice-puzzle', 'Final designs')).toEqual([
+      'Interface',
+      'Same-panel menu',
+      'Dialog menu',
+      'Final game interface direction',
+    ])
+  })
+
+  it('uses masonry only for sections configured as multi-column galleries', () => {
+    const autoGmailFinal = legacyProjects
+      .find((project) => project.id === 'auto-gmail')
+      ?.caseStudy?.sections.find((section) => section.title === 'Final designs')
+    const aliceFinal = legacyProjects
+      .find((project) => project.id === 'alice-puzzle')
+      ?.caseStudy?.sections.find((section) => section.title === 'Final designs')
+
+    expect(autoGmailFinal?.imageLayout).toBe('masonry')
+    expect(aliceFinal?.imageLayout).toBeUndefined()
+  })
 })

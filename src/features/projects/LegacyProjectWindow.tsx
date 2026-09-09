@@ -1,15 +1,43 @@
-import type { Project } from '../../content/types'
-import { resolveAssetUrl } from '../../lib/assetUrl'
+import { useState } from 'react'
+import type { Project, ProjectCaseStudy } from '../../content/types'
+import {
+  ImageZoomButton,
+  LegacyImageLightbox,
+  type ImageViewerSelection,
+} from './LegacyImageViewer'
 
 export function LegacyProjectWindow({ project }: { project: Project }) {
-  const caseStudy = project.caseStudy
-  if (!caseStudy) return null
+  if (!project.caseStudy) return null
+
+  return <LegacyProjectCaseStudy project={project} caseStudy={project.caseStudy} />
+}
+
+function LegacyProjectCaseStudy({
+  project,
+  caseStudy,
+}: {
+  project: Project
+  caseStudy: ProjectCaseStudy
+}) {
+  const [viewerSelection, setViewerSelection] = useState<ImageViewerSelection | null>(null)
+  const coverImage = project.thumbnail
+    ? {
+        src: project.thumbnail,
+        alt: `${project.title} project cover`,
+        caption: `${project.title} cover`,
+      }
+    : null
 
   return (
     <article className="legacy-project-window">
-      {project.thumbnail ? (
+      {coverImage ? (
         <div className="legacy-project-cover">
-          <img src={resolveAssetUrl(project.thumbnail)} alt="" decoding="async" />
+          <ImageZoomButton
+            image={coverImage}
+            previewAlt=""
+            loading="eager"
+            onOpen={setViewerSelection}
+          />
         </div>
       ) : null}
 
@@ -42,13 +70,8 @@ export function LegacyProjectWindow({ project }: { project: Project }) {
               {section.images ? (
                 <div className="legacy-section-gallery" data-layout={section.imageLayout}>
                   {section.images.map((image) => (
-                    <figure key={image.src}>
-                      <img
-                        src={resolveAssetUrl(image.src)}
-                        alt={image.alt}
-                        loading="lazy"
-                        decoding="async"
-                      />
+                    <figure key={image.src} data-size={image.displaySize}>
+                      <ImageZoomButton image={image} onOpen={setViewerSelection} />
                       {image.caption ? <figcaption>{image.caption}</figcaption> : null}
                     </figure>
                   ))}
@@ -58,6 +81,13 @@ export function LegacyProjectWindow({ project }: { project: Project }) {
           </section>
         ))}
       </div>
+
+      {viewerSelection ? (
+        <LegacyImageLightbox
+          selection={viewerSelection}
+          onClose={() => setViewerSelection(null)}
+        />
+      ) : null}
     </article>
   )
 }

@@ -32,18 +32,26 @@ export const legacyProjects: Project[] = [
           body: [
             'Early directions explored how a small product mark could communicate both email and assisted writing while remaining legible at extension-icon scale.',
           ],
+          images: [
+            {
+              src: `${mediaRoot}/auto-gmail/initial-drafts.webp`,
+              alt: 'Early Auto Gmail product icon concepts exploring email and AI motifs',
+              caption: 'Initial product icon explorations',
+            },
+          ],
         },
         {
           title: 'Final designs',
           body: [
             'After several iterations with the client, the final system included the product icon, a small promotional tile, a marquee image for the store carousel, and five supporting promotional images.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             {
               src: `${mediaRoot}/auto-gmail/logo.jpg`,
               alt: 'Final Auto Gmail product icon',
               caption: 'Product icon',
+              displaySize: 'compact',
             },
             {
               src: `${mediaRoot}/auto-gmail/promo-small.jpg`,
@@ -114,7 +122,7 @@ export const legacyProjects: Project[] = [
           body: [
             'The original experience spread the product story, platform downloads, installation instructions, and contact information across separate utility-led pages.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             { src: `${mediaRoot}/ravageous/old-home.jpg`, alt: 'Original Ravageous landing page', caption: 'Old landing page' },
             { src: `${mediaRoot}/ravageous/old-android.jpg`, alt: 'Original Android download instructions', caption: 'Android instructions' },
@@ -207,7 +215,7 @@ export const legacyProjects: Project[] = [
           body: [
             'The exploration phase tested value propositions, analysed the client’s copy, and compared two relevant competitors before committing to the page narratives.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             { src: `${mediaRoot}/freeguides/value-propositions.png`, alt: 'FreeGuides value proposition exploration', caption: 'Value propositions' },
             { src: `${mediaRoot}/freeguides/copy-analysis.png`, alt: 'FreeGuides client copy analysis', caption: 'Copy analysis' },
@@ -271,7 +279,7 @@ export const legacyProjects: Project[] = [
           body: [
             'The client supplied a rough sketch of the extension alongside two visual references. These established the expected feature set and provided contrasting approaches to compact AI interfaces.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             { src: `${mediaRoot}/form-gpt/client-sketch.png`, alt: 'Client sketch for the Form GPT extension', caption: 'Client sketch' },
             { src: `${mediaRoot}/form-gpt/inspiration-1.png`, alt: 'First interface reference supplied for Form GPT', caption: 'Inspiration 1' },
@@ -283,16 +291,11 @@ export const legacyProjects: Project[] = [
           body: [
             'The early drafts translated the sketch into a base interface that could be evaluated and refined, testing several arrangements for the same core controls.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             { src: `${mediaRoot}/form-gpt/draft-1.jpg`, alt: 'First compact Form GPT interface draft', caption: 'Draft 1' },
             { src: `${mediaRoot}/form-gpt/draft-2.jpg`, alt: 'Second compact Form GPT interface draft', caption: 'Draft 2' },
             { src: `${mediaRoot}/form-gpt/draft-3.jpg`, alt: 'Third compact Form GPT interface draft', caption: 'Draft 3' },
-            {
-              src: `${mediaRoot}/form-gpt/exploration.jpg`,
-              alt: 'Early Form GPT extension interface exploration',
-              caption: 'Extension in context',
-            },
           ],
         },
         {
@@ -301,6 +304,11 @@ export const legacyProjects: Project[] = [
             'Given the small widget constraint, the final direction brings every required feature forward without making the interface feel busy. The final mockup also demonstrates how the extension sits within a real browsing context.',
           ],
           images: [
+            {
+              src: `${mediaRoot}/form-gpt/exploration.jpg`,
+              alt: 'Form GPT extension shown within a browser page',
+              caption: 'Extension in context',
+            },
             {
               src: `${mediaRoot}/form-gpt/final.jpg`,
               alt: 'Final Form GPT browser extension interface',
@@ -348,7 +356,7 @@ export const legacyProjects: Project[] = [
           body: [
             'The visual direction began in dark mode because it supported the requested glass treatment and felt appropriate for a modern, tech-oriented audience. A quick logo direction was explored alongside the redesign to capture the purpose of the product.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             { src: `${mediaRoot}/donor-hub/first-sketch.png`, alt: 'First Donor Hub layout sketch', caption: 'First layout sketch' },
             { src: `${mediaRoot}/donor-hub/draft-how-to.jpg`, alt: 'Donor Hub how-to page draft', caption: 'How-to draft' },
@@ -366,7 +374,7 @@ export const legacyProjects: Project[] = [
           body: [
             'Responsive table behaviour required careful data prioritisation, while the transaction popup needed to make it clear that a transfer was actively taking place. The client also requested complete dark and light versions of the website.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             { src: `${mediaRoot}/donor-hub/overview-dark.jpg`, alt: 'Donor Hub dark theme homepage overview', caption: 'Dark theme overview' },
             { src: `${mediaRoot}/donor-hub/overview-light.jpg`, alt: 'Donor Hub light theme homepage overview', caption: 'Light theme overview' },
@@ -442,16 +450,13 @@ export const legacyProjects: Project[] = [
           body: [
             'Realistic dummy data helped refine the dense single-screen interface. The visual explorations combined AI, technology, retro-computing, and terminal cues while testing different relationships between the game viewport, laws, achievements, commands, and menu controls.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             { src: `${mediaRoot}/alice-puzzle/mainframe-1.jpg`, alt: 'Alice puzzle mainframe interface exploration one', caption: 'Mainframe exploration 1' },
             { src: `${mediaRoot}/alice-puzzle/mainframe-2.jpg`, alt: 'Alice puzzle mainframe interface exploration two', caption: 'Mainframe exploration 2' },
             { src: `${mediaRoot}/alice-puzzle/mainframe-3.jpg`, alt: 'Alice puzzle mainframe interface exploration three', caption: 'Mainframe exploration 3' },
             { src: `${mediaRoot}/alice-puzzle/mainframe-4.jpg`, alt: 'Alice puzzle mainframe interface exploration four', caption: 'Mainframe exploration 4' },
             { src: `${mediaRoot}/alice-puzzle/mainframe-draft.jpg`, alt: 'Alice puzzle full mainframe draft', caption: 'Mainframe draft' },
-            { src: `${mediaRoot}/alice-puzzle/draft-v2.jpg`, alt: 'Alice puzzle AI interface draft', caption: 'Interface draft' },
-            { src: `${mediaRoot}/alice-puzzle/draft-panel.jpg`, alt: 'Alice puzzle same-panel menu option', caption: 'Same-panel menu exploration' },
-            { src: `${mediaRoot}/alice-puzzle/draft-dialog.jpg`, alt: 'Alice puzzle dialog menu option', caption: 'Dialog menu exploration' },
           ],
         },
         {
@@ -460,6 +465,21 @@ export const legacyProjects: Project[] = [
             'The final direction includes the main game screen, side panels for objectives and settings, an alternative approach to viewing menu options, and a reusable style guide for the interface.',
           ],
           images: [
+            {
+              src: `${mediaRoot}/alice-puzzle/draft-v2.jpg`,
+              alt: 'Alice puzzle AI interface draft',
+              caption: 'Interface',
+            },
+            {
+              src: `${mediaRoot}/alice-puzzle/draft-panel.jpg`,
+              alt: 'Alice puzzle same-panel menu option',
+              caption: 'Same-panel menu',
+            },
+            {
+              src: `${mediaRoot}/alice-puzzle/draft-dialog.jpg`,
+              alt: 'Alice puzzle dialog menu option',
+              caption: 'Dialog menu',
+            },
             {
               src: `${mediaRoot}/alice-puzzle/final.png`,
               alt: 'Final Alice puzzle game interface and style direction',
@@ -511,7 +531,7 @@ export const legacyProjects: Project[] = [
           body: [
             'The client supplied the existing mobile and desktop paywalls along with a moodboard to ground the redesign in the current product language.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             { src: `${mediaRoot}/vocal-email/old-paywall-1.png`, alt: 'Original Vocal Email paywall design', caption: 'Old paywall 1' },
             { src: `${mediaRoot}/vocal-email/old-paywall-2.png`, alt: 'Original Vocal Email paywall design', caption: 'Old paywall 2' },
@@ -527,7 +547,7 @@ export const legacyProjects: Project[] = [
           body: [
             'The mobile sequence covers the default paywall, expanded benefits, payment entry, inline validation, processing, success, and a recoverable payment failure.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             { src: `${mediaRoot}/vocal-email/mobile-default.jpg`, alt: 'Vocal Email default mobile paywall', caption: 'Default modal' },
             { src: `${mediaRoot}/vocal-email/mobile-more-features.jpg`, alt: 'Vocal Email expanded mobile benefits', caption: 'More features' },
@@ -543,7 +563,7 @@ export const legacyProjects: Project[] = [
           body: [
             'The desktop popover uses the same hierarchy and carries the checkout through every entry, validation, processing, failure, and success state.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             {
               src: `${mediaRoot}/vocal-email/desktop.jpg`,
@@ -593,7 +613,7 @@ export const legacyProjects: Project[] = [
             'Make the “suggest a resource” action easier to find.',
             'Replace an unclear resource key with repeatable, learnable content patterns.',
           ],
-          imageLayout: 'grid',
+          imageLayout: 'masonry',
           images: [
             {
               src: `${mediaRoot}/seogaeilge/before.png`,
