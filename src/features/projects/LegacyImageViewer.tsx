@@ -3,6 +3,7 @@ import type { MouseEvent } from 'react'
 import { X, ZoomIn } from 'lucide-react'
 import type { ProjectCaseStudyImage } from '../../content/types'
 import { resolveAssetUrl } from '../../lib/assetUrl'
+import { responsiveImage } from '../../lib/responsiveImage'
 
 export type ImageViewerSelection = {
   image: ProjectCaseStudyImage
@@ -13,11 +14,13 @@ export function ImageZoomButton({
   image,
   previewAlt = image.alt,
   loading = 'lazy',
+  sizes = '(max-width: 760px) calc(100vw - 48px), 704px',
   onOpen,
 }: {
   image: ProjectCaseStudyImage
   previewAlt?: string
   loading?: 'eager' | 'lazy'
+  sizes?: string
   onOpen: (selection: ImageViewerSelection) => void
 }) {
   function openViewer(event: MouseEvent<HTMLButtonElement>) {
@@ -32,7 +35,7 @@ export function ImageZoomButton({
       onClick={openViewer}
     >
       <img
-        src={resolveAssetUrl(image.src)}
+        {...responsiveImage(image.src, sizes)}
         alt={previewAlt}
         loading={loading}
         decoding="async"

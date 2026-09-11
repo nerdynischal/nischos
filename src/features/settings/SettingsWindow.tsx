@@ -1,6 +1,6 @@
 import type { SettingsSection } from '../../content/types'
 import { EmptyState } from '../../components/EmptyState'
-import { resolveAssetUrl } from '../../lib/assetUrl'
+import { responsiveImage } from '../../lib/responsiveImage'
 import { ContactDetails } from './ContactDetails'
 import { SettingsSidebar } from './SettingsSidebar'
 import { ToolkitSection } from './ToolkitSection'
@@ -33,7 +33,7 @@ export function SettingsWindow({
         <div className="avatar-orbit" aria-hidden="true">
           <img
             className="about-portrait"
-            src={resolveAssetUrl('/about-icon.png')}
+            {...responsiveImage('/about-icon.png', '120px')}
             alt=""
           />
         </div>

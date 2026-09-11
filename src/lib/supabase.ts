@@ -6,6 +6,7 @@ import {
 import { sortProjects } from '../content/projectOrdering'
 import type {
   BlogPost,
+  BlogPostSummary,
   Project,
   SettingsSection,
   SettingsToolGroup,
@@ -102,20 +103,41 @@ export async function fetchProjects(): Promise<Project[]> {
   return (data ?? []).map(mapProject)
 }
 
-export async function fetchPosts(): Promise<BlogPost[]> {
+export async function fetchPostSummaries(): Promise<BlogPostSummary[]> {
   const supabase = await getSupabaseClient()
   if (!supabase) return []
 
   const { data, error } = await supabase
     .from('blog_posts')
-    .select('id,title,date,folder,is_pinned,content_markdown')
+    .select('id,title,date,folder,is_pinned')
     .order('date', { ascending: false })
 
   if (error) {
     throw new Error(error.message)
   }
 
-  return sortPosts((data ?? []).map(mapPost))
+  return sortPosts((data ?? []).map(mapPostSummary))
+}
+
+export async function fetchPostContent(id: string): Promise<string> {
+  const supabase = await getSupabaseClient()
+  if (!supabase) throw new Error('Notes are unavailable')
+
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 10_000)
+  try {
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('content_markdown')
+      .eq('id', id)
+      .abortSignal(controller.signal)
+      .maybeSingle()
+    if (error) throw new Error(error.message)
+    if (!data) throw new Error('Note not found')
+    return data.content_markdown
+  } finally {
+    clearTimeout(timeout)
+  }
 }
 
 export async function fetchSettingsSections(): Promise<SettingsSection[]> {
@@ -234,17 +256,20 @@ export function mapSettingsSection(row: SettingsSectionRow): SettingsSection {
 }
 
 export function mapPost(row: BlogPostRow): BlogPost {
+  return { ...mapPostSummary(row), contentMarkdown: row.content_markdown }
+}
+
+export function mapPostSummary(row: Omit<BlogPostRow, 'content_markdown'>): BlogPostSummary {
   return {
     id: row.id,
     title: row.title,
     date: row.date,
     folder: row.folder ?? 'Notes',
     isPinned: row.is_pinned,
-    contentMarkdown: row.content_markdown,
   }
 }
 
-export function sortPosts(posts: BlogPost[]) {
+export function sortPosts<T extends Pick<BlogPostSummary, 'isPinned' | 'date'>>(posts: T[]): T[] {
   return [...posts].sort((left, right) => {
     if (left.isPinned !== right.isPinned) return left.isPinned ? -1 : 1
     return right.date.localeCompare(left.date)

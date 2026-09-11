@@ -1,7 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { legacyProjects } from './legacyProjects'
+import { legacyProjectSummaries } from './legacyProjectSummaries'
 
 describe('local legacy project archive', () => {
+  it('keeps desktop metadata complete without including case-study bodies', () => {
+    expect(legacyProjectSummaries.every((project) => project.caseStudy === undefined)).toBe(true)
+    expect(legacyProjects.map(({ caseStudy: _caseStudy, ...project }) => project)).toEqual(legacyProjectSummaries)
+  })
   it('contains the eight projects from the freelance portfolio', () => {
     expect(legacyProjects.map((project) => project.title)).toEqual([
       'Auto Gmail',

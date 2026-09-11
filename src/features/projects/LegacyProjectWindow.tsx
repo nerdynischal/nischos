@@ -36,6 +36,7 @@ function LegacyProjectCaseStudy({
             image={coverImage}
             previewAlt=""
             loading="eager"
+            sizes="(max-width: 760px) calc(100vw - 16px), 1120px"
             onOpen={setViewerSelection}
           />
         </div>
@@ -71,7 +72,15 @@ function LegacyProjectCaseStudy({
                 <div className="legacy-section-gallery" data-layout={section.imageLayout}>
                   {section.images.map((image) => (
                     <figure key={image.src} data-size={image.displaySize}>
-                      <ImageZoomButton image={image} onOpen={setViewerSelection} />
+                      <ImageZoomButton
+                        image={image}
+                        sizes={image.displaySize === 'compact'
+                          ? '128px'
+                          : section.imageLayout === 'masonry'
+                            ? '(max-width: 760px) calc(100vw - 48px), 340px'
+                            : undefined}
+                        onOpen={setViewerSelection}
+                      />
                       {image.caption ? <figcaption>{image.caption}</figcaption> : null}
                     </figure>
                   ))}

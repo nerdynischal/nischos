@@ -45,6 +45,11 @@ export type BlogPost = {
   contentMarkdown: string
 }
 
+// Local fallbacks already have a body; remote list responses contain metadata only.
+export type BlogPostSummary = Omit<BlogPost, 'contentMarkdown'> & {
+  contentMarkdown?: string
+}
+
 export type SettingsDetail = {
   label: string
   value: string

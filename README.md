@@ -10,6 +10,13 @@ New browser sessions begin on a macOS-inspired nischOS lock screen. Unlocking is
 
 On fine-pointer devices, a lightweight WebGL surface bends the lock-screen grid around the mouse and idles as soon as its ripples settle. Touch devices, reduced-motion preferences, and browsers without WebGL keep the static CSS grid. The effect is unmounted after unlocking; the desktop uses its own static wallpaper grid.
 
+Unlocking starts preparing the desktop and loading content immediately, behind a
+300 ms progress animation and 360 ms reveal. Reduced-motion users enter directly.
+
+Window readers and note bodies show a compact spinner with status text only when
+loading takes longer than 180 ms. Content appears as soon as it is ready, and
+reduced-motion users see a static indicator.
+
 ## Local setup
 
 ```bash
@@ -127,7 +134,16 @@ npm run project:add -- --from ./project.json --dry-run
 
 ### Notes
 
-Notes are stored in the existing `blog_posts` table as full Markdown in the required `content_markdown` column:
+Notes are stored in the existing `blog_posts` table as full Markdown in the required `content_markdown` column.
+
+The desktop fetches only note metadata (`id`, title, date, folder, and pinning).
+Opening Notes fetches the selected body by ID. Successful bodies are cached for
+five minutes, with up to 50 entries and shared in-flight requests. Failures are
+not cached; the reader offers retry and uses a matching checked-in body when
+available. Body requests time out after ten seconds. Switching notes cannot
+replace the current body with a late response from a previous selection.
+
+To add a note:
 
 ```sql
 insert into public.blog_posts (
@@ -165,7 +181,34 @@ For an existing Supabase table created before Markdown and pinning support exist
 
 The Markdown notes reader is lazy-loaded so its rendering dependencies are not part of the initial JavaScript bundle.
 
+Project, About, and Selected Work readers are also lazy-loaded. Desktop and dock
+metadata for archived projects lives in `src/content/legacyProjectSummaries.ts`;
+their full case-study bodies load from `src/content/legacyProjects.ts` only when
+a case study is opened. Window dragging paints coordinates once per animation
+frame and commits React state on release, using measured window dimensions.
+
+### Responsive media
+
+`npm run media:build` generates WebP variants and intrinsic dimensions for local
+PNG, JPEG, and WebP artwork. It runs automatically before development, tests,
+and production builds. Generated files in `public/optimized` and `src/generated`
+are ignored by Git; source images stay in `public` and are used for full-size
+case-study zooming. Remote URLs and SVGs retain their original paths.
+
+Generation is cached by source content and encoder settings. After adding or
+replacing images while the dev server is running, run `npm run media:build` again.
+Responsive candidates respect the configured GitHub Pages base path. This reduces
+image transfer and decoding during browsing; originals still ship for zooming,
+so it does not reduce the total deployment directory size.
+
 ## Checks
+
+For browser profiling, run `npm run dev -- --config scripts/profile-vite.config.ts`
+and open `/scripts/profile-desktop.html`. This developer-only page records React
+render time, commits, animation-frame intervals, and supported long-task events
+while dragging actual windows. It is not included in production builds. See
+[the measured optimisation results](docs/performance-2026-09-10.md) for the
+workload, baseline comparison, and limits of these measurements.
 
 Run the complete pre-commit check:
 

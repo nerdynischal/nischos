@@ -1,5 +1,29 @@
 # Changelog
 
+## 10 September 2026
+
+### Added
+
+- Added compact window and note loading indicators after a 180 ms delay, with immediate removal when content arrives, accessible status text, and a static reduced-motion appearance.
+
+### Optimised
+
+- Split remote Notes loading into metadata and selected-body queries, with bounded caching, deduplicated requests, request timeouts, retry, local fallback, and protection against late responses after changing selection.
+- Removed the unused 985,285-byte original folder icon after auditing runtime content and asset references; retained all referenced artwork and full-size zoom sources.
+- Added a separate browser profiling harness and [documented three baseline/current comparisons](docs/performance-2026-09-10.md) using seven windows and 64 mounted images. Median measured React render time fell from 598.4 ms to 245.3 ms (59.0%), and median commits fell from 97 to 14 (85.6%). These development-mode measurements show reduced React work; frame intervals remained near 16.7 ms, with no observed frame-rate improvement.
+- Added cached, reproducible WebP variants for local icons, project previews, and case-study images, with responsive selection and intrinsic dimensions. Full-size originals remain available in the image viewer.
+- Reduced the entry progress delay from 1200 ms to 300 ms, began preparing the desktop during that interval, and removed entry delays for reduced-motion users.
+- Applied remote content collections independently as they arrive.
+- Deferred project, About, folder, and case-study readers until opened, separating archive metadata from the full case-study bodies.
+- Updated drag positions once per animation frame without rerendering window content, committing state on release and using measured dimensions to keep resized windows in view.
+- Added regression coverage for responsive asset paths, archive metadata, and drag batching, release, cancellation, and resized bounds.
+
+### Release validation — 11 September 2026
+
+- `npm run check` passed: project manifests, CSS tokens, lint, all 94 tests across 24 files, TypeScript, and the Vite production build.
+- Production-browser smoke checks passed for unlocking, Selected Work, Auto Gmail, dragging, full-size image viewing, and remote Notes loading; no browser warnings or errors were recorded during those checks.
+- Confirmed that all eight archived projects and case-study bodies match the previous release exactly. All 274 generated variants are referenced by the 97-source media manifest. The original drag benchmark and reproduction harness are unchanged by this release review.
+
 ## 9 September 2026
 
 ### Added

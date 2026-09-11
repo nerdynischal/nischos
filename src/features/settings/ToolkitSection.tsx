@@ -1,5 +1,5 @@
 import type { SettingsToolGroup } from '../../content/types'
-import { resolveAssetUrl } from '../../lib/assetUrl'
+import { responsiveImage } from '../../lib/responsiveImage'
 
 export function ToolkitSection({ groups }: { groups: SettingsToolGroup[] }) {
   return (
@@ -14,7 +14,7 @@ export function ToolkitSection({ groups }: { groups: SettingsToolGroup[] }) {
               {group.tools.map((tool) => (
                 <li key={tool.title} className="toolkit-row">
                   <span className="toolkit-icon" aria-hidden="true">
-                    <img src={resolveAssetUrl(tool.icon)} alt="" />
+                    <img {...responsiveImage(tool.icon, '40px')} alt="" loading="lazy" decoding="async" />
                   </span>
                   <div className="toolkit-copy">
                     <h5>{tool.title}</h5>

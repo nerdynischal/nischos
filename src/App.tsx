@@ -8,7 +8,7 @@ import {
 } from './features/entry/entrySession'
 
 const ENTRY_EXIT_MS = 360
-const ENTRY_LOAD_MS = 1200
+const ENTRY_LOAD_MS = 300
 
 type EntryState = 'locked' | 'loading' | 'unlocking' | 'entered'
 
@@ -31,6 +31,12 @@ function App() {
   function enterDesktop() {
     if (entryState !== 'locked') return
 
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      markEntrySessionEntered()
+      setEntryState('entered')
+      return
+    }
+
     setEntryState('loading')
     entryTimerRef.current = window.setTimeout(() => {
       markEntrySessionEntered()
@@ -43,12 +49,12 @@ function App() {
   }
 
   const isUnlocking = entryState === 'unlocking'
-  const isDesktopMounted = isUnlocking || entryState === 'entered'
+  const isDesktopMounted = entryState !== 'locked'
 
   return (
     <>
       {isDesktopMounted ? (
-        <DesktopExperience isEntering={isUnlocking} />
+        <DesktopExperience isEntering={isUnlocking} isPreparing={entryState === 'loading'} />
       ) : null}
 
       {entryState !== 'entered' ? (

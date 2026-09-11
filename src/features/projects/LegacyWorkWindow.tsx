@@ -1,6 +1,6 @@
 import { FileText, FolderOpen } from 'lucide-react'
 import type { Project } from '../../content/types'
-import { resolveAssetUrl } from '../../lib/assetUrl'
+import { responsiveImage } from '../../lib/responsiveImage'
 
 export function LegacyWorkWindow({
   projects,
@@ -40,7 +40,7 @@ export function LegacyWorkWindow({
             >
               <span className="legacy-file-preview" aria-hidden="true">
                 {project.thumbnail ? (
-                  <img src={resolveAssetUrl(project.thumbnail)} alt="" loading="lazy" decoding="async" />
+                  <img {...responsiveImage(project.thumbnail, '(max-width: 760px) 40vw, 180px')} alt="" loading="lazy" decoding="async" />
                 ) : (
                   <FileText strokeWidth={1.5} absoluteStrokeWidth />
                 )}

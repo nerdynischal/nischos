@@ -4,6 +4,7 @@
 @import './lock-screen.css';
 @import './desktop.css';
 @import './windows.css';
+@import './loading-indicator.css';
 @import './projects.css';
 @import './legacy-work.css';
 @import './legacy-image-viewer.css';

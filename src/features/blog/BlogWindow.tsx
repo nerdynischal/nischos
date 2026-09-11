@@ -1,8 +1,10 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import type { BlogPost } from '../../content/types'
+import type { BlogPostSummary } from '../../content/types'
 import { EmptyState } from '../../components/EmptyState'
+import { LoadingIndicator } from '../../components/LoadingIndicator'
 import { getPostMarkdown } from './getPostMarkdown'
+import { usePostContent } from './usePostContent'
 
 const markdownHeadingComponents = {
   h1: 'h4',
@@ -18,12 +20,15 @@ export function BlogWindow({
   selectedPostId,
   onSelectPost,
 }: {
-  posts: BlogPost[]
+  posts: BlogPostSummary[]
   selectedPostId?: string
   onSelectPost: (postId?: string) => void
 }) {
   const selectedPost = posts.find((post) => post.id === selectedPostId) ?? posts[0]
-  const postMarkdown = selectedPost ? getPostMarkdown(selectedPost) : ''
+  const content = usePostContent(selectedPost)
+  const postMarkdown = selectedPost
+    ? getPostMarkdown({ ...selectedPost, contentMarkdown: content.markdown })
+    : ''
 
   return (
     <div className="finder">
@@ -52,14 +57,31 @@ export function BlogWindow({
               </p>
               <h3>{selectedPost.title}</h3>
             </header>
-            <div className="blog-markdown">
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={markdownHeadingComponents}
-              >
-                {postMarkdown}
-              </ReactMarkdown>
-            </div>
+            {content.status === 'loading' ? (
+              <LoadingIndicator key={selectedPost.id} label="Loading note…" />
+            ) : content.status === 'error' ? (
+              <div className="note-load-status" role="status">
+                <p>This note could not be loaded.</p>
+                <button type="button" onClick={content.retry}>Try again</button>
+              </div>
+            ) : (
+              <>
+                {content.status === 'fallback' ? (
+                  <div className="note-load-status" role="status">
+                    <p>Showing the saved version of this note.</p>
+                    <button type="button" onClick={content.retry}>Try again</button>
+                  </div>
+                ) : null}
+                <div className="blog-markdown">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={markdownHeadingComponents}
+                  >
+                    {postMarkdown}
+                  </ReactMarkdown>
+                </div>
+              </>
+            )}
           </article>
         ) : (
           <EmptyState title="No notes yet" body="This folder is waiting for its first note." />

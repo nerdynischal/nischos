@@ -3,8 +3,8 @@ import { useState } from 'react'
 import type { Project } from '../../content/types'
 import { IconArtwork } from '../../desktop/IconArtwork'
 import { resolveAssetUrl } from '../../lib/assetUrl'
+import { responsiveImage } from '../../lib/responsiveImage'
 import { MetaRow } from './MetaRow'
-import { LegacyProjectWindow } from './LegacyProjectWindow'
 
 function isImageScreenshot(screenshot: string) {
   return /^(?:https?:\/\/|\/)/.test(screenshot)
@@ -45,10 +45,6 @@ export function ProjectWindow({
     isImageScreenshot(selectedScreenshot) &&
     selectedScreenshotUrl !== failedScreenshot,
   )
-
-  if (project.caseStudy) {
-    return <LegacyProjectWindow project={project} />
-  }
 
   function showPreviousShot() {
     setActiveShot((index) => (index - 1 + screenshotCount) % screenshotCount)
@@ -125,7 +121,7 @@ export function ProjectWindow({
         >
           {selectedScreenshotIsImage ? (
             <img
-              src={selectedScreenshotUrl}
+              {...responsiveImage(selectedScreenshot, '(max-width: 760px) calc(100vw - 48px), 1040px')}
               alt={`${project.title}: ${selectedScreenshotLabel}`}
               loading="lazy"
               decoding="async"

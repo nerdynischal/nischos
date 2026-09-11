@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { DEFAULT_SETTINGS_SECTION_ID } from '../content'
-import { legacyProjects } from '../content/legacyProjects'
+import { legacyProjectSummaries as legacyProjects } from '../content/legacyProjectSummaries'
 import { useDesktopWindows } from '../hooks/useDesktopWindows'
 import { usePortfolioContent } from '../hooks/usePortfolioContent'
 import type { DesktopIcon } from '../types'
@@ -14,9 +14,10 @@ import { createDesktopIcons } from './createDesktopIcons'
 
 type DesktopExperienceProps = {
   isEntering: boolean
+  isPreparing: boolean
 }
 
-export function DesktopExperience({ isEntering }: DesktopExperienceProps) {
+export function DesktopExperience({ isEntering, isPreparing }: DesktopExperienceProps) {
   const desktopRef = useRef<HTMLElement>(null)
   const {
     projects,
@@ -109,6 +110,8 @@ export function DesktopExperience({ isEntering }: DesktopExperienceProps) {
     <main
       ref={desktopRef}
       className="desktop"
+      hidden={isPreparing}
+      inert={isPreparing}
       data-entering={isEntering}
       aria-label="nischOS Desktop"
       tabIndex={isEntering ? -1 : undefined}

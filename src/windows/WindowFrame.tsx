@@ -44,6 +44,7 @@ export function WindowFrame({
         onPointerMove={onMoveDrag}
         onPointerUp={onEndDrag}
         onPointerCancel={onEndDrag}
+        onLostPointerCapture={onEndDrag}
       >
         <div className="traffic-lights" aria-label="Window controls">
           <button

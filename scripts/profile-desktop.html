@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>nischOS performance profile</title>
+    <style>
+      #profile-panel { position: fixed; right: 12px; top: 48px; z-index: 10000; width: 280px; max-height: 65vh; overflow: auto; padding: 12px; background: #fff; color: #111; border: 1px solid #888; border-radius: 8px; font: 12px/1.4 monospace; }
+      #profile-panel button { margin: 0 8px 8px 0; padding: 6px; }
+      #profile-results { white-space: pre-wrap; overflow-wrap: anywhere; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <aside id="profile-panel" aria-label="Performance profiling">
+      <button id="profile-start">Start measurement</button>
+      <button id="profile-stop">Stop measurement</button>
+      <pre id="profile-results" aria-live="polite">Open the workload, then start measuring and drag a window.</pre>
+    </aside>
+    <script type="module" src="./profile-desktop.tsx"></script>
+  </body>
+</html>

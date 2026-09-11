@@ -31,7 +31,7 @@
   --lock-screen-grid-opacity: 0.045;
   --lock-screen-exit-distance: clamp(2.5rem, 6svh, 3.5rem);
   --lock-screen-progress-width: 240px;
-  --entry-load-duration: 1200ms;
+  --entry-load-duration: 300ms;
   --entry-exit-duration: 360ms;
   --entry-reveal-duration: 280ms;
   --entry-reveal-delay: 80ms;
