@@ -323,16 +323,16 @@
   height: var(--space-3);
 }
 
-.project-actions a:hover,
-.project-actions button:hover,
+.project-actions a:not(.disabled-action):not([aria-disabled="true"]):hover,
+.project-actions button:enabled:not(.disabled-action):not([aria-disabled="true"]):hover,
 .finder-sidebar button:hover,
 .dock button:hover {
   border-color: var(--line-control-hover);
   background: var(--surface-hover-strong);
 }
 
-.project-actions a:active,
-.project-actions button:active,
+.project-actions a:not(.disabled-action):not([aria-disabled="true"]):active,
+.project-actions button:enabled:not(.disabled-action):not([aria-disabled="true"]):active,
 .finder-sidebar button:active,
 .dock button:active {
   transform: scale(0.97);

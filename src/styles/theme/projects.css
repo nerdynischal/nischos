@@ -102,16 +102,16 @@
   text-shadow: var(--action-primary-text-shadow);
 }
 
-.project-actions a:hover,
-.project-actions button:hover,
+.project-actions a:not(.disabled-action):not([aria-disabled="true"]):hover,
+.project-actions button:enabled:not(.disabled-action):not([aria-disabled="true"]):hover,
 .finder-sidebar button:hover,
 .dock button:hover {
   border-color: var(--line-control-hover);
   background: var(--surface-hover-strong);
 }
 
-.project-actions .primary-action:not(.disabled-action):hover,
-.project-actions .primary-action:not(.disabled-action):focus-visible {
+.project-actions .primary-action:not(:disabled):not(.disabled-action):not([aria-disabled="true"]):hover,
+.project-actions .primary-action:not(:disabled):not(.disabled-action):not([aria-disabled="true"]):focus-visible {
   border-color: var(--action-primary-border-hover);
   background: var(--action-primary-bg-hover);
 }
