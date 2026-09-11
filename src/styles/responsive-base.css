@@ -20,10 +20,21 @@
     transform: translateY(0) scale(0.985);
   }
 
-  .icon-glyph {
+  .desktop-icon .icon-glyph {
+    /* Keep layer promotion local to the artwork, away from the label text. */
+    will-change: transform;
     transition:
-      box-shadow var(--duration-window) var(--ease-out),
-      transform var(--duration-window) var(--ease-out);
+      box-shadow var(--desktop-icon-hover-duration) ease,
+      transform var(--desktop-icon-hover-duration) ease;
+  }
+
+  .desktop-icon .icon-label {
+    transition: color var(--desktop-icon-hover-duration) ease;
+  }
+
+  .desktop-icon:hover .icon-label,
+  .desktop-icon:focus-visible .icon-label {
+    color: var(--text-primary);
   }
 }
 

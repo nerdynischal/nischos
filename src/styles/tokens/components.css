@@ -26,6 +26,7 @@
   --dock-reserved-space: calc(var(--dock-bottom) + var(--dock-height) + 24px);
   --dock-item-size: 50px;
   --desktop-icon-width: 98px;
+  --desktop-icon-hover-duration: 240ms;
   --icon-tile-size: 66px;
   --lock-screen-avatar-size: 88px;
   --lock-screen-artwork-size: 112px;
