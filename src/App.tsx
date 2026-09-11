@@ -7,7 +7,8 @@ import {
   markEntrySessionEntered,
 } from './features/entry/entrySession'
 
-const ENTRY_EXIT_MS = 360
+// Safety net for browsers that suppress transitionend (for example, hidden tabs).
+const ENTRY_EXIT_FALLBACK_MS = 1000
 const ENTRY_LOAD_MS = 300
 
 type EntryState = 'locked' | 'loading' | 'unlocking' | 'entered'
@@ -21,12 +22,35 @@ function App() {
   const entryTimerRef = useRef<number | null>(null)
 
   useEffect(() => {
+    if (entryState !== 'loading') return
+
+    // Schedule after the desktop has committed, then allow a painted frame
+    // before revealing it, even when mounting took longer than expected.
+    let frameId: number | null = null
+    const timer = window.setTimeout(() => {
+      frameId = window.requestAnimationFrame(() => {
+        frameId = window.requestAnimationFrame(() => {
+          markEntrySessionEntered()
+          setEntryState('unlocking')
+        })
+      })
+    }, ENTRY_LOAD_MS)
     return () => {
-      if (entryTimerRef.current !== null) {
-        window.clearTimeout(entryTimerRef.current)
-      }
+      window.clearTimeout(timer)
+      if (frameId !== null) window.cancelAnimationFrame(frameId)
     }
-  }, [])
+  }, [entryState])
+
+  useEffect(() => {
+    if (entryState !== 'unlocking') return
+    entryTimerRef.current = window.setTimeout(() => {
+      setEntryState('entered')
+    }, ENTRY_EXIT_FALLBACK_MS)
+    return () => {
+      if (entryTimerRef.current !== null) window.clearTimeout(entryTimerRef.current)
+      entryTimerRef.current = null
+    }
+  }, [entryState])
 
   function enterDesktop() {
     if (entryState !== 'locked') return
@@ -38,14 +62,7 @@ function App() {
     }
 
     setEntryState('loading')
-    entryTimerRef.current = window.setTimeout(() => {
-      markEntrySessionEntered()
-      setEntryState('unlocking')
-      entryTimerRef.current = window.setTimeout(() => {
-        setEntryState('entered')
-        entryTimerRef.current = null
-      }, ENTRY_EXIT_MS)
-    }, ENTRY_LOAD_MS)
+
   }
 
   const isUnlocking = entryState === 'unlocking'
@@ -62,6 +79,7 @@ function App() {
           isLoading={entryState === 'loading'}
           isExiting={isUnlocking}
           onEnter={enterDesktop}
+          onExitComplete={() => setEntryState('entered')}
         />
       ) : null}
     </>

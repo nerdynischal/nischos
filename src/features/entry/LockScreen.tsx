@@ -5,6 +5,7 @@ import { LockScreenWaterRipple } from './LockScreenWaterRipple'
 type LockScreenProps = {
   isLoading: boolean
   isExiting: boolean
+  onExitComplete: () => void
   onEnter: () => void
 }
 
@@ -12,6 +13,7 @@ export function LockScreen({
   isLoading,
   isExiting,
   onEnter,
+  onExitComplete,
 }: LockScreenProps) {
   const dateTime = useClock()
   const shortTime = dateTime.time.slice(0, 5).replace(/^0/, '')
@@ -21,6 +23,12 @@ export function LockScreen({
       className="lock-screen"
       aria-label="nischOS login"
       aria-hidden={isExiting || undefined}
+      data-loading={isLoading || undefined}
+      onTransitionEnd={(event) => {
+        if (isExiting && event.target === event.currentTarget && event.propertyName === 'opacity') {
+          onExitComplete()
+        }
+      }}
       data-exiting={isExiting || undefined}
       inert={isExiting}
     >

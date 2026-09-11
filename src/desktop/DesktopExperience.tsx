@@ -110,7 +110,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
     <main
       ref={desktopRef}
       className="desktop"
-      hidden={isPreparing}
+      aria-hidden={isPreparing || undefined}
       inert={isPreparing}
       data-entering={isEntering}
       aria-label="nischOS Desktop"

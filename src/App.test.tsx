@@ -6,12 +6,12 @@ import App from './App'
 
 vi.mock('./desktop/DesktopExperience', () => ({
   DesktopExperience: ({ isPreparing }: { isPreparing: boolean }) => (
-    <main data-testid="desktop" hidden={isPreparing} inert={isPreparing} />
+    <main data-testid="desktop" aria-hidden={isPreparing || undefined} inert={isPreparing} />
   ),
 }))
 vi.mock('./features/entry/LockScreen', () => ({
-  LockScreen: ({ onEnter, isLoading }: { onEnter: () => void; isLoading: boolean }) => (
-    <button onClick={onEnter} disabled={isLoading}>Unlock</button>
+  LockScreen: ({ onEnter, onExitComplete, isLoading }: { onEnter: () => void; onExitComplete: () => void; isLoading: boolean }) => (
+    <button onClick={onEnter} onTransitionEnd={onExitComplete} disabled={isLoading}>Unlock</button>
   ),
 }))
 
@@ -34,15 +34,21 @@ afterEach(() => {
 })
 
 describe('desktop entry preparation', () => {
-  it('mounts an inert desktop immediately and completes entry after 660 ms', () => {
+  it('prepares the desktop before revealing it and waits for transition completion', () => {
     act(() => root.render(<App />))
     expect(container.querySelector('main')).toBeNull()
     act(() => container.querySelector('button')!.click())
-    expect(container.querySelector('main')!.hidden).toBe(true)
+    expect(container.querySelector('main')!.getAttribute('aria-hidden')).toBe('true')
+    expect(container.querySelector('main')!.hidden).toBe(false)
     expect(container.querySelector('main')!.hasAttribute('inert')).toBe(true)
     act(() => vi.advanceTimersByTime(300))
+    expect(container.querySelector('main')!.hasAttribute('inert')).toBe(true)
+    act(() => vi.advanceTimersToNextFrame())
+    act(() => vi.advanceTimersToNextFrame())
     expect(container.querySelector('main')!.hidden).toBe(false)
     act(() => vi.advanceTimersByTime(360))
+    expect(container.querySelector('button')).not.toBeNull()
+    act(() => container.querySelector('button')!.dispatchEvent(new Event('transitionend', { bubbles: true })))
     expect(container.querySelector('button')).toBeNull()
   })
 

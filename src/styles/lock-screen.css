@@ -17,21 +17,22 @@
   background: var(--color-neutral-1000);
   isolation: isolate;
   opacity: 1;
-  filter: blur(0);
   transform: scale(1);
   transform-origin: center;
   transition:
     opacity var(--entry-reveal-duration) var(--ease-crossfade) var(--entry-reveal-delay),
-    filter var(--entry-reveal-duration) var(--ease-crossfade) var(--entry-reveal-delay),
     transform var(--entry-exit-duration) var(--ease-out);
+}
+
+.lock-screen[data-loading='true'] {
+  will-change: opacity, transform;
 }
 
 .lock-screen[data-exiting='true'] {
   pointer-events: none;
   opacity: 0;
-  filter: blur(4px);
   transform: scale(1.02);
-  will-change: opacity, filter, transform;
+  will-change: opacity, transform;
 }
 
 .lock-screen::before {
