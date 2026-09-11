@@ -2,7 +2,7 @@
 .dock {
   position: absolute;
   left: 50%;
-  bottom: max(3.1rem, calc(env(safe-area-inset-bottom) + 2.3rem));
+  bottom: var(--dock-bottom);
   z-index: 90;
   display: flex;
   gap: 0.55rem;

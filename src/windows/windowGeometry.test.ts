@@ -23,6 +23,16 @@ describe('clampWindowToViewport', () => {
     })
   })
 
+  it('keeps dragged windows above the reserved dock area', () => {
+    const result = clampWindowToViewport(windowGeometry, { width: 1200, height: 800, bottomInset: 154 })
+    expect(result.y + result.height + 40).toBe(800 - 154 - 8)
+  })
+
+  it('anchors oversized windows below the menu on short viewports', () => {
+    const result = clampWindowToViewport(windowGeometry, { width: 1200, height: 400, bottomInset: 154 })
+    expect(result.y).toBe(8)
+  })
+
   it('leaves mobile geometry to the responsive layout', () => {
     expect(
       clampWindowToViewport(windowGeometry, { width: 760, height: 800 }),

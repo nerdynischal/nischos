@@ -19,7 +19,11 @@ function clampValue(value: number, min: number, max: number) {
 }
 
 export function getCurrentViewport(): ViewportSize {
+  // Read the CSS-defined workspace so drag bounds share its dock reservation.
+  const layer = document.querySelector<HTMLElement>('.window-layer')
+  const bottomInset = layer ? Math.max(0, window.innerHeight - layer.getBoundingClientRect().bottom) : 0
   return {
+    bottomInset,
     width: window.innerWidth,
     height: window.innerHeight,
   }
@@ -27,7 +31,7 @@ export function getCurrentViewport(): ViewportSize {
 
 function getViewportWindowSize(item: WindowSize, viewport = getCurrentViewport()) {
   const availableWidth = Math.max(320, viewport.width - WINDOW_EDGE_GAP * 2)
-  const availableHeight = Math.max(240, viewport.height - MENU_BAR_HEIGHT - WINDOW_EDGE_GAP * 2)
+  const availableHeight = Math.max(0, viewport.height - (viewport.bottomInset ?? 0) - MENU_BAR_HEIGHT - WINDOW_EDGE_GAP * 2)
 
   return {
     width: Math.min(item.width, availableWidth),
@@ -42,7 +46,7 @@ function getViewportWindowBounds(item: WindowSize, viewport: ViewportSize) {
     maxX: Math.max(WINDOW_EDGE_GAP, viewport.width - width - WINDOW_EDGE_GAP),
     maxY: Math.max(
       WINDOW_EDGE_GAP,
-      viewport.height - MENU_BAR_HEIGHT - height - WINDOW_EDGE_GAP,
+      viewport.height - (viewport.bottomInset ?? 0) - MENU_BAR_HEIGHT - height - WINDOW_EDGE_GAP,
     ),
   }
 }

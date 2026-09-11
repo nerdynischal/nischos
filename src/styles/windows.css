@@ -1,7 +1,7 @@
 /* Window layout and bounds */
 .window-layer {
   position: absolute;
-  inset: var(--menu-bar-height) 0 0;
+  inset: var(--menu-bar-height) 0 var(--dock-reserved-space);
   z-index: 20;
   pointer-events: none;
 }
@@ -10,7 +10,7 @@
   --window-min-width: 390px;
   --window-min-height: 320px;
   --window-max-width: 920px;
-  --window-max-height: calc(100svh - 72px);
+  --window-max-height: max(0px, calc(100% - var(--window-y) - 8px));
   --type-title-size: 1.25rem;
   --type-heading-size: 0.96rem;
   --type-body-size: 0.88rem;
@@ -27,12 +27,12 @@
     min(var(--window-max-width), calc(100vw - 20px))
   );
   height: clamp(
-    min(var(--window-min-height), calc(100svh - 96px)),
+    min(var(--window-min-height), var(--window-max-height)),
     var(--window-height),
     var(--window-max-height)
   );
   min-width: min(var(--window-min-width), calc(100vw - 20px));
-  min-height: min(var(--window-min-height), calc(100svh - 96px));
+  min-height: min(var(--window-min-height), var(--window-max-height));
   max-width: min(var(--window-max-width), calc(100vw - 20px));
   max-height: var(--window-max-height);
   overflow: hidden;

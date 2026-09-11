@@ -31,6 +31,7 @@ export type DesktopIcon = {
 }
 
 export type ViewportSize = {
+  bottomInset?: number
   width: number
   height: number
 }

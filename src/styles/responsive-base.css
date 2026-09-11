@@ -65,9 +65,13 @@
     transform: scale(0.97);
   }
 
+  .dock {
+    position: fixed;
+  }
+
   .window-layer {
     position: fixed;
-    inset: var(--menu-bar-height) 0 0;
+    inset: var(--menu-bar-height) 0 var(--dock-reserved-space);
   }
 
   .window {
@@ -75,11 +79,12 @@
     right: var(--space-2);
     top: var(--space-3);
     width: auto;
-    height: min(78svh, 620px);
+    --window-max-height: max(0px, calc(100% - var(--space-3) - var(--space-2)));
+    height: min(620px, var(--window-max-height));
     min-width: 0;
-    min-height: min(360px, calc(100svh - 64px));
+    min-height: min(360px, var(--window-max-height));
     max-width: calc(100vw - 1rem);
-    max-height: calc(100svh - 56px);
+    max-height: var(--window-max-height);
     resize: none;
     transform: none;
   }

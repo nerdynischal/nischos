@@ -42,7 +42,6 @@
     --window-min-width: 440px;
     --window-min-height: 340px;
     --window-max-width: calc(100vw - 24px);
-    --window-max-height: calc(100svh - 72px);
   }
 
   .window-blog,
