@@ -1,7 +1,18 @@
 import { describe, expect, it } from 'vitest'
 import { responsiveImage } from './responsiveImage'
+import remoteMedia from '../../content/remote-media.json'
 
 describe('responsive images', () => {
+  it('serves all mirrored remote screenshots through local responsive variants', () => {
+    for (const source of Object.keys(remoteMedia)) {
+      const image = responsiveImage(source, '640px', '/nischos/')
+      expect(image.src).toMatch(/^\/nischos\/optimized\/.+-320.webp$/)
+      expect(image.srcSet).toContain('640w')
+      expect(image.sizes).toBe('640px')
+      expect(image.width).toBeGreaterThan(0)
+    }
+  })
+
   it('serves generated sizes and reserves the original aspect ratio', () => {
     const image = responsiveImage('/folder-icon-v2.png', '96px', '/')
     expect(image.src).toMatch(/^\/optimized\/.+-96.webp$/)

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import './styles/app.css'
 import { DesktopExperience } from './desktop/DesktopExperience'
 import { LockScreen } from './features/entry/LockScreen'
+import { preloadDesktopImages } from './desktop/preloadDesktopImages'
 import {
   hasEntrySession,
   markEntrySessionEntered,
@@ -18,6 +19,7 @@ function getInitialEntryState(): EntryState {
 }
 
 function App() {
+  useEffect(() => { preloadDesktopImages() }, [])
   const [entryState, setEntryState] = useState<EntryState>(getInitialEntryState)
   const entryTimerRef = useRef<number | null>(null)
 

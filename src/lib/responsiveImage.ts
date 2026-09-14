@@ -1,4 +1,5 @@
 import generatedMedia from '../generated/media.json'
+import remoteMedia from '../../content/remote-media.json'
 import { resolveAssetUrl } from './assetUrl'
 
 type ImageMetadata = {
@@ -8,10 +9,11 @@ type ImageMetadata = {
 }
 
 const media: Record<string, ImageMetadata> = generatedMedia
+const remoteAliases: Record<string, string> = remoteMedia
 
-/** Unknown and remote media retain their original URL. Originals remain available for zooming. */
+/** Unknown media retain their original URL. Mirrored remote images use local variants. */
 export function responsiveImage(source: string, sizes: string, baseUrl = import.meta.env.BASE_URL) {
-  const metadata = media[source]
+  const metadata = media[remoteAliases[source] ?? source]
   if (!metadata) return { src: resolveAssetUrl(source, baseUrl) }
 
   return {

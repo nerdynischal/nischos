@@ -2,12 +2,7 @@ import { useState } from 'react'
 import { responsiveImage } from '../lib/responsiveImage'
 import type { DesktopIcon } from '../types'
 import { PlaceholderIcon } from './PlaceholderIcon'
-
-const defaultArtwork: Partial<Record<DesktopIcon['category'], string>> = {
-  folder: '/folder-icon-v2.png',
-  blog: '/notes-icon.png',
-  settings: '/about-icon.png',
-}
+import { iconArtworkSource } from './iconArtworkSource'
 
 export function IconArtwork({
   artworkId,
@@ -19,7 +14,7 @@ export function IconArtwork({
   variant: DesktopIcon['category']
 }) {
   const [failedArtwork, setFailedArtwork] = useState<string | null>(null)
-  const artwork = thumbnail ?? defaultArtwork[variant]
+  const artwork = iconArtworkSource(variant, thumbnail)
   const imageProps = artwork ? responsiveImage(artwork, '96px') : undefined
   const artworkUrl = imageProps?.src
 

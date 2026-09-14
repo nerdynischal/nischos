@@ -18,6 +18,7 @@
     "supabase:check": "node scripts/check-supabase.mjs",
     "preview": "vite preview",
     "media:build": "node scripts/build-media.mjs",
+    "media:sync": "node scripts/sync-remote-media.mjs && npm run media:build",
     "predev": "npm run media:build",
     "prebuild": "npm run media:build",
     "pretest": "npm run media:build"

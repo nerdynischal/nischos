@@ -51,7 +51,7 @@ export function LockScreen({
           onClick={onEnter}
         >
           <span className="lock-screen-avatar" aria-hidden="true">
-            <img {...responsiveImage('/about-icon.png', '144px')} alt="" />
+            <img {...responsiveImage('/about-icon.png', '144px')} alt="" fetchPriority="high" />
           </span>
           <span className="lock-screen-name">nischOS</span>
           <span className="lock-screen-hint">Click to Unlock</span>

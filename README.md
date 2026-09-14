@@ -236,6 +236,22 @@ To preview the production build locally:
 npm run preview
 ```
 
+### Early loading and remote screenshots
+
+The entry screen preloads desktop artwork at low priority using the same responsive
+candidates as the desktop. The avatar has high priority; case-study screenshots
+are not preloaded.
+
+`content/remote-media.json` maps known remote screenshot URLs to checked-in originals
+under `public/project-media/remote`. These use the existing WebP generation pipeline,
+including when Supabase returns the same URLs. Unknown URLs retain their original
+behaviour. No Supabase image-transformation plan is required.
+
+Run `npm run media:sync` after adding remote raster images to the project manifests
+or replacing an image at an existing URL. This explicit network step refreshes the
+originals and mapping; normal builds remain offline. Images added only in Supabase
+must also be added to the project manifests to receive these local variants.
+
 ## GitHub Pages deployment
 
 The repository includes `.github/workflows/deploy-pages.yml`. A push to `master`, or a manual workflow run, installs dependencies, runs the full production check, builds with the correct repository subpath, and deploys `dist` to GitHub Pages.
