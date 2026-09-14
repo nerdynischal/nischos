@@ -1,4 +1,6 @@
 import type { CSSProperties, PointerEvent, ReactNode } from 'react'
+import { useState } from 'react'
+import { WindowTitleContext } from './WindowTitleContext'
 import type { DesktopWindow } from '../types'
 
 export function WindowFrame({
@@ -20,6 +22,7 @@ export function WindowFrame({
   onEndDrag: (event: PointerEvent<HTMLElement>) => void
   children: ReactNode
 }) {
+  const [mobileTitle, setMobileTitle] = useState<string | null>(null)
   return (
     <article
       className={`window window-${desktopWindow.category} ${
@@ -59,9 +62,14 @@ export function WindowFrame({
           <span className="traffic traffic-minimize" aria-hidden="true" />
           <span className="traffic traffic-zoom" aria-hidden="true" />
         </div>
-        <h2>{desktopWindow.title}</h2>
+        <h2>
+          <span className="window-title-desktop">{desktopWindow.title}</span>
+          <span className="window-title-mobile">{mobileTitle ?? desktopWindow.title}</span>
+        </h2>
       </header>
-      <div className="window-body">{children}</div>
+      <div className="window-body">
+        <WindowTitleContext value={setMobileTitle}>{children}</WindowTitleContext>
+      </div>
     </article>
   )
 }

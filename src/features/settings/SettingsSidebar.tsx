@@ -1,12 +1,14 @@
 import {
   AtSign,
   CircleUserRound,
+  ChevronRight,
   Gem,
   Shapes,
   Wrench,
   type LucideIcon,
 } from 'lucide-react'
 import type { SettingsSection } from '../../content/types'
+import { ProfilePortrait } from './ProfilePortrait'
 
 const SECTION_ICONS: Record<string, LucideIcon> = {
   about: CircleUserRound,
@@ -27,6 +29,7 @@ export function SettingsSidebar({
 }) {
   return (
     <aside className="settings-sidebar" aria-label="Settings sections">
+      <ProfilePortrait className="settings-list-portrait" />
       <div className="settings-sidebar-group">
         <p className="settings-sidebar-title">Nischal</p>
       </div>
@@ -38,6 +41,7 @@ export function SettingsSidebar({
           <button
             key={section.id}
             type="button"
+            data-section-id={section.id}
             className={isSelected ? 'is-selected' : ''}
             onClick={() => onChangeSection(section.id)}
             aria-current={isSelected ? 'page' : undefined}
@@ -46,6 +50,7 @@ export function SettingsSidebar({
               <SectionIcon className="settings-sidebar-icon" aria-hidden="true" />
             ) : null}
             <span>{section.label}</span>
+            <ChevronRight className="settings-section-chevron" aria-hidden="true" />
           </button>
         )
       })}

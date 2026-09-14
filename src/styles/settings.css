@@ -1,4 +1,12 @@
 /* Settings sidebar */
+.settings-sidebar .settings-list-portrait,
+.settings-mobile-header,
+.settings-mobile-back,
+.settings-mobile-heading,
+.settings-section-chevron {
+  display: none;
+}
+
 .settings-sidebar {
   display: flex;
   flex-direction: column;
@@ -201,7 +209,7 @@
   grid-template-columns: minmax(7.5rem, 0.42fr) minmax(0, 1fr);
   gap: 1rem;
   align-items: start;
-  padding: 0.78rem 1rem;
+  padding: var(--space-4) 1rem;
   border-bottom: 1px solid var(--profile-row-line);
 }
 
@@ -453,7 +461,7 @@
 }
 
 .settings-detail .settings-item {
-  padding: 0.78rem 1rem;
+  padding: var(--space-4) 1rem;
   border: 0;
   border-bottom: 1px solid var(--profile-row-line);
   border-radius: 0;
@@ -507,7 +515,7 @@
   grid-template-columns: 42px minmax(0, 1fr);
   gap: var(--space-4);
   align-items: center;
-  padding: 0.85rem 1rem;
+  padding: var(--space-4) 1rem;
   border: 0;
   border-bottom: 1px solid var(--profile-row-line);
   border-radius: 0;

@@ -39,6 +39,105 @@
 }
 
 @media (max-width: 760px) {
+  .window-title-desktop {
+    display: none;
+  }
+
+  .window-title-mobile {
+    display: inline;
+  }
+
+  .settings-window {
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .settings-mobile-header {
+    display: contents;
+  }
+
+  .settings-detail {
+    gap: var(--space-3);
+  }
+
+  .settings-mobile-heading {
+    display: grid;
+    align-items: center;
+    flex-shrink: 0;
+    min-height: 44px;
+    margin: 0 0 var(--space-6);
+    padding-inline: calc(44px + var(--space-3));
+    text-align: center;
+  }
+
+  .settings-detail .profile-heading,
+  .settings-detail .avatar-orbit {
+    display: none;
+  }
+
+  .settings-sidebar .settings-list-portrait {
+    display: grid;
+    margin-block: var(--space-6) var(--space-8);
+  }
+
+  .settings-window .settings-sidebar {
+    flex-direction: column;
+    gap: var(--space-2);
+    border: 0;
+    padding: var(--space-4);
+  }
+
+  .settings-window .settings-sidebar button {
+    flex-shrink: 0;
+    min-height: 48px;
+    padding: var(--space-3);
+    color: var(--text-primary);
+    background: var(--surface-soft);
+  }
+
+  .settings-section-chevron {
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin-left: auto;
+    color: var(--text-tertiary);
+  }
+
+  .settings-window[data-mobile-detail='false'] .settings-detail,
+  .settings-window[data-mobile-detail='true'] .settings-sidebar {
+    display: none;
+  }
+
+  .settings-mobile-back {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    /* Share the title's row while letting only the button stick during scrolling. */
+    margin-bottom: calc(-44px - var(--space-3));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    flex-shrink: 0;
+    min-height: 44px;
+    min-width: 44px;
+    padding: var(--space-2);
+    border: 0;
+    border-radius: var(--radius-round);
+    color: var(--text-primary);
+    background: var(--surface-soft);
+    backdrop-filter: blur(12px);
+    cursor: pointer;
+  }
+
+  .settings-mobile-back:hover {
+    background: var(--surface-hover);
+  }
+
+  .settings-mobile-back svg {
+    width: 16px;
+    height: 16px;
+  }
+
   .dock .dock-desktop-only,
   .dock-separator {
     display: none;

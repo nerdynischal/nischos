@@ -114,6 +114,10 @@
 }
 
 /* Window chrome */
+.window-title-mobile {
+  display: none;
+}
+
 .window.is-inactive {
   filter: saturate(0.88);
   box-shadow:

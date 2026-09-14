@@ -1,7 +1,10 @@
+import { useContext, useEffect, useRef, useState } from 'react'
+import { ChevronLeft } from 'lucide-react'
 import type { SettingsSection } from '../../content/types'
 import { EmptyState } from '../../components/EmptyState'
-import { responsiveImage } from '../../lib/responsiveImage'
+import { WindowTitleContext } from '../../windows/WindowTitleContext'
 import { ContactDetails } from './ContactDetails'
+import { ProfilePortrait } from './ProfilePortrait'
 import { SettingsSidebar } from './SettingsSidebar'
 import { ToolkitSection } from './ToolkitSection'
 
@@ -16,27 +19,64 @@ export function SettingsWindow({
   onChangeSection: (sectionId: string) => void
   settingsSections: SettingsSection[]
 }) {
+  const [showMobileDetail, setShowMobileDetail] = useState(false)
+  const setMobileTitle = useContext(WindowTitleContext)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const backRef = useRef<HTMLButtonElement>(null)
+  const pendingFocus = useRef<'detail' | 'list' | null>(null)
   const section = settingsSections.find((item) => item.id === activeSection) ?? settingsSections[0]
+
+  useEffect(() => {
+    setMobileTitle?.(showMobileDetail ? section?.label ?? null : null)
+    return () => setMobileTitle?.(null)
+  }, [setMobileTitle, showMobileDetail, section?.label])
+
+  useEffect(() => {
+    if (pendingFocus.current === 'detail') {
+      backRef.current?.focus()
+    } else if (pendingFocus.current === 'list') {
+      const buttons = containerRef.current?.querySelectorAll<HTMLButtonElement>('[data-section-id]')
+      Array.from(buttons ?? []).find((button) => button.dataset.sectionId === section?.id)?.focus()
+    }
+    pendingFocus.current = null
+  }, [showMobileDetail, section?.id])
 
   if (!section) {
     return <EmptyState title="About unavailable" body="Profile information could not be loaded." />
   }
 
   return (
-    <div className="settings-window">
+    <div ref={containerRef} className="settings-window" data-mobile-detail={showMobileDetail}>
       <SettingsSidebar
         activeSectionId={section.id}
-        onChangeSection={onChangeSection}
+        onChangeSection={(id) => {
+          onChangeSection(id)
+          if (window.matchMedia('(max-width: 760px)').matches) {
+            pendingFocus.current = 'detail'
+            setShowMobileDetail(true)
+          }
+        }}
         sections={settingsSections}
       />
       <section className="settings-detail">
-        <div className="avatar-orbit" aria-hidden="true">
-          <img
-            className="about-portrait"
-            {...responsiveImage('/about-icon.png', '120px')}
-            alt=""
-          />
+        <div className="settings-mobile-header">
+          <button
+            ref={backRef}
+            type="button"
+            className="settings-mobile-back"
+            aria-label="Back to About sections"
+            onClick={() => {
+              pendingFocus.current = 'list'
+              setShowMobileDetail(false)
+            }}
+          >
+            <ChevronLeft aria-hidden="true" />
+          </button>
+          <h3 className="settings-mobile-heading">
+            {section.displaySubtitle ?? section.displayTitle ?? section.label}
+          </h3>
         </div>
+        <ProfilePortrait />
         <div className="profile-heading">
           <h3>{section.displayTitle ?? section.label}</h3>
           {section.displaySubtitle ? (
