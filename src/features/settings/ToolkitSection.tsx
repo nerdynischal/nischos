@@ -14,7 +14,9 @@ export function ToolkitSection({ groups }: { groups: SettingsToolGroup[] }) {
               {group.tools.map((tool) => (
                 <li key={tool.title} className="toolkit-row">
                   <span className="toolkit-icon" aria-hidden="true">
-                    <img {...responsiveImage(tool.icon, '40px')} alt="" loading="lazy" decoding="async" />
+                    {/* This section mounts on selection; load its small icons without
+                        waiting for lazy-load visibility checks inside the window. */}
+                    <img {...responsiveImage(tool.icon, '40px')} alt="" loading="eager" decoding="async" />
                   </span>
                   <div className="toolkit-copy">
                     <h5>{tool.title}</h5>
