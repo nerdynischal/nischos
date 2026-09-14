@@ -3,6 +3,7 @@ import { DEFAULT_SETTINGS_SECTION_ID } from '../content'
 import { legacyProjectSummaries as legacyProjects } from '../content/legacyProjectSummaries'
 import { useDesktopWindows } from '../hooks/useDesktopWindows'
 import { usePortfolioContent } from '../hooks/usePortfolioContent'
+import { useMobileScrollLock } from '../hooks/useMobileScrollLock'
 import type { DesktopIcon } from '../types'
 import { WindowContent } from '../windows/WindowContent'
 import { WindowFrame } from '../windows/WindowFrame'
@@ -37,6 +38,8 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
     moveDrag,
     endDrag,
   } = useDesktopWindows()
+
+  useMobileScrollLock(windows.length > 0)
 
   const icons = useMemo(() => createDesktopIcons(projects), [projects])
   const allProjects = useMemo(() => [...projects, ...legacyProjects], [projects])
