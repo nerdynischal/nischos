@@ -1,4 +1,25 @@
 /* Responsive theme behavior */
+@media (max-width: 760px), (pointer: coarse) {
+  button.traffic-close {
+    position: relative;
+  }
+
+  button.traffic-close::before {
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    width: 44px;
+    height: 44px;
+    content: '';
+    transform: translateY(-50%);
+  }
+
+  button.traffic-close:active {
+    transform: none;
+    filter: brightness(0.85);
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .desktop-icon:hover .icon-glyph {
     box-shadow:
