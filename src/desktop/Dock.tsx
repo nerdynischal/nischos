@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { selectDockProjects } from '../content/projectOrdering'
 import type { Project } from '../content/types'
 import type { DesktopWindow, WindowCategory } from '../types'
-import { getProjectWindowId, SYSTEM_APPS } from './appRegistry'
+import { getProjectWindowId, LEGACY_WORK_APP, SYSTEM_APPS } from './appRegistry'
 import { IconArtwork } from './IconArtwork'
 import { useDockMagnification } from './useDockMagnification'
 
@@ -20,6 +20,7 @@ export function Dock({
   projects,
   onOpenProject,
   onOpenBlog,
+  onOpenLegacyWork,
   onOpenSettings,
   onFocusWindow,
 }: {
@@ -27,6 +28,7 @@ export function Dock({
   projects: Project[]
   onOpenProject: (projectId: string) => void
   onOpenBlog: () => void
+  onOpenLegacyWork: () => void
   onOpenSettings: () => void
   onFocusWindow: (id: string) => void
 }) {
@@ -48,12 +50,12 @@ export function Dock({
       thumbnail: project.thumbnail,
       windowId: getProjectWindowId(project.id),
     })),
-    ...SYSTEM_APPS.map(({ label, category, tone }) => ({
-      id: category,
+    ...[SYSTEM_APPS[0], LEGACY_WORK_APP, SYSTEM_APPS[1]].map(({ label, category, tone }) => ({
+      id: category === 'folder' ? LEGACY_WORK_APP.id : category,
       label,
       category,
       tone,
-      windowId: category,
+      windowId: category === 'folder' ? LEGACY_WORK_APP.id : category,
     })),
   ]
 
@@ -72,6 +74,7 @@ export function Dock({
 
     if (item.category === 'project') onOpenProject(item.id)
     if (item.category === 'blog') onOpenBlog()
+    if (item.category === 'folder') onOpenLegacyWork()
     if (item.category === 'settings') onOpenSettings()
   }
 

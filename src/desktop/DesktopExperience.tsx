@@ -158,6 +158,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
         projects={allProjects}
         onOpenProject={openProject}
         onOpenBlog={openBlog}
+        onOpenLegacyWork={openLegacyWork}
         onOpenSettings={openSettings}
         onFocusWindow={focusWindow}
       />
