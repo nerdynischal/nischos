@@ -1,5 +1,34 @@
 # Changelog
 
+## 14 September 2026
+
+### Changed
+
+- Added Selected Work between Notes and About in the dock. Mobile shows only these three destinations, with consistent icon sizing across smaller screens.
+- Replaced mobile About tabs with a section list and detail navigation. Section titles appear in the window bar; centered subtitles sit beside a circular back arrow that stays available during scrolling. The profile portrait appears only on the main mobile list.
+- Increased content-row vertical padding across screen sizes. Balanced the mobile section heading's spacing above and below, correcting a shared heading rule that overrode its bottom margin.
+
+### Optimised
+
+- Preload desktop artwork while the lock screen is visible, matching the desktop's responsive image candidates. Prioritise the profile avatar and load desktop icons at low priority; project screenshots remain deferred until needed.
+- Serve nine remote screenshots across Keyform, Nisch's Toolkit, and Maneki Neko Catalog through local responsive WebP variants. Existing remote URLs map to checked-in originals without requiring Supabase image transformations.
+- Added `npm run media:sync` to explicitly refresh remote raster images from project manifests. Normal builds remain offline; new or replaced remote images require a sync and redeployment.
+- Across those nine screenshots, total image data fell from 672,209 bytes to 150,864 bytes at 640px (78% smaller), or 390,364 bytes for the largest variants (42% smaller).
+- Compared live image downloads over three rounds per version (81 requests, no browser cache). Median per-image download time was 137 ms for originals, 122 ms for 640px variants, and 63 ms for the largest variants. Network and CDN latency affect these results; these are image-download measurements, not whole-page or controlled slow-mobile benchmarks.
+
+### Fixed
+
+- Enlarged the window close control's touch target while preserving the traffic-light appearance.
+- Locked desktop scrolling while mobile windows are open, restoring the previous position when the last window closes or the viewport returns to desktop size.
+- Load About → Tools icons eagerly when the section mounts, avoiding lazy-load visibility checks inside the scrollable window. This adds no Tools image requests to the initial page load. The user confirmed on Safari for Mac that the deployed icons now appear without refreshing; the underlying browser cause was not independently reproduced.
+
+### Release validation
+
+- After the mobile navigation, scroll-lock, and spacing changes, `npm run check` passed with all 100 tests across 27 files, plus manifest checks, CSS tokens, lint, TypeScript, and the production build.
+- `npm run check` passed for both changes: project manifests, CSS tokens, lint, all 98 tests across 25 files, TypeScript, and the production build.
+- Browser checks confirmed entry image preload hints, rendered desktop artwork, and an optimised Keyform screenshot with no recorded browser warnings or errors.
+- GitHub Pages deployments succeeded for `6d7256f` (earlier loading and remote screenshots) and `fe24662` (About Tools icons).
+
 ## 10 September 2026
 
 ### Added

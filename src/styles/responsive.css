@@ -59,14 +59,20 @@
     gap: var(--space-3);
   }
 
-  .settings-mobile-heading {
+  .settings-detail .settings-mobile-heading {
     display: grid;
     align-items: center;
     flex-shrink: 0;
     min-height: 44px;
-    margin: 0 0 var(--space-6);
+    /* Match the detail pane's top padding, including its existing flex gap. */
+    margin: 0 0 calc(1.7rem - var(--space-3));
     padding-inline: calc(44px + var(--space-3));
     text-align: center;
+  }
+
+  .settings-detail > .profile-details,
+  .settings-detail > .settings-items {
+    margin-top: 0;
   }
 
   .settings-detail .profile-heading,
