@@ -95,7 +95,7 @@ export function Dock({
             {item.category === 'blog' ? <span className="dock-separator" aria-hidden="true" /> : null}
             <button
               type="button"
-              className={`dock-item dock-tone-${item.tone} ${openWindow ? 'is-open' : ''}`}
+              className={`dock-item dock-tone-${item.tone} ${item.category === 'project' ? 'dock-desktop-only' : ''} ${openWindow ? 'is-open' : ''}`}
               data-dock-id={item.id}
               data-dock-label={item.label}
               onClick={() => handlePinnedClick(item)}
@@ -120,7 +120,7 @@ export function Dock({
           <button
             key={item.id}
             type="button"
-            className={`dock-item dock-tone-${project?.iconTone ?? 'note'} is-open`}
+            className={`dock-item dock-desktop-only dock-tone-${project?.iconTone ?? 'note'} is-open`}
             data-dock-id={item.id}
             data-dock-label={item.title}
             onClick={() => onFocusWindow(item.id)}

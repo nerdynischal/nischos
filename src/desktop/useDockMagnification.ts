@@ -62,6 +62,7 @@ export function useDockMagnification() {
     if (!dock) return
 
     const items = Array.from(dock.querySelectorAll<HTMLButtonElement>(ITEM_SELECTOR))
+      .filter((item) => item.offsetWidth > 0)
     if (items.length === 0) return
 
     const geometries = items.map((item) => ({
@@ -146,9 +147,11 @@ export function useDockMagnification() {
     }
 
     window.addEventListener('pointermove', handleWindowMove)
+    window.addEventListener('resize', handlePointerLeave)
 
     return () => {
       window.removeEventListener('pointermove', handleWindowMove)
+      window.removeEventListener('resize', handlePointerLeave)
       if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current)
     }
   }, [handlePointerLeave])

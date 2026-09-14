@@ -18,6 +18,11 @@
 }
 
 @media (max-width: 760px) {
+  .dock .dock-desktop-only,
+  .dock-separator {
+    display: none;
+  }
+
   .finder-sidebar,
   .settings-sidebar {
     border-bottom-color: var(--line-subtle);
