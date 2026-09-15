@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import type { BlogPostSummary, Project, SettingsSection } from '../content/types'
 import { EmptyState } from '../components/EmptyState'
-import { LoadingIndicator } from '../components/LoadingIndicator'
+import { WindowSkeleton } from './WindowSkeleton'
 import { legacyProjectSummaries as legacyProjects } from '../content/legacyProjectSummaries'
 import type { DesktopWindow } from '../types'
 
@@ -35,7 +35,7 @@ type WindowContentProps = {
 
 export function WindowContent(props: WindowContentProps) {
   return (
-    <Suspense fallback={<LoadingIndicator label={`Opening ${props.desktopWindow.title}…`} inset />}>
+    <Suspense fallback={<WindowSkeleton key={props.desktopWindow.id} {...props} />}>
       <WindowReader {...props} />
     </Suspense>
   )

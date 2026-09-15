@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { BlogPostSummary } from '../../content/types'
 import { EmptyState } from '../../components/EmptyState'
-import { LoadingIndicator } from '../../components/LoadingIndicator'
+import { NoteSkeleton } from '../../components/ContentSkeleton'
 import { getPostMarkdown } from './getPostMarkdown'
 import { usePostContent } from './usePostContent'
 import { WindowTitleContext } from '../../windows/WindowTitleContext'
@@ -100,7 +100,7 @@ export function BlogWindow({
               <h3>{selectedPost.title}</h3>
             </header>
             {content.status === 'loading' ? (
-              <LoadingIndicator key={selectedPost.id} label="Loading note…" />
+              <NoteSkeleton key={selectedPost.id} />
             ) : content.status === 'error' ? (
               <div className="note-load-status" role="status">
                 <p>This note could not be loaded.</p>
