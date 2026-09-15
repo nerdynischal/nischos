@@ -20,6 +20,7 @@ export function SettingsWindow({
   settingsSections: SettingsSection[]
 }) {
   const [showMobileDetail, setShowMobileDetail] = useState(false)
+  const [hasMobileNavigation, setHasMobileNavigation] = useState(false)
   const setMobileTitle = useContext(WindowTitleContext)
   const containerRef = useRef<HTMLDivElement>(null)
   const backRef = useRef<HTMLButtonElement>(null)
@@ -46,12 +47,13 @@ export function SettingsWindow({
   }
 
   return (
-    <div ref={containerRef} className="settings-window" data-mobile-detail={showMobileDetail}>
+    <div ref={containerRef} className="settings-window" data-mobile-detail={showMobileDetail} data-mobile-navigation={hasMobileNavigation}>
       <SettingsSidebar
         activeSectionId={section.id}
         onChangeSection={(id) => {
           onChangeSection(id)
           if (window.matchMedia('(max-width: 760px)').matches) {
+            setHasMobileNavigation(true)
             pendingFocus.current = 'detail'
             setShowMobileDetail(true)
           }

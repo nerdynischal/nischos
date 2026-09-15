@@ -9,6 +9,7 @@
 
 ### Changed
 
+- Mobile About sections enter from the right with a 360 ms eased slide; returning to the section list slides it in from the left. Initial opening stays still, reduced-motion preferences disable the animation, and existing focus restoration remains intact.
 - App preview screenshots now slide in the navigation direction over 360 ms with a gentle ease-out. The active dot animates, and reduced-motion preferences disable the slide.
 - Screenshot navigation stops at either end, with the corresponding arrow dimmed and disabled.
 
@@ -28,6 +29,7 @@
 
 ### Release validation
 
+- After the mobile About animation, `npm run check` passed: all 105 tests across 29 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
 - After the carousel changes, `npm run check` passed: all 105 tests across 29 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
 
 - After the final 404 edits, `npm run check` passed: all 105 tests across 29 files, project manifests, CSS tokens, lint, TypeScript, and the production build.

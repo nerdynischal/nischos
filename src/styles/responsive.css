@@ -284,3 +284,24 @@
     transform: none;
   }
 }
+
+/* Animate only navigation within About, keeping its initial opening still. */
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  .settings-window[data-mobile-navigation='true'][data-mobile-detail='true'] .settings-detail {
+    animation: about-detail-enter 360ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  .settings-window[data-mobile-navigation='true'][data-mobile-detail='false'] .settings-sidebar {
+    animation: about-list-enter 360ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+
+@keyframes about-detail-enter {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes about-list-enter {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
