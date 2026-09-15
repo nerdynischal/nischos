@@ -146,9 +146,15 @@
     border-color var(--duration-control) var(--ease-out);
 }
 
-.carousel-controls > button:hover {
+.carousel-controls > button:enabled:hover {
   color: var(--carousel-control-text-hover);
   background: var(--carousel-control-bg-hover);
+}
+
+.carousel-controls > button:disabled {
+  color: var(--text-disabled);
+  opacity: 0.45;
+  cursor: default;
 }
 
 .carousel-controls > button svg {
@@ -170,6 +176,7 @@
   padding: 0;
   background: var(--carousel-dot-bg);
   cursor: pointer;
+  transition: width 200ms var(--ease-out), background-color 200ms var(--ease-out);
 }
 
 .carousel-dots button.is-active {
@@ -343,4 +350,45 @@
   background: var(--inset-line);
   cursor: default;
   transition: none;
+}
+
+/* Retain the outgoing image until the replacement has decoded. */
+.screenshot-card.has-image img.screenshot-outgoing {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  object-fit: contain;
+  background: var(--surface-screenshot);
+  pointer-events: none;
+  animation: screenshot-slide-out 360ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.screenshot-incoming,
+.screenshot-outgoing {
+  --slide-offset: 100%;
+}
+
+.screenshot-incoming.slide-previous,
+.screenshot-outgoing.slide-previous {
+  --slide-offset: -100%;
+}
+
+.screenshot-incoming {
+  animation: screenshot-slide-in 360ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes screenshot-slide-in {
+  from { transform: translateX(var(--slide-offset)); }
+  to { transform: translateX(0); }
+}
+
+@keyframes screenshot-slide-out {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-1 * var(--slide-offset))); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-dots button { transition: none; }
+  .screenshot-incoming { animation: none; }
+  .screenshot-card.has-image img.screenshot-outgoing { display: none; }
 }

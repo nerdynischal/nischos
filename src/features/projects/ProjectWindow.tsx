@@ -3,7 +3,7 @@ import { useState } from 'react'
 import type { Project } from '../../content/types'
 import { IconArtwork } from '../../desktop/IconArtwork'
 import { resolveAssetUrl } from '../../lib/assetUrl'
-import { responsiveImage } from '../../lib/responsiveImage'
+import { ScreenshotImage } from './ScreenshotImage'
 import { MetaRow } from './MetaRow'
 
 function isImageScreenshot(screenshot: string) {
@@ -28,10 +28,11 @@ export function ProjectWindow({
   onOpenBlog: (postId?: string) => void
 }) {
   const [activeShot, setActiveShot] = useState(0)
+  const [slideDirection, setSlideDirection] = useState<'next' | 'previous'>('next')
   const [failedScreenshot, setFailedScreenshot] = useState<string | null>(null)
   const projectScreenshots = project.screenshots
   const screenshotCount = projectScreenshots.length
-  const selectedShotIndex = screenshotCount > 0 ? activeShot % screenshotCount : 0
+  const selectedShotIndex = Math.max(0, Math.min(activeShot, screenshotCount - 1))
   const selectedScreenshot = projectScreenshots[selectedShotIndex]
   const selectedScreenshotLabel = selectedScreenshot
     ? getScreenshotLabel(selectedScreenshot, selectedShotIndex)
@@ -47,11 +48,13 @@ export function ProjectWindow({
   )
 
   function showPreviousShot() {
-    setActiveShot((index) => (index - 1 + screenshotCount) % screenshotCount)
+    setSlideDirection('previous')
+    setActiveShot((index) => Math.max(0, index - 1))
   }
 
   function showNextShot() {
-    setActiveShot((index) => (index + 1) % screenshotCount)
+    setSlideDirection('next')
+    setActiveShot((index) => Math.max(0, Math.min(index + 1, screenshotCount - 1)))
   }
 
   return (
@@ -120,11 +123,13 @@ export function ProjectWindow({
           }`}
         >
           {selectedScreenshotIsImage ? (
-            <img
-              {...responsiveImage(selectedScreenshot, '(max-width: 760px) calc(100vw - 48px), 1040px')}
+            <ScreenshotImage
+              source={selectedScreenshot}
+              direction={slideDirection}
+              nextSource={isImageScreenshot(projectScreenshots[selectedShotIndex + 1] ?? '')
+                ? projectScreenshots[selectedShotIndex + 1]
+                : undefined}
               alt={`${project.title}: ${selectedScreenshotLabel}`}
-              loading="lazy"
-              decoding="async"
               onError={() => setFailedScreenshot(selectedScreenshotUrl ?? null)}
             />
           ) : (
@@ -133,7 +138,7 @@ export function ProjectWindow({
         </div>
         {screenshotCount > 1 ? (
           <div className="carousel-controls" aria-label="Screenshot carousel controls">
-            <button type="button" onClick={showPreviousShot} aria-label="Show previous screenshot">
+            <button type="button" onClick={showPreviousShot} disabled={selectedShotIndex === 0} aria-label="Show previous screenshot">
               <ChevronLeft strokeWidth={1.8} absoluteStrokeWidth aria-hidden="true" />
             </button>
             <div className="carousel-dots" aria-label="Screenshot selector">
@@ -144,14 +149,17 @@ export function ProjectWindow({
                     key={`${screenshot}-${index}`}
                     type="button"
                     className={index === selectedShotIndex ? 'is-active' : ''}
-                    onClick={() => setActiveShot(index)}
+                    onClick={() => {
+                      setSlideDirection(index > selectedShotIndex ? 'next' : 'previous')
+                      setActiveShot(index)
+                    }}
                     aria-label={`Show ${label}`}
                     aria-current={index === selectedShotIndex ? 'true' : undefined}
                   />
                 )
               })}
             </div>
-            <button type="button" onClick={showNextShot} aria-label="Show next screenshot">
+            <button type="button" onClick={showNextShot} disabled={selectedShotIndex === screenshotCount - 1} aria-label="Show next screenshot">
               <ChevronRight strokeWidth={1.8} absoluteStrokeWidth aria-hidden="true" />
             </button>
           </div>

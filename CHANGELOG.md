@@ -9,6 +9,9 @@
 
 ### Changed
 
+- App preview screenshots now slide in the navigation direction over 360 ms with a gentle ease-out. The active dot animates, and reduced-motion preferences disable the slide.
+- Screenshot navigation stops at either end, with the corresponding arrow dimmed and disabled.
+
 - Replaced window-opening and note-body spinners with tailored skeleton placeholders. Selected Work uses its toolbar and eight-file grid; case studies and app projects use separate layouts; About follows its portrait and section content; Notes follows its sidebar and reader spacing.
 - Reused view layout styles and available metadata to preserve known text wrapping and responsive behavior. Unloaded body content uses estimated lines. Kept the 180 ms delay, accessible loading announcements, inert placeholder controls, theme colors, and reduced-motion support.
 - Replaced mobile Notes tabs with a vertical note list and detail navigation matching About. Selected notes show their title in the window bar, centered folder/date metadata, and a circular sticky back arrow with a 44px touch target.
@@ -17,11 +20,15 @@
 
 ### Optimised
 
+- Preload only the next screenshot after its app preview mounts, using matching responsive image candidates. Keep the current screenshot visible until the selected image has decoded; no animation library was added.
+
 - Defer rendering skeleton placeholder subtrees until the 180 ms loading delay expires, avoiding that work for fast loads.
 - Use one CSS pulse animation per skeleton instead of animating individual blocks. Retained reduced-motion support and removed the unused spinner component, styles, and tests.
 - Production CSS decreased from 86.24 kB to 85.56 kB (15.35 kB to 15.25 kB gzip); main JavaScript size remained unchanged. These are bundle measurements, not device-performance benchmarks.
 
 ### Release validation
+
+- After the carousel changes, `npm run check` passed: all 105 tests across 29 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
 
 - After the final 404 edits, `npm run check` passed: all 105 tests across 29 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
 - During 404 development, verified desktop and 320px mobile layouts, keyboard focus, and home navigation. Checked generated assets and home links under both `/` and `/nischos/`, including resolution from nested missing URLs.
