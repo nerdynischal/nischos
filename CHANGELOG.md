@@ -2,6 +2,11 @@
 
 ## 15 September 2026
 
+### Added
+
+- Added a standalone nischOS-style `404.html` page for GitHub Pages, with a compact window, “Missing page” heading, and “Back to desktop” link. The trailing Lucide Undo 2 icon uses tighter spacing and a 2px upward optical adjustment.
+- Included the 404 page in the Vite build with deployment-base-aware asset and home links. It uses existing theme preferences and works without loading React or portfolio data. Preview locally at `/404.html`; unknown URLs still use Vite’s development fallback.
+
 ### Changed
 
 - Replaced window-opening and note-body spinners with tailored skeleton placeholders. Selected Work uses its toolbar and eight-file grid; case studies and app projects use separate layouts; About follows its portrait and section content; Notes follows its sidebar and reader spacing.
@@ -18,6 +23,8 @@
 
 ### Release validation
 
+- After the final 404 edits, `npm run check` passed: all 105 tests across 29 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
+- During 404 development, verified desktop and 320px mobile layouts, keyboard focus, and home navigation. Checked generated assets and home links under both `/` and `/nischos/`, including resolution from nested missing URLs.
 - After the optimisation pass, `npm run check` passed: all 105 tests across 29 files, project manifests, CSS tokens, lint, TypeScript, and the production build. Added fast-load coverage verifying that the placeholder subtree never renders; updated window tests to exercise delayed mounting.
 - After the skeleton changes, `npm run check` passed: all 107 tests across 30 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
 - Compared skeletons with loaded Selected Work, About, case-study, and Notes views in the browser, including dark/light themes and mobile layouts; checked note widths at 768px, 1024px, and 1440px.

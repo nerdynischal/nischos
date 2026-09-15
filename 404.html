@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#050505" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%logo.svg" />
+    <link rel="stylesheet" href="/src/styles/not-found.css" />
+    <title>Page not found · nischOS</title>
+    <script>
+      ;(() => {
+        const storageKey = 'nischos-theme'
+        let preference = 'system'
+
+        try {
+          const storedPreference = window.localStorage.getItem(storageKey)
+          if (storedPreference === 'light' || storedPreference === 'dark') {
+            preference = storedPreference
+          }
+        } catch {
+          // Use the system preference when browser storage is unavailable.
+        }
+
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        const theme = preference === 'system' ? (prefersDark ? 'dark' : 'light') : preference
+        const themeColor = theme === 'dark' ? '#050505' : '#f6f6f6'
+
+        document.documentElement.dataset.theme = theme
+        document.documentElement.style.colorScheme = theme
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor)
+      })()
+    </script>
+  </head>
+  <body>
+    <header class="not-found-menu"><span>nischOS</span><span>Page not found</span></header>
+    <main class="not-found-desktop">
+      <section class="not-found-window" aria-labelledby="not-found-title">
+        <div class="not-found-titlebar">
+          <div class="not-found-lights" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span>nischOS</span>
+        </div>
+        <div class="not-found-content">
+          <p class="not-found-code">Error 404</p>
+          <h1 id="not-found-title">Missing page</h1>
+          <p class="not-found-description">It may have moved, or the link might be incorrect.</p>
+          <a class="not-found-home" href="%BASE_URL%">Back to desktop <svg class="not-found-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" /></svg></a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
