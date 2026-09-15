@@ -1,17 +1,34 @@
 // @vitest-environment jsdom
-import { renderToStaticMarkup } from 'react-dom/server'
-import { expect, it } from 'vitest'
+import { act } from 'react'
+import { createRoot, type Root } from 'react-dom/client'
+import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import { WindowSkeleton } from './WindowSkeleton'
 import { legacyProjectSummaries } from '../content/legacyProjectSummaries'
 import { projects, posts, settingsSections } from '../content'
 import type { WindowCategory } from '../types'
 
+let roots: Root[] = []
+beforeEach(() => {
+  vi.useFakeTimers()
+  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true)
+})
+afterEach(() => {
+  act(() => roots.forEach((root) => root.unmount()))
+  roots = []
+  vi.useRealTimers()
+  vi.unstubAllGlobals()
+})
+
 function render(category: WindowCategory, refId?: string) {
   const container = document.createElement('div')
-  container.innerHTML = renderToStaticMarkup(<WindowSkeleton
+  const root = createRoot(container)
+  roots.push(root)
+  act(() => root.render(<WindowSkeleton
     desktopWindow={{ id: 'preview', category, refId, title: 'Preview', x: 0, y: 0, width: 800, height: 600, z: 1 }}
     projects={projects} posts={posts} settingsSections={settingsSections} activeSection="about"
-  />)
+  />))
+  expect(container.querySelector('.skeleton-shapes')).toBeNull()
+  act(() => vi.advanceTimersByTime(180))
   return container
 }
 

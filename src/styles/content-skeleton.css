@@ -8,8 +8,7 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
-.skeleton-shapes { visibility: hidden; pointer-events: none; }
-.content-skeleton[data-visible='true'] > .skeleton-shapes { visibility: visible; }
+.skeleton-shapes { pointer-events: none; }
 .window-skeleton, .window-skeleton > .skeleton-shapes { height: 100%; }
 .skeleton-text {
   color: transparent;
@@ -36,12 +35,12 @@
 }
 .skeleton-paragraph .skeleton-line:nth-child(2) { width: 94%; }
 .skeleton-paragraph .skeleton-line:last-child { width: 62%; }
-.content-skeleton[data-visible='true'] :is(.skeleton-text, .skeleton-fill, .skeleton-line) {
+.content-skeleton > .skeleton-shapes {
   animation: skeleton-pulse 1800ms ease-in-out infinite;
 }
 @keyframes skeleton-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 0.95; } }
 @media (prefers-reduced-motion: reduce) {
-  .content-skeleton[data-visible='true'] :is(.skeleton-text, .skeleton-fill, .skeleton-line) { animation: none; }
+  .content-skeleton > .skeleton-shapes { animation: none; }
 }
 
 .window-skeleton > .skeleton-shapes { overflow: auto; }

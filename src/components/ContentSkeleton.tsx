@@ -15,7 +15,7 @@ export function SkeletonFrame({ label, children, className = '' }: {
   return (
     <div className={`content-skeleton ${className}`} data-visible={visible} aria-busy="true">
       <span className="skeleton-announcement" role="status">{visible ? label : ''}</span>
-      <div className="skeleton-shapes" aria-hidden="true" inert>{children}</div>
+      {visible && <div className="skeleton-shapes" aria-hidden="true" inert>{children}</div>}
     </div>
   )
 }

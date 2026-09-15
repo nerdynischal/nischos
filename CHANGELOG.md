@@ -10,8 +10,15 @@
 - Added roomier note rows and matching reader spacing. Back navigation restores focus to the selected list row; direct note selections still open the reader, and desktop retains its sidebar layout.
 - Kept the empty Notes state visible when no posts are available.
 
+### Optimised
+
+- Defer rendering skeleton placeholder subtrees until the 180 ms loading delay expires, avoiding that work for fast loads.
+- Use one CSS pulse animation per skeleton instead of animating individual blocks. Retained reduced-motion support and removed the unused spinner component, styles, and tests.
+- Production CSS decreased from 86.24 kB to 85.56 kB (15.35 kB to 15.25 kB gzip); main JavaScript size remained unchanged. These are bundle measurements, not device-performance benchmarks.
+
 ### Release validation
 
+- After the optimisation pass, `npm run check` passed: all 105 tests across 29 files, project manifests, CSS tokens, lint, TypeScript, and the production build. Added fast-load coverage verifying that the placeholder subtree never renders; updated window tests to exercise delayed mounting.
 - After the skeleton changes, `npm run check` passed: all 107 tests across 30 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
 - Compared skeletons with loaded Selected Work, About, case-study, and Notes views in the browser, including dark/light themes and mobile layouts; checked note widths at 768px, 1024px, and 1440px.
 - `npm run check` passed: all 101 tests across 28 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
