@@ -1,4 +1,9 @@
 /* Notes layout */
+.notes-mobile-back,
+.notes-row-chevron {
+  display: none;
+}
+
 .note-load-status {
   margin-block: var(--space-4);
   color: var(--text-muted);

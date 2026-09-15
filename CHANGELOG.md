@@ -1,5 +1,18 @@
 # Changelog
 
+## 15 September 2026
+
+### Changed
+
+- Replaced mobile Notes tabs with a vertical note list and detail navigation matching About. Selected notes show their title in the window bar, centered folder/date metadata, and a circular sticky back arrow with a 44px touch target.
+- Added roomier note rows and matching reader spacing. Back navigation restores focus to the selected list row; direct note selections still open the reader, and desktop retains its sidebar layout.
+- Kept the empty Notes state visible when no posts are available.
+
+### Release validation
+
+- `npm run check` passed: all 101 tests across 28 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
+- Browser checks verified the mobile note list, reader, back navigation, title updates, and desktop sidebar/reader visibility.
+
 ## 14 September 2026
 
 ### Changed

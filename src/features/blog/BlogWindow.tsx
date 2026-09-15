@@ -1,3 +1,5 @@
+import { useContext, useEffect, useRef } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { BlogPostSummary } from '../../content/types'
@@ -5,6 +7,7 @@ import { EmptyState } from '../../components/EmptyState'
 import { LoadingIndicator } from '../../components/LoadingIndicator'
 import { getPostMarkdown } from './getPostMarkdown'
 import { usePostContent } from './usePostContent'
+import { WindowTitleContext } from '../../windows/WindowTitleContext'
 
 const markdownHeadingComponents = {
   h1: 'h4',
@@ -24,32 +27,71 @@ export function BlogWindow({
   selectedPostId?: string
   onSelectPost: (postId?: string) => void
 }) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const backRef = useRef<HTMLButtonElement>(null)
+  const previousPostId = useRef(selectedPostId)
+  const setMobileTitle = useContext(WindowTitleContext)
   const selectedPost = posts.find((post) => post.id === selectedPostId) ?? posts[0]
+  const showMobileDetail = Boolean(selectedPostId && selectedPost)
+
+  useEffect(() => {
+    setMobileTitle?.(showMobileDetail ? selectedPost?.title ?? null : null)
+    return () => setMobileTitle?.(null)
+  }, [setMobileTitle, showMobileDetail, selectedPost?.title])
+
+  useEffect(() => {
+    if (window.matchMedia('(max-width: 760px)').matches) {
+      if (selectedPostId) {
+        backRef.current?.focus()
+        const reader = containerRef.current?.querySelector('.blog-reader')
+        if (reader) reader.scrollTop = 0
+      } else if (previousPostId.current) {
+        const rows = containerRef.current?.querySelectorAll<HTMLButtonElement>('[data-post-id]')
+        Array.from(rows ?? []).find((row) => row.dataset.postId === previousPostId.current)?.focus()
+      }
+    }
+    previousPostId.current = selectedPostId
+  }, [selectedPostId])
   const content = usePostContent(selectedPost)
   const postMarkdown = selectedPost
     ? getPostMarkdown({ ...selectedPost, contentMarkdown: content.markdown })
     : ''
 
+  if (!selectedPost) {
+    return <EmptyState title="No notes yet" body="This folder is waiting for its first note." />
+  }
+
   return (
-    <div className="finder">
+    <div ref={containerRef} className="finder" data-mobile-detail={showMobileDetail}>
       <aside className="finder-sidebar blog-post-nav" aria-label="Notes">
         <p className="sidebar-title">Notes</p>
         {posts.map((post) => (
           <button
             key={post.id}
             type="button"
+            data-post-id={post.id}
             className={post.id === selectedPost?.id ? 'is-selected' : ''}
             onClick={() => onSelectPost(post.id)}
             aria-current={post.id === selectedPost?.id ? 'page' : undefined}
           >
             <span className="post-title">{post.title}</span>
             {post.isPinned ? <span className="post-pin">Pinned</span> : null}
+            <ChevronRight className="notes-row-chevron" aria-hidden="true" />
           </button>
         ))}
       </aside>
       <section className="blog-reader" aria-label="Selected note">
         {selectedPost ? (
           <article className="blog-reader-post">
+            <button
+              ref={backRef}
+              type="button"
+              className="notes-mobile-back"
+              aria-label="Back to notes"
+              onClick={() => onSelectPost(undefined)}
+            >
+              <ChevronLeft aria-hidden="true" />
+            </button>
             <header>
               <p>
                 {selectedPost.folder} ·{' '}
