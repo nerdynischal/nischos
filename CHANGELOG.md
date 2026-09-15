@@ -9,6 +9,8 @@
 
 ### Changed
 
+- Mobile Notes now uses the same 360 ms forward/back slides as mobile About. Shared navigation timing and easing tokens also keep the screenshot carousel consistent.
+- Case-study image viewers enter with a 180 ms fade and subtle scale-in; contact copy confirmation transitions between copy and check icons over 160 ms. These effects respect reduced-motion preferences. Desktop About section changes remain instant.
 - Mobile About sections enter from the right with a 360 ms eased slide; returning to the section list slides it in from the left. Initial opening stays still, reduced-motion preferences disable the animation, and existing focus restoration remains intact.
 - App preview screenshots now slide in the navigation direction over 360 ms with a gentle ease-out. The active dot animates, and reduced-motion preferences disable the slide.
 - Screenshot navigation stops at either end, with the corresponding arrow dimmed and disabled.
@@ -29,6 +31,7 @@
 
 ### Release validation
 
+- After the shared motion updates and removal of the desktop About fade, `npm run check` passed: all 105 tests across 29 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
 - After the mobile About animation, `npm run check` passed: all 105 tests across 29 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
 - After the carousel changes, `npm run check` passed: all 105 tests across 29 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
 

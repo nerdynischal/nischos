@@ -285,23 +285,25 @@
   }
 }
 
-/* Animate only navigation within About, keeping its initial opening still. */
+/* Shared mobile list/detail navigation; initial list opening stays still. */
 @media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
-  .settings-window[data-mobile-navigation='true'][data-mobile-detail='true'] .settings-detail {
-    animation: about-detail-enter 360ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  .settings-window[data-mobile-navigation='true'][data-mobile-detail='true'] .settings-detail,
+  .finder[data-mobile-navigation='true'][data-mobile-detail='true'] .blog-reader {
+    animation: mobile-detail-enter var(--duration-navigation) var(--ease-navigation) both;
   }
 
-  .settings-window[data-mobile-navigation='true'][data-mobile-detail='false'] .settings-sidebar {
-    animation: about-list-enter 360ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  .settings-window[data-mobile-navigation='true'][data-mobile-detail='false'] .settings-sidebar,
+  .finder[data-mobile-navigation='true'][data-mobile-detail='false'] .blog-post-nav {
+    animation: mobile-list-enter var(--duration-navigation) var(--ease-navigation) both;
   }
 }
 
-@keyframes about-detail-enter {
+@keyframes mobile-detail-enter {
   from { transform: translateX(100%); }
   to { transform: translateX(0); }
 }
 
-@keyframes about-list-enter {
+@keyframes mobile-list-enter {
   from { transform: translateX(-100%); }
   to { transform: translateX(0); }
 }

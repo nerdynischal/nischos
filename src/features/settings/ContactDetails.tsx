@@ -44,13 +44,14 @@ function ContactRow({ detail }: { detail: SettingsDetail }) {
       </span>
       <span className="contact-row-value">
         <span>{detail.value}</span>
-        <span className="contact-action-indicator" aria-hidden="true">
+        <span className="contact-action-indicator" data-copied={copied} aria-hidden="true">
           {isCopyAction ? (
             <>
               <span className="contact-copy-toast" data-visible={copied}>
                 {detail.label} copied
               </span>
-              {copied ? <Check /> : <Copy />}
+              <Copy className="contact-copy-icon" />
+              <Check className="contact-check-icon" />
             </>
           ) : (
             <ExternalLink />

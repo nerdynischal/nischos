@@ -44,6 +44,9 @@
   --duration-press: 140ms;
   --duration-control: 160ms;
   --duration-window: 180ms;
+  --duration-navigation: 360ms;
+  --duration-content: 180ms;
+  --ease-navigation: cubic-bezier(0.22, 0.61, 0.36, 1);
   --duration-reduced: 1ms;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);

@@ -360,7 +360,7 @@
   object-fit: contain;
   background: var(--surface-screenshot);
   pointer-events: none;
-  animation: screenshot-slide-out 360ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation: screenshot-slide-out var(--duration-navigation) var(--ease-navigation) forwards;
 }
 
 .screenshot-incoming,
@@ -374,7 +374,7 @@
 }
 
 .screenshot-incoming {
-  animation: screenshot-slide-in 360ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: screenshot-slide-in var(--duration-navigation) var(--ease-navigation) both;
 }
 
 @keyframes screenshot-slide-in {

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -27,6 +27,7 @@ export function BlogWindow({
   selectedPostId?: string
   onSelectPost: (postId?: string) => void
 }) {
+  const [hasMobileNavigation, setHasMobileNavigation] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const backRef = useRef<HTMLButtonElement>(null)
   const previousPostId = useRef(selectedPostId)
@@ -62,7 +63,7 @@ export function BlogWindow({
   }
 
   return (
-    <div ref={containerRef} className="finder" data-mobile-detail={showMobileDetail}>
+    <div ref={containerRef} className="finder" data-mobile-detail={showMobileDetail} data-mobile-navigation={hasMobileNavigation}>
       <aside className="finder-sidebar blog-post-nav" aria-label="Notes">
         <p className="sidebar-title">Notes</p>
         {posts.map((post) => (
@@ -71,7 +72,10 @@ export function BlogWindow({
             type="button"
             data-post-id={post.id}
             className={post.id === selectedPost?.id ? 'is-selected' : ''}
-            onClick={() => onSelectPost(post.id)}
+            onClick={() => {
+              setHasMobileNavigation(true)
+              onSelectPost(post.id)
+            }}
             aria-current={post.id === selectedPost?.id ? 'page' : undefined}
           >
             <span className="post-title">{post.title}</span>
@@ -88,7 +92,10 @@ export function BlogWindow({
               type="button"
               className="notes-mobile-back"
               aria-label="Back to notes"
-              onClick={() => onSelectPost(undefined)}
+              onClick={() => {
+                setHasMobileNavigation(true)
+                onSelectPost(undefined)
+              }}
             >
               <ChevronLeft aria-hidden="true" />
             </button>

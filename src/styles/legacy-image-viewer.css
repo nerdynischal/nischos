@@ -125,3 +125,23 @@
     opacity: 1;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .legacy-image-lightbox {
+    animation: image-viewer-enter var(--duration-content) var(--ease-out);
+  }
+
+  .legacy-image-lightbox-content {
+    animation: image-viewer-content-enter var(--duration-content) var(--ease-out);
+  }
+}
+
+@keyframes image-viewer-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes image-viewer-content-enter {
+  from { transform: scale(0.97); }
+  to { transform: scale(1); }
+}
