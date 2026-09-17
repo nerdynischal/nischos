@@ -75,7 +75,7 @@
     flex-shrink: 0;
     width: 16px;
     height: 16px;
-    color: var(--text-tertiary);
+    color: var(--icon-tertiary);
   }
 
   .blog-reader-post {
@@ -191,7 +191,7 @@
     width: 16px;
     height: 16px;
     margin-left: auto;
-    color: var(--text-tertiary);
+    color: var(--icon-tertiary);
   }
 
   .settings-window[data-mobile-detail='false'] .settings-detail,

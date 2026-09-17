@@ -1,5 +1,6 @@
-import { useEffect, useId, useRef } from 'react'
+import { useId, useLayoutEffect, useRef } from 'react'
 import type { MouseEvent } from 'react'
+import { createPortal } from 'react-dom'
 import { X, ZoomIn } from 'lucide-react'
 import type { ProjectCaseStudyImage } from '../../content/types'
 import { resolveAssetUrl } from '../../lib/assetUrl'
@@ -55,43 +56,56 @@ export function LegacyImageLightbox({
   onClose: () => void
 }) {
   const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
   const captionId = useId()
   const { image, returnFocusTo } = selection
 
-  useEffect(() => {
-    const windowBody = closeButtonRef.current?.closest<HTMLElement>('.window-body')
-    const previousOverflow = windowBody?.style.overflow
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current
+    if (!dialog) return
+    // The desktop owns body scroll locking on mobile; lock the root separately
+    // so resizing across its breakpoint while viewing an image cannot undo it.
+    const scrollRoot = document.documentElement
+    const previousOverflow = scrollRoot.style.overflow
 
-    if (windowBody) windowBody.style.overflow = 'hidden'
+    // Native modality makes the whole background inert, including the dock and
+    // window chrome. A portal avoids the window's transformed containing block.
+    dialog.showModal()
+    scrollRoot.style.overflow = 'hidden'
     closeButtonRef.current?.focus()
 
     return () => {
-      if (windowBody) windowBody.style.overflow = previousOverflow ?? ''
+      dialog.close()
+      scrollRoot.style.overflow = previousOverflow
+      if (returnFocusTo.isConnected) returnFocusTo.focus({ preventScroll: true })
     }
-  }, [])
+  }, [returnFocusTo])
 
   function closeViewer() {
     onClose()
-    window.requestAnimationFrame(() => returnFocusTo.focus())
   }
 
   function closeFromBackdrop(event: MouseEvent<HTMLElement>) {
     if (event.target === event.currentTarget) closeViewer()
   }
 
-  return (
-    <div
+  return createPortal(
+    <dialog
+      ref={dialogRef}
       className="legacy-image-lightbox"
-      role="dialog"
       aria-modal="true"
       aria-labelledby={captionId}
-      onClick={closeFromBackdrop}
-      onKeyDown={(event) => {
-        if (event.key === 'Escape') closeViewer()
-        if (event.key === 'Tab') {
-          event.preventDefault()
-          closeButtonRef.current?.focus()
-        }
+      onClick={(event) => {
+        event.stopPropagation()
+        closeFromBackdrop(event)
+      }}
+      onCancel={(event) => {
+        event.preventDefault()
+        closeViewer()
+      }}
+      onClose={(event) => {
+        // Ignore a queued close event if StrictMode has already reopened it.
+        if (!event.currentTarget.open) onClose()
       }}
     >
       <figure className="legacy-image-lightbox-content" onClick={closeFromBackdrop}>
@@ -107,6 +121,7 @@ export function LegacyImageLightbox({
       >
         <X size={18} strokeWidth={1.8} />
       </button>
-    </div>
+    </dialog>,
+    document.body,
   )
 }

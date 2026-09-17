@@ -5,16 +5,21 @@ import { IconArtwork } from './IconArtwork'
 export function DesktopIcons({
   icons,
   onOpenIcon,
+  isCovered = false,
+  inert = false,
 }: {
   icons: DesktopIcon[]
   onOpenIcon: (icon: DesktopIcon) => void
+  isCovered?: boolean
+  inert?: boolean
 }) {
   return (
-    <section className="desktop-icons" aria-label="Desktop icons">
+    <section className="desktop-icons" aria-label="Desktop icons" inert={inert}>
       {icons.map((icon) => (
         <button
           key={icon.id}
           type="button"
+          tabIndex={isCovered ? -1 : undefined}
           className={`desktop-icon tone-${icon.tone}`}
           style={{ '--icon-x': `${icon.x}%`, '--icon-y': `${icon.y}%` } as CSSProperties}
           onClick={() => onOpenIcon(icon)}

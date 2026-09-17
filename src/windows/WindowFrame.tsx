@@ -6,6 +6,7 @@ import type { DesktopWindow } from '../types'
 export function WindowFrame({
   desktopWindow,
   isActive,
+  inert = false,
   onFocus,
   onClose,
   onStartDrag,
@@ -15,6 +16,7 @@ export function WindowFrame({
 }: {
   desktopWindow: DesktopWindow
   isActive: boolean
+  inert?: boolean
   onFocus: (id: string) => void
   onClose: (id: string) => void
   onStartDrag: (event: PointerEvent<HTMLElement>, target: DesktopWindow) => void
@@ -25,6 +27,8 @@ export function WindowFrame({
   const [mobileTitle, setMobileTitle] = useState<string | null>(null)
   return (
     <article
+      data-window-id={desktopWindow.id}
+      inert={inert}
       className={`window window-${desktopWindow.category} ${
         isActive ? 'is-active' : 'is-inactive'
       }`}
@@ -62,7 +66,7 @@ export function WindowFrame({
           <span className="traffic traffic-minimize" aria-hidden="true" />
           <span className="traffic traffic-zoom" aria-hidden="true" />
         </div>
-        <h2>
+        <h2 tabIndex={-1} data-window-focus-target>
           <span className="window-title-desktop">{desktopWindow.title}</span>
           <span className="window-title-mobile">{mobileTitle ?? desktopWindow.title}</span>
         </h2>

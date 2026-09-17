@@ -5,7 +5,9 @@
   --text-primary: rgb(var(--color-neutral-50-rgb));
   --text-secondary: rgba(var(--color-neutral-50-rgb), 0.74);
   --text-muted: rgba(var(--color-neutral-50-rgb), 0.58);
-  --text-tertiary: rgba(var(--color-neutral-50-rgb), 0.42);
+  --text-tertiary: rgba(var(--color-neutral-50-rgb), 0.5);
+  --text-tertiary-inactive: rgba(var(--color-neutral-50-rgb), 0.57);
+  --icon-tertiary: rgba(var(--color-neutral-50-rgb), 0.42);
   --text-disabled: rgba(var(--color-neutral-50-rgb), 0.32);
   --text-link: var(--text-secondary);
 
@@ -57,7 +59,7 @@
   --scrollbar-color: rgba(var(--color-white-rgb), 0.26);
   --focus-ring: rgba(116, 166, 255, 0.72);
   --status-connected: rgb(var(--tone-mint-rgb));
-  --status-loading: var(--text-tertiary);
+  --status-loading: var(--icon-tertiary);
   --status-fallback: rgb(var(--tone-amber-rgb));
 
   --sans: var(--font-sans);
@@ -91,6 +93,9 @@
   --text-secondary: rgba(23, 23, 23, 0.78);
   --text-muted: rgba(23, 23, 23, 0.7);
   --text-tertiary: rgba(23, 23, 23, 0.64);
+  --text-pinned-inactive: rgba(23, 23, 23, 0.68);
+  --text-tertiary-inactive: var(--text-tertiary);
+  --icon-tertiary: var(--text-tertiary);
   --text-disabled: rgba(23, 23, 23, 0.46);
   --text-link: #2b2b2b;
 

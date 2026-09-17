@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useId, useRef, useState } from 'react'
 import { Check, Copy, ExternalLink, Mail } from 'lucide-react'
 import type { SettingsDetail } from '../../content/types'
 import { resolveAssetUrl } from '../../lib/assetUrl'
@@ -10,7 +10,7 @@ const CONTACT_ICON_ASSETS: Record<string, string> = {
 
 export function ContactDetails({ details }: { details: SettingsDetail[] }) {
   return (
-    <div className="profile-details" role="group" aria-label="Contact links">
+    <div className="profile-details contact-details" role="group" aria-label="Contact links">
       {details.map((detail) => (
         <ContactRow key={detail.label} detail={detail} />
       ))}
@@ -19,20 +19,25 @@ export function ContactDetails({ details }: { details: SettingsDetail[] }) {
 }
 
 function ContactRow({ detail }: { detail: SettingsDetail }) {
-  const [copied, setCopied] = useState(false)
-  const resetTimer = useRef<number | undefined>(undefined)
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copying' | 'copied' | 'error'>('idle')
+  const [copyAttempt, setCopyAttempt] = useState(0)
+  const copying = useRef(false)
+  const manualCopyId = useId()
+  const copied = copyStatus === 'copied'
   const isCopyAction = !detail.href
 
-  useEffect(() => () => window.clearTimeout(resetTimer.current), [])
-
   const copyValue = async () => {
+    if (copying.current) return
+    copying.current = true
+    setCopyAttempt((attempt) => attempt + 1)
+    setCopyStatus('copying')
     try {
       await navigator.clipboard.writeText(detail.value)
-      setCopied(true)
-      window.clearTimeout(resetTimer.current)
-      resetTimer.current = window.setTimeout(() => setCopied(false), 1600)
+      setCopyStatus('copied')
     } catch {
-      setCopied(false)
+      setCopyStatus('error')
+    } finally {
+      copying.current = false
     }
   }
 
@@ -47,9 +52,6 @@ function ContactRow({ detail }: { detail: SettingsDetail }) {
         <span className="contact-action-indicator" data-copied={copied} aria-hidden="true">
           {isCopyAction ? (
             <>
-              <span className="contact-copy-toast" data-visible={copied}>
-                {detail.label} copied
-              </span>
               <Copy className="contact-copy-icon" />
               <Check className="contact-check-icon" />
             </>
@@ -63,15 +65,36 @@ function ContactRow({ detail }: { detail: SettingsDetail }) {
 
   if (isCopyAction) {
     return (
-      <button
-        type="button"
-        className="profile-row contact-row"
-        onClick={copyValue}
-        aria-label={`Copy ${detail.label.toLowerCase()} ${detail.value}`}
-        title={copied ? 'Copied' : `Copy ${detail.label.toLowerCase()}`}
-      >
-        {content}
-      </button>
+      <>
+        <button
+          type="button"
+          className="profile-row contact-row"
+          onClick={copyValue}
+          aria-disabled={copyStatus === 'copying' || undefined}
+          aria-label={`Copy ${detail.label.toLowerCase()} ${detail.value}`}
+          title={copied ? 'Copied' : `Copy ${detail.label.toLowerCase()}`}
+        >
+          {content}
+        </button>
+        <p className="contact-copy-status" role="status" aria-atomic="true">
+          {copyStatus !== 'idle' && <span key={copyAttempt}>{copyStatus === 'copying' ? `Copying ${detail.label.toLowerCase()}…`
+            : copied ? `${detail.label} copied.`
+              : copyStatus === 'error' ? `Couldn’t copy ${detail.label.toLowerCase()}. Select the value below and copy it manually.`
+                : ''}</span>}
+        </p>
+        {copyStatus === 'error' && (
+          <div className="contact-manual-copy">
+            <label htmlFor={manualCopyId}>{detail.label} for manual copying</label>
+            <textarea
+              id={manualCopyId}
+              readOnly
+              value={detail.value}
+              onFocus={(event) => event.currentTarget.select()}
+              onClick={(event) => event.currentTarget.select()}
+            />
+          </div>
+        )}
+      </>
     )
   }
 

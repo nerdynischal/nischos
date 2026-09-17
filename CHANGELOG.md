@@ -1,5 +1,24 @@
 # Changelog
 
+## 17 September 2026
+
+### Fixed
+
+- A01: Move keyboard focus into newly opened or explicitly activated windows, restore focus when they close, and prevent focus entering covered mobile windows and desktop shortcuts.
+- A02: Raise dark tertiary-text contrast while preserving decorative icon brightness and existing layouts. Compensate for inactive-window dimming, and apply a narrowly scoped contrast correction to inactive light-theme Notes “Pinned” labels.
+- A03: Use a native modal dialog for case-study images, with background interaction blocked, Escape dismissal, scroll locking, and focus restoration.
+- A04: Show complete contact values with wrapping and pane-width-based stacked layouts instead of ellipses, including enlarged text and text-spacing overrides.
+- A05: Allow short lock screens to scroll, keep the unlock control reachable, and wrap enlarged clock text without horizontal overflow.
+- A07: Expose persistent copy success/failure status and a selectable manual-copy fallback; prevent duplicate requests while copying.
+- A08: Keep dock tooltips visible across the hover gap and over their text; allow Escape dismissal without moving focus.
+
+### Documentation and validation
+
+- Added the accessibility audit and contrast screenshots under `docs/`. A06 remains open: the proposed Arrange controls were reverted, retaining the existing window interactions.
+- `npm run check` passed: 129 tests across 34 files, project manifests, CSS tokens, lint, TypeScript, and the production build.
+- Browser checks covered keyboard focus, modal behavior, narrow layouts, enlarged text, contact feedback, tooltip interactions, and contrast. Checked dark metadata now measures at least 4.71:1; the scoped inactive light “Pinned” label measures 4.87:1.
+- These changes do not establish WCAG conformance. Actual screen-reader speech, real browser zoom, cross-browser coverage, and a complete criterion-by-criterion evaluation remain outstanding.
+
 ## 15 September 2026
 
 ### Added

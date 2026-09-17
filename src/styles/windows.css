@@ -161,6 +161,11 @@
   padding-left: 0.8rem;
 }
 
+.window-titlebar h2:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 .traffic {
   display: block;
   width: 12px;

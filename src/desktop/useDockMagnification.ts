@@ -20,6 +20,9 @@ export function useDockMagnification() {
   const pointerXRef = useRef(0)
   const frameRef = useRef<number | null>(null)
   const tooltipKeyRef = useRef<string | null>(null)
+  const dismissedItemRef = useRef<string | null>(null)
+  const focusedItemRef = useRef<HTMLButtonElement | null>(null)
+  const pointerWithinDockRef = useRef(false)
   const [tooltip, setTooltip] = useState<DockTooltip | null>(null)
 
   const setActiveTooltip = useCallback(
@@ -29,7 +32,8 @@ export function useDockMagnification() {
       const label = item.dataset.dockLabel
       const key = `${source}:${id}`
 
-      if (!id || !label || tooltipKeyRef.current === key) return
+      if (!id || !label || dismissedItemRef.current === id || tooltipKeyRef.current === key) return
+      dismissedItemRef.current = null
       tooltipKeyRef.current = key
       setTooltip({ label, source })
     },
@@ -110,6 +114,14 @@ export function useDockMagnification() {
 
   const handlePointerMove = useCallback((event: PointerEvent<HTMLElement>) => {
     if (event.pointerType !== 'mouse') return
+    pointerWithinDockRef.current = true
+    // The tooltip and its transparent bridge belong to the dock. Keep its label
+    // and position steady while the pointer moves from the trigger onto it.
+    if (event.target instanceof Node && tooltipRef.current?.contains(event.target)) {
+      if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current)
+      frameRef.current = null
+      return
+    }
     pointerXRef.current = event.clientX - event.currentTarget.getBoundingClientRect().left
 
     if (frameRef.current === null) {
@@ -118,43 +130,60 @@ export function useDockMagnification() {
   }, [updateMagnification])
 
   const handlePointerLeave = useCallback(() => {
+    pointerWithinDockRef.current = false
     if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current)
     frameRef.current = null
     resetItems()
     clearTooltip()
-  }, [clearTooltip, resetItems])
+    const focused = focusedItemRef.current
+    if (focused?.dataset.dockId !== dismissedItemRef.current) dismissedItemRef.current = null
+    if (focused) setActiveTooltip(focused, focused.offsetLeft + focused.offsetWidth / 2, 'keyboard')
+  }, [clearTooltip, resetItems, setActiveTooltip])
 
   const handleItemFocus = useCallback((event: FocusEvent<HTMLButtonElement>) => {
     if (!event.currentTarget.matches(':focus-visible')) return
     const item = event.currentTarget
+    focusedItemRef.current = item
     setActiveTooltip(item, item.offsetLeft + item.offsetWidth / 2, 'keyboard')
   }, [setActiveTooltip])
 
   const handleItemBlur = useCallback(() => {
-    clearTooltip()
+    focusedItemRef.current = null
+    if (!pointerWithinDockRef.current) {
+      dismissedItemRef.current = null
+      clearTooltip()
+    }
   }, [clearTooltip])
 
   useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || tooltipKeyRef.current === null) return
+      dismissedItemRef.current = tooltipKeyRef.current.slice(tooltipKeyRef.current.indexOf(':') + 1)
+      clearTooltip()
+      // Do not move focus or consume Escape needed by another component.
+    }
     const handleWindowMove = (event: Event) => {
       const dock = dockRef.current
       const target = event.target
       if (
         !dock ||
         (target instanceof Node && dock.contains(target)) ||
-        tooltipKeyRef.current === null
+        !pointerWithinDockRef.current
       ) return
       handlePointerLeave()
     }
 
     window.addEventListener('pointermove', handleWindowMove)
     window.addEventListener('resize', handlePointerLeave)
+    window.addEventListener('keydown', handleEscape)
 
     return () => {
       window.removeEventListener('pointermove', handleWindowMove)
       window.removeEventListener('resize', handlePointerLeave)
+      window.removeEventListener('keydown', handleEscape)
       if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current)
     }
-  }, [handlePointerLeave])
+  }, [handlePointerLeave, clearTooltip])
 
   return {
     dockRef,

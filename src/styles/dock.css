@@ -164,7 +164,18 @@
   transform: translateX(-50%) rotate(45deg);
 }
 
+/* A continuous hover path across the visual gap; no timeout to race against. */
+.dock-tooltip::before {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: calc(var(--space-4) + 6px);
+  content: '';
+}
+
 .dock-tooltip[data-visible='true'] {
+  pointer-events: auto;
   opacity: 1;
   transform: translate(-50%, 0) scale(1);
   transition-delay: 70ms;

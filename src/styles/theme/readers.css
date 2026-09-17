@@ -59,6 +59,10 @@
   line-height: var(--type-meta-line);
 }
 
+:root[data-theme='light'] .window-blog.is-inactive .post-pin {
+  color: var(--text-pinned-inactive);
+}
+
 .blog-reader {
   min-height: 0;
   overflow: auto;

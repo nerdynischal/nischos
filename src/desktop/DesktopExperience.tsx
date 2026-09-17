@@ -4,6 +4,7 @@ import { legacyProjectSummaries as legacyProjects } from '../content/legacyProje
 import { useDesktopWindows } from '../hooks/useDesktopWindows'
 import { usePortfolioContent } from '../hooks/usePortfolioContent'
 import { useMobileScrollLock } from '../hooks/useMobileScrollLock'
+import { useWindowFocus } from '../hooks/useWindowFocus'
 import type { DesktopIcon } from '../types'
 import { WindowContent } from '../windows/WindowContent'
 import { WindowFrame } from '../windows/WindowFrame'
@@ -33,11 +34,14 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
     activeWindow,
     focusWindow,
     upsertWindow,
-    closeWindow,
+    closeWindow: removeWindow,
     startDrag,
     moveDrag,
     endDrag,
   } = useDesktopWindows()
+  const { isMobile, prepareOpen, activateWindow, closeWindow, captureInvoker } = useWindowFocus({
+    desktopRef, windows, activeWindow, raiseWindow: focusWindow, removeWindow,
+  })
 
   useMobileScrollLock(windows.length > 0)
 
@@ -53,6 +57,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
   function openProject(projectId: string) {
     const project = allProjects.find((item) => item.id === projectId)
     if (!project) return
+    prepareOpen(getProjectWindowId(project.id))
     upsertWindow({
       id: getProjectWindowId(project.id),
       category: 'project',
@@ -62,6 +67,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
   }
 
   function openLegacyWork() {
+    prepareOpen('selected-work')
     upsertWindow({
       id: 'selected-work',
       category: 'folder',
@@ -72,6 +78,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
   function openBlog(postId?: string) {
     const linkedPostId = postId && posts.some((post) => post.id === postId) ? postId : undefined
 
+    prepareOpen('blog')
     upsertWindow({
       id: 'blog',
       category: 'blog',
@@ -85,6 +92,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
       ? sectionId
       : settingsSections[0]?.id ?? DEFAULT_SETTINGS_SECTION_ID
     setActiveSection(nextSection)
+    prepareOpen('settings')
     upsertWindow({
       id: 'settings',
       category: 'settings',
@@ -112,6 +120,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
   return (
     <main
       ref={desktopRef}
+      onClickCapture={captureInvoker}
       className="desktop"
       aria-hidden={isPreparing || undefined}
       inert={isPreparing}
@@ -128,7 +137,12 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
         supabaseStatus={supabaseStatus}
         onOpenAbout={() => openSettings('about')}
       />
-      <DesktopIcons icons={icons} onOpenIcon={openIcon} />
+      <DesktopIcons
+        icons={icons}
+        onOpenIcon={openIcon}
+        isCovered={windows.length > 0}
+        inert={isMobile && windows.length > 0}
+      />
 
       <section className="window-layer" aria-live="polite">
         {windows.map((desktopWindow) => (
@@ -136,6 +150,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
             key={desktopWindow.id}
             desktopWindow={desktopWindow}
             isActive={activeWindow?.id === desktopWindow.id}
+            inert={isMobile && activeWindow?.id !== desktopWindow.id}
             onFocus={focusWindow}
             onClose={closeWindow}
             onStartDrag={startDrag}
@@ -163,7 +178,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
         onOpenBlog={openBlog}
         onOpenLegacyWork={openLegacyWork}
         onOpenSettings={openSettings}
-        onFocusWindow={focusWindow}
+        onFocusWindow={activateWindow}
       />
     </main>
   )

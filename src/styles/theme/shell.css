@@ -143,6 +143,7 @@
 }
 
 .window.is-inactive {
+  --text-tertiary: var(--text-tertiary-inactive);
   filter: saturate(0.88) brightness(0.88);
   box-shadow:
     var(--shadow-window-inactive),
