@@ -34,10 +34,12 @@ export function SettingsWindow({
 
   useEffect(() => {
     if (pendingFocus.current === 'detail') {
-      backRef.current?.focus()
+      const detail = containerRef.current?.querySelector('.settings-detail')
+      if (detail) detail.scrollTop = 0
+      backRef.current?.focus({ preventScroll: true })
     } else if (pendingFocus.current === 'list') {
       const buttons = containerRef.current?.querySelectorAll<HTMLButtonElement>('[data-section-id]')
-      Array.from(buttons ?? []).find((button) => button.dataset.sectionId === section?.id)?.focus()
+      Array.from(buttons ?? []).find((button) => button.dataset.sectionId === section?.id)?.focus({ preventScroll: true })
     }
     pendingFocus.current = null
   }, [showMobileDetail, section?.id])

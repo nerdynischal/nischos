@@ -285,25 +285,18 @@
   }
 }
 
-/* Shared mobile list/detail navigation; initial list opening stays still. */
+/* Keep mobile scroll panes stationary: focusing a translated pane can scroll
+   its clipped ancestors, and leave the content offset on mobile browsers. */
 @media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
   .settings-window[data-mobile-navigation='true'][data-mobile-detail='true'] .settings-detail,
-  .finder[data-mobile-navigation='true'][data-mobile-detail='true'] .blog-reader {
-    animation: mobile-detail-enter var(--duration-navigation) var(--ease-navigation) both;
-  }
-
+  .finder[data-mobile-navigation='true'][data-mobile-detail='true'] .blog-reader,
   .settings-window[data-mobile-navigation='true'][data-mobile-detail='false'] .settings-sidebar,
   .finder[data-mobile-navigation='true'][data-mobile-detail='false'] .blog-post-nav {
-    animation: mobile-list-enter var(--duration-navigation) var(--ease-navigation) both;
+    animation: mobile-pane-enter var(--duration-control) var(--ease-out);
   }
 }
 
-@keyframes mobile-detail-enter {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
-}
-
-@keyframes mobile-list-enter {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
+@keyframes mobile-pane-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

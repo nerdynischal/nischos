@@ -43,12 +43,12 @@ export function BlogWindow({
   useEffect(() => {
     if (window.matchMedia('(max-width: 760px)').matches) {
       if (selectedPostId) {
-        backRef.current?.focus()
+        backRef.current?.focus({ preventScroll: true })
         const reader = containerRef.current?.querySelector('.blog-reader')
         if (reader) reader.scrollTop = 0
       } else if (previousPostId.current) {
         const rows = containerRef.current?.querySelectorAll<HTMLButtonElement>('[data-post-id]')
-        Array.from(rows ?? []).find((row) => row.dataset.postId === previousPostId.current)?.focus()
+        Array.from(rows ?? []).find((row) => row.dataset.postId === previousPostId.current)?.focus({ preventScroll: true })
       }
     }
     previousPostId.current = selectedPostId

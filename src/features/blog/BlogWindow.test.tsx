@@ -26,14 +26,18 @@ it('opens a mobile note and returns to its list row with focus restored', () => 
     const finder = host.querySelector('.finder')!
     expect(finder.getAttribute('data-mobile-detail')).toBe('false')
     const row = host.querySelector<HTMLButtonElement>('[data-post-id]')!
+    const back = host.querySelector<HTMLButtonElement>('.notes-mobile-back')!
+    const backFocus = vi.spyOn(back, 'focus')
+    const rowFocus = vi.spyOn(row, 'focus')
     act(() => row.click())
     expect(finder.getAttribute('data-mobile-detail')).toBe('true')
     expect(setTitle).toHaveBeenLastCalledWith(posts[0].title)
-    const back = host.querySelector<HTMLButtonElement>('.notes-mobile-back')!
     expect(document.activeElement).toBe(back)
+    expect(backFocus).toHaveBeenLastCalledWith({ preventScroll: true })
     act(() => back.click())
     expect(finder.getAttribute('data-mobile-detail')).toBe('false')
     expect(document.activeElement).toBe(row)
+    expect(rowFocus).toHaveBeenLastCalledWith({ preventScroll: true })
     expect(setTitle).toHaveBeenLastCalledWith(null)
     act(() => root.render(<BlogWindow posts={[]} onSelectPost={vi.fn()} />))
     expect(host.textContent).toContain('No notes yet')
