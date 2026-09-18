@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { Check, Copy, ExternalLink, Mail } from 'lucide-react'
 import type { SettingsDetail } from '../../content/types'
 import { resolveAssetUrl } from '../../lib/assetUrl'
@@ -21,19 +21,28 @@ export function ContactDetails({ details }: { details: SettingsDetail[] }) {
 function ContactRow({ detail }: { detail: SettingsDetail }) {
   const [copyStatus, setCopyStatus] = useState<'idle' | 'copying' | 'copied' | 'error'>('idle')
   const [copyAttempt, setCopyAttempt] = useState(0)
+  const [toastVisible, setToastVisible] = useState(false)
   const copying = useRef(false)
   const manualCopyId = useId()
   const copied = copyStatus === 'copied'
+
+  useEffect(() => {
+    if (!copied) return
+    const timer = window.setTimeout(() => setToastVisible(false), 5000)
+    return () => window.clearTimeout(timer)
+  }, [copied, copyAttempt])
   const isCopyAction = !detail.href
 
   const copyValue = async () => {
     if (copying.current) return
     copying.current = true
     setCopyAttempt((attempt) => attempt + 1)
+    setToastVisible(false)
     setCopyStatus('copying')
     try {
       await navigator.clipboard.writeText(detail.value)
       setCopyStatus('copied')
+      setToastVisible(true)
     } catch {
       setCopyStatus('error')
     } finally {
@@ -49,11 +58,12 @@ function ContactRow({ detail }: { detail: SettingsDetail }) {
       </span>
       <span className="contact-row-value">
         <span>{detail.value}</span>
-        <span className="contact-action-indicator" data-copied={copied} aria-hidden="true">
+        <span className="contact-action-indicator" data-copied={toastVisible} aria-hidden="true">
           {isCopyAction ? (
             <>
               <Copy className="contact-copy-icon" />
               <Check className="contact-check-icon" />
+              <span className="contact-copy-toast" data-visible={toastVisible}>Copied</span>
             </>
           ) : (
             <ExternalLink />
@@ -76,7 +86,7 @@ function ContactRow({ detail }: { detail: SettingsDetail }) {
         >
           {content}
         </button>
-        <p className="contact-copy-status" role="status" aria-atomic="true">
+        <p className={`contact-copy-status${copyStatus === 'error' ? '' : ' contact-copy-status--announcement'}`} role="status" aria-atomic="true">
           {copyStatus !== 'idle' && <span key={copyAttempt}>{copyStatus === 'copying' ? `Copying ${detail.label.toLowerCase()}…`
             : copied ? `${detail.label} copied.`
               : copyStatus === 'error' ? `Couldn’t copy ${detail.label.toLowerCase()}. Select the value below and copy it manually.`

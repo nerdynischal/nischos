@@ -1,5 +1,18 @@
 # Changelog
 
+## 18 September 2026
+
+### Changed
+
+- Restored the compact “Copied” toast for contact copying. It stays visible for five seconds and restarts on repeated copies, while a separate persistent live region announces the result to assistive technology.
+- Retained visible error feedback, the manual-copy fallback, duplicate-request protection, focus retention, and reduced-motion support.
+
+### Documentation and validation
+
+- Updated the A07 audit record and added an accessibility to-do list covering A06 and the remaining verification work.
+- `npm run check` passed: 130 tests across 34 files, project manifests, CSS tokens, lint, TypeScript, and the production build. Added coverage for toast timing, repeated-copy timer reset, retained announcements, and focus.
+- Verified the restored toast in wide and narrow browser fixtures using a simulated clipboard. Actual screen-reader speech testing remains outstanding.
+
 ## 17 September 2026
 
 ### Fixed

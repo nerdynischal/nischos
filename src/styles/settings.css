@@ -365,7 +365,35 @@
   transition: color var(--duration-control) var(--ease-out);
 }
 
-/* Keep the live region mounted and empty until an action produces feedback. */
+.contact-copy-toast {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: max-content;
+  border: 1px solid var(--line-frame);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-2);
+  color: var(--text-primary);
+  background: var(--surface-panel-raised);
+  box-shadow: var(--shadow-tooltip);
+  font-size: var(--type-meta-size);
+  font-weight: var(--type-meta-weight);
+  line-height: var(--type-meta-line);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) translateX(var(--space-1)) scale(0.97);
+  transform-origin: right center;
+  transition:
+    opacity var(--duration-control) var(--ease-out),
+    transform var(--duration-control) var(--ease-out);
+}
+
+.contact-copy-toast[data-visible='true'] {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0) scale(1);
+}
+
+/* Keep announcements mounted independently of the visual toast. */
 .contact-copy-status {
   margin: 0;
   color: var(--text-primary);
@@ -376,6 +404,18 @@
 
 .contact-copy-status:not(:empty) {
   padding: var(--space-3) var(--space-4);
+}
+
+.contact-copy-status.contact-copy-status--announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .contact-manual-copy {

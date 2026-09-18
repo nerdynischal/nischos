@@ -90,3 +90,25 @@ it('prevents duplicate in-flight requests without disabling the focused button',
   expect(button.hasAttribute('aria-disabled')).toBe(false)
   expect(document.activeElement).toBe(button)
 })
+
+it('shows a five-second toast while retaining the accessible success message', async () => {
+  vi.useFakeTimers()
+  try {
+    const button = await copy()
+    const toast = container.querySelector<HTMLElement>('.contact-copy-toast')!
+    const status = container.querySelector('[role="status"]')!
+    expect(toast.dataset.visible).toBe('true')
+    expect(toast.closest('[aria-hidden="true"]')).not.toBeNull()
+    expect(status.classList.contains('contact-copy-status--announcement')).toBe(true)
+    act(() => vi.advanceTimersByTime(4000))
+    await copy()
+    act(() => vi.advanceTimersByTime(4000))
+    expect(toast.dataset.visible).toBe('true')
+    act(() => vi.advanceTimersByTime(1000))
+    expect(toast.dataset.visible).toBe('false')
+    expect(status.textContent).toBe('Email copied.')
+    expect(document.activeElement).toBe(button)
+  } finally {
+    vi.useRealTimers()
+  }
+})
