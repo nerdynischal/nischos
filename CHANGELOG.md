@@ -1,6 +1,23 @@
 # Changelog
 
+## 21 September 2026
+
+### Added
+
+- A06: Added accessible window movement and resizing through a compact More popover, replacing the rejected inline Arrange panel. Controls overlay content, use labelled Lucide icons and separated full-width rows, and support individual clicks and keyboard activation.
+- Added 1/4/8/16/32px increments with an 8px default, workspace bounds and size limits, native-resize interoperability, focus handling, and subtle position/size status feedback.
+
+### Documentation and validation
+
+- Updated the accessibility audit and to-do list to mark A06 implemented, with manual keyboard, screen-reader, and cross-browser verification still outstanding.
+- `npm run check` passed: 145 tests across 35 files, project manifests, CSS tokens, lint, TypeScript, and the production build. Focused window coverage includes bounds, precise adjustments, native resizing, opening focus, and dismissal.
+
 ## 18 September 2026
+
+### Fixed
+
+- Fixed mobile About and Notes navigation shifting or clipping the view by preventing automatic scrolling during focus changes. About details reset to the top when opened, and mobile grid columns can shrink to fit the window.
+- Retained the 360 ms forward/back slide animations and reduced-motion support. Animation transforms are released after entry instead of remaining on scrollable panes.
 
 ### Changed
 
@@ -9,6 +26,8 @@
 
 ### Documentation and validation
 
+- After restoring mobile slides with the focus and sizing fixes retained, `npm run check` passed: 130 tests across 34 files, project manifests, CSS tokens, lint, TypeScript, and the production build. Regression coverage checks focus without automatic scrolling and the About detail scroll reset.
+- Deployed the restored slides successfully to GitHub Pages; the user confirmed the mobile behavior now appears correct after the earlier Android animation glitches and iOS clipping.
 - Updated the A07 audit record and added an accessibility to-do list covering A06 and the remaining verification work.
 - `npm run check` passed: 130 tests across 34 files, project manifests, CSS tokens, lint, TypeScript, and the production build. Added coverage for toast timing, repeated-copy timer reset, retained announcements, and focus.
 - Verified the restored toast in wide and narrow browser fixtures using a simulated clipboard. Actual screen-reader speech testing remains outstanding.

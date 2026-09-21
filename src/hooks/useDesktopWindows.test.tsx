@@ -99,3 +99,25 @@ describe('window dragging', () => {
     expect(renders).toBe(before)
   })
 })
+
+it('moves a natively resized window without losing its size', () => {
+  act(() => desktop.adjustWindow('settings', 'right', frame))
+  expect(desktop.windows[0]).toMatchObject({ x: 49, y: 22, width: 900, height: 570 })
+  expect(frame.style.width).toBe('900px')
+  expect(frame.style.height).toBe('570px')
+})
+
+it('resizes from actual dimensions and synchronizes native inline overrides', () => {
+  frame.style.width = '900px'
+  act(() => desktop.adjustWindow('settings', 'narrower', frame))
+  expect(desktop.windows[0].width).toBe(868)
+  expect(frame.style.width).toBe('868px')
+})
+
+it('does not adjust the fixed mobile layout', () => {
+  vi.stubGlobal('innerWidth', 320)
+  const before = desktop.windows[0]
+  act(() => desktop.adjustWindow('settings', 'right', frame))
+  expect(desktop.windows[0]).toEqual(before)
+  expect(frame.style.width).toBe('')
+})

@@ -121,6 +121,8 @@ Selected Work's folder metadata and visible file-type labels also failed. This i
 
 ### A06 — Medium: window movement has no keyboard or non-drag pointer alternative
 
+**Remediation status (21 September 2026): Implemented; manual verification pending.** Following user-directed design iteration, a borderless vertical More icon opens a floating, window-contained popover without displacing content. Labelled Lucide controls provide movement and resizing using individual clicks or native keyboard button activation. Increments are 1, 4, 8, 16, and 32px, defaulting to 8px. Geometry respects workspace bounds and size limits and reads actual dimensions after native resizing. Opening focuses the first control; adjustments retain focus; Escape and Done return focus to More; outside interaction dismisses the popover. Position and size appear on separate lines in metadata styling in a live status region. Controls stay hidden in the fixed mobile layout. All 25 focused window tests pass. Real keyboard/browser and screen-reader verification of this final design remains outstanding, including pronunciation of compact x/y/w/h feedback. Evidence below describes the original defect.
+
 **Evidence:** Window movement is implemented only through pointer-down/move/up handlers on a nonfocusable header. Resizing is exposed through CSS `resize: both`. No move/resize commands or click-based alternative are present. The decorative minimize/zoom dots are spans, not alternatives.
 
 **Impact:** Users who cannot perform a sustained drag cannot arrange desktop windows; keyboard users cannot operate the same window-management functionality.

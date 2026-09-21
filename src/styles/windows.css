@@ -212,3 +212,125 @@ button.traffic:active {
   overflow-x: hidden;
   background: var(--window-bg);
 }
+
+/* Click and keyboard alternatives to dragging and the native resize handle. */
+.window-arrange-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  margin-right: var(--space-2);
+}
+
+.window-arrange-toggle,
+.window-arrange-panel button,
+.window-arrange-panel select {
+  min-height: 28px;
+  border: 1px solid var(--line-control);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-2);
+  color: var(--text-primary);
+  background: var(--surface-panel-strong);
+  font: inherit;
+  font-size: var(--type-ui-size);
+  cursor: pointer;
+}
+
+.window-arrange-toggle {
+  border: 0;
+  background: transparent;
+}
+
+.window-arrange-toggle:focus-visible,
+.window-arrange-panel button:focus-visible,
+.window-arrange-panel select:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.window-arrange-panel {
+  position: absolute;
+  top: 38px;
+  right: var(--space-2);
+  z-index: 1;
+  width: min(240px, calc(100% - 2 * var(--space-2)));
+  max-height: calc(100% - 46px);
+  box-sizing: border-box;
+  overflow: auto;
+  border: 1px solid var(--line-emphasis);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-window);
+  padding: var(--space-3);
+  color: var(--text-primary);
+  background: var(--window-bg);
+  font-size: var(--type-ui-size);
+}
+
+.window-arrange-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.window-arrange-panel fieldset {
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid var(--line-hairline);
+  padding: 0 0 var(--space-2);
+}
+
+.window-arrange-panel legend {
+  margin-bottom: var(--space-1);
+}
+
+.window-arrange-panel button {
+  display: flex;
+  width: 100%;
+  min-height: 32px;
+  align-items: center;
+  gap: var(--space-2);
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.window-arrange-panel button:hover {
+  background: var(--surface-panel-strong);
+}
+
+.window-arrange-panel svg {
+  flex-shrink: 0;
+}
+
+.window-arrange-panel p {
+  white-space: pre-line;
+  margin: var(--space-2) 0;
+  color: var(--text-tertiary);
+  font-family: var(--mono);
+  font-size: var(--type-meta-size);
+  font-weight: var(--type-meta-weight);
+  line-height: var(--type-meta-line);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .window-arrange-toggle,
+  .window-arrange-panel {
+    display: none;
+  }
+}
+
+.window-arrange-step {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--line-hairline);
+}
+
+.window-arrange-step select {
+  margin-left: auto;
+}

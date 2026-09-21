@@ -1,6 +1,8 @@
 import type { DesktopWindow, ViewportSize, WindowCategory } from '../types'
 
-type WindowGeometry = Pick<DesktopWindow, 'x' | 'y' | 'width' | 'height'>
+export type WindowGeometry = Pick<DesktopWindow, 'x' | 'y' | 'width' | 'height'>
+export type WindowAdjustmentStep = 1 | 4 | 8 | 16 | 32
+export type WindowAdjustment = 'left' | 'right' | 'up' | 'down' | 'narrower' | 'wider' | 'shorter' | 'taller'
 type WindowSize = Pick<DesktopWindow, 'width' | 'height'>
 
 export const initialWindowLayout: Record<WindowCategory, WindowGeometry> = {
@@ -13,6 +15,24 @@ export const initialWindowLayout: Record<WindowCategory, WindowGeometry> = {
 const MENU_BAR_HEIGHT = 40
 const WINDOW_EDGE_GAP = 8
 const MOBILE_BREAKPOINT = 760
+
+export function adjustWindowGeometry(
+  item: WindowGeometry,
+  action: WindowAdjustment,
+  limits: { minWidth: number; maxWidth: number; minHeight: number },
+  viewport = getCurrentViewport(),
+  step: WindowAdjustmentStep = 32,
+): WindowGeometry {
+  if (viewport.width <= MOBILE_BREAKPOINT) return item
+  const maxWidth = Math.min(limits.maxWidth, viewport.width - 20)
+  const maxHeight = Math.max(0, viewport.height - (viewport.bottomInset ?? 0) - MENU_BAR_HEIGHT - item.y - WINDOW_EDGE_GAP)
+  return clampWindowToViewport({
+    x: item.x + (action === 'left' ? -step : action === 'right' ? step : 0),
+    y: item.y + (action === 'up' ? -step : action === 'down' ? step : 0),
+    width: clampValue(item.width + (action === 'narrower' ? -step : action === 'wider' ? step : 0), Math.min(limits.minWidth, maxWidth), maxWidth),
+    height: clampValue(item.height + (action === 'shorter' ? -step : action === 'taller' ? step : 0), Math.min(limits.minHeight, maxHeight), maxHeight),
+  }, viewport)
+}
 
 function clampValue(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value))

@@ -1,12 +1,13 @@
 # Accessibility to-do list
 
-Updated: 18 September 2026
+Updated: 21 September 2026
 
-Based on [the accessibility audit](accessibility-audit-2026-09-16.md) and the subsequent fixes. A01, A02 (including the light-theme follow-up), A03, A04, A05, A07, and A08 have been implemented. A06 was reverted at the user's request and remains open. Completed fixes still need broader assistive-technology and browser verification. This is not a conformance statement.
+Based on [the accessibility audit](accessibility-audit-2026-09-16.md) and the subsequent fixes. A01–A08 have been implemented, including the A02 light-theme follow-up and the revised A06 window controls. Completed fixes still need broader assistive-technology and browser verification. This is not a conformance statement.
 
-## Priority 1 — Resolve the known gap and verify critical journeys
+## Priority 1 — Verify critical journeys
 
-- [ ] **Revisit A06 with a less intrusive design.** Choose an alternative to the reverted Arrange panel that enables window movement and resizing with both keyboard input and individual clicks. Preserve precise positioning and sizing, usable bounds, and focus. Do not reinstate the rejected panel without agreement on the design.
+- [x] **Implement the revised A06 design.** The user-approved More popover overlays window content and provides labelled move/resize controls, 1/4/8/16/32px increments (8px default), bounds enforcement, and focus handling.
+- [ ] **Verify A06 manually across browsers and assistive technology.** Check keyboard activation, single-click movement/resizing, 1px precision, native-resize interoperability, short-window scrolling, viewport/breakpoint changes, focus on dismissal, and spoken position/size feedback, including the compact x/y/w/h labels.
 - [ ] **Run real screen-reader testing.** Test VoiceOver with Safari and NVDA with Firefox or Chrome through unlock, app opening/switching/closing, Notes and About navigation, image dialogs, carousels, and contact copying. Confirm successful/repeated/failed copy announcements and manual fallback. Record actual speech and focus behavior.
 - [ ] **Check announcement volume.** Listen to the whole-window `aria-live="polite"` behavior when loading notes and case studies. If it reads excessive content, replace it with concise status announcements while retaining useful loading/error feedback.
 - [ ] **Test actual zoom and text resizing.** Exercise browser zoom at 200% and 400%, text-only zoom at 200%, and text-spacing overrides. Verify complete content, controls, focus visibility, scrolling, and absence of avoidable horizontal clipping. Previous viewport/root-font simulations do not replace these checks.

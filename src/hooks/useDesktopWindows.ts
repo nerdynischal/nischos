@@ -3,10 +3,12 @@ import type { PointerEvent } from 'react'
 import type { DesktopWindow, DragState, ViewportSize } from '../types'
 import {
   clampWindowToViewport,
+  adjustWindowGeometry,
   getCurrentViewport,
   initialWindowLayout,
   repositionWindowForViewport,
 } from '../windows/windowGeometry'
+import type { WindowAdjustment, WindowAdjustmentStep } from '../windows/windowGeometry'
 
 type WindowInput = Pick<DesktopWindow, 'id' | 'category' | 'title'> & Partial<DesktopWindow>
 
@@ -114,6 +116,24 @@ export function useDesktopWindows() {
     setWindows((items) => items.filter((item) => item.id !== id))
   }
 
+  function adjustWindow(id: string, action: WindowAdjustment, element: HTMLElement, step: WindowAdjustmentStep = 32) {
+    const item = windows.find((window) => window.id === id)
+    if (!item || getCurrentViewport().width <= 760) return null
+    finishDrag()
+    const { width, height } = element.getBoundingClientRect()
+    const styles = getComputedStyle(element)
+    const geometry = adjustWindowGeometry({ ...item, width, height }, action, {
+      minWidth: parseFloat(styles.getPropertyValue('--window-min-width')) || 390,
+      maxWidth: parseFloat(styles.getPropertyValue('--window-max-width')) || 920,
+      minHeight: parseFloat(styles.getPropertyValue('--window-min-height')) || 320,
+    }, getCurrentViewport(), step)
+    // Native CSS resizing writes inline dimensions; keep them in sync with controls.
+    element.style.width = `${geometry.width}px`
+    element.style.height = `${geometry.height}px`
+    setWindows((items) => items.map((window) => window.id === id ? { ...window, ...geometry } : window))
+    return geometry
+  }
+
   function startDrag(event: PointerEvent<HTMLElement>, target: DesktopWindow) {
     if (event.button !== 0 || getCurrentViewport().width <= 760) return
     const element = event.currentTarget.closest<HTMLElement>('.window')
@@ -171,6 +191,7 @@ export function useDesktopWindows() {
     focusWindow,
     upsertWindow,
     closeWindow,
+    adjustWindow,
     startDrag,
     moveDrag,
     endDrag,

@@ -38,6 +38,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
     startDrag,
     moveDrag,
     endDrag,
+    adjustWindow,
   } = useDesktopWindows()
   const { isMobile, prepareOpen, activateWindow, closeWindow, captureInvoker } = useWindowFocus({
     desktopRef, windows, activeWindow, raiseWindow: focusWindow, removeWindow,
@@ -156,6 +157,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
             onStartDrag={startDrag}
             onMoveDrag={moveDrag}
             onEndDrag={endDrag}
+            onAdjust={adjustWindow}
           >
             <WindowContent
               desktopWindow={desktopWindow}
