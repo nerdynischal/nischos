@@ -156,7 +156,7 @@
   background: var(--surface-panel-strong);
 }
 
-.window-titlebar h2 {
+.window-titlebar .window-title {
   color: var(--text-secondary);
   font-size: var(--type-chrome-size);
   font-weight: var(--type-chrome-weight);

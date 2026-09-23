@@ -38,7 +38,7 @@ function BlogSkeleton({ posts, selectedPostId }: { posts: BlogPostSummary[]; sel
     <section className="blog-reader">
       <article className="blog-reader-post">
         <div className="notes-mobile-back skeleton-fill" />
-        <header><p><Text>{selectedPost.folder} · {selectedPost.date}</Text></p><h3><Text>{selectedPost.title}</Text></h3></header>
+        <header><p><Text>{selectedPost.folder} · {selectedPost.date}</Text></p><h1><Text>{selectedPost.title}</Text></h1></header>
         <NoteLines />
       </article>
     </section>

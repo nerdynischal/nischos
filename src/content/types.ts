@@ -32,6 +32,7 @@ export type ProjectCaseStudySection = {
 }
 
 export type ProjectCaseStudy = {
+  coverAlt: string
   tags: string[]
   sections: ProjectCaseStudySection[]
 }

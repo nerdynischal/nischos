@@ -170,7 +170,7 @@
   line-height: var(--type-body-line);
 }
 
-.settings-detail h3 {
+.settings-detail h1 {
   font-size: var(--type-title-size);
   font-weight: var(--type-title-weight);
   line-height: var(--type-title-line);
@@ -553,7 +553,7 @@
   gap: var(--space-2);
 }
 
-.toolkit-group h4 {
+.toolkit-group h2 {
   margin: 0;
   padding-left: var(--space-1);
   color: var(--text-tertiary);
@@ -624,7 +624,7 @@
   gap: 0.15rem;
 }
 
-.toolkit-copy h5 {
+.toolkit-copy h3 {
   margin: 0;
   color: var(--text-primary);
   font-size: var(--type-ui-size);

@@ -12,7 +12,7 @@ export function LegacyWorkWindow({
   return (
     <div className="legacy-folder-window">
       <div className="legacy-folder-toolbar">
-        <div className="legacy-folder-path" aria-label="Current folder">
+        <div className="legacy-folder-path">
           <FolderOpen strokeWidth={1.7} absoluteStrokeWidth aria-hidden="true" />
           <span>Portfolio</span>
           <span aria-hidden="true">/</span>
@@ -23,10 +23,10 @@ export function LegacyWorkWindow({
 
       <div className="legacy-folder-layout">
         <aside className="legacy-folder-sidebar" aria-label="Folder locations">
-          <button type="button" className="is-selected" aria-current="page">
+          <div className="legacy-folder-location is-selected" aria-current="page">
             <FolderOpen strokeWidth={1.7} absoluteStrokeWidth aria-hidden="true" />
             Selected Work
-          </button>
+          </div>
         </aside>
 
         <section className="legacy-file-grid" aria-label="Selected work files">

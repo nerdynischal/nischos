@@ -5,17 +5,10 @@ import { IconArtwork } from '../../desktop/IconArtwork'
 import { resolveAssetUrl } from '../../lib/assetUrl'
 import { ScreenshotImage } from './ScreenshotImage'
 import { MetaRow } from './MetaRow'
+import { getScreenshotAlternative } from '../../content/screenshotAlternatives'
 
 function isImageScreenshot(screenshot: string) {
   return /^(?:https?:\/\/|\/)/.test(screenshot)
-}
-
-function getScreenshotLabel(screenshot: string, index: number) {
-  if (!isImageScreenshot(screenshot)) return screenshot
-
-  const filename = screenshot.split('/').pop()?.split('?')[0]
-  const label = filename?.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ')
-  return label ? label.charAt(0).toUpperCase() + label.slice(1) : `Screenshot ${index + 1}`
 }
 
 export function ProjectWindow({
@@ -35,7 +28,7 @@ export function ProjectWindow({
   const selectedShotIndex = Math.max(0, Math.min(activeShot, screenshotCount - 1))
   const selectedScreenshot = projectScreenshots[selectedShotIndex]
   const selectedScreenshotLabel = selectedScreenshot
-    ? getScreenshotLabel(selectedScreenshot, selectedShotIndex)
+    ? getScreenshotAlternative(project, selectedScreenshot)
     : 'Screenshot unavailable'
   const selectedScreenshotUrl = selectedScreenshot
     ? resolveAssetUrl(selectedScreenshot)
@@ -64,7 +57,7 @@ export function ProjectWindow({
           <IconArtwork artworkId={project.id} thumbnail={project.thumbnail} variant="project" />
         </div>
         <div className="project-heading">
-          <h3>{project.title}</h3>
+          <h1>{project.title}</h1>
           <p>{project.type}</p>
           <div className="project-actions">
             {project.demoUrl ? (
@@ -106,13 +99,13 @@ export function ProjectWindow({
         </div>
       </section>
 
-      <section className="project-meta" aria-label="Project metadata">
+      <dl className="project-meta">
         <MetaRow label="type" value={project.type} />
         <MetaRow label="model" value={project.model} />
-      </section>
+      </dl>
 
       <section className="story-panel">
-        <h4>{project.subtitle}</h4>
+        <h2>{project.subtitle}</h2>
         <p>{project.story}</p>
       </section>
 
@@ -137,13 +130,13 @@ export function ProjectWindow({
           )}
         </div>
         {screenshotCount > 1 ? (
-          <div className="carousel-controls" aria-label="Screenshot carousel controls">
+          <div className="carousel-controls" role="group" aria-label="Screenshot carousel controls">
             <button type="button" onClick={showPreviousShot} disabled={selectedShotIndex === 0} aria-label="Show previous screenshot">
               <ChevronLeft strokeWidth={1.8} absoluteStrokeWidth aria-hidden="true" />
             </button>
-            <div className="carousel-dots" aria-label="Screenshot selector">
+            <div className="carousel-dots">
               {projectScreenshots.map((screenshot, index) => {
-                const label = getScreenshotLabel(screenshot, index)
+                const label = getScreenshotAlternative(project, screenshot)
                 return (
                   <button
                     key={`${screenshot}-${index}`}
@@ -153,7 +146,7 @@ export function ProjectWindow({
                       setSlideDirection(index > selectedShotIndex ? 'next' : 'previous')
                       setActiveShot(index)
                     }}
-                    aria-label={`Show ${label}`}
+                    aria-label={`Show screenshot ${index + 1}: ${label}`}
                     aria-current={index === selectedShotIndex ? 'true' : undefined}
                   />
                 )

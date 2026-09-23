@@ -54,5 +54,5 @@ it('matches the note selection and mobile list/detail state', () => {
   const detail = render('blog', posts[0].id)
   expect(detail.querySelector('.finder')?.getAttribute('data-mobile-detail')).toBe('true')
   expect(detail.querySelectorAll('.blog-post-nav button')).toHaveLength(posts.length)
-  expect(detail.querySelector('header h3')?.textContent).toBe(posts[0].title)
+  expect(detail.querySelector('header h1')?.textContent).toBe(posts[0].title)
 })

@@ -11,6 +11,7 @@ type SystemAppDefinition = {
 }
 
 export const NOTES_APP_LABEL = 'Notes'
+export const ABOUT_APP_LABEL = 'About'
 
 export const LEGACY_WORK_APP = {
   id: 'selected-work',
@@ -30,7 +31,7 @@ export const SYSTEM_APPS = [
     y: 14,
   },
   {
-    label: 'About',
+    label: ABOUT_APP_LABEL,
     category: 'settings',
     tone: 'settings',
     x: 85,

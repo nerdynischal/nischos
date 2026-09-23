@@ -5,6 +5,7 @@ const mediaRoot = '/project-media/legacy'
 
 const caseStudies: Record<string, ProjectCaseStudy> = {
   'auto-gmail': {
+    coverAlt: 'Auto Gmail promotion shows an email reply being drafted automatically, paired with its orange envelope robot icon.',
     tags: ['Branding'],
     sections: [
       {
@@ -21,7 +22,7 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         images: [
           {
             src: `${mediaRoot}/auto-gmail/initial-drafts.webp`,
-            alt: 'Early Auto Gmail product icon concepts exploring email and AI motifs',
+            alt: 'Grid of Auto Gmail identity experiments combining envelopes, robot faces and lettermarks in different colours and shapes.',
             caption: 'Initial product icon explorations',
           },
         ],
@@ -35,43 +36,43 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         images: [
           {
             src: `${mediaRoot}/auto-gmail/logo.jpg`,
-            alt: 'Final Auto Gmail product icon',
+            alt: 'Auto Gmail icon combining an orange robot face with an envelope and a sheet of email text.',
             caption: 'Product icon',
             displaySize: 'compact',
           },
           {
             src: `${mediaRoot}/auto-gmail/promo-small.jpg`,
-            alt: 'Auto Gmail small promotional tile',
+            alt: 'Store tile pairing the orange envelope robot with the Auto Gmail wordmark on a circuit-board background.',
             caption: 'Small promotional tile',
           },
           {
             src: `${mediaRoot}/auto-gmail/promo-marquee.jpg`,
-            alt: 'Auto Gmail marquee promotional artwork',
+            alt: 'Wide store banner pairing the envelope robot with the Auto Gmail name and the tagline ChatGPT for Email Inbox.',
             caption: 'Store carousel marquee',
           },
           {
             src: `${mediaRoot}/auto-gmail/promo-1.jpg`,
-            alt: 'Auto Gmail promotional image explaining automatic email drafts',
+            alt: 'Connect your Inbox: a Gmail icon points to Auto Gmail above the Connect with Auto Gmail button.',
             caption: 'Promotional image 1',
           },
           {
             src: `${mediaRoot}/auto-gmail/promo-2.jpg`,
-            alt: 'Auto Gmail promotional feature artwork',
+            alt: 'Train the AI: the assistant learns from previously sent emails, with a panel for adding drafting context.',
             caption: 'Promotional image 2',
           },
           {
             src: `${mediaRoot}/auto-gmail/promo-3.jpg`,
-            alt: 'Auto Gmail promotional feature artwork',
+            alt: 'Auto Gmail learns to draft responses on your behalf, illustrated by an email reply being composed.',
             caption: 'Promotional image 3',
           },
           {
             src: `${mediaRoot}/auto-gmail/promo-4.jpg`,
-            alt: 'Auto Gmail promotional feature artwork',
+            alt: 'Auto Drafts: replies are prepared for unopened emails in the background, with updates every 15 minutes.',
             caption: 'Promotional image 4',
           },
           {
             src: `${mediaRoot}/auto-gmail/promo-5.jpg`,
-            alt: 'Auto Gmail promotional product artwork',
+            alt: 'Review, edit if needed, and send: the user checks an automatically drafted reply before sending it.',
             caption: 'Promotional image 5',
           },
         ],
@@ -79,6 +80,7 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
     ],
   },
   'ravageous': {
+    coverAlt: 'Ravageous landing-page introduction pairs game characters with prominent platform download links.',
     tags: ['UI', 'UX', 'Web'],
     sections: [
       {
@@ -94,11 +96,11 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         ],
         imageLayout: 'masonry',
         images: [
-          { src: `${mediaRoot}/ravageous/old-home.jpg`, alt: 'Original Ravageous landing page', caption: 'Old landing page' },
-          { src: `${mediaRoot}/ravageous/old-android.jpg`, alt: 'Original Android download instructions', caption: 'Android instructions' },
-          { src: `${mediaRoot}/ravageous/old-linux.jpg`, alt: 'Original Linux download instructions', caption: 'Linux instructions' },
-          { src: `${mediaRoot}/ravageous/old-windows.jpg`, alt: 'Original Windows download instructions', caption: 'Windows instructions' },
-          { src: `${mediaRoot}/ravageous/old-contact.jpg`, alt: 'Original Ravageous contact page', caption: 'Old contact page' },
+          { src: `${mediaRoot}/ravageous/old-home.jpg`, alt: 'Original game page mixes a character banner, long introductory copy, gameplay images and download information.', caption: 'Old landing page' },
+          { src: `${mediaRoot}/ravageous/old-android.jpg`, alt: 'Separate Android download page with installation text and phone screenshots, illustrating the fragmented original journey.', caption: 'Android instructions' },
+          { src: `${mediaRoot}/ravageous/old-linux.jpg`, alt: 'Separate Linux download page with installation commands, desktop screenshots and a package-contents table.', caption: 'Linux instructions' },
+          { src: `${mediaRoot}/ravageous/old-windows.jpg`, alt: 'Separate Windows download page dominated by installation text, a package-contents table and a warning notice.', caption: 'Windows instructions' },
+          { src: `${mediaRoot}/ravageous/old-contact.jpg`, alt: 'Original contact page with a long introduction above name, email and message fields.', caption: 'Old contact page' },
         ],
       },
       {
@@ -131,7 +133,7 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         images: [
           {
             src: `${mediaRoot}/ravageous/exploration.jpg`,
-            alt: 'Final long-form Ravageous landing page',
+            alt: 'Consolidated Ravageous landing page with prominent platform downloads, colourful game sections, installation information and newsletter signup.',
             caption: 'Final single-page experience',
           },
         ],
@@ -139,6 +141,7 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
     ],
   },
   'freeguides': {
+    coverAlt: 'FreeGuides hero pairs the message Monetize your knowledge with a phone displaying self-guided tours.',
     tags: ['UI', 'UX', 'Web'],
     sections: [
       {
@@ -171,10 +174,10 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         ],
         imageLayout: 'masonry',
         images: [
-          { src: `${mediaRoot}/freeguides/value-propositions.png`, alt: 'FreeGuides value proposition exploration', caption: 'Value propositions' },
-          { src: `${mediaRoot}/freeguides/copy-analysis.png`, alt: 'FreeGuides client copy analysis', caption: 'Copy analysis' },
-          { src: `${mediaRoot}/freeguides/competitor-1.png`, alt: 'FreeGuides competitor analysis', caption: 'Competitor analysis 1' },
-          { src: `${mediaRoot}/freeguides/competitor-2.png`, alt: 'FreeGuides competitor analysis', caption: 'Competitor analysis 2' },
+          { src: `${mediaRoot}/freeguides/value-propositions.png`, alt: 'Annotated research asks what hotel and hostel operators gain, highlighting trust, benefit, value, reliability, security and convenience.', caption: 'Value propositions' },
+          { src: `${mediaRoot}/freeguides/copy-analysis.png`, alt: 'Hotel and hostel copy compared side by side, with notes distinguishing benefits for guests from benefits for accommodation providers.', caption: 'Copy analysis' },
+          { src: `${mediaRoot}/freeguides/competitor-1.png`, alt: 'Competitor reference board comparing landing-page structures, pricing sections and product demonstrations to inform the FreeGuides page.', caption: 'Competitor analysis 1' },
+          { src: `${mediaRoot}/freeguides/competitor-2.png`, alt: 'Annotated reference details highlight FAQs, customer logos, product screenshots and a map-based tour example as ways to explain value.', caption: 'Competitor analysis 2' },
         ],
       },
       {
@@ -191,12 +194,12 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         images: [
           {
             src: `${mediaRoot}/freeguides/hostel.jpg`,
-            alt: 'FreeGuides landing page for hostel operators',
+            alt: 'Hostel landing page leads with monetising local knowledge, followed by tour examples, product benefits, pricing and demo calls to action.',
             caption: 'Hostel page — focused on revenue opportunities',
           },
           {
             src: `${mediaRoot}/freeguides/hotel.jpg`,
-            alt: 'FreeGuides landing page for hotel operators',
+            alt: 'Hotel landing page leads with enriching the guest experience, followed by tour examples, product benefits, pricing and demo calls to action.',
             caption: 'Hotel page — focused on the guest experience',
           },
         ],
@@ -204,6 +207,7 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
     ],
   },
   'form-gpt': {
+    coverAlt: 'Compact browser-extension settings group trigger mode, AI provider and API-key controls.',
     tags: ['UI', 'UX'],
     sections: [
       {
@@ -219,9 +223,9 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         ],
         imageLayout: 'masonry',
         images: [
-          { src: `${mediaRoot}/form-gpt/client-sketch.png`, alt: 'Client sketch for the Form GPT extension', caption: 'Client sketch' },
-          { src: `${mediaRoot}/form-gpt/inspiration-1.png`, alt: 'First interface reference supplied for Form GPT', caption: 'Inspiration 1' },
-          { src: `${mediaRoot}/form-gpt/inspiration-2.png`, alt: 'Second interface reference supplied for Form GPT', caption: 'Inspiration 2' },
+          { src: `${mediaRoot}/form-gpt/client-sketch.png`, alt: 'Annotated extension sketch groups trigger-mode radio buttons above AI-provider tabs and an API-key field.', caption: 'Client sketch' },
+          { src: `${mediaRoot}/form-gpt/inspiration-1.png`, alt: 'Compact hydration-reminder extension used as a reference for fitting a few clear actions inside a browser popup.', caption: 'Inspiration 1' },
+          { src: `${mediaRoot}/form-gpt/inspiration-2.png`, alt: 'App-switcher reference uses rows of icons, names and secondary details to organise a compact menu.', caption: 'Inspiration 2' },
         ],
       },
       {
@@ -231,9 +235,9 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         ],
         imageLayout: 'masonry',
         images: [
-          { src: `${mediaRoot}/form-gpt/draft-1.jpg`, alt: 'First compact Form GPT interface draft', caption: 'Draft 1' },
-          { src: `${mediaRoot}/form-gpt/draft-2.jpg`, alt: 'Second compact Form GPT interface draft', caption: 'Draft 2' },
-          { src: `${mediaRoot}/form-gpt/draft-3.jpg`, alt: 'Third compact Form GPT interface draft', caption: 'Draft 3' },
+          { src: `${mediaRoot}/form-gpt/draft-1.jpg`, alt: 'First extension draft uses a purple header, trigger-mode choices, provider tabs and a full-width Save button.', caption: 'Draft 1' },
+          { src: `${mediaRoot}/form-gpt/draft-2.jpg`, alt: 'Second extension draft tests a black header and Save button while retaining the trigger and provider groups.', caption: 'Draft 2' },
+          { src: `${mediaRoot}/form-gpt/draft-3.jpg`, alt: 'Third extension draft uses a white header, purple accents and an Active now indicator below the form.', caption: 'Draft 3' },
         ],
       },
       {
@@ -244,12 +248,12 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         images: [
           {
             src: `${mediaRoot}/form-gpt/exploration.jpg`,
-            alt: 'Form GPT extension shown within a browser page',
+            alt: 'Extension popup over a browser page demonstrates how trigger settings and AI-provider controls fit within the browsing workflow.',
             caption: 'Extension in context',
           },
           {
             src: `${mediaRoot}/form-gpt/final.jpg`,
-            alt: 'Final Form GPT browser extension interface',
+            alt: 'Final extension groups trigger choices and provider options with icons, supports a custom trigger character, and places Save beside the API-key field.',
             caption: 'Final compact extension UI',
           },
         ],
@@ -257,6 +261,7 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
     ],
   },
   'donor-hub': {
+    coverAlt: 'Donor Hub homepage introduces Donate and earn with a coin illustration and donation progress indicator.',
     tags: ['UI', 'IA', 'Web'],
     sections: [
       {
@@ -269,7 +274,7 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         title: 'Existing design',
         body: ['The existing interface appeared dated and did not communicate the new product direction.'],
         images: [
-          { src: `${mediaRoot}/donor-hub/old-design.png`, alt: 'Original Donor Hub website design', caption: 'Original design' },
+          { src: `${mediaRoot}/donor-hub/old-design.png`, alt: 'Original participation dialog uses white text and a bright pink Connect Wallet button over a blurred red homepage.', caption: 'Original design' },
         ],
       },
       {
@@ -279,13 +284,13 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         ],
         imageLayout: 'masonry',
         images: [
-          { src: `${mediaRoot}/donor-hub/first-sketch.png`, alt: 'First Donor Hub layout sketch', caption: 'First layout sketch' },
-          { src: `${mediaRoot}/donor-hub/draft-how-to.jpg`, alt: 'Donor Hub how-to page draft', caption: 'How-to draft' },
-          { src: `${mediaRoot}/donor-hub/draft-transaction.jpg`, alt: 'Donor Hub transaction interface draft', caption: 'Transaction draft' },
-          { src: `${mediaRoot}/donor-hub/draft-faq.jpg`, alt: 'Donor Hub frequently asked questions draft', caption: 'FAQ draft' },
+          { src: `${mediaRoot}/donor-hub/first-sketch.png`, alt: 'Early homepage layout places a Donate and earn introduction above pool progress, transaction rows and charity cards.', caption: 'First layout sketch' },
+          { src: `${mediaRoot}/donor-hub/draft-how-to.jpg`, alt: 'Participation instructions appear in a centred overlay with a Connect your wallet action, keeping the homepage behind it.', caption: 'How-to draft' },
+          { src: `${mediaRoot}/donor-hub/draft-transaction.jpg`, alt: 'Transaction draft places the recipient address, ETH amount and Send action in a modal over the homepage.', caption: 'Transaction draft' },
+          { src: `${mediaRoot}/donor-hub/draft-faq.jpg`, alt: 'FAQ draft places expandable questions in an overlay rather than a separate page.', caption: 'FAQ draft' },
           {
             src: `${mediaRoot}/donor-hub/exploration.jpg`,
-            alt: 'Donor Hub interface and identity exploration',
+            alt: 'Homepage exploration adds a coin illustration and green accents to the donation introduction, progress bar and charity cards.',
             caption: 'Working design direction',
           },
         ],
@@ -297,8 +302,8 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         ],
         imageLayout: 'masonry',
         images: [
-          { src: `${mediaRoot}/donor-hub/overview-dark.jpg`, alt: 'Donor Hub dark theme homepage overview', caption: 'Dark theme overview' },
-          { src: `${mediaRoot}/donor-hub/overview-light.jpg`, alt: 'Donor Hub light theme homepage overview', caption: 'Light theme overview' },
+          { src: `${mediaRoot}/donor-hub/overview-dark.jpg`, alt: 'Dark homepage overview uses green actions and progress indicators above transaction data and charity cards.', caption: 'Dark theme overview' },
+          { src: `${mediaRoot}/donor-hub/overview-light.jpg`, alt: 'Light homepage overview preserves the donation, transaction and charity-card hierarchy on a pale background.', caption: 'Light theme overview' },
         ],
       },
       {
@@ -306,14 +311,14 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         images: [
           {
             src: `${mediaRoot}/donor-hub/dark.jpg`,
-            alt: 'Final Donor Hub dark-mode homepage',
+            alt: 'Donor Hub dark theme: homepage places donation progress and a transaction table above charity cards.',
             caption: 'Homepage',
           },
-          { src: `${mediaRoot}/donor-hub/dark-faq.jpg`, alt: 'Donor Hub dark-mode FAQ page', caption: 'FAQs' },
-          { src: `${mediaRoot}/donor-hub/dark-how-to.jpg`, alt: 'Donor Hub dark-mode how-to page', caption: 'How to' },
-          { src: `${mediaRoot}/donor-hub/dark-send.jpg`, alt: 'Donor Hub dark-mode send transaction page', caption: 'Send' },
-          { src: `${mediaRoot}/donor-hub/dark-contact.jpg`, alt: 'Donor Hub dark-mode contact page', caption: 'Contact' },
-          { src: `${mediaRoot}/donor-hub/dark-privacy.jpg`, alt: 'Donor Hub dark-mode privacy policy page', caption: 'Privacy policy' },
+          { src: `${mediaRoot}/donor-hub/dark-faq.jpg`, alt: 'Donor Hub dark theme: FAQ page uses expandable questions, with one answer open.', caption: 'FAQs' },
+          { src: `${mediaRoot}/donor-hub/dark-how-to.jpg`, alt: 'Donor Hub dark theme: participation dialog explains the donation process and offers Connect your wallet.', caption: 'How to' },
+          { src: `${mediaRoot}/donor-hub/dark-send.jpg`, alt: 'Donor Hub dark theme: transaction dialog shows the recipient address, editable ETH amount, Send action and connected wallet details.', caption: 'Send' },
+          { src: `${mediaRoot}/donor-hub/dark-contact.jpg`, alt: 'Donor Hub dark theme: contact page provides name, email and message fields with a Send button.', caption: 'Contact' },
+          { src: `${mediaRoot}/donor-hub/dark-privacy.jpg`, alt: 'Donor Hub dark theme: privacy page demonstrates the layout for long policy text under clear section headings.', caption: 'Privacy policy' },
         ],
       },
       {
@@ -321,19 +326,20 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         images: [
           {
             src: `${mediaRoot}/donor-hub/light.jpg`,
-            alt: 'Final Donor Hub light-mode homepage',
+            alt: 'Donor Hub light theme: homepage places donation progress and a transaction table above charity cards.',
             caption: 'Homepage',
           },
-          { src: `${mediaRoot}/donor-hub/light-faq.jpg`, alt: 'Donor Hub light-mode FAQ page', caption: 'FAQs' },
-          { src: `${mediaRoot}/donor-hub/light-how-to.jpg`, alt: 'Donor Hub light-mode how-to page', caption: 'How to' },
-          { src: `${mediaRoot}/donor-hub/light-send.jpg`, alt: 'Donor Hub light-mode send transaction page', caption: 'Send' },
-          { src: `${mediaRoot}/donor-hub/light-contact.jpg`, alt: 'Donor Hub light-mode contact page', caption: 'Contact' },
-          { src: `${mediaRoot}/donor-hub/light-privacy.jpg`, alt: 'Donor Hub light-mode privacy policy page', caption: 'Privacy policy' },
+          { src: `${mediaRoot}/donor-hub/light-faq.jpg`, alt: 'Donor Hub light theme: FAQ page uses expandable questions, with one answer open.', caption: 'FAQs' },
+          { src: `${mediaRoot}/donor-hub/light-how-to.jpg`, alt: 'Donor Hub light theme: participation dialog explains the donation process and offers Connect your wallet.', caption: 'How to' },
+          { src: `${mediaRoot}/donor-hub/light-send.jpg`, alt: 'Donor Hub light theme: transaction dialog shows the recipient address, editable ETH amount, Send action and connected wallet details.', caption: 'Send' },
+          { src: `${mediaRoot}/donor-hub/light-contact.jpg`, alt: 'Donor Hub light theme: contact page provides name, email and message fields with a Send button.', caption: 'Contact' },
+          { src: `${mediaRoot}/donor-hub/light-privacy.jpg`, alt: 'Donor Hub light theme: privacy page demonstrates the layout for long policy text under clear section headings.', caption: 'Privacy policy' },
         ],
       },
     ],
   },
   'alice-puzzle': {
+    coverAlt: 'Green terminal-style puzzle interface arranges laws, word-based commands and achievements around a central game viewport.',
     tags: ['UI', 'UX', 'IA'],
     sections: [
       {
@@ -360,11 +366,11 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         ],
         imageLayout: 'masonry',
         images: [
-          { src: `${mediaRoot}/alice-puzzle/mainframe-1.jpg`, alt: 'Alice puzzle mainframe interface exploration one', caption: 'Mainframe exploration 1' },
-          { src: `${mediaRoot}/alice-puzzle/mainframe-2.jpg`, alt: 'Alice puzzle mainframe interface exploration two', caption: 'Mainframe exploration 2' },
-          { src: `${mediaRoot}/alice-puzzle/mainframe-3.jpg`, alt: 'Alice puzzle mainframe interface exploration three', caption: 'Mainframe exploration 3' },
-          { src: `${mediaRoot}/alice-puzzle/mainframe-4.jpg`, alt: 'Alice puzzle mainframe interface exploration four', caption: 'Mainframe exploration 4' },
-          { src: `${mediaRoot}/alice-puzzle/mainframe-draft.jpg`, alt: 'Alice puzzle full mainframe draft', caption: 'Mainframe draft' },
+          { src: `${mediaRoot}/alice-puzzle/mainframe-1.jpg`, alt: 'Early visual experiment uses a glowing rounded terminal frame on a dark background before adding game controls.', caption: 'Mainframe exploration 1' },
+          { src: `${mediaRoot}/alice-puzzle/mainframe-2.jpg`, alt: 'Bright green wireframe divides the game into a wide central viewport with stacked panels on both sides.', caption: 'Mainframe exploration 2' },
+          { src: `${mediaRoot}/alice-puzzle/mainframe-3.jpg`, alt: 'Dark version of the wireframe uses thin green borders to separate the central viewport and side panels.', caption: 'Mainframe exploration 3' },
+          { src: `${mediaRoot}/alice-puzzle/mainframe-4.jpg`, alt: 'Populated terminal layout places objective and laws on the left, the game viewport in the centre, and progress on the right.', caption: 'Mainframe exploration 4' },
+          { src: `${mediaRoot}/alice-puzzle/mainframe-draft.jpg`, alt: 'Game draft adds a working sentence and word buttons beneath the viewport, with laws on the left and achievements on the right.', caption: 'Mainframe draft' },
         ],
       },
       {
@@ -375,22 +381,22 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         images: [
           {
             src: `${mediaRoot}/alice-puzzle/draft-v2.jpg`,
-            alt: 'Alice puzzle AI interface draft',
+            alt: 'Green terminal interface combines laws, a central game viewport, word-based command building, progress objectives and Easter egg achievements.',
             caption: 'Interface',
           },
           {
             src: `${mediaRoot}/alice-puzzle/draft-panel.jpg`,
-            alt: 'Alice puzzle same-panel menu option',
+            alt: 'Menu alternative replaces the left laws panel with menu content while keeping the game and commands visible.',
             caption: 'Same-panel menu',
           },
           {
             src: `${mediaRoot}/alice-puzzle/draft-dialog.jpg`,
-            alt: 'Alice puzzle dialog menu option',
+            alt: 'Menu alternative opens a large centred dialog over the dimmed game, providing more room for longer menu content.',
             caption: 'Dialog menu',
           },
           {
             src: `${mediaRoot}/alice-puzzle/final.png`,
-            alt: 'Final Alice puzzle game interface and style direction',
+            alt: 'Style guide collects game components, achievement icons, green and dark colour swatches, and Bebas Neue and Orbitron type samples.',
             caption: 'Final game interface direction',
           },
         ],
@@ -398,6 +404,7 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
     ],
   },
   'vocal-email': {
+    coverAlt: 'Vocal Pro upgrade places unlimited-recording benefits beside plan choices and payment fields.',
     tags: ['UI', 'UX', 'Web'],
     sections: [
       {
@@ -424,11 +431,11 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         ],
         imageLayout: 'masonry',
         images: [
-          { src: `${mediaRoot}/vocal-email/old-paywall-1.png`, alt: 'Original Vocal Email paywall design', caption: 'Old paywall 1' },
-          { src: `${mediaRoot}/vocal-email/old-paywall-2.png`, alt: 'Original Vocal Email paywall design', caption: 'Old paywall 2' },
+          { src: `${mediaRoot}/vocal-email/old-paywall-1.png`, alt: 'Reference board of existing Vocal screens includes recording interfaces, three-tier pricing comparisons and upgrade popups.', caption: 'Old paywall 1' },
+          { src: `${mediaRoot}/vocal-email/old-paywall-2.png`, alt: 'Overview of the original mobile and desktop payment screens maps the many checkout, error and confirmation states.', caption: 'Old paywall 2' },
           {
             src: `${mediaRoot}/vocal-email/moodboard.png`,
-            alt: 'Vocal Email old designs and visual references',
+            alt: 'Moodboard compares subscription screens with benefit lists, plan choices and prominent upgrade actions.',
             caption: 'Inspiration moodboard',
           },
         ],
@@ -440,13 +447,13 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         ],
         imageLayout: 'masonry',
         images: [
-          { src: `${mediaRoot}/vocal-email/mobile-default.jpg`, alt: 'Vocal Email default mobile paywall', caption: 'Default modal' },
-          { src: `${mediaRoot}/vocal-email/mobile-more-features.jpg`, alt: 'Vocal Email expanded mobile benefits', caption: 'More features' },
-          { src: `${mediaRoot}/vocal-email/mobile-filled.jpg`, alt: 'Vocal Email mobile card details form', caption: 'Card details' },
-          { src: `${mediaRoot}/vocal-email/mobile-inline-error.jpg`, alt: 'Vocal Email mobile inline payment error', caption: 'Inline error' },
-          { src: `${mediaRoot}/vocal-email/mobile-processing.jpg`, alt: 'Vocal Email mobile payment processing state', caption: 'Processing' },
-          { src: `${mediaRoot}/vocal-email/mobile-success.jpg`, alt: 'Vocal Email mobile successful payment state', caption: 'Success' },
-          { src: `${mediaRoot}/vocal-email/mobile-fail.jpg`, alt: 'Vocal Email mobile failed payment state', caption: 'Payment error' },
+          { src: `${mediaRoot}/vocal-email/mobile-default.jpg`, alt: 'Mobile Pro upgrade stacks unlimited-recording benefits, monthly and annual plan choices, and card fields in one modal.', caption: 'Default modal' },
+          { src: `${mediaRoot}/vocal-email/mobile-more-features.jpg`, alt: 'Expanded mobile upgrade reveals the full benefits list above the plan choices and card fields.', caption: 'More features' },
+          { src: `${mediaRoot}/vocal-email/mobile-filled.jpg`, alt: 'Mobile checkout with card details entered and the Subscribe button enabled.', caption: 'Card details' },
+          { src: `${mediaRoot}/vocal-email/mobile-inline-error.jpg`, alt: 'Mobile checkout highlights invalid card details with a pink field border and keeps Subscribe disabled.', caption: 'Inline error' },
+          { src: `${mediaRoot}/vocal-email/mobile-processing.jpg`, alt: 'Mobile checkout changes the payment button to Processing while the transaction is underway.', caption: 'Processing' },
+          { src: `${mediaRoot}/vocal-email/mobile-success.jpg`, alt: 'Mobile payment confirmation announces the Pro upgrade, lists unlocked benefits and offers Start recording.', caption: 'Success' },
+          { src: `${mediaRoot}/vocal-email/mobile-fail.jpg`, alt: 'Mobile payment failure explains that payment could not be processed and offers a link to complete payment through Stripe.', caption: 'Payment error' },
         ],
       },
       {
@@ -458,16 +465,16 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         images: [
           {
             src: `${mediaRoot}/vocal-email/desktop.jpg`,
-            alt: 'Final Vocal Email desktop paywall',
+            alt: 'Desktop Pro upgrade places unlimited-recording benefits beside monthly and annual plan choices and card-entry fields.',
             caption: 'Default popover',
           },
-          { src: `${mediaRoot}/vocal-email/desktop-filled.jpg`, alt: 'Vocal Email desktop card details form', caption: 'Card details' },
-          { src: `${mediaRoot}/vocal-email/desktop-inline-error.jpg`, alt: 'Vocal Email desktop inline payment error', caption: 'Inline error' },
-          { src: `${mediaRoot}/vocal-email/desktop-processing.jpg`, alt: 'Vocal Email desktop payment processing state', caption: 'Processing' },
-          { src: `${mediaRoot}/vocal-email/desktop-fail.jpg`, alt: 'Vocal Email desktop failed payment state', caption: 'Payment error' },
+          { src: `${mediaRoot}/vocal-email/desktop-filled.jpg`, alt: 'Desktop checkout with card details entered and the Subscribe button enabled.', caption: 'Card details' },
+          { src: `${mediaRoot}/vocal-email/desktop-inline-error.jpg`, alt: 'Desktop checkout highlights invalid card details with a pink field border and keeps Subscribe disabled.', caption: 'Inline error' },
+          { src: `${mediaRoot}/vocal-email/desktop-processing.jpg`, alt: 'Desktop checkout changes the payment button to Processing while the transaction is underway.', caption: 'Processing' },
+          { src: `${mediaRoot}/vocal-email/desktop-fail.jpg`, alt: 'Desktop payment failure explains that payment could not be processed and links to Stripe to complete payment.', caption: 'Payment error' },
           {
             src: `${mediaRoot}/vocal-email/success.jpg`,
-            alt: 'Vocal Email successful payment state',
+            alt: 'Desktop payment confirmation announces the Pro upgrade, lists unlocked benefits in two columns and offers Start recording.',
             caption: 'Success',
           },
         ],
@@ -475,6 +482,7 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
     ],
   },
   'seogaeilge': {
+    coverAlt: 'SeoGaeilge resource page uses a category sidebar and repeatable cards with descriptions and preview images.',
     tags: ['UI', 'UX', 'IA', 'Web'],
     sections: [
       {
@@ -491,12 +499,12 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         images: [
           {
             src: `${mediaRoot}/seogaeilge/before.png`,
-            alt: 'Original SeoGaeilge homepage',
+            alt: 'Original homepage presents Irish-learning categories as large image tiles, with the resource suggestion action at the bottom.',
             caption: 'Original website',
           },
           {
             src: `${mediaRoot}/seogaeilge/resource-key.png`,
-            alt: 'Original SeoGaeilge resource key and navigation detail',
+            alt: 'Original resource legend requires readers to decode L for learner, F for fluent and ! for non-native content that may contain errors.',
             caption: 'Original resource key',
           },
         ],
@@ -515,12 +523,12 @@ const caseStudies: Record<string, ProjectCaseStudy> = {
         images: [
           {
             src: `${mediaRoot}/seogaeilge/resources.jpg`,
-            alt: 'Redesigned SeoGaeilge resource listing',
+            alt: 'Redesigned resource directory puts categories in a persistent left sidebar and groups links with descriptive tags in repeatable sections.',
             caption: 'All-resources page',
           },
           {
             src: `${mediaRoot}/seogaeilge/audio.jpg`,
-            alt: 'SeoGaeilge audio resource category page',
+            alt: 'Category-page template keeps the left navigation and presents each resource with a description, tags, a visit action and a preview image.',
             caption: 'Category-page template',
           },
         ],

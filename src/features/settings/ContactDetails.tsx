@@ -114,7 +114,7 @@ function ContactRow({ detail }: { detail: SettingsDetail }) {
       href={detail.href}
       target="_blank"
       rel="noreferrer"
-      aria-label={`Open ${detail.label} in a new tab`}
+      aria-label={`${detail.label} ${detail.value} — Open in a new tab`}
       title={`Open ${detail.label} in a new tab`}
     >
       {content}

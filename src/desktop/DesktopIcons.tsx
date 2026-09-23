@@ -14,7 +14,7 @@ export function DesktopIcons({
   inert?: boolean
 }) {
   return (
-    <section className="desktop-icons" aria-label="Desktop icons" inert={inert}>
+    <section id="desktop-shortcuts" tabIndex={-1} className="desktop-icons" aria-label="Desktop icons" inert={inert}>
       {icons.map((icon) => (
         <button
           key={icon.id}

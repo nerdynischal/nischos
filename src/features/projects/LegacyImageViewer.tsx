@@ -32,7 +32,7 @@ export function ImageZoomButton({
     <button
       type="button"
       className="legacy-image-zoom-trigger"
-      aria-label={`View ${image.caption ?? image.alt} larger`}
+      aria-label={`View ${image.caption ?? 'image'} larger: ${image.alt}`}
       onClick={openViewer}
     >
       <img

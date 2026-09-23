@@ -141,7 +141,7 @@
   cursor: grabbing;
 }
 
-.window-titlebar h2 {
+.window-titlebar .window-title {
   margin: 0;
   color: var(--text-secondary);
   font-family: var(--mono);
@@ -161,7 +161,7 @@
   padding-left: 0.8rem;
 }
 
-.window-titlebar h2:focus-visible {
+.window-titlebar .window-title:focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }

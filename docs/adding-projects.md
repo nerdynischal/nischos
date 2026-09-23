@@ -40,7 +40,11 @@ placement are confirmed explicitly because they cannot be inferred reliably.
 
 ## Validate and publish
 
-After reviewing the generated manifest and SQL:
+After reviewing the generated manifest and SQL, inspect each screenshot and add
+its [authored alternative](#screenshot-alternatives). The generator does not write
+these descriptions; the regression suite checks coverage for published manifests.
+For remote raster images, run `npm run media:sync` to refresh the checked-in
+originals and mirror mapping before validation. Then run:
 
 ```bash
 npm run check
@@ -49,7 +53,8 @@ npm run check
 Then:
 
 1. Run the generated migration in the Supabase SQL editor.
-2. Commit the manifest, migration, and any copied media.
+2. Commit the manifest, migration, screenshot descriptions and any copied media,
+   including the remote mirror mapping and originals when refreshed.
 3. Push to `master` and wait for the GitHub Pages workflow to finish.
 4. Open the live site and confirm the project metadata, artwork, placement, and
    Supabase connection indicator.
@@ -71,3 +76,28 @@ Use an existing manifest-shaped JSON file or preview without writing:
 npm run project:add -- --from ./project.json
 npm run project:add -- --from ./project.json --dry-run
 ```
+
+## Screenshot alternatives
+
+Before publishing screenshots, inspect each image and add an entry to
+`content/screenshot-alternatives.json`, keyed by its exact manifest URL or path.
+Describe the task, state or design choice the image demonstrates; do not turn its
+filename into prose. Each distinct image needs its own description. Known remote
+URLs automatically share descriptions with the local mirrors listed in
+`content/remote-media.json`; carousel order does not affect the mapping.
+
+When changing an image at an existing URL, review its description too. New remote
+assets without a reviewed entry use the project’s purpose as a fallback, which
+must not replace this editorial review. Archive images and zoomable covers keep
+their descriptions alongside their case-study content in
+`src/content/legacyProjects.ts`. Decorative icons and repeated listing thumbnails
+retain empty alternatives.
+
+See [Accessibility: status and verification](accessibility.md) for the current
+image-review scope and remaining manual checks.
+
+## Related Notes content
+
+Use logical Markdown headings: a leading title matching the note title is omitted, and remaining
+level-one headings render as level two beneath the reader title. Avoid skipping
+levels in authored content.

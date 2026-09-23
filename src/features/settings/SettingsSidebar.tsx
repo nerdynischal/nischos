@@ -28,7 +28,7 @@ export function SettingsSidebar({
   sections: SettingsSection[]
 }) {
   return (
-    <aside className="settings-sidebar" aria-label="Settings sections">
+    <nav className="settings-sidebar" aria-label="About sections">
       <ProfilePortrait className="settings-list-portrait" />
       <div className="settings-sidebar-group">
         <p className="settings-sidebar-title">Nischal</p>
@@ -54,6 +54,6 @@ export function SettingsSidebar({
           </button>
         )
       })}
-    </aside>
+    </nav>
   )
 }

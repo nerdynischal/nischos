@@ -1,0 +1,15 @@
+{
+  "/project-media/workout-board/workout-board-session.png": "Workout session with bench press and lat pulldown, editable sets, reps and weights, completion checkboxes, and rest timer controls.",
+  "/project-media/workout-board/workout-board-overview.png": "Empty workout board inviting the user to add their first exercise, with a countdown timer and stopwatch above the session.",
+  "/project-media/still/still-preview.webp": "Saved website preview in Still with an Edit details panel for its title, description, tags, notes and colour palette.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-typing.jpg": "Keyform displays a full dark QWERTY keyboard below a typing area, with controls for keyboard layout and sound.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-mac.jpg": "Keyform in Mac mode, showing Command and Option key legends on the interactive keyboard.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/keyform/keyform-windows.jpg": "Keyform in Windows mode, showing Windows and Alt key legends on the interactive keyboard.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-01-catalog.jpg": "Grid of lucky cat figures with individual Owned and Buy next controls and links to read about each figure.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-02-collection-status.jpg": "Collection tracking with two cats marked Owned and one marked Buy next; owned figures appear first in the grid.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/maneki-neko/product-03-product-details.jpg": "Product details dialog for the silver Nova lucky cat, explaining its symbolism and design over the dimmed catalog.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/toolkit-overview.jpg": "Tool catalog with Notion selected; a side panel explains its role in the workflow and links to the product website.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/codex-detail.jpg": "Codex selected in the tool catalog, with a detail panel describing its use for accessing AI and a product website link.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/tool-categories.jpg": "Lower portion of the tool catalog showing design and development tools with status badges such as Core, Exploring and Archived.",
+  "/project-media/still/still-preview.png": "Saved website preview in Still with an Edit details panel for its title, description, tags, notes and colour palette."
+}

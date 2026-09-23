@@ -1,8 +1,8 @@
 export function MetaRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <span>{label}</span>
-      <strong>{value}</strong>
+      <dt>{label}</dt>
+      <dd>{value}</dd>
     </div>
   )
 }

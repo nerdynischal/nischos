@@ -76,13 +76,13 @@ export function SettingsWindow({
           >
             <ChevronLeft aria-hidden="true" />
           </button>
-          <h3 className="settings-mobile-heading">
+          <h1 className="settings-mobile-heading">
             {section.displaySubtitle ?? section.displayTitle ?? section.label}
-          </h3>
+          </h1>
         </div>
         <ProfilePortrait />
         <div className="profile-heading">
-          <h3>{section.displayTitle ?? section.label}</h3>
+          <h1>{section.displayTitle ?? section.label}</h1>
           {section.displaySubtitle ? (
             <p className="profile-subtitle">{section.displaySubtitle}</p>
           ) : null}
@@ -124,8 +124,8 @@ export function SettingsWindow({
 
 function AboutFooter() {
   return (
-    <footer className="about-footer" aria-label="About nischOS">
-      <nav className="about-footer-links" aria-label="Project links">
+    <footer className="about-footer">
+      <nav className="about-footer-links" aria-label="Profile links">
         <a href={GITHUB_PROFILE_URL} target="_blank" rel="noreferrer">
           GitHub Profile
         </a>

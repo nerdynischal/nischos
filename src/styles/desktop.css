@@ -346,3 +346,33 @@
   height: 66px;
   transform: translateX(-2.3%) scale(1.35);
 }
+
+/* Keep orientation available to heading navigation without adding desktop chrome. */
+.desktop-heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.desktop-skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 110;
+  max-width: calc(100vw - 16px);
+  padding: 12px 16px;
+  color: var(--text-primary);
+  background: var(--surface-panel);
+  border: 2px solid var(--text-primary);
+  border-radius: 8px;
+  transform: translateY(calc(-100% - 16px));
+}
+
+.desktop-skip-link:focus {
+  transform: none;
+}

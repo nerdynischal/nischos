@@ -44,6 +44,7 @@ export function WindowFrame({
   onAdjust: (id: string, action: WindowAdjustment, element: HTMLElement, step: WindowAdjustmentStep) => WindowGeometry | null
   children: ReactNode
 }) {
+  const Title = desktopWindow.category === 'folder' ? 'h1' : 'div'
   const [mobileTitle, setMobileTitle] = useState<string | null>(null)
   const [arranging, setArranging] = useState(false)
   const [announcement, setAnnouncement] = useState('')
@@ -110,7 +111,7 @@ export function WindowFrame({
         onPointerCancel={onEndDrag}
         onLostPointerCapture={onEndDrag}
       >
-        <div className="traffic-lights" aria-label="Window controls">
+        <div className="traffic-lights">
           <button
             type="button"
             className="traffic traffic-close"
@@ -123,10 +124,10 @@ export function WindowFrame({
           <span className="traffic traffic-minimize" aria-hidden="true" />
           <span className="traffic traffic-zoom" aria-hidden="true" />
         </div>
-        <h2 tabIndex={-1} data-window-focus-target>
+        <Title id={isActive ? 'active-window-title' : undefined} className="window-title" tabIndex={-1} data-window-focus-target>
           <span className="window-title-desktop">{desktopWindow.title}</span>
           <span className="window-title-mobile">{mobileTitle ?? desktopWindow.title}</span>
-        </h2>
+        </Title>
         <button
           ref={arrangeRef}
           type="button"

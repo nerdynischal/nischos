@@ -23,7 +23,7 @@ function LegacyProjectCaseStudy({
   const coverImage = project.thumbnail
     ? {
         src: project.thumbnail,
-        alt: `${project.title} project cover`,
+        alt: caseStudy.coverAlt,
         caption: `${project.title} cover`,
       }
     : null
@@ -34,7 +34,6 @@ function LegacyProjectCaseStudy({
         <div className="legacy-project-cover">
           <ImageZoomButton
             image={coverImage}
-            previewAlt=""
             loading="eager"
             sizes="(max-width: 760px) calc(100vw - 16px), 1120px"
             onOpen={setViewerSelection}
@@ -43,7 +42,7 @@ function LegacyProjectCaseStudy({
       ) : null}
 
       <header className="legacy-project-header">
-        <h3>{project.title}</h3>
+        <h1>{project.title}</h1>
         <p>{project.subtitle}</p>
         <ul className="legacy-project-tags" aria-label="Project disciplines">
           {caseStudy.tags.map((tag) => (
@@ -61,7 +60,7 @@ function LegacyProjectCaseStudy({
               {String(sectionIndex + 1).padStart(2, '0')}
             </span>
             <div className="legacy-section-content">
-              <h4>{section.title}</h4>
+              <h2>{section.title}</h2>
               {section.body?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               {section.bullets ? (
                 <ul>

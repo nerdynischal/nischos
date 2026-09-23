@@ -1,9 +1,16 @@
-# nischOS accessibility audit
+# Historical accessibility audit — 16 September 2026
+
+This report preserves the original defect evidence and dated follow-up notes.
+**All A01–A08 now have local implementations.** Current status, the 23 September
+reviews and outstanding verification are maintained in
+[Accessibility: status and verification](accessibility.md).
+Original failure descriptions and test counts below are historical, not a report
+of the current build.
 
 Date: 16 September 2026
 Code baseline: `4d51125`
 Target: WCAG 2.2, levels A and AA
-Outcome: **Accessibility fixes are required before claiming AA conformance.**
+Original outcome: **Accessibility fixes were required before claiming AA conformance.**
 
 Eight actionable findings are documented below: three high priority and five medium priority. Findings combine browser reproduction, accessibility-tree inspection, computed layout, axe-core results, and source review. Priority reflects user impact, not WCAG conformance level.
 
@@ -33,7 +40,7 @@ At 320 × 568, opening About from its desktop shortcut left focus on that shortc
 
 **Criteria:** 2.4.3 Focus Order; 2.4.11 Focus Not Obscured (Minimum).
 
-**Locations:** [WindowFrame.tsx:27](</Users/nischal/Documents/Vibe code site/src/windows/WindowFrame.tsx:27>), [useDesktopWindows.ts:89](</Users/nischal/Documents/Vibe code site/src/hooks/useDesktopWindows.ts:89>), [DesktopExperience.tsx:131](</Users/nischal/Documents/Vibe code site/src/desktop/DesktopExperience.tsx:131>).
+**Locations:** [WindowFrame.tsx](../src/windows/WindowFrame.tsx), [useDesktopWindows.ts](../src/hooks/useDesktopWindows.ts), [DesktopExperience.tsx](../src/desktop/DesktopExperience.tsx).
 
 **Fix:** Track the invoking control and a useful focus target for each window. On open or explicit dock activation, focus the window heading/container or its first meaningful control. On close, restore the invoking control if available, otherwise focus a sensible surviving window or launcher. On mobile, prevent covered desktop controls and inactive windows from participating in keyboard navigation. Preserve deliberate nonmodal switching on desktop; do not indiscriminately trap focus in every window.
 
@@ -43,7 +50,7 @@ At 320 × 568, opening About from its desktop shortcut left focus on that shortc
 
 **Remediation (2026-09-17): Fixed locally, including the targeted light inactive-state follow-up.** Tertiary text opacity increased from 42% to 50%, with a 57% local token inside inactive windows to compensate for their existing brightness/saturation filter. Decorative contact icons, mobile chevrons, and loading indicators retain their previous opacity through a separate icon token. Typography, spacing, backgrounds, muted text, and the light-theme palette are unchanged.
 
-Browser computed-style contrast calculations (alpha compositing and inactive filters included) measured: active application 4.95:1; Notes sidebar 4.99:1; selected Pinned 4.73:1; note date 4.98:1; Toolkit headings, project TYPE/MODEL, and Selected Work file labels 4.99:1; dark 404 metadata 4.95–4.99:1. Inactive dark Pinned is 4.71:1 and inactive note date is 4.94:1. A saved after screenshot is available in `docs/a02-evidence/notes-after.png`. These are computed-style checks, not a fresh axe scan or cross-browser certification. Regression tests cover nine opaque surfaces plus the translucent Selected Work hover surface, including the inactive dark-window filter. All 128 tests, lint, project/token checks, and the production build pass.
+Browser computed-style contrast calculations (alpha compositing and inactive filters included) measured: active application 4.95:1; Notes sidebar 4.99:1; selected Pinned 4.73:1; note date 4.98:1; Toolkit headings, project TYPE/MODEL, and Selected Work file labels 4.99:1; dark 404 metadata 4.95–4.99:1. Inactive dark Pinned is 4.71:1 and inactive note date is 4.94:1. A saved after screenshot is available in [the after screenshot](a02-evidence/notes-after.png). These are computed-style checks, not a fresh axe scan or cross-browser certification. Regression tests cover nine opaque surfaces plus the translucent Selected Work hover surface, including the inactive dark-window filter. All 128 tests, lint, project/token checks, and the production build pass.
 
 **Light-theme follow-up (2026-09-17): Fixed locally.** A selector scoped to light-theme inactive Notes windows raises only the Pinned label from 64% to 68% text opacity. Browser computed-style checks including the dimming filter now measure 4.87:1, up from 4.36:1. Active light Pinned remains 4.77:1 at 64%; inactive dark Pinned remains 4.71:1 at 57%; adjacent sidebar text retains its prior styling. A regression test covers the scoped color over sidebar, hover, and selected surfaces with the inactive filter. All 129 tests and the full project check pass. Evidence below records the original defect.
 
@@ -65,7 +72,7 @@ Selected Work's folder metadata and visible file-type labels also failed. This i
 
 **Criterion:** 1.4.3 Contrast (Minimum).
 
-**Location:** [semantic.css:9](</Users/nischal/Documents/Vibe code site/src/styles/tokens/semantic.css:9>) defines dark `--text-tertiary` with 42% opacity. Consumers include [readers.css:83](</Users/nischal/Documents/Vibe code site/src/styles/theme/readers.css:83>).
+**Location:** [semantic.css](../src/styles/tokens/semantic.css) defines dark `--text-tertiary` with 42% opacity. Consumers include [readers.css](../src/styles/theme/readers.css).
 
 **Fix:** Adjust the tertiary text token to achieve at least 4.5:1 on every surface where it is used. Recheck selected, inactive, hover, and mixed-opacity surfaces, including the 404 page, rather than choosing a value against only the desktop background.
 
@@ -81,7 +88,7 @@ Selected Work's folder metadata and visible file-type labels also failed. This i
 
 **Criteria:** 4.1.2 Name, Role, Value; related focus-order behavior under 2.4.3.
 
-**Locations:** [LegacyImageViewer.tsx:83](</Users/nischal/Documents/Vibe code site/src/features/projects/LegacyImageViewer.tsx:83>), [legacy-image-viewer.css:44](</Users/nischal/Documents/Vibe code site/src/styles/legacy-image-viewer.css:44>).
+**Locations:** [LegacyImageViewer.tsx](../src/features/projects/LegacyImageViewer.tsx), [legacy-image-viewer.css](../src/styles/legacy-image-viewer.css).
 
 **Fix:** Choose consistent behavior. For a page-modal viewer, render it above the desktop, make the background inert, and contain focus until dismissal. For a window-local nonmodal viewer, remove the page-modal assertion and provide a coherent route to other windows. Retain Escape dismissal and focus restoration, which worked in the tested viewer.
 
@@ -97,7 +104,7 @@ Selected Work's folder metadata and visible file-type labels also failed. This i
 
 **Criteria:** 1.4.10 Reflow; 1.4.4 Resize Text. Text-spacing resilience should be included in remediation; baseline clipping was already present before that override.
 
-**Locations:** [settings.css:113](</Users/nischal/Documents/Vibe code site/src/styles/settings.css:113>), [settings.css:207](</Users/nischal/Documents/Vibe code site/src/styles/settings.css:207>), [settings.css:289](</Users/nischal/Documents/Vibe code site/src/styles/settings.css:289>).
+**Locations:** [settings.css](../src/styles/settings.css), [settings.css](../src/styles/settings.css), [settings.css](../src/styles/settings.css).
 
 **Fix:** Stack contact labels and values when space is limited, remove the fixed minimum label-column constraint at narrow widths, allow addresses to wrap, and keep the copy/link affordance visible without shrinking away the value.
 
@@ -113,7 +120,7 @@ Selected Work's folder metadata and visible file-type labels also failed. This i
 
 **Criterion:** 1.4.10 Reflow.
 
-**Location:** [lock-screen.css:2](</Users/nischal/Documents/Vibe code site/src/styles/lock-screen.css:2>) combines a fixed viewport, hidden overflow, substantial padding, and nonshrinking content.
+**Location:** [lock-screen.css](../src/styles/lock-screen.css) combines a fixed viewport, hidden overflow, substantial padding, and nonshrinking content.
 
 **Fix:** Allow vertical scrolling and content-driven height, or introduce a compact short-height layout that retains the complete entry control. Do not solve this by restricting browser zoom.
 
@@ -129,7 +136,7 @@ Selected Work's folder metadata and visible file-type labels also failed. This i
 
 **Criteria:** 2.1.1 Keyboard; 2.5.7 Dragging Movements for authored window dragging. The exact accessibility of the browser-provided CSS resize affordance also needs cross-browser checking.
 
-**Locations:** [WindowFrame.tsx:44](</Users/nischal/Documents/Vibe code site/src/windows/WindowFrame.tsx:44>), [useDesktopWindows.ts:117](</Users/nischal/Documents/Vibe code site/src/hooks/useDesktopWindows.ts:117>), [windows.css:51](</Users/nischal/Documents/Vibe code site/src/styles/windows.css:51>).
+**Locations:** [WindowFrame.tsx](../src/windows/WindowFrame.tsx), [useDesktopWindows.ts](../src/hooks/useDesktopWindows.ts), [windows.css](../src/styles/windows.css).
 
 **Fix:** Add accessible window commands for movement and useful layout positions/sizes, operable by both keyboard and individual pointer clicks. If arbitrary positioning remains functionality, provide an equivalent way to achieve it; a single maximize button alone does not reproduce all movement.
 
@@ -145,7 +152,7 @@ Selected Work's folder metadata and visible file-type labels also failed. This i
 
 **Criterion:** 4.1.3 Status Messages for the displayed success message. Silent failure is an additional usability problem.
 
-**Location:** [ContactDetails.tsx:28](</Users/nischal/Documents/Vibe code site/src/features/settings/ContactDetails.tsx:28>) and its hidden status content at line 47.
+**Location:** [ContactDetails.tsx](../src/features/settings/ContactDetails.tsx) and its hidden status content at line 47.
 
 **Fix:** Add a persistent, initially empty `role="status"` region outside the hidden icon wrapper. Announce success concisely and expose an actionable failure message with a way to select/copy the address manually. Keep focus on the initiating button.
 
@@ -161,7 +168,7 @@ Selected Work's folder metadata and visible file-type labels also failed. This i
 
 **Criterion:** 1.4.13 Content on Hover or Focus, particularly hoverability. Whether a specific tooltip overlaps other content affects the dismissibility exception; the hoverability problem does not depend on that exception.
 
-**Locations:** [dock.css:145](</Users/nischal/Documents/Vibe code site/src/styles/dock.css:145>), [useDockMagnification.ts:120](</Users/nischal/Documents/Vibe code site/src/desktop/useDockMagnification.ts:120>).
+**Locations:** [dock.css](../src/styles/dock.css), [useDockMagnification.ts](../src/desktop/useDockMagnification.ts).
 
 **Fix:** Maintain visibility while the pointer is over either the trigger or the tooltip, allow Escape dismissal, and keep the tooltip visible until hover/focus is removed or the user dismisses it. Existing button names already supply accessible labels; avoid duplicate announcements when revising the tooltip.
 
@@ -200,17 +207,17 @@ axe also returned manual-review items for labels on generic `div` elements (`.me
 - Note loading/fallback/error paths include status text and retry controls. Loading skeleton content is intended to be hidden and inert.
 - No target-size failure was reported in the scanned states. The 12px close dot is still a usability improvement opportunity, but size alone does not prove a WCAG 2.5.8 failure: spacing exceptions and the mobile 44px pseudo-element hit area must be considered.
 
-## Further checks and improvements
+## Follow-up areas identified in the original audit
 
-These are separate from the eight findings, because impact or conformance needs additional validation:
+The original audit identified screen-reader speech and announcement volume, image
+alternatives, structure and accessible names, the updating clock, and broader
+browser/preference coverage as follow-up areas. The image and structure reviews
+were completed on 23 September; the whole-window live region has also been
+removed. The [current checklist](accessibility.md#remaining-verification) tracks
+remaining work without duplicating it here. External project sites remain outside
+the audit scope.
 
-1. **Actual screen-reader speech:** Test VoiceOver/Safari and NVDA/Firefox or Chrome. The whole window layer has `aria-live="polite"`, which may announce excessive case-study/note content when mounted. Prefer a small dedicated status message if speech testing confirms this. Accessibility-tree inspection is not a substitute for listening to the announcement.
-2. **Image alternatives:** Modern screenshot names are generated from filenames. Some legacy alternatives repeat generic phrases such as “promotional feature artwork.” Review every meaningful image against its visual purpose; author meaningful descriptions or adjacent explanations where needed. This audit did not visually assess every archived image or every remote content variant.
-3. **Structure and labels:** Add a useful top-level page heading and consider a skip-to-active-window control. A missing `h1` alone was not treated as a WCAG failure. Review the unlock button's visible “Click to Unlock” copy against its “Unlock nischOS” accessible name for speech-input consistency. Consider consistent About/Nischal naming across launcher and close controls.
-4. **Updating clock:** The desktop clock changes every second with no pause/hide control. Assess it against 2.2.2 Pause, Stop, Hide; a portfolio clock is not obviously essential. Consider a static timestamp, a hide option, or user-controlled updates.
-5. **Browser and preference coverage:** Complete real 200%/400% zoom, text-only zoom, forced-colors/high-contrast mode, OS reduced-motion, touch hardware, and additional browser testing. The 404 page and error/fallback states were source-reviewed, not separately exercised in all visual states. External project sites linked from this portfolio are outside this audit.
-
-## Recommended remediation order
+## Original recommended remediation order
 
 1. Fix focus lifecycle and image-viewer modality together; these affect the navigation model.
 2. Correct dark-theme contrast tokens and remeasure affected surfaces.
@@ -218,4 +225,4 @@ These are separate from the eight findings, because impact or conformance needs 
 4. Add non-drag window controls, accessible copy feedback, and persistent/dismissible tooltips.
 5. Add focused browser regression checks for these behaviors and complete assistive-technology testing before making a conformance claim.
 
-The original audit changed documentation only. A01, A02, A03, A04, A05, A07, and A08 were subsequently fixed locally as recorded above; other findings remain open. This report does not certify conformance. See CHANGELOG.md for the implementation and validation record.
+The original audit changed documentation only. A01–A08 were subsequently implemented locally as recorded above. Broader verification remains outstanding in the [current accessibility record](accessibility.md). This historical report does not certify conformance. See the [changelog](../CHANGELOG.md) for implementation history.

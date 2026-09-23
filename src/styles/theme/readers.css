@@ -90,7 +90,7 @@
   line-height: var(--type-meta-line);
 }
 
-.blog-reader-post > header h3 {
+.blog-reader-post > header h1 {
   margin: 0;
   color: var(--text-primary);
   font-size: var(--type-title-size);
@@ -103,7 +103,7 @@
   gap: 1.35rem;
 }
 
-.blog-markdown :is(p, ul, ol, blockquote, pre, table, h1, h2, h4, h5, h6) {
+.blog-markdown :is(p, ul, ol, blockquote, pre, table, h1, h2, h3, h4, h5, h6) {
   margin: 0;
 }
 
@@ -115,14 +115,14 @@
   line-height: var(--type-body-line);
 }
 
-.blog-markdown h4 {
+.blog-markdown h2 {
   color: var(--text-primary);
   font-size: 1.32rem;
   font-weight: 720;
   line-height: 1.18;
 }
 
-.blog-markdown :is(h5, h6) {
+.blog-markdown :is(h3, h4, h5, h6) {
   color: var(--text-primary);
   font-size: 1rem;
   font-weight: 720;

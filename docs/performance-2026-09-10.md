@@ -1,5 +1,10 @@
 # Desktop optimisation measurements — 10 September 2026
 
+This is a historical measurement record. “Current” below refers to the
+10 September measurement build, not the latest checkout. Later changes and
+validation are recorded in the [changelog](../CHANGELOG.md); accessibility
+verification is tracked separately in the [current accessibility record](accessibility.md).
+
 ## Method
 
 Measured the actual desktop in the Codex in-app browser at 1280 × 720, with

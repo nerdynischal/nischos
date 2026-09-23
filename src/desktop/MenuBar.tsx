@@ -42,7 +42,7 @@ export function MenuBar({
   return (
     <header className="menu-bar">
       <div className="menu-left">
-        <button type="button" className="brand-button" onClick={onOpenAbout}>
+        <button type="button" className="brand-button" aria-label="nischOS — Open About" onClick={onOpenAbout}>
           <img
             className="brand-logo"
             src={resolveAssetUrl('/logo.svg')}
@@ -53,7 +53,7 @@ export function MenuBar({
         </button>
         {activeTitle ? <span className="active-app-label">{activeTitle}</span> : null}
       </div>
-      <div className="menu-status" aria-label="Desktop status">
+      <div className="menu-status">
         <div
           className="supabase-status"
           data-status={supabaseStatus}
@@ -73,7 +73,6 @@ export function MenuBar({
           type="button"
           className="theme-toggle"
           aria-label={toggleLabel}
-          aria-pressed={resolvedTheme === 'light'}
           title={toggleLabel}
           onClick={toggleTheme}
         >

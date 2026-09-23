@@ -36,14 +36,13 @@ export function LockScreen({
 
       <header className="lock-screen-clock">
         <p>{dateTime.lockScreenDate}</p>
-        <time dateTime={shortTime}>{shortTime}</time>
+        <time dateTime={dateTime.time.slice(0, 5)}>{shortTime}</time>
       </header>
 
       <section className="lock-screen-profile-region" aria-label="nischOS profile">
         <button
           type="button"
           className="lock-screen-profile"
-          aria-label="Unlock nischOS"
           aria-busy={isLoading || undefined}
           data-loading={isLoading || undefined}
           autoFocus

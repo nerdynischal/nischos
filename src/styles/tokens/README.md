@@ -13,3 +13,17 @@ The application stores `system`, `light`, or `dark` under `nischos-theme`. An in
 Runtime positioning variables such as `--window-x` and `--icon-y` are set by React and intentionally live outside these files.
 
 Run `npm run tokens:check` after changing CSS custom properties. The check rejects unused or duplicate root tokens, references that are neither defined in CSS nor supplied by TypeScript at runtime, and raw colours outside the token files.
+
+## Accessibility checks when changing tokens
+
+Preserve the distinction between tertiary text and decorative icon opacity. The
+inactive-window treatment affects perceived contrast, so test selected, hovered
+and inactive states in both themes rather than checking only the desktop surface.
+Keep keyboard focus indicators visible, including the desktop skip link.
+
+`npm run check` includes the contrast regression tests in
+`scripts/contrast.test.ts`; these targeted checks do not cover every rendered
+state. Consult the [current accessibility record](../../../docs/accessibility.md)
+for remaining contrast, forced-colors and browser checks, and the
+[historical A02 evidence](../../../docs/accessibility-audit-2026-09-16.md#a02--high-dark-theme-secondary-metadata-fails-text-contrast)
+for the measured surfaces behind the existing corrections.

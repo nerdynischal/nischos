@@ -14,10 +14,10 @@ export function SettingsSkeleton({ sections, activeSection }: { sections: Settin
     </aside>
     <section className="settings-detail">
       <div className="avatar-orbit skeleton-fill" />
-      <div className="profile-heading"><h3><Text>{section.displayTitle ?? section.label}</Text></h3>{section.displaySubtitle && <p className="profile-subtitle"><Text>{section.displaySubtitle}</Text></p>}</div>
+      <div className="profile-heading"><h1><Text>{section.displayTitle ?? section.label}</Text></h1>{section.displaySubtitle && <p className="profile-subtitle"><Text>{section.displaySubtitle}</Text></p>}</div>
       {section.toolGroups?.length ? <div className="toolkit-groups">{section.toolGroups.map((group) => <section className="toolkit-group" key={group.id}>
-        <h4><Text>{group.label}</Text></h4><ul className="toolkit-list">{group.tools.map((tool) => <li className="toolkit-row" key={tool.title}>
-          <span className="toolkit-icon skeleton-fill" /><div className="toolkit-copy"><h5><Text>{tool.title}</Text></h5><p><Text>{tool.description}</Text></p></div>
+        <h2><Text>{group.label}</Text></h2><ul className="toolkit-list">{group.tools.map((tool) => <li className="toolkit-row" key={tool.title}>
+          <span className="toolkit-icon skeleton-fill" /><div className="toolkit-copy"><h3><Text>{tool.title}</Text></h3><p><Text>{tool.description}</Text></p></div>
         </li>)}</ul>
       </section>)}</div> : section.details?.length ? <dl className="profile-details">{section.details.map((item) => <div className={`profile-row${section.id === 'contact' ? ' contact-row' : ''}`} key={item.label}>
         <dt><Text>{item.label}</Text></dt><dd><Text>{item.value}</Text></dd>

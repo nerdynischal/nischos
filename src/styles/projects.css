@@ -42,9 +42,9 @@
 }
 
 /* Shared content typography */
-.project-hero h3,
-.settings-detail h3,
-.empty-state h3 {
+.project-hero h1,
+.settings-detail h1,
+.empty-state h1 {
   margin: 0;
   color: var(--text-primary);
   font-family: var(--sans);
@@ -77,7 +77,7 @@
   padding-top: 0.8rem;
 }
 
-.story-panel h4 {
+.story-panel h2 {
   margin: 0;
   color: var(--text-primary);
   font-size: var(--type-heading-size);
@@ -241,6 +241,7 @@
 
 /* Project metadata and actions */
 .project-meta {
+  margin: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0;
@@ -263,7 +264,7 @@
   border-right: 0;
 }
 
-.project-meta span {
+.project-meta dt {
   color: var(--text-tertiary);
   font-family: var(--mono);
   font-size: var(--type-meta-size);
@@ -273,7 +274,8 @@
   text-transform: uppercase;
 }
 
-.project-meta strong {
+.project-meta dd {
+  margin: 0;
   color: var(--text-secondary);
   font-family: var(--mono);
   font-size: var(--type-chrome-size);

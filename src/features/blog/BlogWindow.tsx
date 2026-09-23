@@ -10,11 +10,11 @@ import { usePostContent } from './usePostContent'
 import { WindowTitleContext } from '../../windows/WindowTitleContext'
 
 const markdownHeadingComponents = {
-  h1: 'h4',
-  h2: 'h4',
-  h3: 'h5',
-  h4: 'h6',
-  h5: 'h6',
+  h1: 'h2',
+  h2: 'h2',
+  h3: 'h3',
+  h4: 'h4',
+  h5: 'h5',
   h6: 'h6',
 } as const
 
@@ -64,7 +64,7 @@ export function BlogWindow({
 
   return (
     <div ref={containerRef} className="finder" data-mobile-detail={showMobileDetail} data-mobile-navigation={hasMobileNavigation}>
-      <aside className="finder-sidebar blog-post-nav" aria-label="Notes">
+      <nav className="finder-sidebar blog-post-nav" aria-label="Notes">
         <p className="sidebar-title">Notes</p>
         {posts.map((post) => (
           <button
@@ -83,7 +83,7 @@ export function BlogWindow({
             <ChevronRight className="notes-row-chevron" aria-hidden="true" />
           </button>
         ))}
-      </aside>
+      </nav>
       <section className="blog-reader" aria-label="Selected note">
         {selectedPost ? (
           <article className="blog-reader-post">
@@ -104,7 +104,7 @@ export function BlogWindow({
                 {selectedPost.folder} ·{' '}
                 <time dateTime={selectedPost.date}>{selectedPost.date}</time>
               </p>
-              <h3>{selectedPost.title}</h3>
+              <h1>{selectedPost.title}</h1>
             </header>
             {content.status === 'loading' ? (
               <NoteSkeleton key={selectedPost.id} />

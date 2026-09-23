@@ -69,8 +69,8 @@ function activate(selector: string, focus = true) {
   })
   return target
 }
-function heading(id: string) {
-  return element(`[data-window-id="${id}"] h2`)
+function windowTitle(id: string) {
+  return element(`[data-window-id="${id}"] [data-window-focus-target]`)
 }
 function resizeMobile() {
   act(() => {
@@ -82,7 +82,7 @@ function resizeMobile() {
 it('moves focus into windows opened from either launcher and restores their opener', () => {
   for (const launcher of ['.desktop-icons', '.dock']) {
     const opener = activate(`${launcher} [aria-label="Open Notes"]`)
-    expect(document.activeElement).toBe(heading('blog'))
+    expect(document.activeElement).toBe(windowTitle('blog'))
     activate('[aria-label="Close Notes"]')
     expect(document.activeElement).toBe(opener)
   }
@@ -90,7 +90,7 @@ it('moves focus into windows opened from either launcher and restores their open
 
 it('remembers pointer invokers even when the browser does not focus a clicked button', () => {
   const opener = activate('.desktop-icons [aria-label="Open Notes"]', false)
-  expect(document.activeElement).toBe(heading('blog'))
+  expect(document.activeElement).toBe(windowTitle('blog'))
   activate('[aria-label="Close Notes"]')
   expect(document.activeElement).toBe(opener)
 })
@@ -99,7 +99,7 @@ it('explicit dock switching enters the window but ordinary control focus is pres
   activate('.dock [aria-label="Open Notes"]')
   activate('.dock [aria-label="Open About"]')
   activate('.dock [aria-label="Focus Notes"]')
-  expect(document.activeElement).toBe(heading('blog'))
+  expect(document.activeElement).toBe(windowTitle('blog'))
   const link = element('[data-window-id="settings"] a')
   act(() => link.focus())
   expect(document.activeElement).toBe(link)
@@ -116,7 +116,7 @@ it('makes covered mobile controls inert while leaving the dock available', () =>
   expect(element('[data-window-id="settings"]').hasAttribute('inert')).toBe(false)
   expect(element('.dock').closest('[inert]')).toBeNull()
   activate('.dock [aria-label="Focus Notes"]')
-  expect(document.activeElement).toBe(heading('blog'))
+  expect(document.activeElement).toBe(windowTitle('blog'))
   expect(element('[data-window-id="blog"]').hasAttribute('inert')).toBe(false)
 })
 
@@ -124,7 +124,7 @@ it('reactivates the invoking window before restoring its control on mobile', () 
   resizeMobile()
   activate('.dock [aria-label="Open Selected Work"]')
   const opener = activate('[data-window-id="selected-work"] .window-body button')
-  expect(document.activeElement).toBe(heading('project:auto-gmail'))
+  expect(document.activeElement).toBe(windowTitle('project:auto-gmail'))
   activate('[aria-label="Close Auto Gmail"]')
   expect(document.activeElement).toBe(opener)
   expect(element('[data-window-id="selected-work"]').hasAttribute('inert')).toBe(false)
@@ -136,19 +136,58 @@ it('uses a surviving window when the original opener has been removed', () => {
   activate('[aria-label="Close Selected Work"]')
   activate('.dock [aria-label="Open Notes"]')
   activate('[aria-label="Close Auto Gmail"]')
-  expect(document.activeElement).toBe(heading('blog'))
+  expect(document.activeElement).toBe(windowTitle('blog'))
 })
 
 it('does not restore focus to a desktop shortcut covered by another window', () => {
   activate('.desktop-icons [aria-label="Open Notes"]')
   activate('.dock [aria-label="Open About"]')
   activate('[aria-label="Close Notes"]')
-  expect(document.activeElement).toBe(heading('settings'))
+  expect(document.activeElement).toBe(windowTitle('settings'))
 })
 
 it('moves focus out of newly inert content when changing to the mobile layout', () => {
   activate('.desktop-icons [aria-label="Open Notes"]')
   act(() => element('.desktop-icons [aria-label="Open About"]').focus())
   resizeMobile()
-  expect(document.activeElement).toBe(heading('blog'))
+  expect(document.activeElement).toBe(windowTitle('blog'))
+})
+
+
+it('focuses the desktop when entering without an animation', () => {
+  expect(document.activeElement).toBe(element('main.desktop'))
+  expect(element('main.desktop').hasAttribute('inert')).toBe(false)
+})
+
+it('skips to desktop shortcuts when no window is open', () => {
+  const link = element('.desktop-skip-link')
+  expect(link.getAttribute('href')).toBe('#desktop-shortcuts')
+  expect(link.textContent).toBe('Skip to desktop shortcuts')
+  activate('.desktop-skip-link')
+  expect(document.activeElement).toBe(element('#desktop-shortcuts'))
+  expect(element('#desktop-shortcuts button').tabIndex).toBe(0)
+  expect(element('main').getAttribute('aria-labelledby')).toBe('desktop-heading')
+  expect(element('#desktop-heading').tagName).toBe('H1')
+})
+
+it('keeps the skip destination current through opening, switching and closing windows', () => {
+  activate('.dock [aria-label="Open Notes"]')
+  activate('.dock [aria-label="Open About"]')
+  expect(element('[data-window-id="settings"]').getAttribute('aria-label')).toBe('About')
+  expect(element('.window-settings .window-title-desktop').textContent).toBe('About')
+  expect(element('.desktop-skip-link').textContent).toBe('Skip to active window: About')
+  activate('.desktop-skip-link')
+  expect(document.activeElement).toBe(windowTitle('settings'))
+  resizeMobile()
+  activate('.dock [aria-label="Focus Notes"]')
+  activate('.desktop-skip-link')
+  expect(document.activeElement).toBe(windowTitle('blog'))
+  expect(document.activeElement?.closest('[inert]')).toBeNull()
+  expect(container.querySelectorAll('#active-window-title')).toHaveLength(1)
+  activate('[aria-label="Close Notes"]')
+  activate('.desktop-skip-link')
+  expect(document.activeElement).toBe(windowTitle('settings'))
+  activate('[aria-label="Close About"]')
+  activate('.desktop-skip-link')
+  expect(document.activeElement).toBe(element('#desktop-shortcuts'))
 })

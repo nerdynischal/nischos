@@ -3,9 +3,9 @@
   gap: 1.45rem;
 }
 
-.project-hero h3,
-.settings-detail h3,
-.empty-state h3 {
+.project-hero h1,
+.settings-detail h1,
+.empty-state h1 {
   color: var(--text-primary);
   font-weight: var(--type-title-weight);
   letter-spacing: var(--tracking-tight);
@@ -44,7 +44,7 @@
   color: var(--text-secondary);
 }
 
-.story-panel h4 {
+.story-panel h2 {
   color: var(--text-primary);
 }
 
@@ -72,13 +72,13 @@
   background-color: var(--surface-screenshot);
 }
 
-.project-meta span {
+.project-meta dt {
   color: var(--text-tertiary);
   font-weight: var(--type-meta-weight);
   letter-spacing: var(--tracking-meta);
 }
 
-.project-meta strong {
+.project-meta dd {
   color: var(--text-secondary);
   font-weight: var(--type-chrome-weight);
 }

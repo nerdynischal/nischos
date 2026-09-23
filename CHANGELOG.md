@@ -1,5 +1,19 @@
 # Changelog
 
+## 23 September 2026
+
+### Accessibility
+
+- Reviewed 12 project screenshots, 78 archive case-study images and eight zoomable covers. Replaced filename-derived and generic alternatives with authored descriptions; remote originals, mirrors and reordered lists retain asset-specific descriptions. Zoom controls expose the descriptions and decorative images remain hidden.
+- Aligned the unlock name with its visible wording and standardised About naming across launchers, window titles and controls. Corrected navigation landmarks and unnecessary generic ARIA labels; contact link names include the visible value.
+- Added a desktop orientation heading and a focus-visible skip link to the active window, with a shortcut fallback when no window is open. Preserved content heading hierarchy and targeted status feedback rather than a whole-window live region.
+
+### Documentation and validation
+
+- Consolidated the accessibility checklist and the image/structure follow-up reports into [Accessibility: status and verification](docs/accessibility.md). Preserved the original audit as historical evidence and updated setup, media, content-authoring and token documentation.
+- The latest code validation passed `npm run check`: 154 tests across 37 files, project and token checks, lint, TypeScript and production build. Browser keyboard and accessibility-tree checks verified unlock wording, skip-link focus, About navigation and desktop/mobile Tools headings.
+- Real screen-reader speech, speech recognition, native zoom, broader browser/preference checks and deployment verification remain outstanding. Documentation consolidation adds no new browser or conformance evidence.
+
 ## 21 September 2026
 
 ### Added

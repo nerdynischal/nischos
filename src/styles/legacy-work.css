@@ -68,7 +68,7 @@
   background: var(--sidebar-bg);
 }
 
-.legacy-folder-sidebar button {
+.legacy-folder-sidebar .legacy-folder-location {
   display: flex;
   min-height: var(--control-height-compact);
   align-items: center;
@@ -83,7 +83,7 @@
   cursor: default;
 }
 
-.legacy-folder-sidebar button.is-selected {
+.legacy-folder-sidebar .legacy-folder-location.is-selected {
   color: var(--text-primary);
   background: var(--surface-selected);
 }
@@ -200,7 +200,7 @@
   padding: var(--space-8) 0 var(--space-5);
 }
 
-.legacy-project-header h3 {
+.legacy-project-header h1 {
   margin: 0;
   color: var(--text-primary);
   font-size: clamp(1.6rem, 5cqi, 2.4rem);
@@ -265,7 +265,7 @@
   min-width: 0;
 }
 
-.legacy-section-content h4,
+.legacy-section-content h2,
 .legacy-section-content p,
 .legacy-section-content ul,
 .legacy-section-gallery,
@@ -273,7 +273,7 @@
   margin: 0;
 }
 
-.legacy-section-content h4 {
+.legacy-section-content h2 {
   color: var(--text-primary);
   font-size: var(--type-heading-size);
   line-height: var(--type-heading-line);

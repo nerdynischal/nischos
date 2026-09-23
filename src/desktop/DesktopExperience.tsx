@@ -11,7 +11,7 @@ import { WindowFrame } from '../windows/WindowFrame'
 import { DesktopIcons } from './DesktopIcons'
 import { Dock } from './Dock'
 import { MenuBar } from './MenuBar'
-import { getProjectWindowId, NOTES_APP_LABEL } from './appRegistry'
+import { getProjectWindowId, NOTES_APP_LABEL, ABOUT_APP_LABEL } from './appRegistry'
 import { createDesktopIcons } from './createDesktopIcons'
 
 type DesktopExperienceProps = {
@@ -50,10 +50,10 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
   const allProjects = useMemo(() => [...projects, ...legacyProjects], [projects])
 
   useEffect(() => {
-    if (isEntering) {
+    if (!isPreparing) {
       desktopRef.current?.focus()
     }
-  }, [isEntering])
+  }, [isPreparing])
 
   function openProject(projectId: string) {
     const project = allProjects.find((item) => item.id === projectId)
@@ -97,7 +97,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
     upsertWindow({
       id: 'settings',
       category: 'settings',
-      title: 'Nischal',
+      title: ABOUT_APP_LABEL,
     })
   }
 
@@ -126,9 +126,21 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
       aria-hidden={isPreparing || undefined}
       inert={isPreparing}
       data-entering={isEntering}
-      aria-label="nischOS Desktop"
-      tabIndex={isEntering ? -1 : undefined}
+      aria-labelledby="desktop-heading"
+      tabIndex={-1}
     >
+      <a
+        className="desktop-skip-link"
+        href={activeWindow ? '#active-window-title' : '#desktop-shortcuts'}
+        onClick={(event) => {
+          event.preventDefault()
+          const targetId = activeWindow ? 'active-window-title' : 'desktop-shortcuts'
+          document.getElementById(targetId)?.focus({ preventScroll: true })
+        }}
+      >
+        {activeWindow ? `Skip to active window: ${activeWindow.title}` : 'Skip to desktop shortcuts'}
+      </a>
+      <h1 id="desktop-heading" className="desktop-heading">nischOS portfolio desktop</h1>
       <div className="wallpaper" aria-hidden="true">
         <div className="wallpaper-grid" />
       </div>
@@ -145,7 +157,7 @@ export function DesktopExperience({ isEntering, isPreparing }: DesktopExperience
         inert={isMobile && windows.length > 0}
       />
 
-      <section className="window-layer" aria-live="polite">
+      <section className="window-layer">
         {windows.map((desktopWindow) => (
           <WindowFrame
             key={desktopWindow.id}

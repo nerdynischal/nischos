@@ -60,7 +60,9 @@ The app currently loads these tables:
 An icon in the menu bar reports whether every content collection loaded from
 Supabase. If configuration is missing, a request fails, or a table is empty,
 the icon indicates fallback mode and the affected collection stays available
-from checked-in content.
+from checked-in content. Collections load independently: local projects form the
+baseline, matching Supabase records replace them, and remote-only projects are
+appended.
 
 Project records use `sort_order` for desktop placement and nullable
 `dock_order` for dock placement. A null `dock_order` keeps a project on the
@@ -68,8 +70,6 @@ desktop without pinning it to the dock. Ordering values use gaps of ten so new
 projects can be inserted without renumbering the whole collection.
 
 The checked-in schema contains the current read model. Running it preserves legacy tables and content. Project metadata uses `type`; the current migration backfills it from the obsolete `category` column before removing that column.
-
-Each content type is loaded independently. Checked-in projects form the baseline collection, with matching Supabase records overlaid and remote-only projects appended. If Supabase is not configured, a request fails, or another table is empty, the app keeps the corresponding local fallback content.
 
 The typed browser client lives in `src/lib/supabase.ts`, with its database shape
 in `src/lib/database.types.ts`. Regenerate that type after future schema changes
@@ -80,7 +80,10 @@ if you adopt the Supabase CLI.
 Project artwork can be stored locally under `public/project-media/<project-id>`
 or remotely in the public `project-screenshots` Supabase Storage bucket. Store
 the resulting local path or public HTTPS URL in `thumbnail` or `screenshots`;
-the app renders both forms directly.
+the app accepts both forms. Known remote raster images use checked-in mirrors
+and responsive variants, as described under [Responsive media](#responsive-media).
+Author a purpose-specific description for every screenshot using the
+[screenshot alternatives workflow](docs/adding-projects.md#screenshot-alternatives).
 
 For a fresh local Supabase project, `supabase/seed.sql` supplies the current
 portfolio content, including Keyform.
@@ -168,12 +171,15 @@ For an existing Supabase table created before Markdown and pinning support exist
 ## Project structure
 
 - `src/hooks` contains portfolio data loading, the live clock, and desktop-window state.
-- `content/projects` contains validated fallback project manifests.
+- `content/projects` contains validated fallback project manifests;
+  `content/screenshot-alternatives.json` stores descriptions keyed by image source,
+  and `content/remote-media.json` maps remote images to local mirrors.
 - `src/content/types.ts` defines the shared portfolio content model; `src/content.ts` assembles project manifests with the checked-in notes and profile fallback.
 - `src/features/entry` contains the lock screen, session persistence, and its isolated water-ripple renderer.
 - The remaining `src/features` folders contain the Notes, Project, and About window content.
 - `src/desktop` contains desktop icons, dock behavior, and artwork.
-- `src/windows` contains reusable window framing and viewport geometry.
+- `src/windows` contains reusable window framing, move/resize controls and viewport geometry.
+- `docs/accessibility.md` tracks completed accessibility work, evidence and remaining checks.
 - `src/theme` contains the persisted system/light/dark preference model and document theme synchronization.
 - `src/styles/tokens` contains the semantic light and dark palettes; `src/styles/theme` contains component-scoped theme rendering.
 - `src/assets/fonts` contains the locally bundled Geist fonts and their license.
@@ -193,13 +199,44 @@ frame and commits React state on release, using measured window dimensions.
 PNG, JPEG, and WebP artwork. It runs automatically before development, tests,
 and production builds. Generated files in `public/optimized` and `src/generated`
 are ignored by Git; source images stay in `public` and are used for full-size
-case-study zooming. Remote URLs and SVGs retain their original paths.
+case-study zooming. Known remote raster URLs use local mirrors; unknown remote
+URLs and SVGs retain their original paths.
 
 Generation is cached by source content and encoder settings. After adding or
 replacing images while the dev server is running, run `npm run media:build` again.
 Responsive candidates respect the configured GitHub Pages base path. This reduces
 image transfer and decoding during browsing; originals still ship for zooming,
 so it does not reduce the total deployment directory size.
+
+### Early loading and remote screenshots
+
+The entry screen preloads desktop artwork at low priority using the same responsive
+candidates as the desktop. The avatar has high priority; case-study screenshots
+are not preloaded.
+
+`content/remote-media.json` maps known remote screenshot URLs to checked-in originals
+under `public/project-media/remote`. These use the existing WebP generation pipeline,
+including when Supabase returns the same URLs. Unknown URLs retain their original
+behaviour. No Supabase image-transformation plan is required.
+
+Run `npm run media:sync` after adding remote raster images to the project manifests
+or replacing an image at an existing URL. This explicit network step refreshes the
+originals and mapping; normal builds remain offline. Images added only in Supabase
+must also be added to the project manifests to receive these local variants.
+
+## Accessibility
+
+The interface supports keyboard window navigation, non-drag move/resize controls,
+modal image viewing, copy feedback, a skip-to-active-window link and authored image
+alternatives. The unlock name matches its visible wording, and About naming stays
+consistent between the launchers and window controls.
+
+[Accessibility: status and verification](docs/accessibility.md) is the single
+current checklist, including image and structure review evidence. The
+[original audit](docs/accessibility-audit-2026-09-16.md) remains as historical
+reproduction evidence. Screen-reader speech, native zoom, additional browsers and
+some content/preference states still need verification; passing automated checks
+does not establish conformance.
 
 ## Checks
 
@@ -235,22 +272,6 @@ To preview the production build locally:
 ```bash
 npm run preview
 ```
-
-### Early loading and remote screenshots
-
-The entry screen preloads desktop artwork at low priority using the same responsive
-candidates as the desktop. The avatar has high priority; case-study screenshots
-are not preloaded.
-
-`content/remote-media.json` maps known remote screenshot URLs to checked-in originals
-under `public/project-media/remote`. These use the existing WebP generation pipeline,
-including when Supabase returns the same URLs. Unknown URLs retain their original
-behaviour. No Supabase image-transformation plan is required.
-
-Run `npm run media:sync` after adding remote raster images to the project manifests
-or replacing an image at an existing URL. This explicit network step refreshes the
-originals and mapping; normal builds remain offline. Images added only in Supabase
-must also be added to the project manifests to receive these local variants.
 
 ## GitHub Pages deployment
 

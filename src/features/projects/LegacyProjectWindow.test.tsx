@@ -14,7 +14,20 @@ describe('LegacyProjectWindow', () => {
     const zoomTriggerCount = markup.match(/class="legacy-image-zoom-trigger"/g)?.length ?? 0
 
     expect(zoomTriggerCount).toBe(imageCount + 1)
-    expect(markup).toContain('aria-label="View Auto Gmail cover larger"')
-    expect(markup).toContain('aria-label="View Product icon larger"')
+    expect(markup).toContain('aria-label="View Auto Gmail cover larger: Auto Gmail promotion')
+    expect(markup).toContain('aria-label="View Product icon larger: Auto Gmail icon')
   })
+})
+
+it('exposes each archived image description in its zoom control', () => {
+  for (const project of legacyProjects) {
+    const markup = renderToStaticMarkup(<LegacyProjectWindow project={project} />)
+    const images = project.caseStudy!.sections.flatMap((section) => section.images ?? [])
+    for (const image of images) {
+      // React escapes punctuation when serializing attributes.
+      const escapedAlt = renderToStaticMarkup(<span>{image.alt}</span>).slice(6, -7)
+      expect(markup).toContain(`alt="${escapedAlt}"`)
+      expect(markup).toContain(`larger: ${escapedAlt}"`)
+    }
+  }
 })

@@ -9,7 +9,7 @@ export function ToolkitSection({ groups }: { groups: SettingsToolGroup[] }) {
 
         return (
           <section key={group.id} className="toolkit-group" aria-labelledby={headingId}>
-            <h4 id={headingId}>{group.label}</h4>
+            <h2 id={headingId}>{group.label}</h2>
             <ul className="toolkit-list">
               {group.tools.map((tool) => (
                 <li key={tool.title} className="toolkit-row">
@@ -19,7 +19,7 @@ export function ToolkitSection({ groups }: { groups: SettingsToolGroup[] }) {
                     <img {...responsiveImage(tool.icon, '40px')} alt="" loading="eager" decoding="async" />
                   </span>
                   <div className="toolkit-copy">
-                    <h5>{tool.title}</h5>
+                    <h3>{tool.title}</h3>
                     <p>{tool.description}</p>
                   </div>
                 </li>
