@@ -29,6 +29,7 @@ export function SettingsSidebar({
 }) {
   return (
     <nav className="settings-sidebar" aria-label="About sections">
+      <h1 className="mobile-list-heading">About</h1>
       <ProfilePortrait className="settings-list-portrait" />
       <div className="settings-sidebar-group">
         <p className="settings-sidebar-title">Nischal</p>

@@ -8,15 +8,7 @@ import { NoteSkeleton } from '../../components/ContentSkeleton'
 import { getPostMarkdown } from './getPostMarkdown'
 import { usePostContent } from './usePostContent'
 import { WindowTitleContext } from '../../windows/WindowTitleContext'
-
-const markdownHeadingComponents = {
-  h1: 'h2',
-  h2: 'h2',
-  h3: 'h3',
-  h4: 'h4',
-  h5: 'h5',
-  h6: 'h6',
-} as const
+import { remarkNoteHeadings } from './remarkNoteHeadings'
 
 export function BlogWindow({
   posts,
@@ -65,6 +57,7 @@ export function BlogWindow({
   return (
     <div ref={containerRef} className="finder" data-mobile-detail={showMobileDetail} data-mobile-navigation={hasMobileNavigation}>
       <nav className="finder-sidebar blog-post-nav" aria-label="Notes">
+        <h1 className="mobile-list-heading">Notes</h1>
         <p className="sidebar-title">Notes</p>
         {posts.map((post) => (
           <button
@@ -123,8 +116,7 @@ export function BlogWindow({
                 ) : null}
                 <div className="blog-markdown">
                   <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={markdownHeadingComponents}
+                    remarkPlugins={[remarkGfm, remarkNoteHeadings]}
                   >
                     {postMarkdown}
                   </ReactMarkdown>

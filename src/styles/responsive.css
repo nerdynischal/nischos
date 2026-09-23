@@ -1,4 +1,8 @@
 /* Responsive theme behavior */
+.mobile-list-heading {
+  display: none;
+}
+
 @media (max-width: 760px), (pointer: coarse) {
   button.traffic-close {
     position: relative;
@@ -44,7 +48,9 @@
   }
 
   /* Keep the article title in the accessibility tree without repeating it visually. */
+  .mobile-list-heading,
   .blog-reader-post > header h1 {
+    display: block;
     position: absolute;
     width: 1px;
     height: 1px;
