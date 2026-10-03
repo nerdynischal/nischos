@@ -1,0 +1,17 @@
+{
+  "$schema": "../project.schema.json",
+  "id": "run-visualiser",
+  "title": "Run Visualiser",
+  "subtitle": "A local Mac app for exploring running trends and reviewing individual runs.",
+  "iconTone": "mint",
+  "type": "Mac app",
+  "model": "GPT-6 Astra Light",
+  "sortOrder": 60,
+  "story": "Run Visualiser is a local Mac app for reviewing running data imported from Apple Health. Weekly and annual views show distance, time and run counts, while individual run details reveal pace and heart-rate patterns. Built with Swift and a bundled web interface, it reads a local SQLite database without an account or network connection.",
+  "screenshots": [
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/run-visualiser/weekly-review.png",
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/run-visualiser/annual-review.png",
+    "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/run-visualiser/pace-detail.png"
+  ],
+  "thumbnail": "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/run-visualiser/running-journal-logo.png"
+}

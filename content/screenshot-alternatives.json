@@ -11,5 +11,11 @@
   "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/toolkit-overview.jpg": "Tool catalog with Notion selected; a side panel explains its role in the workflow and links to the product website.",
   "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/codex-detail.jpg": "Codex selected in the tool catalog, with a detail panel describing its use for accessing AI and a product website link.",
   "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/toolkit/tool-categories.jpg": "Lower portion of the tool catalog showing design and development tools with status badges such as Core, Exploring and Archived.",
-  "/project-media/still/still-preview.png": "Saved website preview in Still with an Edit details panel for its title, description, tags, notes and colour palette."
+  "/project-media/still/still-preview.png": "Saved website preview in Still with an Edit details panel for its title, description, tags, notes and colour palette.",
+  "/project-media/run-visualiser/weekly-review.png": "Weekly running review with distance, duration and run totals, a 12-week distance chart, and a selected run showing heart-rate changes over time.",
+  "/project-media/run-visualiser/annual-review.png": "Annual running review with yearly totals and monthly distance bars; September is selected to show its individual runs, durations and average paces.",
+  "/project-media/run-visualiser/pace-detail.png": "Detailed view of a 15-kilometre run with Pace selected, showing workout duration, average pace and heart rate above a chart of pace changes throughout the run.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/run-visualiser/weekly-review.png": "Weekly running review with distance, duration and run totals, a 12-week distance chart, and a selected run showing heart-rate changes over time.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/run-visualiser/annual-review.png": "Annual running review with yearly totals and monthly distance bars; September is selected to show its individual runs, durations and average paces.",
+  "https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/run-visualiser/pace-detail.png": "Detailed view of a 15-kilometre run with Pace selected, showing workout duration, average pace and heart rate above a chart of pace changes throughout the run."
 }

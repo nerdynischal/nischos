@@ -9,6 +9,7 @@ describe('local fallback content', () => {
       'keyform',
       'my-toolkit',
       'maneki-neko-catalog',
+      'run-visualiser',
     ])
   })
 
@@ -19,6 +20,7 @@ describe('local fallback content', () => {
       keyform: 'GPT-5.6 Sol',
       'my-toolkit': 'GPT-5.5',
       'maneki-neko-catalog': 'GPT-5.5',
+      'run-visualiser': 'GPT-6 Astra Light',
     })
   })
 
