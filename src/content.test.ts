@@ -10,6 +10,7 @@ describe('local fallback content', () => {
       'my-toolkit',
       'maneki-neko-catalog',
       'run-visualiser',
+      'pricewatch',
     ])
   })
 
@@ -21,6 +22,7 @@ describe('local fallback content', () => {
       'my-toolkit': 'GPT-5.5',
       'maneki-neko-catalog': 'GPT-5.5',
       'run-visualiser': 'GPT-6 Astra Light',
+      pricewatch: 'GPT-6 Astra',
     })
   })
 

@@ -1,0 +1,17 @@
+{
+  "$schema": "../project.schema.json",
+  "id": "pricewatch",
+  "title": "Pricewatch",
+  "subtitle": "A local product watchlist for tracking GBP prices and price history.",
+  "iconTone": "graphite",
+  "thumbnail": "/project-media/pricewatch/pricewatch-logo.png",
+  "type": "web app",
+  "model": "GPT-6 Astra",
+  "sortOrder": 70,
+  "story": "Pricewatch brings product links into a local watchlist with saved images, GBP price history and the lowest observed price. Browser-assisted checks capture prices from retailer pages and report failures while preserving the last verified observation. Built with React, TypeScript, a Node.js API and SQLite, it keeps the watchlist on your computer.",
+  "screenshots": [
+    "/project-media/pricewatch/01-watchlist.png",
+    "/project-media/pricewatch/02-price-history.png",
+    "/project-media/pricewatch/03-add-item.png"
+  ]
+}
