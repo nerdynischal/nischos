@@ -4,6 +4,9 @@
 
 ### Audit and maintenance
 
+- Removed five byte-identical image copies (2,050,453 bytes), redirected their
+  references to retained originals, and made media sync reuse matching local
+  artwork rather than recreate duplicate mirrors. Removed local Finder metadata.
 - Deploy Pages using the uploader's returned artifact ID and GitHub's OIDC-backed
   deployment API. This avoids the failing artifact-discovery call reproduced
   with both official uploader versions; the current v5 uploader is retained.

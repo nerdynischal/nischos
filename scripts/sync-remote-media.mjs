@@ -8,6 +8,25 @@ const root = path.resolve(import.meta.dirname, '..')
 const directory = path.join(root, 'content/projects')
 const output = path.join(root, 'public/project-media/remote')
 await mkdir(output, { recursive: true })
+const localOriginals = new Map()
+const contentHash = (input) => createHash('sha256').update(input).digest('hex')
+
+async function indexOriginals(directory) {
+  for (const entry of (await readdir(directory, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
+    const filename = path.join(directory, entry.name)
+    if (filename === output) continue
+    if (entry.isDirectory()) await indexOriginals(filename)
+    else if (/\.(png|jpe?g|webp|svg)$/i.test(entry.name)) {
+      const hash = contentHash(await readFile(filename))
+      if (!localOriginals.has(hash)) {
+        localOriginals.set(hash, `/${path.relative(path.join(root, 'public'), filename).split(path.sep).join('/')}`)
+      }
+    }
+  }
+}
+
+// Reuse byte-identical checked-in originals instead of copying them into remote/.
+await indexOriginals(path.join(root, 'public/project-media'))
 const aliases = {}
 for (const filename of (await readdir(directory)).filter((name) => name.endsWith('.json')).sort()) {
   const project = JSON.parse(await readFile(path.join(directory, filename), 'utf8'))
@@ -20,9 +39,14 @@ for (const filename of (await readdir(directory)).filter((name) => name.endsWith
     if (!metadata.width || !metadata.height || (metadata.pages ?? 1) > 1) {
       throw new Error(`Expected a static image: ${source}`)
     }
-    const name = `${createHash('sha256').update(source).digest('hex').slice(0, 16)}${path.extname(new URL(source).pathname)}`
-    await writeFile(path.join(output, name), input)
-    aliases[source] = `/project-media/remote/${name}`
+    const original = localOriginals.get(contentHash(input))
+    if (original) {
+      aliases[source] = original
+    } else {
+      const name = `${createHash('sha256').update(source).digest('hex').slice(0, 16)}${path.extname(new URL(source).pathname)}`
+      await writeFile(path.join(output, name), input)
+      aliases[source] = `/project-media/remote/${name}`
+    }
     console.log(`${project.id}: ${metadata.width}×${metadata.height}, ${input.length} bytes`)
   }
 }

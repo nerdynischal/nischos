@@ -230,6 +230,8 @@ Run `npm run media:sync` after adding remote raster images to the project manife
 or replacing an image at an existing URL. This explicit network step refreshes the
 originals and mapping; normal builds remain offline. Images added only in Supabase
 must also be added to the project manifests to receive these local variants.
+Sync compares downloaded bytes with checked-in project artwork and reuses an
+identical original when available, avoiding duplicate files under `remote`.
 
 `content/media-aliases.json` records additional live URLs whose downloaded bytes
 were verified to match existing local artwork. These explicit aliases share local

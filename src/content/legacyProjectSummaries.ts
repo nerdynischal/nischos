@@ -33,7 +33,7 @@ export const legacyProjectSummaries: Project[] = [
       'Redesigned the landing page for an unreleased game, simplifying a fragmented download experience while giving it a clearer game-led identity.',
     screenshots: [
       `${mediaRoot}/ravageous/exploration.jpg`,
-      `${mediaRoot}/ravageous/final.jpg`,
+      `${mediaRoot}/ravageous/old-home.jpg`,
     ],
   },
   {
