@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import type { Project } from '../../content/types'
 import { IconArtwork } from '../../desktop/IconArtwork'
 import { resolveAssetUrl } from '../../lib/assetUrl'
@@ -22,7 +22,10 @@ export function ProjectWindow({
 }) {
   const [activeShot, setActiveShot] = useState(0)
   const [slideDirection, setSlideDirection] = useState<'next' | 'previous'>('next')
-  const [failedScreenshot, setFailedScreenshot] = useState<string | null>(null)
+  const [failedScreenshots, setFailedScreenshots] = useState<Set<string>>(() => new Set())
+  const markScreenshotFailed = useCallback((source: string) => {
+    setFailedScreenshots((current) => current.has(source) ? current : new Set(current).add(source))
+  }, [])
   const projectScreenshots = project.screenshots
   const screenshotCount = projectScreenshots.length
   const selectedShotIndex = Math.max(0, Math.min(activeShot, screenshotCount - 1))
@@ -37,17 +40,17 @@ export function ProjectWindow({
     selectedScreenshot &&
     selectedScreenshotUrl &&
     isImageScreenshot(selectedScreenshot) &&
-    selectedScreenshotUrl !== failedScreenshot,
+    !failedScreenshots.has(selectedScreenshot),
   )
 
   function showPreviousShot() {
     setSlideDirection('previous')
-    setActiveShot((index) => Math.max(0, index - 1))
+    setActiveShot(Math.max(0, selectedShotIndex - 1))
   }
 
   function showNextShot() {
     setSlideDirection('next')
-    setActiveShot((index) => Math.max(0, Math.min(index + 1, screenshotCount - 1)))
+    setActiveShot(Math.max(0, Math.min(selectedShotIndex + 1, screenshotCount - 1)))
   }
 
   return (
@@ -123,7 +126,7 @@ export function ProjectWindow({
                 ? projectScreenshots[selectedShotIndex + 1]
                 : undefined}
               alt={`${project.title}: ${selectedScreenshotLabel}`}
-              onError={() => setFailedScreenshot(selectedScreenshotUrl ?? null)}
+              onError={markScreenshotFailed}
             />
           ) : (
             <span>{selectedScreenshotLabel}</span>

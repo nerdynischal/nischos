@@ -12,6 +12,7 @@ beforeEach(() => {
   vi.stubEnv('VITE_SUPABASE_PUBLISHABLE_KEY', 'test-public-key')
   query.from.mockReturnValue(query)
   query.select.mockReturnValue(query)
+  query.order.mockReturnValue(query)
   query.eq.mockReturnValue(query)
   query.abortSignal.mockReturnValue(query)
 })
@@ -19,7 +20,7 @@ afterEach(() => { vi.unstubAllEnvs(); vi.clearAllMocks() })
 
 describe('note queries', () => {
   it('requests metadata only for the desktop list', async () => {
-    query.order.mockResolvedValue({ data: [{
+    query.abortSignal.mockResolvedValueOnce({ data: [{
       id: 'note', title: 'Note', date: '2026-09-10', folder: null, is_pinned: false,
     }], error: null })
     const { fetchPostSummaries } = await import('./supabase')
@@ -27,6 +28,14 @@ describe('note queries', () => {
     expect(query.select).toHaveBeenCalledWith('id,title,date,folder,is_pinned')
     expect(summaries[0]).not.toHaveProperty('contentMarkdown')
     expect(summaries[0].folder).toBe('Notes')
+    expect(query.abortSignal).toHaveBeenCalledWith(expect.any(AbortSignal))
+  })
+
+  it.each(['fetchProjects', 'fetchSettingsSections'] as const)('bounds %s requests with an abort signal', async (name) => {
+    query.abortSignal.mockResolvedValueOnce({ data: [], error: null })
+    const api = await import('./supabase')
+    await expect(api[name]()).resolves.toEqual([])
+    expect(query.abortSignal).toHaveBeenCalledWith(expect.any(AbortSignal))
   })
 
   it('requests only the selected note body and reports missing notes', async () => {

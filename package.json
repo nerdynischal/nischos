@@ -1,10 +1,10 @@
 {
   "name": "nischos",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.9.1",
   "type": "module",
   "engines": {
-    "node": "^20.19.0 || >=22.12.0"
+    "node": "^22.13.0 || ^24.0.0 || >=26.0.0"
   },
   "scripts": {
     "dev": "vite",
@@ -32,17 +32,17 @@
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
-    "@types/node": "^24.13.2",
+    "@types/node": "^26.6.6",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
-    "jsdom": "^26.1.0",
+    "jsdom": "^29.1.1",
     "oxlint": "^1.69.0",
     "sharp": "^0.35.4",
-    "typescript": "~6.0.2",
+    "typescript": "~7.0.2",
     "vite": "^8.1.0",
-    "vitest": "^4.1.10"
+    "vitest": "^5.1.1"
   }
 }

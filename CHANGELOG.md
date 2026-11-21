@@ -1,5 +1,36 @@
 # Changelog
 
+## 21 November 2026
+
+### Audit and maintenance
+
+- Updated dependencies, including TypeScript 7, Vitest 5 and jsdom 29; adjusted
+  keyboard-focus fixtures and documented the supported Node runtime range.
+- Added shared content-query deadlines, retryable client initialization, and
+  consistent validation of remote project links.
+- Fixed carousel selection after remote content changes, image-error ownership,
+  remembered image fallbacks, and refreshed alternative text.
+- Extracted About navigation into a dedicated hook while retaining the existing
+  Values draft and its focus behavior.
+- Mirrored remote SVG icons, added byte-verified live artwork aliases, and removed
+  obsolete generated variants from future builds.
+- Clean installation, all 202 tests across 43 files, production checks, and the
+  GitHub Pages subpath build passed. See [the audit report](docs/audit-2026-11-21.md)
+  for browser evidence, media-size measurements, and remaining verification.
+
+## 3 October 2026
+
+### Projects
+
+- Added Run Visualiser (GPT-6 Astra Light), a local Mac running-data viewer, with its logo, three screenshots, authored image descriptions and Supabase migration. Aligned its checked-in record with the published Supabase image URLs and added remote media mirrors.
+- Added Pricewatch (GPT-6 Astra), a local GBP product-price watchlist, with its logo, three screenshots, authored image descriptions and Supabase migration.
+- Both projects appear on the desktop; the five existing dock positions are unchanged.
+
+### Validation
+
+- `npm run check` passed in the working tree: 181 tests across 39 files, project and token checks, lint, TypeScript and production build. This working tree also contained separate About/settings work; the project commits include only their relevant files.
+- Pushed the project additions to `master`. Run Visualiser's public database record and uploaded image URLs were checked; deployment completion and Pricewatch's live database record were not verified in this update.
+
 ## 23 September 2026
 
 ### Accessibility

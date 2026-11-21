@@ -18,7 +18,7 @@ export function ScreenshotImage({ source, alt, nextSource, direction, onError }:
   alt: string
   nextSource?: string
   direction: 'next' | 'previous'
-  onError: () => void
+  onError: (source: string) => void
 }) {
   const [frame, setFrame] = useState({ source, alt, previous: '', direction })
 
@@ -36,7 +36,7 @@ export function ScreenshotImage({ source, alt, nextSource, direction, onError }:
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       setFrame((current) => ({ source, alt, previous: reduceMotion ? '' : current.source, direction }))
     }).catch(() => {
-      if (!cancelled) onError()
+      if (!cancelled) onError(source)
     })
     return () => { cancelled = true }
   }, [source, alt, frame.source, direction, onError])
@@ -47,10 +47,10 @@ export function ScreenshotImage({ source, alt, nextSource, direction, onError }:
         key={frame.source}
         className={frame.previous ? `screenshot-incoming slide-${frame.direction}` : undefined}
         {...responsiveImage(frame.source, screenshotSizes)}
-        alt={frame.alt}
+        alt={frame.source === source ? alt : frame.alt}
         loading="lazy"
         decoding="async"
-        onError={onError}
+        onError={() => onError(frame.source)}
       />
       {frame.previous && (
         <img

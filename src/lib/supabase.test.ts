@@ -91,6 +91,8 @@ describe('Supabase content mapping', () => {
       sortOrder: 30,
       dockOrder: 10,
     })
+    expect(mapProject({ ...row, demo_url: 'javascript:alert(1)', source_url: 'data:text/html,unsafe' }))
+      .toMatchObject({ demoUrl: undefined, sourceUrl: undefined })
   })
 
   it('defaults nullable post presentation fields', () => {

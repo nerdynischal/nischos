@@ -12,13 +12,13 @@ const aliases = {}
 for (const filename of (await readdir(directory)).filter((name) => name.endsWith('.json')).sort()) {
   const project = JSON.parse(await readFile(path.join(directory, filename), 'utf8'))
   for (const source of [project.thumbnail, ...project.screenshots]) {
-    if (!source || !/^https:\/\/.+\.(png|jpe?g|webp)$/i.test(source) || aliases[source]) continue
+    if (!source || !/^https:\/\/.+\.(png|jpe?g|webp|svg)$/i.test(source) || aliases[source]) continue
     const response = await fetch(source, { signal: AbortSignal.timeout(30000) })
     if (!response.ok) throw new Error(`Unable to download ${source}: ${response.status}`)
     const input = Buffer.from(await response.arrayBuffer())
     const metadata = await sharp(input).metadata()
     if (!metadata.width || !metadata.height || (metadata.pages ?? 1) > 1) {
-      throw new Error(`Expected a static raster image: ${source}`)
+      throw new Error(`Expected a static image: ${source}`)
     }
     const name = `${createHash('sha256').update(source).digest('hex').slice(0, 16)}${path.extname(new URL(source).pathname)}`
     await writeFile(path.join(output, name), input)

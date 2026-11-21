@@ -6,11 +6,23 @@ describe('responsive images', () => {
   it('serves all mirrored remote screenshots through local responsive variants', () => {
     for (const source of Object.keys(remoteMedia)) {
       const image = responsiveImage(source, '640px', '/nischos/')
+      if (source.endsWith('.svg')) {
+        expect(image).toEqual({ src: `/nischos${remoteMedia[source as keyof typeof remoteMedia]}` })
+        continue
+      }
       expect(image.src).toMatch(/^\/nischos\/optimized\/.+-320.webp$/)
       expect(image.srcSet).toContain('640w')
       expect(image.sizes).toBe('640px')
       expect(image.width).toBeGreaterThan(0)
     }
+  })
+
+  it('uses verified local artwork for live aliases, including query variants', () => {
+    const base = 'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/'
+    expect(responsiveImage(`${base}workout-board/icon.svg?v=2`, '96px', '/nischos/'))
+      .toEqual({ src: '/nischos/project-media/workout-board/icon.svg' })
+    expect(responsiveImage(`${base}item-tracker/01-watchlist.png`, '640px', '/nischos/').src)
+      .toBe(responsiveImage('/project-media/pricewatch/01-watchlist.png', '640px', '/nischos/').src)
   })
 
   it('serves generated sizes and reserves the original aspect ratio', () => {

@@ -40,6 +40,14 @@ describe('screenshot alternatives', () => {
     expect(markup).toContain('alt=""')
   })
 
+  it('reuses reviewed descriptions for byte-verified live screenshot aliases', () => {
+    const pricewatch = projects.find(({ id }) => id === 'pricewatch')!
+    const remote = 'https://twrilkmctqxdizoojgzd.supabase.co/storage/v1/object/public/project-screenshots/item-tracker/01-watchlist.png'
+    expect(getScreenshotAlternative(pricewatch, remote))
+      .toBe(getScreenshotAlternative(pricewatch, '/project-media/pricewatch/01-watchlist.png'))
+    expect(getScreenshotAlternative(pricewatch, remote)).not.toContain('Interface preview.')
+  })
+
   it('uses project purpose for unreviewed remote assets without guessing from filenames or positions', () => {
     const description = getScreenshotAlternative(project, 'https://example.com/keyform-mac.jpg')
     expect(description).toBe(`Interface preview. ${project.story}`)

@@ -54,3 +54,39 @@ it('opens mobile sections and returns focus to the chosen list row', () => {
     container.remove()
   }
 })
+
+it.each([false, true])('opens value details and restores focus (mobile: %s)', (mobile) => {
+  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true)
+  vi.stubGlobal('matchMedia', vi.fn(() => ({ matches: mobile })))
+  const container = document.createElement('div')
+  document.body.append(container)
+  const root = createRoot(container)
+  function Harness() {
+    const [active, setActive] = useState('about')
+    return <SettingsWindow activeSection={active} onChangeSection={setActive} settingsSections={settingsSections} />
+  }
+  try {
+    act(() => root.render(<Harness />))
+    act(() => container.querySelector<HTMLButtonElement>('[data-section-id="values"]')!.click())
+    const items = settingsSections.find((section) => section.id === 'values')!.items
+    for (const item of items) {
+      act(() => Array.from(container.querySelectorAll<HTMLButtonElement>('[data-value]')).find((button) => button.dataset.value === item)!.click())
+      expect(container.querySelector('.value-description')?.textContent).toContain('Placeholder copy')
+      expect(container.querySelector('.profile-heading h1')?.textContent).toBe(item)
+      expect(container.querySelectorAll('[data-value]')).toHaveLength(0)
+      const back = container.querySelector<HTMLButtonElement>(mobile ? '.settings-mobile-back' : '.values-back')!
+      expect(document.activeElement).toBe(back)
+      act(() => back.click())
+      expect((document.activeElement as HTMLElement).dataset.value).toBe(item)
+      expect(container.querySelectorAll('[data-value]')).toHaveLength(items.length)
+      if (mobile) expect(container.querySelector('.settings-window')?.getAttribute('data-mobile-detail')).toBe('true')
+    }
+    act(() => container.querySelector<HTMLButtonElement>('[data-value]')!.click())
+    act(() => container.querySelector<HTMLButtonElement>('[data-section-id="hobbies"]')!.click())
+    act(() => container.querySelector<HTMLButtonElement>('[data-section-id="values"]')!.click())
+    expect(container.querySelectorAll('[data-value]')).toHaveLength(items.length)
+  } finally {
+    act(() => root.unmount())
+    container.remove()
+  }
+})

@@ -12,6 +12,8 @@ import type {
   SettingsToolGroup,
 } from '../content/types'
 import type { Database } from './database.types'
+import { externalUrl } from './externalUrl'
+import { withRequestTimeout } from './requestTimeout'
 
 type ProjectTableRow = Database['public']['Tables']['projects']['Row']
 
@@ -79,7 +81,11 @@ async function getSupabaseClient() {
         persistSession: false,
       },
     }),
-  )
+  ).catch((error: unknown) => {
+    // A failed lazy import must not permanently prevent subsequent retries.
+    supabaseClientPromise = null
+    throw error
+  })
 
   return supabaseClientPromise
 }
@@ -88,13 +94,14 @@ export async function fetchProjects(): Promise<Project[]> {
   const supabase = await getSupabaseClient()
   if (!supabase) return []
 
-  const { data, error } = await supabase
+  const { data, error } = await withRequestTimeout((signal) => supabase
     .from('projects')
     .select(
       'id,title,subtitle,icon_tone,thumbnail,type,model,sort_order,dock_order,story,screenshots,demo_url,source_url,post_id',
     )
     .order('sort_order', { ascending: true })
     .order('id', { ascending: true })
+    .abortSignal(signal))
 
   if (error) {
     throw new Error(error.message)
@@ -107,10 +114,11 @@ export async function fetchPostSummaries(): Promise<BlogPostSummary[]> {
   const supabase = await getSupabaseClient()
   if (!supabase) return []
 
-  const { data, error } = await supabase
+  const { data, error } = await withRequestTimeout((signal) => supabase
     .from('blog_posts')
     .select('id,title,date,folder,is_pinned')
     .order('date', { ascending: false })
+    .abortSignal(signal))
 
   if (error) {
     throw new Error(error.message)
@@ -123,31 +131,26 @@ export async function fetchPostContent(id: string): Promise<string> {
   const supabase = await getSupabaseClient()
   if (!supabase) throw new Error('Notes are unavailable')
 
-  const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 10_000)
-  try {
-    const { data, error } = await supabase
-      .from('blog_posts')
-      .select('content_markdown')
-      .eq('id', id)
-      .abortSignal(controller.signal)
-      .maybeSingle()
-    if (error) throw new Error(error.message)
-    if (!data) throw new Error('Note not found')
-    return data.content_markdown
-  } finally {
-    clearTimeout(timeout)
-  }
+  const { data, error } = await withRequestTimeout((signal) => supabase
+    .from('blog_posts')
+    .select('content_markdown')
+    .eq('id', id)
+    .abortSignal(signal)
+    .maybeSingle())
+  if (error) throw new Error(error.message)
+  if (!data) throw new Error('Note not found')
+  return data.content_markdown
 }
 
 export async function fetchSettingsSections(): Promise<SettingsSection[]> {
   const supabase = await getSupabaseClient()
   if (!supabase) return []
 
-  const { data, error } = await supabase
+  const { data, error } = await withRequestTimeout((signal) => supabase
     .from('settings_sections')
     .select('id,label,display_title,display_subtitle,body,details,items')
     .order('sort_order', { ascending: true })
+    .abortSignal(signal))
 
   if (error) {
     throw new Error(error.message)
@@ -169,8 +172,8 @@ export function mapProject(row: ProjectRow): Project {
     dockOrder: row.dock_order ?? undefined,
     story: row.story ?? '',
     screenshots: row.screenshots ?? [],
-    demoUrl: row.demo_url ?? undefined,
-    sourceUrl: row.source_url ?? undefined,
+    demoUrl: externalUrl(row.demo_url),
+    sourceUrl: externalUrl(row.source_url),
     postId: row.post_id ?? undefined,
   }
 }
@@ -286,7 +289,7 @@ export function mapSettingsDetails(details: unknown) {
       {
         label: item.label,
         value: item.value,
-        href: mapExternalUrl(item.href),
+        href: externalUrl(item.href),
       },
     ]
   })
@@ -320,7 +323,7 @@ export function mapSettingsToolGroups(details: unknown): SettingsToolGroup[] {
           title: tool.title,
           description: tool.description,
           icon: tool.icon,
-          url: mapExternalUrl(tool.url),
+          url: externalUrl(tool.url),
         },
       ]
     })
@@ -331,17 +334,4 @@ export function mapSettingsToolGroups(details: unknown): SettingsToolGroup[] {
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null
-}
-
-function mapExternalUrl(value: unknown) {
-  if (typeof value !== 'string') return undefined
-
-  try {
-    const url = new URL(value)
-    return url.protocol === 'https:' || url.protocol === 'http:'
-      ? value
-      : undefined
-  } catch {
-    return undefined
-  }
 }

@@ -11,6 +11,9 @@ From the nischOS repository, run:
 npm run project:add -- "/full/path/to/project"
 ```
 
+Use an absolute path, or `"$HOME/Documents/project"`. A tilde inside quotes
+does not expand to your home directory.
+
 The command inspects the target project's `package.json`, README, `index.html`,
 Git remote, and common media locations. Press Enter to accept a detected value,
 enter a replacement, or enter `-` to remove an optional default.
@@ -38,11 +41,18 @@ The generated files never overwrite existing manifests, migrations, or media.
 Every detected value remains editable. Project type, AI model, icon tone, and
 placement are confirmed explicitly because they cannot be inferred reliably.
 
+For assets in other folders, enter their paths at the thumbnail and screenshot
+prompts. Relative image paths resolve from the inspected project directory.
+Review the detected story: the README's first paragraph may be a documentation
+link rather than a useful project description.
+
 ## Validate and publish
 
 After reviewing the generated manifest and SQL, inspect each screenshot and add
 its [authored alternative](#screenshot-alternatives). The generator does not write
 these descriptions; the regression suite checks coverage for published manifests.
+Update the expected project IDs and model names in `src/content.test.ts` to
+include the new project.
 For remote raster images, run `npm run media:sync` to refresh the checked-in
 originals and mirror mapping before validation. Then run:
 
@@ -61,6 +71,27 @@ Then:
 
 The dock supports five projects. When it is full, a new project is created as a
 desktop-only item unless an existing project's `dockOrder` is removed first.
+
+## Uploading media to Supabase
+
+Upload images to the public `project-screenshots` bucket and copy each public
+HTTPS URL. Update the manifest's `thumbnail` and `screenshots` and the matching
+SQL values before applying the migration. Uploading files alone does not change
+the project's stored image paths.
+
+In the Supabase table editor, paste the URL without surrounding quotation marks.
+JSON uses double quotes and SQL uses single quotes as syntax, but those quote
+characters must not become part of the stored URL.
+
+Add screenshot descriptions keyed by the new URLs, run `npm run media:sync`,
+and commit `content/remote-media.json` and the downloaded originals along with
+the project changes. If the initial migration has already been committed and
+applied, record subsequent changes in a new migration. Local media paths remain
+valid too, provided their files are included in the site deployment.
+
+After applying SQL, verify the live record's image URLs and open each image.
+Matching Supabase records override the local fallback, so a correct local
+manifest alone cannot fix an incorrect live URL.
 
 ## Other modes
 

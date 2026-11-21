@@ -19,6 +19,10 @@ reduced-motion users see a static indicator.
 
 ## Local setup
 
+Use Node.js 22.x (22.13 or newer), 24.x, or 26+ (Node 24 is validated locally). The test tools
+no longer support Node 20. Node 26 type definitions are used for build tooling;
+avoid introducing newer Node APIs without checking the supported runtimes.
+
 ```bash
 npm install
 npm run dev
@@ -200,9 +204,12 @@ PNG, JPEG, and WebP artwork. It runs automatically before development, tests,
 and production builds. Generated files in `public/optimized` and `src/generated`
 are ignored by Git; source images stay in `public` and are used for full-size
 case-study zooming. Known remote raster URLs use local mirrors; unknown remote
-URLs and SVGs retain their original paths.
+URLs retain their original paths. Known remote SVG icons use checked-in mirrors
+without raster conversion.
 
-Generation is cached by source content and encoder settings. After adding or
+Generation is cached by source content and encoder settings. Obsolete generated
+variants are removed after the current manifest is saved; original artwork is
+preserved. After adding or
 replacing images while the dev server is running, run `npm run media:build` again.
 Responsive candidates respect the configured GitHub Pages base path. This reduces
 image transfer and decoding during browsing; originals still ship for zooming,
@@ -224,6 +231,14 @@ or replacing an image at an existing URL. This explicit network step refreshes t
 originals and mapping; normal builds remain offline. Images added only in Supabase
 must also be added to the project manifests to receive these local variants.
 
+`content/media-aliases.json` records additional live URLs whose downloaded bytes
+were verified to match existing local artwork. These explicit aliases share local
+variants and authored descriptions; filenames or carousel positions never imply
+asset identity. Recheck the bytes when an aliased remote object is replaced.
+
+All Supabase content queries abort after ten seconds so a stalled request can
+settle into fallback mode. Individual collections remain independent.
+
 ## Accessibility
 
 The interface supports keyboard window navigation, non-drag move/resize controls,
@@ -239,6 +254,9 @@ some content/preference states still need verification; passing automated checks
 does not establish conformance.
 
 ## Checks
+
+The [21 November project audit](docs/audit-2026-11-21.md) records the latest
+refactoring, verification evidence, and remaining content/accessibility work.
 
 For browser profiling, run `npm run dev -- --config scripts/profile-vite.config.ts`
 and open `/scripts/profile-desktop.html`. This developer-only page records React
@@ -284,3 +302,23 @@ Before the first deployment:
 3. Push to `master` and follow the **Deploy to GitHub Pages** workflow in the Actions tab.
 
 The workflow derives the Vite base path from the repository name, so both `<username>.github.io` sites and project sites hosted at `<username>.github.io/<repository>/` resolve assets correctly.
+
+### OS version and build number
+
+The About OS row reads the release version from `package.json`. GitHub Pages
+builds append the deployment workflow run number (for example,
+`nischOS 1.9.1 · Build 42`). Local builds without `VITE_BUILD_NUMBER` show
+`Development`. The rendered value overrides any OS text stored in Supabase.
+Workflow numbers can have gaps after failed runs; reruns retain the same number.
+
+For an intentional release, run one of these before committing:
+
+```sh
+npm version patch --no-git-tag-version # 1.9.1 → 1.9.2
+npm version minor --no-git-tag-version # 1.9.1 → 1.10.0
+npm version major --no-git-tag-version # 1.9.1 → 2.0.0
+```
+
+Choose one command and commit both `package.json` and `package-lock.json`.
+The next deployment displays the new version automatically. Restart a running
+local dev server after changing the version.

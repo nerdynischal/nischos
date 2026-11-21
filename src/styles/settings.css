@@ -663,3 +663,116 @@
   .contact-check-icon,
   .contact-copy-toast { transition: none; }
 }
+
+/* Values drill-down uses the same navigation motion as mobile About. */
+.values-pane {
+  flex: 0 0 auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.settings-detail .values-list .settings-item {
+  padding: 0;
+}
+
+.value-button,
+.values-back {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  border: 0;
+  padding: var(--space-4);
+  color: var(--text-primary);
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--duration-control) var(--ease-out);
+}
+
+.value-button {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.value-button span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.value-button svg,
+.values-back svg {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  color: var(--icon-tertiary);
+}
+
+.value-button:hover,
+.values-back:hover {
+  background: var(--surface-hover);
+}
+
+.value-button:active,
+.values-back:active {
+  background: var(--surface-selected);
+}
+
+.value-button:focus-visible,
+.values-back:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: -2px;
+}
+
+.values-heading {
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.values-heading h1 {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.values-back {
+  justify-content: center;
+  width: 44px;
+  border-radius: var(--radius-round);
+  padding: var(--space-2);
+  background: var(--surface-soft);
+}
+
+.value-description {
+  margin-top: var(--space-3);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+  background: var(--surface-profile);
+  color: var(--text-secondary);
+}
+
+.value-description p {
+  margin: 0;
+}
+
+.settings-detail .value-placeholder-label {
+  margin-bottom: var(--space-2);
+  color: var(--text-tertiary);
+  font-size: var(--type-meta-size);
+}
+
+@media (max-width: 760px) {
+  .values-back { display: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .values-pane[data-navigated='true'][data-detail='true'] {
+    animation: mobile-detail-enter var(--duration-navigation) var(--ease-navigation) backwards;
+  }
+
+  .values-pane[data-navigated='true'][data-detail='false'] {
+    animation: mobile-list-enter var(--duration-navigation) var(--ease-navigation) backwards;
+  }
+}

@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import sharp from 'sharp'
 
@@ -60,4 +60,11 @@ for (const filename of await findImages(publicRoot)) {
 
 const contents = `${JSON.stringify(manifest, null, 2)}\n`
 if (contents !== `${JSON.stringify(previous, null, 2)}\n`) await writeFile(manifestPath, contents)
+// Encoder upgrades and replaced originals change content hashes. Keep old
+// generated variants out of subsequent Vite builds; never touch source artwork.
+const referenced = new Set(Object.values(manifest).flatMap((image) =>
+  image.variants.map((variant) => path.basename(variant.src))))
+const obsolete = [...available].filter((name) => /^[a-f\d]{16}-\d+\.webp$/.test(name) && !referenced.has(name))
+await Promise.all(obsolete.map((name) => unlink(path.join(outputRoot, name))))
 console.log(`Responsive media ready (${Object.keys(manifest).length} sources, ${generated} new variants).`)
+if (obsolete.length) console.log(`Removed ${obsolete.length} obsolete generated variants.`)

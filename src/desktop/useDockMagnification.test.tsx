@@ -63,6 +63,13 @@ function escape() {
 function tooltip() { return container.querySelector('span')! }
 function buttons() { return container.querySelectorAll('button') }
 
+function focusWithKeyboard(button: HTMLButtonElement) {
+  act(() => {
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }))
+    button.focus()
+  })
+}
+
 it('keeps the tooltip steady when hovered, and hides it after leaving both tooltip and dock', () => {
   move(buttons()[0])
   expect(tooltip().textContent).toBe('First')
@@ -90,7 +97,7 @@ it('dismisses pointer tooltips until the target changes or the pointer leaves an
 })
 
 it('persists with keyboard focus and dismisses without moving focus or reopening on mouse movement', () => {
-  act(() => buttons()[0].focus())
+  focusWithKeyboard(buttons()[0])
   move(document.body)
   expect(tooltip().textContent).toBe('First')
   escape()
@@ -98,13 +105,13 @@ it('persists with keyboard focus and dismisses without moving focus or reopening
   move(buttons()[0])
   move(document.body)
   expect(tooltip().dataset.visible).toBe('false')
-  act(() => buttons()[1].focus())
+  focusWithKeyboard(buttons()[1])
   expect(tooltip().textContent).toBe('Second')
   expect(tooltip().getAttribute('aria-hidden')).toBe('true')
 })
 
 it('keeps a hovered tooltip after focus leaves until the pointer also leaves', () => {
-  act(() => buttons()[0].focus())
+  focusWithKeyboard(buttons()[0])
   move(tooltip())
   act(() => buttons()[0].blur())
   expect(tooltip().textContent).toBe('First')

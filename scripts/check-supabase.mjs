@@ -3,9 +3,7 @@ import { loadEnv } from 'vite'
 
 const env = loadEnv('development', process.cwd(), 'VITE_')
 const url = env.VITE_SUPABASE_URL?.trim()
-const key = (
-  env.VITE_SUPABASE_PUBLISHABLE_KEY ?? env.VITE_SUPABASE_ANON_KEY
-)?.trim()
+const key = env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() || env.VITE_SUPABASE_ANON_KEY?.trim()
 
 if (!url || !key) {
   console.error(
@@ -21,6 +19,7 @@ if (!url || !key) {
     const { count, error } = await supabase
       .from(table)
       .select('id', { count: 'exact', head: true })
+      .abortSignal(AbortSignal.timeout(10_000))
 
     if (error) {
       hasFailure = true
