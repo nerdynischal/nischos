@@ -1,10 +1,11 @@
-import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import type { Project } from '../../content/types'
 import { IconArtwork } from '../../desktop/IconArtwork'
 import { resolveAssetUrl } from '../../lib/assetUrl'
 import { ScreenshotImage } from './ScreenshotImage'
 import { MetaRow } from './MetaRow'
+import { ProjectActions } from './ProjectActions'
 import { getScreenshotAlternative } from '../../content/screenshotAlternatives'
 
 function isImageScreenshot(screenshot: string) {
@@ -62,43 +63,7 @@ export function ProjectWindow({
         <div className="project-heading">
           <h1>{project.title}</h1>
           <p>{project.type}</p>
-          <div className="project-actions">
-            {project.demoUrl ? (
-              <a className="primary-action" href={project.demoUrl} target="_blank" rel="noreferrer">
-                Visit Website
-                <ExternalLink
-                  className="external-link-icon"
-                  strokeWidth={1.7}
-                  absoluteStrokeWidth
-                  aria-hidden="true"
-                />
-              </a>
-            ) : (
-              <button type="button" className="primary-action disabled-action" disabled>
-                Visit Website
-              </button>
-            )}
-            {project.sourceUrl ? (
-              <a href={project.sourceUrl} target="_blank" rel="noreferrer">
-                Source Code
-                <ExternalLink
-                  className="external-link-icon"
-                  strokeWidth={1.7}
-                  absoluteStrokeWidth
-                  aria-hidden="true"
-                />
-              </a>
-            ) : (
-              <button type="button" className="disabled-action" disabled>
-                Source Code
-              </button>
-            )}
-            {hasLinkedPost ? (
-              <button type="button" onClick={() => onOpenBlog(project.postId)}>
-                Related Note
-              </button>
-            ) : null}
-          </div>
+          <ProjectActions project={project} hasLinkedPost={hasLinkedPost} onOpenBlog={onOpenBlog} />
         </div>
       </section>
 

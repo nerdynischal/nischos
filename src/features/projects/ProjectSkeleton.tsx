@@ -31,15 +31,19 @@ export function ProjectSkeleton({ project, legacy, hasLinkedPost }: { project: P
     </section></div>
   </article>
 
+  const hasPublicLinks = Boolean(project.demoUrl || project.sourceUrl)
+  const hasActions = hasPublicLinks || hasLinkedPost
+
   return <div className="project-window">
     <section className="project-hero">
       <div className="project-icon skeleton-fill" />
       <div className="project-heading"><h1><Text>{project.title}</Text></h1><p><Text>{project.type}</Text></p>
-        <div className="project-actions">
-          <button type="button" tabIndex={-1}><Text>Visit Website</Text></button>
-          <button type="button" tabIndex={-1}><Text>Source Code</Text></button>
+        {!hasPublicLinks && <p className="project-availability"><Text>Not publicly available.</Text></p>}
+        {hasActions && <div className="project-actions">
+          {project.demoUrl && <button type="button" tabIndex={-1}><Text>Visit Website</Text></button>}
+          {project.sourceUrl && <button type="button" tabIndex={-1}><Text>Source Code</Text></button>}
           {hasLinkedPost && <button type="button" tabIndex={-1}><Text>Related Note</Text></button>}
-        </div>
+        </div>}
       </div>
     </section>
     <dl className="project-meta">{[['type', project.type], ['model', project.model]].map(([label, value]) => <div key={label}><dt><Text>{label}</Text></dt><dd><Text>{value}</Text></dd></div>)}</dl>

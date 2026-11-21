@@ -4,6 +4,11 @@
 
 ### Audit and maintenance
 
+- Hide unavailable project links and show a quiet “Not publicly available.” line
+  when neither a website nor source link exists. Loading placeholders match the
+  available actions. Extracted action rendering into a focused component and
+  removed obsolete disabled-action styles; all 206 tests and production checks
+  pass.
 - Removed five byte-identical image copies (2,050,453 bytes), redirected their
   references to retained originals, and made media sync reuse matching local
   artwork rather than recreate duplicate mirrors. Removed local Finder metadata.

@@ -294,8 +294,14 @@
   margin-top: 1.05rem;
 }
 
+.project-heading .project-availability {
+  margin-top: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--type-meta-size);
+  line-height: var(--type-meta-line);
+}
+
 .project-actions a,
-.project-actions span,
 .project-actions button,
 .finder-sidebar button,
 .dock button {
@@ -314,7 +320,6 @@
 }
 
 .project-actions a,
-.project-actions span,
 .project-actions button {
   display: inline-flex;
   gap: var(--space-2);
@@ -332,27 +337,21 @@
   height: var(--space-3);
 }
 
-.project-actions a:not(.disabled-action):not([aria-disabled="true"]):hover,
-.project-actions button:enabled:not(.disabled-action):not([aria-disabled="true"]):hover,
+.project-actions a:not([aria-disabled="true"]):hover,
+.project-actions button:enabled:not([aria-disabled="true"]):hover,
 .finder-sidebar button:hover,
 .dock button:hover {
   border-color: var(--line-control-hover);
   background: var(--surface-hover-strong);
 }
 
-.project-actions a:not(.disabled-action):not([aria-disabled="true"]):active,
-.project-actions button:enabled:not(.disabled-action):not([aria-disabled="true"]):active,
+.project-actions a:not([aria-disabled="true"]):active,
+.project-actions button:enabled:not([aria-disabled="true"]):active,
 .finder-sidebar button:active,
 .dock button:active {
   transform: scale(0.97);
 }
 
-.project-actions .disabled-action {
-  color: var(--text-disabled);
-  background: var(--inset-line);
-  cursor: default;
-  transition: none;
-}
 
 /* Retain the outgoing image until the replacement has decoded. */
 .screenshot-card.has-image img.screenshot-outgoing {
