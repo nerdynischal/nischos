@@ -303,6 +303,12 @@ Before the first deployment:
 
 The workflow derives the Vite base path from the repository name, so both `<username>.github.io` sites and project sites hosted at `<username>.github.io/<repository>/` resolve assets correctly.
 
+The official Pages uploader returns an artifact ID directly to
+`scripts/deploy-pages.mjs`. The script uses the existing workflow token and OIDC
+identity to create a Pages deployment, polls its result, and cancels on failure
+or timeout. It avoids the deploy action's artifact-list lookup, which returned
+an empty list despite successful uploads during the November deployment.
+
 ### OS version and build number
 
 The About OS row reads the release version from `package.json`. GitHub Pages
