@@ -4,6 +4,9 @@
 
 ### Audit and maintenance
 
+- Pinned the Pages artifact uploader to the official v4 implementation after two
+  deployments using v5 uploaded successfully but failed artifact discovery in the
+  deployment step.
 - Updated dependencies, including TypeScript 7, Vitest 5 and jsdom 29; adjusted
   keyboard-focus fixtures and documented the supported Node runtime range.
 - Added shared content-query deadlines, retryable client initialization, and
